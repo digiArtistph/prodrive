@@ -1,8 +1,11 @@
 <?php
 class mdl_joborder extends CI_Model{
 	
-	public function get_orderdetails($id){
+	public function get_orders(){
 		
+		$sql = 'SELECT * FROM jo';
+		$results = $this->db->query($sql)->result();
+		return $results;
 	}
 	
 	public function set_jo($params){
