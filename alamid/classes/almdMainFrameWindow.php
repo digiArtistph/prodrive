@@ -32,6 +32,7 @@ class almdMainFrameWindow {
 	public function createWindow() {
 		return Canvas::loadCanvas();
 	}
+
 	
 }
 

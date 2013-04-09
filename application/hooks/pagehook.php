@@ -39,6 +39,7 @@ class Pagehook {
 		require_once ALAMIDCLASSES . 'toolbars' . EXT;
 		
 		$almdHooks = almdMainFrameWindow::get_instance();		
+
 // 		$almdHooks->test();
 		
 	}
