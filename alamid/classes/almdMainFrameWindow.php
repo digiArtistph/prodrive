@@ -7,14 +7,13 @@
  * 
  */
 class almdMainFrameWindow {
+	private static  $instance = null;
 	
 	/**
 	 * This makes the class a singleton
 	 */
-	private function __construct() {
-		
-		echo 'Initialising alamid Main Frame Window';
-		
+	private function __construct() {		
+		echo 'Initialising alamid Main Frame Window' . '<br />';		
 	}
 	
 	/**
@@ -23,7 +22,15 @@ class almdMainFrameWindow {
 	public function __clone() {}
 	
 	public static function get_instance() {
+		if(! self::$instance instanceof self) {
+			self::$instance = new self();
+		}
 		
+		return self::$instance;
+	}	
+	
+	public function createWindow() {
+		return Canvas::loadCanvas();
 	}
 	
 }
