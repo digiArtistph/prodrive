@@ -10,6 +10,13 @@
 |
 */
 
+$alamidHooks = array(
+		'class'	=> 'Pagehook',
+		'function' => 'loadAlamidHooks',
+		'filename' => 'pagehook.php',
+		'filepath' => 'hooks'
+		);
+$hook['post_conto'] = $alamidHooks;
 
 
 /* End of file hooks.php */
