@@ -11,7 +11,7 @@
 class Toolbars {
 	
 	public function __construct() {
-		echo 'Initialising Toolbars class. <br />';
+		// echo 'Initialising Toolbars class. <br />';
 	}
 }
 

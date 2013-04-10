@@ -13,7 +13,7 @@ class almdMainFrameWindow {
 	 * This makes the class a singleton
 	 */
 	private function __construct() {		
-		echo 'Initialising alamid Main Frame Window' . '<br />';		
+		// echo 'Initialising alamid Main Frame Window' . '<br />';		
 	}
 	
 	/**
@@ -30,7 +30,13 @@ class almdMainFrameWindow {
 	}	
 	
 	public function createWindow() {
-		return Canvas::loadCanvas();
+		$page = new Pagetemplate();
+			
+		Canvas::loadSection($page);
+		Masthead::loadSection($page);
+
+		return $page->renderPage();
+		
 	}
 
 	

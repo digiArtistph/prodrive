@@ -8,14 +8,24 @@
  * @version 1.0
  *
  */
-class Canvas {
+class Canvas extends Pagesection {
 	
-	public function __construct() {
-		echo 'Initialising Canvas class. <br />';
+	private $domType = null;
+	private $domProps = null;
+	
+	public function __construct() {	
+		// echo 'Initialising Canvas class. <br />';
+		$this->domType = '<div>';
+		$this->domProps = '';
+		
 	}
 	
-	public static function loadCanvas() {
-		return '<div class="container">This is the main canvas</div>';
+	public static function loadSection(Pagetemplate $page) {
+		// runs hooks in the section. checks hooks on the options table
+		
+		// builds the canvas here
+		$page->set_canvas('<div class="container">%s</div>');
+		
 	}
 	
 }
