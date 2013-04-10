@@ -11,7 +11,7 @@
 class Panels {
 	
 	public function __construct() {
-		echo 'Initialising Panels class. <br />';
+		// echo 'Initialising Panels class. <br />';
 	}
 	
 }

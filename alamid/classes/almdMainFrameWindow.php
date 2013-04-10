@@ -13,7 +13,7 @@ class almdMainFrameWindow {
 	 * This makes the class a singleton
 	 */
 	private function __construct() {		
-		echo 'Initialising alamid Main Frame Window' . '<br />';		
+		// echo 'Initialising alamid Main Frame Window' . '<br />';		
 	}
 	
 	/**

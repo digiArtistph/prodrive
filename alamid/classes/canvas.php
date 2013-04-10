@@ -11,11 +11,15 @@
 class Canvas {
 	
 	public function __construct() {
-		echo 'Initialising Canvas class. <br />';
+		
+		// echo 'Initialising Canvas class. <br />';
+		
 	}
 	
 	public static function loadCanvas() {
+		
 		return '<div class="container">This is the main canvas</div>';
+		
 	}
 	
 }

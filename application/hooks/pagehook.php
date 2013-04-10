@@ -12,7 +12,7 @@ class Pagehook {
 	
 	
 	public function loadAlamidHooks() {
-		echo 'Loading loadAlamidHooks' . '<br />';
+		// echo 'Loading loadAlamidHooks' . '<br />';
 		
 		// initialises some member variables and globals
 		$this->init();

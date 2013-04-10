@@ -11,7 +11,7 @@
 class Masthead {
 	
 	public function __construct() {
-		echo 'Initialising Masthead class. <br />';
+		// echo 'Initialising Masthead class. <br />';
 	}
 }
 
