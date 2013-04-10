@@ -8,11 +8,19 @@
  * @version 1.0
  *
  */
-class Panels {
+class Panels extends Pagesection {
 	
 	public function __construct() {
 		// echo 'Initialising Panels class. <br />';
 	}
+	
+	public static function loadSection(Pagetemplate $page) {
+		// runs hooks in the section. checks hooks on the options table
+		
+		// builds the panels here
+		$page->set_mastHead('<div class="masthead"><ul><li><a href="#">Log-out</a></li></ul></div>');
+	}
+	
 	
 }
 

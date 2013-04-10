@@ -8,10 +8,17 @@
  * @version 1.0
  *
  */
-class Masthead {
+class Masthead extends Pagesection {
 	
 	public function __construct() {
 		// echo 'Initialising Masthead class. <br />';
+	}
+	
+	public static function loadSection(Pagetemplate $page) {
+		// runs hooks in the section. checks hooks on the options table
+		
+		// builds the masthead
+		$page->set_mastHead('<div class="masthead"><ul><li><a href="#">Cashier</a></li></li><li><a href="#">Log-out</a></li></ul></div>');
 	}
 }
 

@@ -33,10 +33,12 @@ class Pagehook {
 		
 		// requires once some files
 		require_once ALAMIDCLASSES . 'almdMainFrameWindow' . EXT;
+		require_once ALAMIDCLASSES . 'Pagesection' . EXT;
 		require_once ALAMIDCLASSES . 'canvas' . EXT;
 		require_once ALAMIDCLASSES . 'masthead' . EXT;
 		require_once ALAMIDCLASSES . 'panels' . EXT;
 		require_once ALAMIDCLASSES . 'toolbars' . EXT;
+		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;
 		
 		$almdHooks = almdMainFrameWindow::get_instance();		
 

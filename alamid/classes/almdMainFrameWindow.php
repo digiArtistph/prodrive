@@ -30,7 +30,13 @@ class almdMainFrameWindow {
 	}	
 	
 	public function createWindow() {
-		return Canvas::loadCanvas();
+		$page = new Pagetemplate();
+			
+		Canvas::loadSection($page);
+		Masthead::loadSection($page);
+
+		return $page->renderPage();
+		
 	}
 
 	
