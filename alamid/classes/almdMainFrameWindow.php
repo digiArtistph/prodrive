@@ -7,7 +7,7 @@
  * 
  */
 class almdMainFrameWindow {
-	private static  $instance = null;
+	private static $instance = null;
 	
 	/**
 	 * This makes the class a singleton
@@ -34,9 +34,11 @@ class almdMainFrameWindow {
 			
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);
-
-		return $page->renderPage();
+		Panels::loadSection($page);
+		Toolbars::loadSection($page);
+		Footer::loadSection($page);
 		
+		return $page->renderPage();		
 	}
 
 	

@@ -18,9 +18,12 @@ class Panels extends Pagesection {
 		// runs hooks in the section. checks hooks on the options table
 		
 		// builds the panels here
-		$page->set_mastHead('<div class="masthead"><ul><li><a href="#">Log-out</a></li></ul></div>');
+		$page->set_panels('<div class="panels-group">Panels here</div>');
 	}
 	
+	protected static  function buildDOM() {
+		
+	}
 	
 }
 

@@ -9,25 +9,43 @@
  *
  */
 class Canvas extends Pagesection {
-	
-	private $domType = null;
-	private $domProps = null;
-	
-	public function __construct() {	
-		// echo 'Initialising Canvas class. <br />';
-		$this->domType = '<div>';
-		$this->domProps = '';
-		
-	}
+	private static $domElem;
 	
 	public static function loadSection(Pagetemplate $page) {
-		// runs hooks in the section. checks hooks on the options table
 		
+		// runs hooks in the section. checks hooks on the options table
+		self::buildDOM();
+			
 		// builds the canvas here
-		$page->set_canvas('<div class="container">%s</div>');
+		$page->set_canvas(self::$domElem);
 		
 	}
 	
+	protected static  function buildDOM() {
+		
+		$output ='';
+		$node = '<div>';
+		$coreNode = '';
+		$before_hWnd = '';
+		$after_hWnd = '';
+		$classes = 'menu';
+		$xtra_prop = 'title="testing"';
+		$childNode = 'Hello World!';
+		
+		
+		preg_match('/(?<=\<)[\w]+(?=\>)/', $node, $matches);
+
+		if(count($matches) > 0) {
+			$coreNode = $matches[0];
+			$endnode = sprintf("</ %s>", $matches[0]);				
+		}
+		
+		$node = sprintf("<%s %s %s>", $coreNode, ($classes != "") ? 'class="' . $classes . '"' : "", ($xtra_prop != "") ? $xtra_prop : "");
+		$output .= sprintf("%s%s" . $childNode . "%s%s", $before_hWnd, $node,$endnode, $after_hWnd);
+		
+		self::$domElem = trim($output);
+		
+	}
 }
 
 ?>
