@@ -33,6 +33,7 @@ class Canvas extends Pagesection {
 		$xtra_prop = '';
 		$childNode = 'Hello World!';
 		
+
 		preg_match('/(?<=\<)[\w]+(?=\>)/', $node, $matches);
 
 		if(count($matches) > 0) {
@@ -40,7 +41,9 @@ class Canvas extends Pagesection {
 			$endnode = sprintf("</ %s>", $matches[0]);				
 		}
 		
+
 		$node = sprintf("<%s %s %s %s>", $coreNode, ($id != "") ? 'id="' . $id . '"' : "", ($classes != "") ? 'class="' . $classes . '"' : "", ($xtra_prop != "") ? $xtra_prop : "");
+
 		$output .= sprintf("%s%s" . $childNode . "%s%s", $before_hWnd, $node,$endnode, $after_hWnd);
 		
 		self::$domElem = trim($output);

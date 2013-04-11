@@ -21,6 +21,7 @@ class Masthead extends Pagesection {
 	}
 	
 	protected static  function buildDOM() {
+
 		$output ='';
 		$node = '<div>';
 		$coreNode = '';
@@ -42,6 +43,7 @@ class Masthead extends Pagesection {
 		$output .= sprintf("%s%s" . $childNode . "%s%s", $before_hWnd, $node,$endnode, $after_hWnd);
 		
 		self::$domElem = trim($output);
+
 	}
 }
 
