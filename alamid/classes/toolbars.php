@@ -8,11 +8,20 @@
  * @version 1.0
  *
  */
-class Toolbars {
+class Toolbars extends Pagesection {
 	
 	public function __construct() {
 		// echo 'Initialising Toolbars class. <br />';
 	}
+	
+	public static function loadSection(Pagetemplate $page) {
+		$page->set_toolbars('<div class="toolbars">Toolbars here</div>');
+	}
+	
+	protected static  function buildDOM() {
+		
+	}
+	
 }
 
 ?>
