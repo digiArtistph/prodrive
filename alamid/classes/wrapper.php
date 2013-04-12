@@ -10,7 +10,6 @@
  */
 class Wrapper {
 
-	
 	public function __construct() {
 		// echo "Initialising Wrapper class...<br />";		
 	}
@@ -21,7 +20,13 @@ class Wrapper {
 			$this->{$key} = $val;
 		}
 		
-		on_watch($this->prop);
+		// node, child, prop
+		$this->node = (isset($this->node))? $this->node :'div';
+		$this->prop = (isset($this->prop))? $this->prop : '';
+		$this->child = (isset($this->child)) ? $this->child : '';
+		
+		return sprintf("<%s %s>%s</%s>", $this->node, $this->prop, $this->child,$this->node);
+		
 	}
 	
 }

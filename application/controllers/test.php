@@ -18,7 +18,14 @@
  		
 //  		call_debug(trunc_words($str, 4));
 		
-		echo get_dom_elem('<a>', true);
+// 		echo get_dom_elem('<a>', true);
+
+ 		$arr1 = array('one' => 1, 'three' => 3, 'four' => 4);
+ 		$arr2 = array('two' => 2, 'three' => 15, 'five' => 5);
+ 		
+ 		$result = array_merge($arr1, $arr2);
+ 		
+ 		call_debug($result);
  				
 		}
 	}

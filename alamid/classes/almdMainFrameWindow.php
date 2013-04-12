@@ -31,20 +31,20 @@ class almdMainFrameWindow {
 	
 	public function createWindow() {
 		$page = new Pagetemplate();
-		$wrap = new Wrapper();
+		$wrap = new Enclose();
 		
 		$dom = array(
 					'node' => 'div',
-					'child' => '',
-					'prop' => get_elem_properties(array(
+					'child' =>'<a href="#">Login</a>'
+					/* 'prop' => get_elem_properties(array(
  						'title' => 'My Title', 
  						'class' => 'My_class_name',
- 						'id' => 'My Id'
- 						))
+ 						'id' => 'MyId'
+ 						)) */
 				);
 		
-		$wrap->wrap($dom);
-		
+		echo $wrap->wrap($dom);
+				
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);
 		Panels::loadSection($page);
