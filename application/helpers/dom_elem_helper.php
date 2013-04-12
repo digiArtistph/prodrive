@@ -8,20 +8,32 @@
  *
  *
  *	FUNCTIONS:
- *		1)	get_dom_elem('<name>',bool)  // <name>: is an html element. bool is TRUE | FALSE. 
+ *		1)	
+ *	
+ *			- get_dom_elem('<name>',bool)  // <name>: is an html element. bool is TRUE | FALSE. 
  *
  * 		legend:	
  *			TRUE : returns closing element of a tag. This is the default bool
  *			FALSE: returns name of the element of tag
+ *		
+ *		2)
  *
- *		$mArr = array(
- *				'title' => 'My Title', 
- *				'class' => 'My class name',
- *				'id' => 'My Id'
- *				);
+ *			$mArr = array(
+ *					'title' => 'My Title', 
+ *					'class' => 'My class name',
+ *					'id' => 'My Id'
+ *					);
  *
- *		2)	get_elem_properties($mArr)	// returns: title="My Title" class="My class name" id="My Id"
- *			
+ *			-get_elem_properties($mArr)	// returns: title="My Title" class="My class name" id="My Id"
+ *		
+ *	
+ *		3) 
+ *			$string = 'Ako si tarzan hari ng kagubatan';
+ *			$number = 10;	// default is 10
+ *			-trunc_words($string, $number) // returns string from 0 to specified number
+ *
+ 
+ *					
  *
  *	SAMPLE CODE
  *
@@ -42,6 +54,10 @@
  *						);
  *
  *					get_elem_properties($mArr);		//returns title="My Title" class="My class name" id="My Id"
+ *
+ *					$str = 'Ako si tarzan hari ng kagubatan';
+ *					trunc_words($str, 4)		// returns	"Ako si tarzan hari . . ."
+ *					
  *					}
  *			?>
  *
@@ -80,5 +96,28 @@
 			}
 			
 			return $tagproperties;
+		}
+	}
+	
+	if(!function_exists('trunc_words') ) {
+	
+		function trunc_words($param, $word_limit = 10) {
+			
+			if(!is_string($param)){
+				return false;
+			}
+			
+			$chars = '0123456789';
+			$strConcat = '';
+			
+			$mArrWords = str_word_count($param, 2, $chars);
+			$output = array_slice($mArrWords, 0, $word_limit);
+			
+				foreach ($output as $key){
+					$strConcat .= $key . ' ';
+				}
+			$result = $strConcat . '. . .';
+		
+			return $result;
 		}
 	}
