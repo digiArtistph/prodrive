@@ -10,6 +10,12 @@ class Home extends CI_Controller {
 		$data['content'] = $window->createWindow();		
 		$this->load->view('test_view', $data);
 		
+		$arr = array(
+				'title' => "my Title",
+				'id' => "jun",
+				'class' => "myClassName"
+				);
+		call_debug(get_elem_properties($arr) );
 	}
 	
 

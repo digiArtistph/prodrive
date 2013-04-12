@@ -8,11 +8,20 @@
  *
  *
  *	FUNCTIONS:
- *		get_dom_elem('<name>',bool)  // <name>: is an html element. bool is TRUE | FALSE. 
- *			
- *		legend:	
+ *		1)	get_dom_elem('<name>',bool)  // <name>: is an html element. bool is TRUE | FALSE. 
+ *
+ * 		legend:	
  *			TRUE : returns closing element of a tag. This is the default bool
  *			FALSE: returns name of the element of tag
+ *
+ *		$mArr = array(
+ *				'title' => 'My Title', 
+ *				'class' => 'My class name',
+ *				'id' => 'My Id'
+ *				);
+ *
+ *		2)	get_elem_properties($mArr)	// returns: title="My Title" class="My class name" id="My Id"
+ *			
  *
  *	SAMPLE CODE
  *
@@ -25,7 +34,16 @@
  *
  *						get_dom_elem('<div>', true);    //returns </div> - DEFAULT get_dom_elem('<div>');
  *						get_dom_elem('<div>', false);    //returns div
+ *
+ *					$mArr = array(
+ *						'title' => 'My Title', 
+ *						'class' => 'My class name',
+ *						'id' => 'My Id'
+ *						);
+ *
+ *					get_elem_properties($mArr);		//returns title="My Title" class="My class name" id="My Id"
  *					}
+ *			?>
  *
  */
 	if(!function_exists('get_dom_elem') ) {
@@ -44,5 +62,23 @@
 			if($flag == false){
 				return $element[0];
 			}
+		}
+	}
+	
+	if(!function_exists('get_elem_properties') ) {
+	
+		function get_elem_properties($param) {
+			
+			if(!is_array($param)){
+				return false;
+			}
+			
+			$tagproperties = '';
+			
+			foreach ($param as $key => $val){
+				$tagproperties .= ' ' . $key . '="' . $val . '"';
+			}
+			
+			return $tagproperties;
 		}
 	}
