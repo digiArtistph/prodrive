@@ -103,21 +103,27 @@
 	
 		function trunc_words($param, $word_limit = 10) {
 			
-			if(!is_string($param)){
+			if(!is_string($param))
 				return false;
-			}
+			
+			if ($word_limit <1)
+				return false;
 			
 			$chars = '0123456789';
 			$strConcat = '';
-			
-			$mArrWords = str_word_count($param, 2, $chars);
+			$result = 'sdf';
+			$mArrWords = str_word_count($param, 1, $chars);
 			$output = array_slice($mArrWords, 0, $word_limit);
 			
-				foreach ($output as $key){
-					$strConcat .= $key . ' ';
-				}
-			$result = $strConcat . '. . .';
-		
+			foreach ($output as $key){
+				$strConcat .= $key . ' ';
+			}
+			
+			if(count($mArrWords) > $word_limit){
+				$result = $strConcat . '. . .';
+			}else{
+				$result = $strConcat;
+			}
 			return $result;
 		}
 	}
