@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 		$this->load->view('test_view', $data);
 		
 		$str = 'Ako si tarzan hari ng kagubatan';
-		call_debug(trunc_words($str, 5) );
+		call_debug(trunc_words($str) );
 	}
 	
 
