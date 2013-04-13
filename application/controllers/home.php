@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 		//call_debug(trunc_words($str) );
 		
 		$dbhooks = new DBGenerator();
+
 	}
 	
 
