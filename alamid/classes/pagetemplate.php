@@ -17,11 +17,13 @@ class Pagetemplate {
 	protected $styles = null;
 	protected $masthead = null;
 	protected $panels = null;
+	protected $toolbars = null;
 	protected $html_open = '<html lang="en">';
 	protected $html_close = '</html>';
 	protected $body_open = '<body>';
 	protected $maincontent = null;
 	protected $body_close = '</body>';
+	protected $footer = null;
 	
 	const DOCTYPE = '<!DOCTYPE html>';
 
@@ -36,6 +38,8 @@ class Pagetemplate {
 		$this->meta = '<meta charset="utf-8" />';
 		$this->scripts = '';
 		$this->styles = '';
+		$this->toolbars = '';
+		$this->footer = '';
 		
 	}
 	
@@ -85,4 +89,19 @@ class Pagetemplate {
 		return trim($this->panels);
 	}
 	
+	public function set_toolbars($toolbars) {
+		$this->toolbars = $toolbars;
+	}
+	
+	public function get_toolbar() {
+		return trim($this->toolbars);
+	}
+	
+	public function set_footer($footer) {
+		$this->footer = $footer;
+	}
+	
+	public function get_footer() {
+		return trim($this->footer);
+	}
 }

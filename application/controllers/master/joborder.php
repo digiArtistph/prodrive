@@ -12,11 +12,15 @@ class joborder extends CI_Controller{
 	public function section(){
 		
 		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
+		$id = ($this->uri->segment(5)) ? $this->uri->segment(5) : '';
 		
 		switch($section) {
 			case 'viewjoborder':
 				$this->_viewjoborder();
 				break;
+			case 'vieworderlist':
+					$this->_vieworderlist($id);
+					break;
 			case 'newjoborder':
 				$this->_newjoborder();
 				break;
@@ -25,11 +29,26 @@ class joborder extends CI_Controller{
 		}
 	}
 	
-	private function _viewjoborder(){
+	private function _vieworderlist($id){
+		
+		$data['orders'] = $this->_getOrders($id);
+		
 		$data['main_content'] = 'joborder/viewjoborder';
 		$this->load->view('includes/template', $data);
 	}
 	
+	private function _viewjoborder(){
+		$data['orders'] = $this->_getOrders();
+		//call_debug($data['orders']);
+		$data['main_content'] = 'joborder/viewjoborder';
+		$this->load->view('includes/template', $data);
+	}
+	
+	private function _getOrders(){
+		$this->load->model('mdl_joborder');
+		$list = $this->mdl_joborder->get_orders();
+		return $list;
+	}
 	
 	private function _newjoborder(){
 		$data['main_content'] = 'joborder/addjoborder';

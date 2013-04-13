@@ -9,7 +9,7 @@ class Home extends CI_Controller {
 		
 		$data['content'] = $window->createWindow();		
 		$this->load->view('test_view', $data);
-		
+			
 	}
 	
 
