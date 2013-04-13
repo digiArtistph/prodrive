@@ -11,7 +11,9 @@ class Home extends CI_Controller {
 		$this->load->view('test_view', $data);
 		
 		$str = 'Ako si tarzan hari ng kagubatan';
-		call_debug(trunc_words($str) );
+		//call_debug(trunc_words($str) );
+		
+		$dbhooks = new DBGenerator();
 	}
 	
 

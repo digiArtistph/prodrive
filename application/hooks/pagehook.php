@@ -41,8 +41,10 @@ class Pagehook {
 		require_once ALAMIDCLASSES . 'toolbars' . EXT;
 		require_once ALAMIDCLASSES . 'footer' . EXT;	
 		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;		
+		require_once ALAMIDCLASSES . 'dbgenerator' . EXT;
 		
-		$almdHooks = almdMainFrameWindow::get_instance();		
+		$almdHooks = almdMainFrameWindow::get_instance();
+	
 	
 	}
 	
