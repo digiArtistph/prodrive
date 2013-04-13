@@ -43,6 +43,8 @@ class Pagehook {
 		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;
 		require_once ALAMIDCLASSES . 'wrapper' . EXT;
 		require_once ALAMIDCLASSES . 'misnomer' . EXT;
+		require_once ALAMIDFUNCTIONS . 'json_parser_helper'. EXT;
+		require_once ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT;
 		require_once ALAMIDFUNCTIONS . 'util'. EXT;
 				
 		// activates framework
