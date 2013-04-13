@@ -9,20 +9,31 @@
  *
  */
 class Panels extends Pagesection {
-	
-	public function __construct() {
-		// echo 'Initialising Panels class. <br />';
-	}
-	
+	private static $domElem;
+
 	public static function loadSection(Pagetemplate $page) {
-		// runs hooks in the section. checks hooks on the options table
-		
+		self::buildDOM();		
 		// builds the panels here
-		$page->set_panels('<div class="panels-group">Panels here</div>');
+		$page->set_panels(self::$domElem);
 	}
 	
 	protected static  function buildDOM() {
+		global $almd_wrap;
+		$output ='';
 		
+		// runs hook here
+		$objChild = '<ul><li><a href="#">Master Files</a></li><li><a href="#">Utility</a></li><li><a href="#">About</a></li><li><a href="#">Configuration</a></li></ul>';
+		$dom = array(
+				'node' => 'ul',
+				'child' => $objChild,
+				'prop' => get_elem_properties(array(
+						'class' => 'panel-widgets'
+				))
+		);
+		
+		$output = $almd_wrap->wrap($dom);
+		
+		self::$domElem = trim($output);
 	}
 	
 }

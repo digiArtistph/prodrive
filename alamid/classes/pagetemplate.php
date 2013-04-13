@@ -47,16 +47,16 @@ class Pagetemplate {
 		$page = '';
 		
 		$page .= self::DOCTYPE;
-		$page .= $this->html_open;
-		$page .= $this->meta;
+		$page .= $this->html_open;		
 		$page .= $this->head_open;
+		$page .= $this->meta;
 		$page .= ($this->scripts != '') ? $this->scripts: '';
 		$page .= $this->styles = ($this->styles != '') ? $this->styles : '';
 		$page .= $this->head_close;
 		$page .= $this->body_open;
 		
 		// perform sprintf here for all DOM elements
-		$page .= sprintf($this->maincontent, $this->masthead);
+		$page .= sprintf($this->maincontent, $this->masthead, $this->panels, $this->toolbars, $this->footer);
 		$page .= $this->body_close;
 		$page .= $this->html_close;
 		

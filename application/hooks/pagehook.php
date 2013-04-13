@@ -32,23 +32,26 @@ class Pagehook {
 		define('ALAMIDVIEWS', FCPATH . '/alamid/views/');
 		define('ALAMIDFUNCTIONS', FCPATH . '/alamid/functions/');
 		
-		// requires once some files
-		require_once ALAMIDCLASSES . 'almdMainFrameWindow' . EXT;
-		require_once ALAMIDCLASSES . 'pagesection' . EXT;
-		require_once ALAMIDCLASSES . 'canvas' . EXT;
-		require_once ALAMIDCLASSES . 'masthead' . EXT;
-		require_once ALAMIDCLASSES . 'panels' . EXT;
-		require_once ALAMIDCLASSES . 'toolbars' . EXT;
-		require_once ALAMIDCLASSES . 'footer' . EXT;	
-		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;
-		require_once ALAMIDCLASSES . 'wrapper' . EXT;
-		require_once ALAMIDCLASSES . 'misnomer' . EXT;
-		require_once ALAMIDFUNCTIONS . 'util'. EXT;
+		// requires necessary files and loads them once
+		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'panels' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'toolbars' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'footer' . EXT);	
+		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
 				
-		// activates framework
+		/**
+		 * Activates Alamid Framework
+		 */
 		$almdHooks = almdMainFrameWindow::get_instance();		
 		Misnomer::load();
-	
+		loadAlamidGlobals();
+		
 	}
 	
 }
