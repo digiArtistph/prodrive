@@ -35,12 +35,12 @@ class almdMainFrameWindow {
 		
 		$dom = array(
 					'node' => 'div',
-					'child' =>'<a href="#">Login</a>'
-					/* 'prop' => get_elem_properties(array(
+					'child' =>'<a href="#">Login</a>',
+					'prop' => get_elem_properties(array(
  						'title' => 'My Title', 
  						'class' => 'My_class_name',
  						'id' => 'MyId'
- 						)) */
+ 						)) 
 				);
 		
 		echo $wrap->wrap($dom);

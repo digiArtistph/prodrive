@@ -48,10 +48,6 @@ class DBGenerator{
 		$this->mDBName = $config['db_name'];
 	}
 	
-	private function _getTablePrefix(){
-		
-	}
-	
 	// 	connect to database
 	private function _connectDB(){
 		$this->mDB = mysql_connect($this->mDBServer, $this->mDBUser, $this->mDBPass);
@@ -89,18 +85,78 @@ class DBGenerator{
 	}
 	
 	private function _checktables(){
-		echo 'df'; die();
+		$prefix = $this->_getTableprefix();
+		
+		
+		echo '<pre />';
+		print_r($prefix);
+		die();
+		// initializes some variables
+		foreach ($file_maker->mData as $key => $val) {
+			$this->$key = trim($val);
+		}
+		
 		$tables = $this->_getTables();
 		if($tables['rowCount']<1){
 // 			no tables
 		}else{
-			echo 'sdf';
-// 			check if tables have order,customer
+			
 			foreach ($tables['mData'] as $key){
-				echo $key; die();
-				//if()
+				
+				$subString =  substr($key, 0,$strlen);
+				$dbTables = array(
+						$fileData['prefix'] .'customer',
+						$fileData['prefix'] .'joborder',
+						$fileData['prefix'] .'labortype',
+						$fileData['prefix'] .'option',
+						$fileData['prefix'] .'orderdetails',
+						$fileData['prefix'] .'users',
+						$fileData['prefix'] .'vehicle'
+						
+						);
+				foreach ($dbTables as $val){
+					if($key == $val){
+						//create table
+					}
+				}
 			}
 		}
+	}
+	
+	private function _getTableprefix(){
+		$config = array(
+				'filename' => 'config.txt',
+				'path' => APPPATH . '../alamid/classes/',
+				'char_struct' => 'kenn:genius'
+		);
+		$file_maker = new file_extension();
+		$file_maker->initialize($config);
+		$file_maker->parseData();
+		$fileData = $file_maker->mData;
+		print_r($fileData); die();
+		$results = array(
+				'fd_prefix' => $fileData['prefix'],
+				'fd_cnt' => strlen($fileData['prefix'])
+				);
+		return $results;
+	}
+	
+	private function _createTable($tblName){
+		$config = array(
+				'filename' => 'config.txt',
+				'path' => APPPATH . '../alamid/classes/',
+				'char_struct' => 'kenn:genius'
+		);
+		$file_maker = new file_extension();
+		$file_maker->initialize($config);
+		$file_maker->parseData();
+		$fileData = $file_maker->mData;
+		
+		$strlen2 = strlen($fileData['prefix']);
+		$strlen = strlen($tblName) -1;
+		
+		$tables = substr($tblName, $strlen2, $strlen);
+	//	if($tabl)
 	}
 	
 	private function _getTables(){

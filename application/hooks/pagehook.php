@@ -45,6 +45,8 @@ class Pagehook {
 		require_once ALAMIDCLASSES . 'wrapper' . EXT;
 		require_once ALAMIDCLASSES . 'misnomer' . EXT;
 		require_once ALAMIDFUNCTIONS . 'util'. EXT;
+		require_once ALAMIDCLASSES . 'File_maker'. EXT;
+		require_once ALAMIDCLASSES . 'file_extension'. EXT;
 		
 		$almdHooks = almdMainFrameWindow::get_instance();
 		Misnomer::load();
