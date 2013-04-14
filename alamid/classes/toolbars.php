@@ -9,17 +9,33 @@
  *
  */
 class Toolbars extends Pagesection {
-	
-	public function __construct() {
-		// echo 'Initialising Toolbars class. <br />';
-	}
-	
+	private static $domElem;
+
 	public static function loadSection(Pagetemplate $page) {
-		$page->set_toolbars('<div class="toolbars">Toolbars here</div>');
+		self::buildDOM();		
+		// builds the masthead
+		$page->set_toolbars(self::$domElem);
+		
 	}
 	
 	protected static  function buildDOM() {
+		global $almd_wrap;		
+		$output ='';
 		
+		// runs hook here
+		$objChild = '<ul><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>';
+		$dom = array(
+					'node' => 'div',
+					'child' => $objChild,
+					'prop' => get_elem_properties(array(
+								'id' => 'toolbar-widgets'
+							))
+				);
+		
+		$output = $almd_wrap->wrap($dom);
+		
+		self::$domElem = trim($output);
+
 	}
 	
 }

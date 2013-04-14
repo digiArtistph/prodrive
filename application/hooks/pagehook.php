@@ -38,6 +38,7 @@ class Pagehook {
 		require_once ALAMIDCLASSES . 'canvas' . EXT;
 		require_once ALAMIDCLASSES . 'masthead' . EXT;
 		require_once ALAMIDCLASSES . 'panels' . EXT;
+		require_once ALAMIDCLASSES . 'pasteboard' . EXT;
 		require_once ALAMIDCLASSES . 'toolbars' . EXT;
 		require_once ALAMIDCLASSES . 'footer' . EXT;	
 		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;

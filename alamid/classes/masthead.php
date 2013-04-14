@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Generates some admin menu on the top side of the graphical user-interface
  * @author Mugs and Coffee
@@ -28,7 +27,7 @@ class Masthead extends Pagesection {
 					'node' => 'div',
 					'child' => $objChild,
 					'prop' => get_elem_properties(array(
-								'class' => 'masthead'
+								'id' => 'masthead'
 							))
 				);
 		

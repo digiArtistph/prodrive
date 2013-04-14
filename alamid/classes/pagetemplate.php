@@ -18,6 +18,7 @@ class Pagetemplate {
 	protected $masthead = null;
 	protected $panels = null;
 	protected $toolbars = null;
+	protected $pasteboard = null;
 	protected $html_open = '<html lang="en">';
 	protected $html_close = '</html>';
 	protected $body_open = '<body>';
@@ -34,6 +35,7 @@ class Pagetemplate {
 		$this->head_close = '</head>';
 		$this->masthead = '';
 		$this->maincontent = '';
+		$this->pasteboard = '';
 		$this->panels = '';
 		$this->meta = '<meta charset="utf-8" />';
 		$this->scripts = '';
@@ -56,7 +58,7 @@ class Pagetemplate {
 		$page .= $this->body_open;
 		
 		// perform sprintf here for all DOM elements
-		$page .= sprintf($this->maincontent, $this->masthead, $this->panels, $this->toolbars, $this->footer);
+		$page .= sprintf($this->maincontent, $this->masthead, $this->panels,$this->pasteboard, $this->toolbars, $this->footer);
 		$page .= $this->body_close;
 		$page .= $this->html_close;
 		
@@ -87,6 +89,14 @@ class Pagetemplate {
 	
 	public function get_panels() {
 		return trim($this->panels);
+	}
+	
+	public function set_pasteboard($pasteboard) {
+		$this->pasteboard = $pasteboard;
+	}
+	
+	public function get_pasteboard() {
+		return trim($this->pasteboard);
 	}
 	
 	public function set_toolbars($toolbars) {

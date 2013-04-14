@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Generates the base object of all dom
+ * Generates the base container object of all dom
  * @author Mugs and Coffee
  * @written Kenneth "digiArtist_ph" P. Vallejos
  * @since Tuesday, April 9, 2013
@@ -25,14 +24,13 @@ class Canvas extends Pagesection {
 		$output ='';
 		$dom = array(
 					'node' => 'div',
-					'child' => '%s%s%s%s',
+					'child' => '%s%s%s%s%s',
 					'prop' => get_elem_properties(array(
-								'id' => 'maincontainer'
+								'id' => 'container'
 							))
 				);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);		
 		self::$domElem = trim($output);
 		
 	}
