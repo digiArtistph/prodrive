@@ -30,25 +30,26 @@ class Pagehook {
 	private function init() {
 		define('ALAMIDCLASSES', FCPATH . '/alamid/classes/');
 		define('ALAMIDVIEWS', FCPATH . '/alamid/views/');
+		define('ALAMIDLIBS', FCPATH . '/alamid/libraries/');
 		define('ALAMIDFUNCTIONS', FCPATH . '/alamid/functions/');
 		
 		// requires once some files
-		require_once ALAMIDCLASSES . 'almdMainFrameWindow' . EXT;
-		require_once ALAMIDCLASSES . 'pagesection' . EXT;
-		require_once ALAMIDCLASSES . 'canvas' . EXT;
-		require_once ALAMIDCLASSES . 'masthead' . EXT;
-		require_once ALAMIDCLASSES . 'panels' . EXT;
-		require_once ALAMIDCLASSES . 'toolbars' . EXT;
-		require_once ALAMIDCLASSES . 'footer' . EXT;	
-		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;
-		require_once ALAMIDCLASSES . 'dbgenerator' . EXT;
-		require_once ALAMIDCLASSES . 'wrapper' . EXT;
-		require_once ALAMIDCLASSES . 'misnomer' . EXT;
-		require_once ALAMIDFUNCTIONS . 'json_parser_helper'. EXT;
-		require_once ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT;
-		require_once ALAMIDFUNCTIONS . 'util'. EXT;
-		require_once ALAMIDCLASSES . 'File_maker'. EXT;
-		require_once ALAMIDCLASSES . 'file_extension'. EXT;
+		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'panels' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'toolbars' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'footer' . EXT);	
+		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'dbgenerator' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
+		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'file_extension'. EXT);
 		
 		$almdHooks = almdMainFrameWindow::get_instance();
 		Misnomer::load();
