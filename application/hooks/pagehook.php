@@ -33,20 +33,20 @@ class Pagehook {
 		define('ALAMIDFUNCTIONS', FCPATH . '/alamid/functions/');
 		
 		// requires once some files
-		require_once ALAMIDCLASSES . 'almdMainFrameWindow' . EXT;
-		require_once ALAMIDCLASSES . 'pagesection' . EXT;
-		require_once ALAMIDCLASSES . 'canvas' . EXT;
-		require_once ALAMIDCLASSES . 'masthead' . EXT;
-		require_once ALAMIDCLASSES . 'panels' . EXT;
-		require_once ALAMIDCLASSES . 'pasteboard' . EXT;
-		require_once ALAMIDCLASSES . 'toolbars' . EXT;
-		require_once ALAMIDCLASSES . 'footer' . EXT;	
-		require_once ALAMIDCLASSES . 'pagetemplate' . EXT;
-		require_once ALAMIDCLASSES . 'wrapper' . EXT;
-		require_once ALAMIDCLASSES . 'misnomer' . EXT;
-		require_once ALAMIDFUNCTIONS . 'json_parser_helper'. EXT;
-		require_once ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT;
-		require_once ALAMIDFUNCTIONS . 'util'. EXT;
+		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'panels' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'pasteboard' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'toolbars' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'footer' . EXT);	
+		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
 
 		/**
 		 * Activates Alamid Framework
