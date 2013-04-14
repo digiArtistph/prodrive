@@ -1,20 +1,19 @@
 <?php
-
 /**
- * Generates all the panels on the right side of the graphical user interface
+ * Generates the main content of the current page
  * @author Mugs and Coffee
  * @written Kenneth "digiArtist_ph" P. Vallejos
- * @since Tuesday, April 9, 2013
+ * @since Sunday, April 14, 2013
  * @version 1.0
  *
  */
-class Panels extends Pagesection {
+class Pasteboard extends Pagesection {	
 	private static $domElem;
 
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
 		// builds the panels here
-		$page->set_panels(self::$domElem);
+		$page->set_pasteboard(self::$domElem);
 	}
 	
 	protected static  function buildDOM() {
@@ -22,20 +21,16 @@ class Panels extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		$objChild = '<ul><li><a href="#">Master Files</a></li><li><a href="#">Utility</a></li><li><a href="#">About</a></li><li><a href="#">Configuration</a></li></ul>';
+		$objChild = 'Home Page!';
 		$dom = array(
 				'node' => 'div',
 				'child' => $objChild,
 				'prop' => get_elem_properties(array(
-						'id' => 'panel-widgets'
+						'class' => 'content'
 				))
 		);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);		
 		self::$domElem = trim($output);
 	}
-	
 }
-
-?>
