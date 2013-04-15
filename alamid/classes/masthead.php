@@ -18,10 +18,11 @@ class Masthead extends Pagesection {
 	}
 	
 	protected static  function buildDOM() {
-		global $almd_wrap;		
+		global $almd_wrap;
 		$output ='';
 		
 		// runs hook here
+		
 		$objChild = '<ul><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>';
 		$dom = array(
 					'node' => 'div',
