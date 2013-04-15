@@ -44,11 +44,12 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
-		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
-		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);		
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);			
+		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'functions'. EXT);
-
+			
 		/**
 		 * Activates Alamid Framework
 		 */
@@ -56,8 +57,7 @@ class Pagehook {
 		Misnomer::load();
 		loadAlamidGlobals();
 		
-	}
-	
+	}	
 }
 
 ?>

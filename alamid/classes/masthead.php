@@ -21,7 +21,9 @@ class Masthead extends Pagesection {
 		global $almd_wrap;
 		$output ='';
 		
+		$objChild = '';
 		// runs hook here
+		Bootstrap::execute($objChild, 'section_masthead');
 		
 		$objChild = '<ul><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>';
 		$dom = array(

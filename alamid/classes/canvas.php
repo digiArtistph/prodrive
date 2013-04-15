@@ -12,7 +12,7 @@ class Canvas extends Pagesection {
 	
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();
-			
+			 	
 		// builds the canvas here
 		$page->set_canvas(self::$domElem);
 		
