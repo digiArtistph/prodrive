@@ -1,124 +1,62 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * Description: Json parser
- * @author Mugs and Coffee
- * @written Norberto Q. Libago Jr.
- * @since Wednesday, April 10, 2013
- * @version 1.0.0
- *
- *
- *	FUNCTIONS:
- *		get_setting('<name>',bool)  // <name>: is an name value. bool is TRUE | FALSE. 
- *			
- *		legend:	
- *			TRUE : returns all array object. This is the Default
- *			FALSE: return only the first object 
- *
- *	SAMPLE CODE
- *
- *		{CONTROLLER}
- *
- *			<?php
- *				class somecontroller extends CI_Controller {
- *
- *					public function index() {
- *
- *						get_setting('sidebar', true); 
- *
- *					}
- *
- */
-	/* if(!function_exists('get_setting') ) {
-
-		function get_setting($param, $flag = TRUE) {
-			
-			$CI =& get_instance();
-			$temp = array();
-			
-			$str = 'SElECT option_value FROM `option` WHERE option_name like "%' . $param . '%"';
-			$query = $CI->db->query($str);
-			
-// 			call_debug($query);
-			if($query->num_rows() <= 0){
-				return false;
-			}
-			
-			if($flag){
-				$result = $query->result();
-				$arr = json_decode($result[0]->option_value);
-				//call_debug($arr);
-				$cnt = count(get_object_vars($arr));
-				if ($cnt == 1){
-					foreach ($arr as $key => $val){
-						$temp = $val;break;
-					}
-					return $temp;
-				}else
-					return $arr;
-				
-			}
-			
-			if($flag  == false){
-				$result = $query->result();
-				$arr = json_decode($result[0]->option_value);
-				
-				foreach ($arr as $key => $val){
-					$temp = $val;break;
-				}
-				return $temp;
-			}
-			
-		}
-	} */
-	
-
-	if(! function_exists('add_settings')) {
-		function add_settings($name, $value = '') {
-			$CI =& get_instance();
-			$setting = '';
-			$strQry = sprintf("SELECT option_value FROM `option` WHERE option_name='%s'", $name);
-			
-			$records = $CI->db->query($strQry);
-			$result = $records->result();			
-			$numrow = $records->num_rows;
-			
-			if($numrow < 1) {
-				// preps data
-				$setting = array($value); 
-// 				call_debug($setting);
-				$setting = json_encode($setting, JSON_FORCE_OBJECT);
-				$strQry = sprintf("INSERT INTO `option` SET option_name='%s', option_value='%s'", $name, $setting);
-				
-				if(! $CI->db->query($strQry))
-					return 0;
-				else
-					return 1; // success insert				
-				
-			}
-			
-			foreach($result as $rec) {
-				$setting = $rec->option_value;
-			}
-			
-			// retrieves settings values
-			$setting = json_decode($setting, TRUE);
-			// adds the new settings into the array
-			$setting[] = $value;
-
-			// deletes the duplicate values in the array
-			$setting = array_unique($setting);
-			
-			// encodes into json
+if(! function_exists('add_settings')) {
+	/**
+	 * 
+	 * Adds setting on the option table
+	 * @param string $name
+	 * @param string $value
+	 * @author Mugs and Coffee
+	 * @written Kenneth "digiArtist_ph" P. Vallejos
+	 * @since Monday, April 15, 2013
+	 * @version 1.0.1
+	 * 
+	 */
+	function add_settings($name, $value = '') {
+		$CI =& get_instance();
+		$setting = '';
+		$strQry = sprintf("SELECT option_value FROM `option` WHERE option_name='%s'", $name);
+		
+		$records = $CI->db->query($strQry);
+		$result = $records->result();			
+		$numrow = $records->num_rows;
+		
+		
+		if($numrow < 1) {
+			// preps data
+			$setting = array($value); 
 			$setting = json_encode($setting, JSON_FORCE_OBJECT);
-			$strQryUpdate = sprintf("UPDATE `option` SET option_value='%s' WHERE option_name='%s'", $setting, $name);
+			$strQry = sprintf("INSERT INTO `option` SET option_name='%s', option_value='%s'", $name, $setting);
 			
-			if(! $CI->db->query($strQryUpdate))
+			if(! $CI->db->query($strQry))
 				return 0;
 			else
-				return 2; // success update
-
+				return 1; // success insert				
+			
 		}
+		
+		foreach($result as $rec) {
+			$setting = $rec->option_value;
+		}
+		
+		// retrieves settings values
+		$setting = json_decode($setting, TRUE);
+		// adds the new settings into the array
+		$setting[] = $value;
+	
+		// deletes the duplicate values in the array
+		$setting = array_unique($setting);
+		
+		// encodes into json
+		$setting = json_encode($setting, JSON_FORCE_OBJECT);
+		$strQryUpdate = sprintf("UPDATE `option` SET option_value='%s' WHERE option_name='%s'", $setting, $name);
+		
+		if(! $CI->db->query($strQryUpdate))
+			return 0;
+		else
+			return 2; // success update
+	
 	}
+}
 	
 	if(! function_exists('get_setting')) {
 		/**
@@ -128,8 +66,10 @@
 		 * @param boolean $includeindex
 		 * @return boolean|multitype:|mixed
 		 * @author Mugs and Coffee
-		 * @written Kenneth "digiArtist_ph" P. Vallejos
+		 * @written Norberto Q. Libago Jr. 
+		 * @contributor Kenneth "digiArtist_ph" P. Vallejos
 		 * @since Monday, April 15, 2013
+		 * @version 1.0.1
 		 */
 		function get_setting($name, $all = FALSE, $includeindex = FALSE) {
 			// $all, when TRUE, retrieves all values in an array form
@@ -163,12 +103,12 @@
 				}
 			}
 			// returns multiple records in an array format with index
-			if(count(	$setting) > 0 && $all && $includeindex)
+			if(count($setting) > 0 && $all && $includeindex)
 				return $setting;
 						
 			// returns multiple records in an array format without index
 			if(count($setting) > 0 && $all && !$includeindex) {
-				remove_array_index($setting);
+				//remove_array_index($setting); @todo: fix this bug
 				
 				return $setting;
 			}

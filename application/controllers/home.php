@@ -9,17 +9,5 @@ class Home extends CI_Controller {
 		$this->load->view('test_view', $data);
 			
 	}
-	
-	
-	public function test () {
-// 		$json = '{"right":"name1", "left":"name2"}';
-		
-// // 		$obj = json_decode($json);
-// 		$obj = json_decode($json);
-// 		echo $obj->right;
-
-		add_settings('section_canvas', 'functiononehundred');
-		on_watch(get_setting('section_mastheads', FALSE, FALSE));
-	}
 
 }

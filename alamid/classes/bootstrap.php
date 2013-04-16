@@ -9,18 +9,15 @@
  */
 class Bootstrap {
 	
-	public static function execute() {
+	public static function execute(&$DOM, $section) {	
 		
-		// reads options table
 		// assigns returned recordset into array
 		// call_user_func() -- use loop here
-		$hooks = array(
-					'funcone', 'functwo', 'functhree'
-				);
 		
-		foreach ($hooks as $hook) {
-			
-			if(! call_user_func('func_name', 'params')) {
+		$hooks = get_setting($section, FALSE, TRUE);
+		
+		foreach ($hooks as $hook) {			
+			if(! call_user_func($hook)) {
 				// logs error.
 			}
 			
