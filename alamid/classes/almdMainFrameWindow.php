@@ -48,6 +48,7 @@ class almdMainFrameWindow {
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);
 		Panels::loadSection($page);
+		Pasteboard::loadSection($page);
 		Toolbars::loadSection($page);
 		Footer::loadSection($page);
 		
