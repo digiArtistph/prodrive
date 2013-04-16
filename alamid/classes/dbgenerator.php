@@ -15,7 +15,13 @@ class DBGenerator{
 	private $mFile;
 	
 	public function __construct(){
-		
+		$this->_setDBConfiguration();
+		$this->_setFileConfiguration();
+		$this->_initialize();
+	}
+	
+	//Database Configuration Settings
+	private function _setDBConfiguration() {
 		$this->mDBReport = 'on';	// put empty value if u dont want mysql error reporting
 		$this->mDBError = 'Oops !!! Error in Database: ';
 		$this->mDBServer = 'localhost';
@@ -24,18 +30,31 @@ class DBGenerator{
 		$this->mDBName = 'prodriveDB';
 		$this->mDBTblprefix = '';
 		
+	}
+	
+	//File Configuration Settings
+	private function _setFileConfiguration(){
+		
+		$configfile = array(
+						'filename' => 'config.txt',
+						'path' => APPPATH . '../alamid/structure/',
+						'char_struct' => 'kenn:genius'
+						);
+		
+		$this->mFile = new fileextension();
+		$this->mFile->initialize($configfile);
 		
 		$prefix = $this->_getTableprefix();
-		
 		if($prefix['fd_cnt']>0){
 			$this->mConsTbl = array( $prefix['fd_prefix'] .'_customer', $prefix['fd_prefix'] .'_joborder', $prefix['fd_prefix'] .'_labortype', $prefix['fd_prefix'].'_option', $prefix['fd_prefix'] .'_orderdetails', $prefix['fd_prefix'] .'_users', $prefix['fd_prefix'] .'_vehicle');
 		}else{
-			$this->mConsTbl = array('customer', 'joborder', 'labortype', 'option', 'orderdetails', 'users', 'vehicle');
+			//@todo
+			// get prefix
+			//$this->mConsTbl = array('customer', 'joborder', 'labortype', 'option', 'orderdetails', 'users', 'vehicle');
 		}
-		
-		$this->_initialize();
 	}
 	
+	//initialize database
 	private function _initialize($config = array()){
 		
 		if(!empty($config))
@@ -49,17 +68,10 @@ class DBGenerator{
 			$this->_checkReport();
 		}
 		
-		$config = array(
-				'filename' => 'config.txt',
-				'path' => APPPATH . '../alamid/structure/',
-				'char_struct' => 'kenn:genius'
-		);
-		$this->mFile = new fileextension();
-		$this->mFile->initialize($config);
-		
 		$this->_checktables();
 	}
 	
+	//if database configuration is set. this method is called
 	private function _getConfiguration($config){
 		
 		$this->mDBServer = $config['db_server'];
@@ -69,10 +81,10 @@ class DBGenerator{
 		
 	}
 	
-	// 	connect to database
+	// 	connecting to database
 	private function _connectDB(){
-		$this->mDB = mysql_connect($this->mDBServer, $this->mDBUser, $this->mDBPass);
 		
+		$this->mDB = mysql_connect($this->mDBServer, $this->mDBUser, $this->mDBPass);
 		//return false if cannot connect to database
 		if (!$this->mDB) {
 			$this->mDBError .=  mysql_error(). '\n';
@@ -82,49 +94,46 @@ class DBGenerator{
 		
 	}
 	
-	//construct database
+	//construct a default database if database name is not defined
 	private function _constructDB(){
 		
-		
 		$db_selected = mysql_select_db($this->mDBName, $this->mDB);
-		
 		if (!$db_selected) {
 			
-			//create database
-			$sql = 'CREATE DATABASE ' . $DBname;
+			$sql = 'CREATE DATABASE ' . $DBname;	//create database
 			if (mysql_query($sql, $link)) {
+				
 				$this->mDBError = 'DATABASE "' .$this->mDBName . '" created';
 				return true;
 			}else {
+				
 				$this->mDBError .=  mysql_error(). '\n';
 				return false;
 			}
 		}else{
+			
 			$this->mDBError = 'DATABASE "' .$this->mDBName . '" connected';
 			return true;
 		}
 	}
 	
+	// check Database table if not existed
 	private function _checktables(){
 		
 		$tables = $this->_getTables();
-		
 		if($tables['rowCount'] < 1){
 			//create all tables
 		}else{
 			//$prefix =  $this->_getTableprefix();
 			$this->_checkValidTables($tables['mData']);
 		}
-		
-		
 	}
 	
+	//checking if tables created are valid tables
 	private function _checkValidTables($arrTables){
-		
 		
 		$checkList = array();
 		$prefix = $this->_getTableprefix();
-		
 		if($prefix['fd_cnt']<0){
 			// create all tables
 		}
@@ -132,49 +141,49 @@ class DBGenerator{
 			
 			foreach ($arrTables as $key){
 				$key = trim($key);
-				
 				foreach ($this->mConsTbl as $val){
-					$val = trim($val);
 					
+					$val = trim($val);
 					if($key == $val){
 						array_push($checkList, $val);
 					}
 				} //end 2nd for each
 				
 			} //end 1st for each
-
-			
 			$this->_createTbl($checkList);
 		}
 		
 	}
 	
+	// get the table prefix in config.txt
 	private function _getTableprefix(){
 		
 		$this->mFile->parseData();
+		
 		$fileData = $this->mFile->mData;
-		
-		
 		if(array_key_exists('kenn', $fileData)){
+			
 			$results = array(
-					'fd_prefix' => 'none',
-					'fd_cnt' => 0
-			);
+						'fd_prefix' => 'none',
+						'fd_cnt' => 0
+					);
 		}else{
+			
 			$results = array(
-					'fd_prefix' => trim($fileData['prefix']),
-					'fd_cnt' => strlen(trim($fileData['prefix']))
-			);
+						'fd_prefix' => trim($fileData['prefix']),
+						'fd_cnt' => strlen(trim($fileData['prefix']))
+						);
 		}
-
 		
 		return $results;
 	}
 	
+	// creates table needed if user did not define configuration files
 	private function _createTbl($params = array()){
 		
 		$dbTables = $this->_traverse_array_tables($params);
 		$prefix = $this->_getTableprefix();
+		
 		$tables = array(
 					$prefix['fd_prefix'] . '_customer' => 'CREATE TABLE ' .$prefix['fd_prefix'] . '_customer' .' (
 															`c_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -248,19 +257,17 @@ class DBGenerator{
 			//get prefix
 		}else{
 			
-			
-			//search array
 			array_walk($tables, array('DBGenerator', '_walkTables'), $dbTables);
-
 		}
-		
-
 	}
 	
+	//walk array of table names to check what must be deliverd
 	private function _walkTables(&$item, $key, $params){
+		
 		foreach ($params as $key2 => $val){
 			
 			if($key == trim($val) ){
+				
 				$query = mysql_query($item, $this->mDB);
 				if(!$query){
 					call_debug(mysql_error());
@@ -271,34 +278,39 @@ class DBGenerator{
 		
 	}
 	
+	//traverse table for checking purposes
 	private function _traverse_array_tables($params = array()){
 		$tables = array();
-		
 		$tables = array_diff($this->mConsTbl, $params);
 		return $tables;
 	}
 	
+	
+	//gets all tables in database
 	private function _getTables(){
+		
 		$tables = array();
 	    $list_tables_sql = "SHOW TABLES FROM {$this->mDBName};";
+
 	    $result = mysql_query($list_tables_sql);
-	    
 	    if($result)
 	    	while($table = mysql_fetch_row($result)){
 	        	$tables[] = $table[0];
 	    	}
 	    	
-	    $results = array(
-	    		'rowCount' => mysql_num_rows($result ),
-	    		'mData' => $tables
-	    		);
+	    	$results = array(
+			    		'rowCount' => mysql_num_rows($result ),
+			    		'mData' => $tables
+			    		);
 	    
 	    return $results;
 	}
 	
+	// turning on the default error reporting
 	private function _checkReport(){
 		if($this->mDBReport == 'on'){
 			echo $this->mDBError; die();
 		}
 	}
+	
 }

@@ -39,7 +39,6 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'panels' . EXT);
-		require_once realpath(ALAMIDCLASSES . 'dbgenerator' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'pasteboard' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'toolbars' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'footer' . EXT);	
@@ -49,6 +48,7 @@ class Pagehook {
 		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'dbgenerator' . EXT);
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
 		
