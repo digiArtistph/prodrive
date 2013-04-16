@@ -14,14 +14,23 @@ class DBGenerator{
 	private $mTbl;
 	private $mFile;
 	
+// 	$config = array(
+// 			'db_server' => 'localhost',
+// 			'db_user' => 'root',
+// 			'db_name' => 'prodrive',
+// 			'db_pass' => 'password',
+// 			'db_tbl_prefix' => 'almd'
+// 			);
 	public function __construct(){
-		$this->_setDBConfiguration();
-		$this->_setFileConfiguration();
-		$this->_initialize();
+		
+		$this->_setFileConfiguration();	// set file configuration
+		
+		
+			$this->_initialize();
 	}
 	
 	//Database Configuration Settings
-	private function _setDBConfiguration() {
+	private function _setDefaultDBConfiguration() {
 		$this->mDBReport = 'on';	// put empty value if u dont want mysql error reporting
 		$this->mDBError = 'Oops !!! Error in Database: ';
 		$this->mDBServer = 'localhost';
@@ -30,6 +39,21 @@ class DBGenerator{
 		$this->mDBName = 'prodriveDB';
 		$this->mDBTblprefix = '';
 		
+	}
+	
+	//if database configuration is set. this method is called
+	private function _setDBConfiguration($config){
+		
+		if(! is_array($config))
+			return false;
+		
+		
+		$this->mDBServer = $config['db_server'];
+		$this->mDBUser = $config['db_user'];
+		$this->mDBPass = $config['db_pass'];
+		$this->mDBName = $config['db_name'];
+		
+		$this->mFile->replacePrefix($config['db_tbl_prefix']);
 	}
 	
 	//File Configuration Settings
@@ -54,11 +78,14 @@ class DBGenerator{
 		}
 	}
 	
+	
 	//initialize database
-	private function _initialize($config = array()){
+	public function _initialize($config = array()){
 		
 		if(!empty($config))
-			$this->_getConfiguration($config);
+			$this->_setDBConfiguration($config);
+		else 
+			$this->_setDefaultDBConfiguration();
 		
 		if(! $this->_connectDB() ){
 			$this->_checkReport();
@@ -71,15 +98,7 @@ class DBGenerator{
 		$this->_checktables();
 	}
 	
-	//if database configuration is set. this method is called
-	private function _getConfiguration($config){
-		
-		$this->mDBServer = $config['db_server'];
-		$this->mDBUser = $config['db_user'];
-		$this->mDBPass = $config['db_pass'];
-		$this->mDBName = $config['db_name'];
-		
-	}
+
 	
 	// 	connecting to database
 	private function _connectDB(){
@@ -100,8 +119,8 @@ class DBGenerator{
 		$db_selected = mysql_select_db($this->mDBName, $this->mDB);
 		if (!$db_selected) {
 			
-			$sql = 'CREATE DATABASE ' . $DBname;	//create database
-			if (mysql_query($sql, $link)) {
+			$sql = 'CREATE DATABASE ' . $this->mDBName;	//create database
+			if (mysql_query($sql, $this->mDB)) {
 				
 				$this->mDBError = 'DATABASE "' .$this->mDBName . '" created';
 				return true;

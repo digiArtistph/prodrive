@@ -12,6 +12,15 @@ class Home extends CI_Controller {
 		//call_debug(trunc_words($str) );
 		
 		$dbhooks = new DBGenerator();
+		
+		$config = array(
+				'db_server' => 'localhost',
+				'db_user' => 'root',
+				'db_name' => 'prodrive',
+				'db_pass' => '',
+				'db_tbl_prefix' => 'almd'
+		);
+		$dbhooks->_initialize($config);
 
 	}
 	
