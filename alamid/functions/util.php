@@ -13,15 +13,26 @@ if(!function_exists('alias')) {
 	}
 }
 
-function remove_array_index(&$array) {
-	$tmpArr = array();
-	
-	foreach($array as $val):
-		$tmpArr[] = $val;
-	endforeach;
-	
-	call_debug($tmpArr);
-	$array = $tmpArr;
+if(! function_exists('remove_array_index')) {
+	function remove_array_index(&$array) {
+		$tmpArr = array();
+		
+		foreach($array as $val):
+			$tmpArr[] = $val;
+		endforeach;
+		
+		call_debug($tmpArr);
+		$array = $tmpArr;
+	}
+}
+
+if(! function_exists('to_array')) {
+	function to_array($str = '', $flag = TRUE) {
+		$retVal = array();
+		
+		$retVal = explode("|", $str);
+		
+	}
 }
 
 // create a function here that will log all the function from hooks that are not properly working

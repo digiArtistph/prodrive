@@ -4,7 +4,7 @@
  * @author Mugs and Coffee
  * @written Kenneth "digiArtist_ph" P. Vallejos
  * @since Monday, April 15, 2013
- * @version 1.0.0 
+ * @version 1.0.0
  *
  */
 class Bootstrap {
@@ -14,13 +14,12 @@ class Bootstrap {
 		// assigns returned recordset into array
 		// call_user_func() -- use loop here
 		
-		$hooks = get_setting($section, FALSE, TRUE);
+		$hooks = get_setting($section, TRUE, FALSE);
 		
-		foreach ($hooks as $hook) {			
+		foreach ($hooks as $hook) {		
 			if(! call_user_func($hook)) {
-				// logs error.
-			}
-			
+				log_message('error', $hook);
+			}			
 		}
 		
 		

@@ -9,7 +9,7 @@
  */
 class Masthead extends Pagesection {
 	private static $domElem;
-
+	
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
 		// builds the masthead
