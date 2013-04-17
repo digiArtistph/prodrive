@@ -102,6 +102,7 @@ if(! function_exists('add_settings')) {
 					return trim($value);
 				}
 			}
+			
 			// returns multiple records in an array format with index
 			if(count($setting) > 0 && $all && $includeindex)
 				return $setting;

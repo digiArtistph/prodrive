@@ -9,7 +9,8 @@
  */
 class Canvas extends Pagesection {
 	private static $domElem;
-	
+	private static $ojbChild;
+		
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();
 			 	
@@ -33,6 +34,10 @@ class Canvas extends Pagesection {
 		$output = $almd_wrap->wrap($dom);		
 		self::$domElem = trim($output);
 		
+	}
+	
+	public static function buildChildDOM($chld) {
+		self::$objChild = $chld;
 	}
 }
 

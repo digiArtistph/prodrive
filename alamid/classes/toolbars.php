@@ -10,7 +10,8 @@
  */
 class Toolbars extends Pagesection {
 	private static $domElem;
-
+	private static $objChild;
+	
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
 		// builds the masthead
@@ -36,6 +37,10 @@ class Toolbars extends Pagesection {
 		
 		self::$domElem = trim($output);
 
+	}
+	
+	public static function buildChildDOM($chld) {
+		self::$objChild = $chld;
 	}
 	
 }

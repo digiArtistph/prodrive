@@ -10,7 +10,8 @@
  */
 class Panels extends Pagesection {
 	private static $domElem;
-
+	private static $objChild;
+		
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
 		// builds the panels here
@@ -34,6 +35,10 @@ class Panels extends Pagesection {
 		$output = $almd_wrap->wrap($dom);
 		
 		self::$domElem = trim($output);
+	}
+	
+	public static function buildChildDOM($chld) {
+		self::$objChild = $chld;
 	}
 	
 }

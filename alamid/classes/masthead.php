@@ -9,6 +9,7 @@
  */
 class Masthead extends Pagesection {
 	private static $domElem;
+	private static $objChild;
 	
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
@@ -21,24 +22,26 @@ class Masthead extends Pagesection {
 		global $almd_wrap;
 		$output ='';
 		
-		$objChild = '';
 		// runs hook here
 		Bootstrap::execute($objChild, 'section_masthead');
 		
-		$objChild = '<ul><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>';
 		$dom = array(
 					'node' => 'div',
-					'child' => $objChild,
+					'child' => self::$objChild,
 					'prop' => get_elem_properties(array(
 								'id' => 'masthead'
 							))
 				);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);	
 		self::$domElem = trim($output);
 
 	}
+	
+	public static function buildChildDOM($chld) {
+		self::$objChild .= $chld;
+	}
+	
 }
 
 ?>
