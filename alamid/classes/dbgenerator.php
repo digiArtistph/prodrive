@@ -175,7 +175,7 @@ class DBGenerator{
 	}
 	
 	// get the table prefix in config.txt
-	private function _getTableprefix(){
+	public function _getTableprefix(){
 		
 		$this->mFile->parseData();
 		
@@ -306,7 +306,7 @@ class DBGenerator{
 	
 	
 	//gets all tables in database
-	private function _getTables(){
+	public function _getTables(){
 		
 		$tables = array();
 	    $list_tables_sql = "SHOW TABLES FROM {$this->mDBName};";

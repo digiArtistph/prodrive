@@ -12,6 +12,9 @@ class Home extends CI_Controller {
 		//call_debug(trunc_words($str) );
 		
 		$dbhooks = new DBGenerator();
+		$almd = almd_db::get_instance();
+		
+		call_debug($almd->muser);
 		
 		$config = array(
 				'db_server' => 'localhost',

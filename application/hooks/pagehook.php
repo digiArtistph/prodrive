@@ -51,6 +51,8 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'dbgenerator' . EXT);
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'alamidDBSchemaReader'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'almd_db'. EXT);
 		
 		/**
 		 * Activates Alamid Framework
