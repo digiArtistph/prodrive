@@ -14,6 +14,7 @@ class Masthead extends Pagesection {
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
 		// builds the masthead
+		
 		$page->set_mastHead(self::$domElem);
 		
 	}
@@ -25,9 +26,11 @@ class Masthead extends Pagesection {
 		// runs hook here
 		Bootstrap::execute($objChild, 'section_masthead');
 		
+		// here
+		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
 					'node' => 'div',
-					'child' => self::$objChild,
+					'child' =>  self::$objChild ,
 					'prop' => get_elem_properties(array(
 								'id' => 'masthead'
 							))
