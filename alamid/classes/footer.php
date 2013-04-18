@@ -12,27 +12,28 @@ class Footer extends Pagesection {
 	}
 	
 	protected static  function buildDOM() {
-		global $almd_wrap;		
+		global $almd_wrap;
 		$output ='';
 		
 		// runs hook here
-		$objChild = 'Copyright 2013 Prodrive Motorwerks';
+		Bootstrap::execute($objChild, 'section_footer');
+		
+		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
 					'node' => 'div',
-					'child' => $objChild,
+					'child' =>  self::$objChild ,
 					'prop' => get_elem_properties(array(
 								'id' => 'footer'
 							))
 				);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);	
 		self::$domElem = trim($output);
 
 	}
 	
 	public static function buildChildDOM($chld) {
-		self::$objChild = $chld;
+		self::$objChild .= $chld;
 	}
 	
 }

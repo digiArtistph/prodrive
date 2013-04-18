@@ -23,22 +23,24 @@ class Panels extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		$objChild = '<ul><li><a href="#">Master Files</a></li><li><a href="#">Utility</a></li><li><a href="#">About</a></li><li><a href="#">Configuration</a></li></ul>';
+		Bootstrap::execute($objChild, 'section_panels');
+		
+		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
-				'node' => 'div',
-				'child' => $objChild,
-				'prop' => get_elem_properties(array(
-						'id' => 'panel-widgets'
-				))
-		);
+					'node' => 'div',
+					'child' =>  self::$objChild ,
+					'prop' => get_elem_properties(array(
+								'id' => 'panels'
+							))
+				);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);	
 		self::$domElem = trim($output);
+
 	}
 	
 	public static function buildChildDOM($chld) {
-		self::$objChild = $chld;
+		self::$objChild .= $chld;
 	}
 	
 }

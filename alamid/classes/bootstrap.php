@@ -17,7 +17,7 @@ class Bootstrap {
 		$hooks = get_setting($section, TRUE, FALSE);
 		
 		foreach ($hooks as $hook) {		
-			if(! call_user_func($hook)) {
+			if(! call_user_func($hook, $section)) {
 				log_message('error', $hook);
 			}			
 		}

@@ -4,9 +4,10 @@
  */
 
 /* masthead */
-add_settings('section_masthead', 'funcone');
+add_settings('section_panels', 'funcone');
+add_settings('section_panels', 'functwo');
 
-function funcone() {
+function funcone($section) {
 
 	$param = array(
 				'section_title' => 'Master Files ',
@@ -18,11 +19,11 @@ function funcone() {
 						) 
 			);
 
-	almd_draw_panel($param);
+	almd_draw_panel($param,$section);
 	
 }
 
-function functwo() {
+function functwo($test) {
 	
 	$param = array(
 			'section_title' => 'Email Servers ',
@@ -34,24 +35,42 @@ function functwo() {
 			)
 	);
 	
-	almd_draw_panel($param);
+	almd_draw_panel($param, $test);
 	
-}
-
-function functhree() {
-	
-	//echo 'Calling functhree<br />';
 }
 
 /* panels */
- 
+
 
 
 /* toolbars */
- 
+add_settings('section_toolbars', 'functoolbar');
 
+function functoolbar($t) {
+	$param = array(
+			'section_title' => 'Toolbar One',
+			'items' => array(
+					array('Facebook', 'http://facebook.com'),
+					array('Twitter', 'http://twitter.com')					
+			)
+	);
+	
+	almd_draw_panel($param, $t);
+}
 
 /* footers */
- 
+add_settings('section_footer', 'footerfunc');
+
+function footerfunc($t) {
+	$param = array(
+			'section_title' => 'Footer Section',
+			'items' => array(
+					array('Quick Links', 'http://cnn.com'),
+					array('Source', 'http://whitehouse.com')
+			)
+	);
+
+	almd_draw_panel($param, $t);
+}
 
 ?>

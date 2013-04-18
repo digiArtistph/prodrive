@@ -1,6 +1,6 @@
 <?php if (! defined('BASEPATH')) exit ('No direct script access allowed.');
 
-function almd_draw_panel($params = array()) {
+function almd_draw_panel($params = array(), $section) {
 	global $almd_wrap;
 	$output = '';
 	
@@ -8,10 +8,26 @@ function almd_draw_panel($params = array()) {
 // 	call_debug($title_section);
 	$output = $title_section;
 	$output .= almd_menu_walker($params['items'], '');
- 
-	Masthead::buildChildDOM($output);
+
 	
-	
+	// wraps it again
+ 	$output = sprintf("<li>%s</li>", $output);
+ 	
+	switch ($section) {
+		case 'section_masthead':
+			Masthead::buildChildDOM($output);
+			break;
+		case 'section_panels':
+			Panels::buildChildDOM($output);
+			break;
+		case 'section_toolbars':
+			Toolbars::buildChildDOM($output);
+			break;
+		case 'section_footer':
+			footer::buildChildDOM($output);
+			break;
+	}
+
 		
 }
 
@@ -42,9 +58,5 @@ function almd_menu_walker($params, $section) {
 		$output = sprintf("<ul>%s</ul>", $output);
 	
 		return $output;
-// 	call_debug($output, FALSE);
-}
 
-function almd_section_menu_title() {
-	
 }
