@@ -4,8 +4,8 @@
  */
 
 /* masthead */
-add_settings('section_panels', 'funcone');
-add_settings('section_panels', 'functwo');
+add_settings('section_masthead', 'funcone');
+// add_settings('section_panels', 'functwo');
 
 function funcone($section) {
 
@@ -19,12 +19,15 @@ function funcone($section) {
 						) 
 			);
 
-	almd_draw_panel($param,$section);
+	almd_draw_window($param,$section);
 	
 }
 
-function functwo($test) {
-	
+
+/* panels */
+add_settings('section_panels', 'functpaste');
+
+function functpaste($arg) {
 	$param = array(
 			'section_title' => 'Email Servers ',
 			'items' => array(
@@ -35,13 +38,20 @@ function functwo($test) {
 			)
 	);
 	
-	almd_draw_panel($param, $test);
+	almd_draw_window($param, $arg);
 	
 }
 
-/* panels */
 
+/* pasteboard */
 
+add_settings('section_pasteboard', 'funcpasteboard');
+
+function funcpasteboard($t) {
+	$param = array('content' => 'This is a test content');
+	
+	almd_draw_window($param, $t);
+}
 
 /* toolbars */
 add_settings('section_toolbars', 'functoolbar');
@@ -55,8 +65,9 @@ function functoolbar($t) {
 			)
 	);
 	
-	almd_draw_panel($param, $t);
+	almd_draw_window($param, $t);
 }
+
 
 /* footers */
 add_settings('section_footer', 'footerfunc');
@@ -70,7 +81,8 @@ function footerfunc($t) {
 			)
 	);
 
-	almd_draw_panel($param, $t);
+	almd_draw_window($param, $t);
 }
+
 
 ?>
