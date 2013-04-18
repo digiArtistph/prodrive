@@ -4,9 +4,9 @@
  */
 
 /* masthead */
-add_settings('section_masthead', 'funcone');
-
-function funcone() {
+add_settings('section_panels', 'funcone');
+add_settings('section_panels', 'functwo');
+function funcone($section) {
 
 	$param = array(
 				'section_title' => 'Master Files ',
@@ -18,11 +18,11 @@ function funcone() {
 						) 
 			);
 
-	almd_draw_panel($param);
+	almd_draw_panel($param,$section);
 	
 }
 
-function functwo() {
+function functwo($section) {
 	
 	$param = array(
 			'section_title' => 'Email Servers ',
@@ -34,7 +34,7 @@ function functwo() {
 			)
 	);
 	
-	almd_draw_panel($param);
+	almd_draw_panel($param, $section);
 	
 }
 
@@ -44,7 +44,7 @@ function functhree() {
 }
 
 /* panels */
- 
+
 
 
 /* toolbars */
