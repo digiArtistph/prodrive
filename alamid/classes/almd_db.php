@@ -4,7 +4,7 @@ class almd_db extends alamidDBScheaReader{
 	
 
 	private function __construct() {
-		parent::getTables();
+		parent::setIndexes();
 	}
 
 	public function __clone() {

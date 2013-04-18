@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 		$dbhooks = new DBGenerator();
 		$almd = almd_db::get_instance();
 		
-		call_debug($almd->muser);
+		call_debug($almd->customer);
 		
 		$config = array(
 				'db_server' => 'localhost',
