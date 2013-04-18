@@ -18,14 +18,13 @@ class Panels extends Pagesection {
 		$page->set_panels(self::$domElem);
 	}
 	
-protected static  function buildDOM() {
+	protected static  function buildDOM() {
 		global $almd_wrap;
 		$output ='';
 		
 		// runs hook here
 		Bootstrap::execute($objChild, 'section_panels');
 		
-		// here
 		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
 					'node' => 'div',

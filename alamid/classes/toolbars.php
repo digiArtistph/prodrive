@@ -20,27 +20,28 @@ class Toolbars extends Pagesection {
 	}
 	
 	protected static  function buildDOM() {
-		global $almd_wrap;		
+		global $almd_wrap;
 		$output ='';
 		
 		// runs hook here
-		$objChild = '<ul><li><a href="#">Home</a></li><li><a href="#">Services</a></li><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul>';
+		Bootstrap::execute($objChild, 'section_toolbars');
+		
+		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
 					'node' => 'div',
-					'child' => $objChild,
+					'child' =>  self::$objChild ,
 					'prop' => get_elem_properties(array(
-								'id' => 'toolbar-widgets'
+								'id' => 'toolbars'
 							))
 				);
 		
-		$output = $almd_wrap->wrap($dom);
-		
+		$output = $almd_wrap->wrap($dom);	
 		self::$domElem = trim($output);
 
 	}
 	
 	public static function buildChildDOM($chld) {
-		self::$objChild = $chld;
+		self::$objChild .= $chld;
 	}
 	
 }

@@ -26,7 +26,6 @@ class Masthead extends Pagesection {
 		// runs hook here
 		Bootstrap::execute($objChild, 'section_masthead');
 		
-		// here
 		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
 					'node' => 'div',
