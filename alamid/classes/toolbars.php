@@ -24,7 +24,7 @@ class Toolbars extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		Bootstrap::execute($objChild, 'section_toolbars');
+		Bootstrap::execute(/* $objChild,  */'section_toolbars');
 		
 		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(

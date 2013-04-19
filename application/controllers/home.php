@@ -12,9 +12,17 @@ class Home extends CI_Controller {
 	}
 	
 	public function test() {
-		echo '<!DOCTYPE html><html lang="en"><head>';
-		almd_build_meta();
-		echo '</head>';
+
+		$param = array(
+				'script' => array(
+						array('type' => 'text/javascript', 'src' => 'http://localhost/alamid/js/jsni.js'),
+						array('type' => 'text/javascript', 'src' => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+				)
+		);
+		
+// 		call_debug($param);	
+		almd_build_metascript($param);
+
 	}
 
 }

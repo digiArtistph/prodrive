@@ -20,6 +20,21 @@ function funcmeta($page) {
 }
 
 
+/* meta script */
+add_settings('section_metascript', 'funcmetasript');
+function funcmetasript($test) {
+	$param = array(
+			'script' => array(
+					array('type' => 'text/javascript', 'src' => 'http://localhost/alamid/js/jsni.js'),
+					array('type' => 'text/javascript', 'src' => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+			)
+	);
+	
+	almd_build_metascript($param);
+}
+
+
+
 /* masthead */
 add_settings('section_masthead', 'funcone');
 // add_settings('section_panels', 'functwo');

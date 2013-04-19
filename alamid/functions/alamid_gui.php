@@ -125,4 +125,50 @@ function almd_build_meta($param = array()) {
 	}
 }
 
+/**
+ * Builds the script tags inside the head
+ * @param array $param
+ * @author Mugs and Coffee
+ * @written Kenneth "digiArtist_ph" P. Vallejos
+ * @since Friday, April 19, 2013
+ * @version 1.0.0
+ *
+ * 	format for the array structure
+ *	$param = array(
+ *				'meta' => array(
+ *							array('type' => 'text/javascript', 'src' => 'http://localhost/alamid/js/jsni.js'),
+ *							array('type' => 'text/javascript', 'src' => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+ *						)
+ *			);
+ *
+ */
+function almd_build_metascript($param = array()) {
+
+	global $almd_wrap;
+	$output = '';
+	
+	if(array_key_exists('script', $param)) {
+		foreach($param['script'] as $val) {
+			$metaProps  = '';
+			foreach($val as $key => $v) {
+
+				$metaProps .= sprintf(' %s="%s" ', $key, $v);
+			}
+			
+
+			$struc = array(
+					'node' => 'script',
+					'child' => ' ',
+					'prop' => trim($metaProps)
+			);
+				
+			$output .= $almd_wrap->wrap($struc);
+
+			$struc = array();
+		}
+
+		Metascript::buildSiblingDOM($output);
+	}
+}
+
 ?>

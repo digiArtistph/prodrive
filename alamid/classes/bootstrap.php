@@ -9,7 +9,7 @@
  */
 class Bootstrap {
 	
-	public static function execute(&$DOM, $section) {	
+	public static function execute(/* &$DOM,  */$section) {	
 		
 		// assigns returned recordset into array
 		// call_user_func() -- use loop here		

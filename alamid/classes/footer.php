@@ -16,7 +16,7 @@ class Footer extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		Bootstrap::execute($objChild, 'section_footer');
+		Bootstrap::execute(/* $objChild,  */'section_footer');
 		
 		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(

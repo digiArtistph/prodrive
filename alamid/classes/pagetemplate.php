@@ -30,7 +30,7 @@ class Pagetemplate {
 
 	public function __construct() {
 		// initialises some member variables
-		$this->title = 'Prodrive System';
+		$this->title = '<title>Prodrive System</title>';
 		$this->head_open = '<head>';
 		$this->head_close = '</head>';
 		$this->masthead = '';
@@ -38,7 +38,7 @@ class Pagetemplate {
 		$this->pasteboard = '';
 		$this->panels = '';
 		$this->meta = '<meta charset="utf-8" />';
-		$this->scripts = '';
+		$this->scripts = '<script type="text/javascript" src="http://goesnowhere.net" > </script>';
 		$this->styles = '';
 		$this->toolbars = '';
 		$this->footer = '';
@@ -52,7 +52,8 @@ class Pagetemplate {
 		$page .= $this->html_open;		
 		$page .= $this->head_open;
 		$page .= $this->meta;
-		$page .= ($this->scripts != '') ? $this->scripts: '';
+		$page .= $this->title;
+		$page .= $this->scripts;
 		$page .= $this->styles = ($this->styles != '') ? $this->styles : '';
 		$page .= $this->head_close;
 		$page .= $this->body_open;

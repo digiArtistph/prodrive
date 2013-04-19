@@ -23,7 +23,7 @@ class Panels extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		Bootstrap::execute($objChild, 'section_panels');
+		Bootstrap::execute(/* $objChild,  */'section_panels');
 		
 		self::$objChild = sprintf("<ul>%s</ul>", self::$objChild);
 		$dom = array(
