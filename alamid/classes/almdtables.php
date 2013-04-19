@@ -22,7 +22,7 @@
  *
  *					public function index() {
  *
- *						$almd = almd_db::get_instance();
+ *						$almd = almdtables::get_instance();
  *
  *						 echo $almd->customer; die(); 	// if prefix of predefined table is "almd"
  *					 									// it return "almd_customer"
@@ -31,7 +31,7 @@
  *
  */
 
-class almd_db extends alamidDBScheaReader{
+class almdtables extends alamidDBScheaReader{
 	private static $instance = null;
 	
 
