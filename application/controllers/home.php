@@ -10,5 +10,11 @@ class Home extends CI_Controller {
 		$this->load->view('test_view', $data);
 			
 	}
+	
+	public function test() {
+		echo '<!DOCTYPE html><html lang="en"><head>';
+		almd_build_meta();
+		echo '</head>';
+	}
 
 }

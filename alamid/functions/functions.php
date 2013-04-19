@@ -3,6 +3,23 @@
  * Add you hooks here
  */
 
+/* meta head */
+add_settings('section_metahead', 'funcmeta');
+function funcmeta($page) {
+	$param = array(
+			'meta' => array(
+					array('name' => 'description', 'content' => 'Prodrive Motowerks'),
+					array('name' => 'keywords', 'content' => 'HTML,CSS,XML,JavaScript'),
+					array('name' => 'author', 'content' => 'Mugs and Coffee'),
+					array('name' => 'Viewport', 'width' => 'devicewidth')
+			)
+	);
+	
+	almd_build_meta($param);
+	
+}
+
+
 /* masthead */
 add_settings('section_masthead', 'funcone');
 // add_settings('section_panels', 'functwo');

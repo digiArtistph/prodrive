@@ -80,4 +80,49 @@ function almd_menu_walker($params, $section) {
 
 }
 
+/**
+ * Builds the meta tags inside the head
+ * @param array $param
+ * @author Mugs and Coffee
+ * @written Kenneth "digiArtist_ph" P. Vallejos
+ * @since Friday, April 19, 2013
+ * @version 1.0.0 
+ * 
+ * 	format for the array structure
+ *	$param = array(
+ *				'meta' => array(
+ *							array('name' => 'description', 'content' => 'Prodrive Motowerks'),
+ *							array('name' => 'keywords', 'content' => 'HTML,CSS,XML,JavaScript'),
+ *							array('name' => 'author', 'content' => 'Mugs and Coffee'),
+ *							array('name' => 'Viewport', 'width' => 'devicewidth')
+ *						)
+ *			);
+ *	
+ */
+function almd_build_meta($param = array()) {
+
+	global $almd_wrap;
+	$output = '';
+	
+	if(array_key_exists('meta', $param)) {
+		foreach($param['meta'] as $val) {
+			$metaProps  = '';
+			foreach($val as $key => $v) {
+				$metaProps .= sprintf(' %s="%s" ', $key, $v);			
+			}
+			
+			$struc = array(
+						'node' => 'meta',
+						'child' => '',
+						'prop' => trim($metaProps)
+					);
+			
+			$output .= $almd_wrap->wrap($struc);
+			$struc = array();
+		}
+		
+		Metahead::buildSiblingDOM($output);
+	}
+}
+
 ?>

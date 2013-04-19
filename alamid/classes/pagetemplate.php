@@ -114,4 +114,28 @@ class Pagetemplate {
 	public function get_footer() {
 		return trim($this->footer);
 	}
+	
+	public function set_meta($meta) {
+		$this->meta = $meta;
+	}
+	
+	public function get_meta() {
+		return trim($this->meta);
+	}
+	
+	public function set_scripts($scripts) {
+		$this->scripts = $scripts;
+	}
+	
+	public function get_scripts() {
+		return trim($this->scripts);
+	}
+	
+	public function set_styles($styles) {
+		$this->scripts = $styles;
+	}
+	
+	public function get_styles() {
+		return trim($this->styles);
+	}
 }

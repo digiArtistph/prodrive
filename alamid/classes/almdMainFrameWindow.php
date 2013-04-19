@@ -31,7 +31,8 @@ class almdMainFrameWindow {
 	
 	public function createWindow() {
 		$page = new Pagetemplate();
-				
+		
+		Metahead::loadSection($page);
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);
 		Panels::loadSection($page);
