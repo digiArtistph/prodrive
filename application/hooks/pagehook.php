@@ -32,6 +32,7 @@ class Pagehook {
 		define('ALAMIDVIEWS', FCPATH . '/alamid/views/');
 		define('ALAMIDLIBS', FCPATH . '/alamid/libraries/');
 		define('ALAMIDFUNCTIONS', FCPATH . '/alamid/functions/');
+		define('ALAMIDSTRUCTURE', FCPATH . '/alamid/structure/');
 		
 		// requires once some files
 		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
@@ -48,7 +49,7 @@ class Pagehook {
 		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
-		require_once realpath(ALAMIDCLASSES . 'dbgenerator' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'alamidDBGenerator' . EXT);
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'alamidDBSchemaReader'. EXT);

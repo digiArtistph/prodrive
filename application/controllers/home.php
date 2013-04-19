@@ -9,22 +9,6 @@ class Home extends CI_Controller {
 		$this->load->view('test_view', $data);
 		
 		$str = 'Ako si tarzan hari ng kagubatan';
-		//call_debug(trunc_words($str) );
-		
-		$dbhooks = new DBGenerator();
-		$almd = almd_db::get_instance();
-		
-		call_debug($almd->customer);
-		
-		$config = array(
-				'db_server' => 'localhost',
-				'db_user' => 'root',
-				'db_name' => 'prodrive',
-				'db_pass' => '',
-				'db_tbl_prefix' => 'almd'
-		);
-		$dbhooks->_initialize($config);
-
 	}
 	
 

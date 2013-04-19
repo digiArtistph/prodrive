@@ -20,9 +20,10 @@ class alamidDBScheaReader{
 	
 	private function _setIndexes(){
 		
-		$this->dbgen = new DBGenerator();
+		$this->dbgen = AlamidDBGenerator::get_instance();
+		$this->dbgen->initialize();
 		
-		if(false == $this->_getTables())
+		if(false == $this->dbgen->_getTables())
 			return false;
 		
 		foreach ($this->_getTables() as $key => $index){

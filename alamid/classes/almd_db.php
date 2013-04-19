@@ -1,4 +1,36 @@
 <?php
+
+/**
+ * Description: Json parser
+ * @author Mugs and Coffee
+ * @written Norberto Q. Libago Jr.
+ * @since Friday, April 19, 2013
+ * @version 1.0.0
+ *
+ *
+ *	1) Calls database predifined table
+ *		$almd->customer 	returns [prefix of table]_customer
+ *		$almd->joborder		returns [prefix of table]_joborder
+ *
+ *
+ *	SAMPLE CODE
+ *
+ *		{CONTROLLER}
+ *
+ *			<?php
+ *				class somecontroller extends CI_Controller {
+ *
+ *					public function index() {
+ *
+ *						$almd = almd_db::get_instance();
+ *
+ *						 echo $almd->customer; die(); 	// if prefix of predefined table is "almd"
+ *					 									// it return "almd_customer"
+ *					}
+ *			?>
+ *
+ */
+
 class almd_db extends alamidDBScheaReader{
 	private static $instance = null;
 	
