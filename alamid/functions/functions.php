@@ -20,6 +20,20 @@ function funcmeta($page) {
 }
 
 
+/* meta style */
+add_settings('section_metastyle', 'funcmetastyle');
+
+function funcmetastyle() {
+	$param = array(
+			'style' => array(
+					array('type' => 'text/css', 'href' => 'http://localhost/prodrive/csss/style.css', 'rel' => 'stylesheet')
+			)
+	);
+	
+	almd_build_metastyle($param);
+}
+
+
 /* meta script */
 add_settings('section_metascript', 'funcmetasript');
 function funcmetasript($test) {

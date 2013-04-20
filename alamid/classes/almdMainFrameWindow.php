@@ -33,6 +33,7 @@ class almdMainFrameWindow {
 		$page = new Pagetemplate();
 		
 		Metahead::loadSection($page);
+		Metastyle::loadSection($page);
 		Metascript::loadSection($page);
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);

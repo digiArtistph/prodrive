@@ -38,8 +38,8 @@ class Pagetemplate {
 		$this->pasteboard = '';
 		$this->panels = '';
 		$this->meta = '<meta charset="utf-8" />';
-		$this->scripts = '<script type="text/javascript" src="http://goesnowhere.net" > </script>';
-		$this->styles = '';
+		$this->scripts = '';//<script type="text/javascript" src="http://goesnowhere.net" > </script>';
+		$this->styles = '';//<link type="text/css" rel="stylesheet" href="http://localhost/prodrive/css/main.css" />';
 		$this->toolbars = '';
 		$this->footer = '';
 		
@@ -53,8 +53,8 @@ class Pagetemplate {
 		$page .= $this->head_open;
 		$page .= $this->meta;
 		$page .= $this->title;
-		$page .= $this->scripts;
 		$page .= $this->styles = ($this->styles != '') ? $this->styles : '';
+		$page .= $this->scripts = ($this->scripts != '') ? $this->scripts : '';
 		$page .= $this->head_close;
 		$page .= $this->body_open;
 		
@@ -139,4 +139,7 @@ class Pagetemplate {
 	public function get_styles() {
 		return trim($this->styles);
 	}
+	
 }
+
+?>

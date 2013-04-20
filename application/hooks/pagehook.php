@@ -36,6 +36,7 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'metahead' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'metastyle' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'metascript' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
