@@ -33,7 +33,7 @@ class Pagehook {
 		define('ALAMIDLIBS', FCPATH . '/alamid/libraries/');
 		define('ALAMIDFUNCTIONS', FCPATH . '/alamid/functions/');
 		define('ALAMIDSTRUCTURE', FCPATH . '/alamid/structure/');
-		
+
 		// requires once some files
 		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);

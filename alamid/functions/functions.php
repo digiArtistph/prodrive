@@ -26,7 +26,7 @@ add_settings('section_metastyle', 'funcmetastyle');
 function funcmetastyle() {
 	$param = array(
 			'style' => array(
-					array('type' => 'text/css', 'href' => 'http://localhost/prodrive/csss/style.css', 'rel' => 'stylesheet')
+					array('type' => 'text/css', 'href' => base_url('alamid/structure/css/main.css'), 'rel' => 'stylesheet')
 			)
 	);
 	
