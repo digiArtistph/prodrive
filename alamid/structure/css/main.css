@@ -3,7 +3,7 @@ a, a img, img {border:0;}
 
 ul {list-style-type:none;}
 
-#container {border:1px solid #ccc; width:982px; overflow:auto;}
+#container {border:1px solid #ccc; margin:auto; width:982px; overflow:auto;}
 
 #masthead {border:1px solid blue; min-height:35px;}
 #masthead ul li, #masthead li a {float:left;}
