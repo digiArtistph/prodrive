@@ -35,6 +35,9 @@ class Pagehook {
 		// requires once some files
 		require_once realpath(ALAMIDCLASSES . 'almdMainFrameWindow' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'pagesection' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'metahead' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'metastyle' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'metascript' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'canvas' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'masthead' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'panels' . EXT);
@@ -44,10 +47,13 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
-		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);
-		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);		
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
-
+		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);			
+		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'functions'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'alamid_gui'. EXT);
+			
 		/**
 		 * Activates Alamid Framework
 		 */
@@ -55,8 +61,7 @@ class Pagehook {
 		Misnomer::load();
 		loadAlamidGlobals();
 		
-	}
-	
+	}	
 }
 
 ?>
