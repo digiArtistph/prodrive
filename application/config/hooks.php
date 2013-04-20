@@ -16,7 +16,7 @@ $alamidHooks = array(
 		'filename' => 'pagehook.php',
 		'filepath' => 'hooks'
 		);
-$hook['pre_controller'] = $alamidHooks;
+$hook['post_controller_constructor'] = $alamidHooks;
 
 
 /* End of file hooks.php */

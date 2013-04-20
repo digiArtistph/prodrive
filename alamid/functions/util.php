@@ -7,15 +7,44 @@
  * @version 1.0.0
  * 
  */
-function alias($name, $nckname) {
-	class_alias($name, $nckname);
+if(!function_exists('alias')) {
+	function alias($name, $nckname) {
+		class_alias($name, $nckname);
+	}
 }
 
+if(! function_exists('remove_array_index')) {
+	function remove_array_index(&$array) {
+		$tmpArr = array();
+		
+		foreach($array as $val):
+			$tmpArr[] = $val;
+		endforeach;
+		
+		call_debug($tmpArr);
+		$array = $tmpArr;
+	}
+}
+
+if(! function_exists('to_array')) {
+	function to_array($str = '', $flag = TRUE) {
+		$retVal = array();
+		
+		$retVal = explode("|", $str);
+		
+	}
+}
+
+// create a function here that will log all the function from hooks that are not properly working
+ 
 /**
  * Loads all framework's globals
  */	
-function loadAlamidGlobals() {
-	global $almd_wrap;
-	$almd_wrap = new Enclose();
-	
+if(! function_exists('loadAlamidGlobals')) {
+	function loadAlamidGlobals() {
+		global $almd_wrap;
+		global $almd_db;
+		
+		$almd_wrap = new Enclose();
+	}
 }
