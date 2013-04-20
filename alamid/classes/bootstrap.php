@@ -9,15 +9,15 @@
  */
 class Bootstrap {
 	
-	public static function execute(&$DOM, $section) {	
+	public static function execute(/* &$DOM,  */$section) {	
 		
 		// assigns returned recordset into array
-		// call_user_func() -- use loop here
-		
-		$hooks = get_setting($section, TRUE, FALSE);
+		// call_user_func() -- use loop here		
+		if(! $hooks = get_setting($section, TRUE, FALSE))
+			return ;
 		
 		foreach ($hooks as $hook) {		
-			if(! call_user_func($hook)) {
+			if(! call_user_func($hook, $section)) {
 				log_message('error', $hook);
 			}			
 		}

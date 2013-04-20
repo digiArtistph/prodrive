@@ -9,12 +9,13 @@
  */
 class Pasteboard extends Pagesection {	
 	private static $domElem;
-	private static $ojbChild;
+	private static $objChild;
 	
 	public static function loadSection(Pagetemplate $page) {
 		self::buildDOM();		
-		// builds the panels here
+		// builds the masthead
 		$page->set_pasteboard(self::$domElem);
+		
 	}
 	
 	protected static  function buildDOM() {
@@ -22,20 +23,25 @@ class Pasteboard extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		$objChild = 'Home Page!';
+		Bootstrap::execute(/* $objChild,  */'section_pasteboard');		
+
+		self::$objChild = sprintf("%s", self::$objChild);
 		$dom = array(
-				'node' => 'div',
-				'child' => $objChild,
-				'prop' => get_elem_properties(array(
-						'class' => 'content'
-				))
-		);
+					'node' => 'div',
+					'child' => self::$objChild,
+					'prop' => get_elem_properties(array(
+								'id' => 'content'
+							))
+				);
 		
-		$output = $almd_wrap->wrap($dom);		
+		$output = $almd_wrap->wrap($dom);	
 		self::$domElem = trim($output);
+
 	}
 	
 	public static function buildChildDOM($chld) {
-		self::$objChild = $chld;
+		self::$objChild .= $chld;
 	}
 }
+
+?>
