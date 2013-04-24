@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 		$xmlfilename = 'alamid/structure/Form_elemets.xml';
 		$xmlreader->loadXml($xmlfilename);
 		$xmlreader->arrtoxml();
+
 	}
 	
 	public function test() {
