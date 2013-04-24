@@ -1,6 +1,6 @@
 <?php
 /**
- * Description: Json parser
+ * Description: alamid Database Generator
  * @author Mugs and Coffee
  * @written Norberto Q. Libago Jr.
  * @since Friday, April 19, 2013
@@ -53,22 +53,7 @@
  *
  *			it will import the database file
  *
- *	SAMPLE CODE
- *
- *		{CONTROLLER}
- *
- *			<?php
- *				class somecontroller extends CI_Controller {
- *
- *					public function index() {
- *
- *						$almd = almd_db::get_instance();
-		
-						echo $almd->customer; die(); 	// if prefix of predefined table is "almd"
-															it return "almd_customer"
- *					}
- *			?>
- *
+ *	
  */
 
  class almd_database{
