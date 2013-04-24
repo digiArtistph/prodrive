@@ -15,7 +15,7 @@ class Home extends CI_Controller {
 		$xmlreader->loadXml($xmlfilename);
 		$xmlreader->arrtoxml();
 		
-		call_debug($xmlreader->mParseData);
+		//call_debug($xmlreader->mParseData);
 
 	}
 	
