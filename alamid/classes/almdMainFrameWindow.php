@@ -3,6 +3,7 @@
  * 
  * @author Mugs and Coffee
  * @since Tuesday, April 9, 2013
+ * @written Kenneth "digiArtist_ph" P. Vallejos
  * @version 1.0
  * 
  */
