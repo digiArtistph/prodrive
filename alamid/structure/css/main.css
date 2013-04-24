@@ -16,13 +16,12 @@ ul {list-style-type:none;}
 /* panels */
 #panels{border:1px solid red; clear:both; float:left; width:20%;}
 
-
 /* content */
-#content {border:1px solid green; float:left; width:55%; }
+#content {border:1px solid green; float:left; width:35%; }
 
 
 /* toolbars */
-#toolbars {border:1px solid blue; float:left; width:20%;}
+#toolbars {border:1px solid blue; float:left; width:30%;}
 
 
 /* footer */
