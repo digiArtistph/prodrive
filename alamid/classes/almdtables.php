@@ -31,7 +31,7 @@
  *
  */
 
-class almdtables extends alamidDBScheaReader{
+class almdtables extends alamiddbschemareader{
 	private static $instance = null;
 	
 

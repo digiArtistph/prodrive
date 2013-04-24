@@ -1,5 +1,5 @@
 <?php
-class alamidDBScheaReader{
+class alamiddbschemareader{
 	
 	private $dbgen;
 	
@@ -20,7 +20,7 @@ class alamidDBScheaReader{
 	
 	private function _setIndexes(){
 		
-		$this->dbgen = AlamidDBGenerator::get_instance();
+		$this->dbgen = Alamiddbgenerator::get_instance();
 		$this->dbgen->initialize();
 		
 		if(false == $this->dbgen->_getTables())

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<datas id="1">
+	<books value="s" gen="fds"> 
+		<book id ="1">
+			<id gen="1">ID</id>
+			<title fd="fuckd"><D>dsf</D></title>     
+			<author>AUTHOR</author>
+		</book>
+		<book  id ="2">
+			<id>1</id>
+			<title>dear john</title>     
+			<author>nicholas sparcks</author>
+		</book>
+	</books>
+</datas>
