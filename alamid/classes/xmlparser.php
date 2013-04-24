@@ -1,4 +1,44 @@
 <?php 
+/**
+ * Description: XML Parser. Read xml file and return to array
+ * @author Mugs and Coffee
+ * @written Norberto Q. Libago Jr.
+ * @since Friday, April 24, 2013
+ * @version 1.0.0
+ *
+ *
+ *		
+ *
+ *		$xmlreader = new xmlparser();					calling xmlparser
+ *
+ *		$filepath = 'alamid/structure/Form_elemets.xml';
+ *			
+ *		1) $xmlreader->loadXml($xmlfilename);			//reads xml from file
+ *			
+ *		
+ *		2) $xmlreader->arrtoxml();	reads xmldata		//convert xml
+ *			
+ *			
+ *		3) $xmlreader->mParseData						// returns array of xml
+ *
+ *		sample controller:
+ *		
+ *		function __construct(){
+ *
+ *			$xmlfilename = 'alamid/structure/Form_elemets.xml';
+ *			$xmlreader->loadXml($xmlfilename);
+ *			$xmlreader->arrtoxml();
+ *			
+ *			echo '<pre />';
+ *			print_r($xmlreader->mParseData);
+ *			die();
+ *		}
+ *
+ *		
+ *
+ *
+ *
+ */
 class xmlparser{
 	
 	public $mParseData;
