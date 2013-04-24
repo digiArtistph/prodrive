@@ -25,7 +25,10 @@ class Wrapper {
 		$this->prop = (isset($this->prop))? $this->prop : '';
 		$this->child = (isset($this->child)) ? $this->child : '';
 		
-		return sprintf("<%s %s>%s</%s>", $this->node, $this->prop, $this->child,$this->node);
+		if($this->child == "")
+			return sprintf("<%s %s />", $this->node, $this->prop);
+		else
+			return sprintf("<%s %s>%s</%s>", $this->node, $this->prop, $this->child,$this->node);
 		
 	}
 	

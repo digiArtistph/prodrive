@@ -30,7 +30,7 @@ class Pagetemplate {
 
 	public function __construct() {
 		// initialises some member variables
-		$this->title = 'Prodrive System';
+		$this->title = '<title>Prodrive System</title>';
 		$this->head_open = '<head>';
 		$this->head_close = '</head>';
 		$this->masthead = '';
@@ -38,8 +38,8 @@ class Pagetemplate {
 		$this->pasteboard = '';
 		$this->panels = '';
 		$this->meta = '<meta charset="utf-8" />';
-		$this->scripts = '';
-		$this->styles = '';
+		$this->scripts = '';//<script type="text/javascript" src="http://goesnowhere.net" > </script>';
+		$this->styles = '';//<link type="text/css" rel="stylesheet" href="http://localhost/prodrive/css/main.css" />';
 		$this->toolbars = '';
 		$this->footer = '';
 		
@@ -52,8 +52,9 @@ class Pagetemplate {
 		$page .= $this->html_open;		
 		$page .= $this->head_open;
 		$page .= $this->meta;
-		$page .= ($this->scripts != '') ? $this->scripts: '';
+		$page .= $this->title;
 		$page .= $this->styles = ($this->styles != '') ? $this->styles : '';
+		$page .= $this->scripts = ($this->scripts != '') ? $this->scripts : '';
 		$page .= $this->head_close;
 		$page .= $this->body_open;
 		
@@ -114,4 +115,31 @@ class Pagetemplate {
 	public function get_footer() {
 		return trim($this->footer);
 	}
+	
+	public function set_meta($meta) {
+		$this->meta = $meta;
+	}
+	
+	public function get_meta() {
+		return trim($this->meta);
+	}
+	
+	public function set_scripts($scripts) {
+		$this->scripts = $scripts;
+	}
+	
+	public function get_scripts() {
+		return trim($this->scripts);
+	}
+	
+	public function set_styles($styles) {
+		$this->scripts = $styles;
+	}
+	
+	public function get_styles() {
+		return trim($this->styles);
+	}
+	
 }
+
+?>

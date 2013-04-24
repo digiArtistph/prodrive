@@ -3,6 +3,7 @@
  * 
  * @author Mugs and Coffee
  * @since Tuesday, April 9, 2013
+ * @written Kenneth "digiArtist_ph" P. Vallejos
  * @version 1.0
  * 
  */
@@ -31,23 +32,13 @@ class almdMainFrameWindow {
 	
 	public function createWindow() {
 		$page = new Pagetemplate();
-		$wrap = new Enclose();
 		
-		$dom = array(
-					'node' => 'div',
-					'child' =>'<a href="#">Login</a>',
-					'prop' => get_elem_properties(array(
- 						'title' => 'My Title', 
- 						'class' => 'My_class_name',
- 						'id' => 'MyId'
- 						)) 
-				);
-		
-		echo $wrap->wrap($dom);
-				
+		Metahead::loadSection($page);
+		Metastyle::loadSection($page);
+		Metascript::loadSection($page);
 		Canvas::loadSection($page);
 		Masthead::loadSection($page);
-		Panels::loadSection($page);
+		Panels::loadSection($page);	
 		Pasteboard::loadSection($page);
 		Toolbars::loadSection($page);
 		Footer::loadSection($page);
