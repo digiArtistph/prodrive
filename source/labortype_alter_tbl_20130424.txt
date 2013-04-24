@@ -1,0 +1,1 @@
+ALTER TABLE labortype ADD COLUMN category INT DEFAULT 0 AFTER name;

@@ -1,0 +1,5 @@
+CREATE TABLE categories(
+categ_id INT NOT NULL,
+category VARCHAR(150) NULL,
+parent TINYINT DEFAULT 0,
+PRIMARY KEY(categ_id))ENGINE=MyISAM;
