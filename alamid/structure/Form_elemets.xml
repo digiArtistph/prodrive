@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<library>
+    <input type="text" name="address" class="input-xlarge">sdf</input>
+    <select type="text" name="address" class="input-xlarge">
+        <option id="1">car</option>
+        <option id="2">truck</option>
+    </select>
+	
+     <select type="text" name="address" class="input-xlarge">
+        <option id="1">car</option>
+        <option id="2">truck</option>
+    </select>
+    
+     <text type="text" name="address" class="input-xlarge">sdf</text>
+     <input type="text" name="address" class="input-xlarge">sdf</input>
+	
+     
+</library>

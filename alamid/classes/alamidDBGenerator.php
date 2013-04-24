@@ -368,7 +368,7 @@
 
 }
 
-class AlamidDBGenerator extends almd_database{
+class Alamiddbgenerator extends almd_database{
 	private static $instance = null;
 	private function __construct() {}
 	public function __clone() {}

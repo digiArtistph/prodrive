@@ -8,7 +8,14 @@ class Home extends CI_Controller {
 		$data['content'] = $window->createWindow();		
 		$this->load->view('test_view', $data);
 		
-		$str = 'Ako si tarzan hari ng kagubatan';
+		$xmlreader = new xmlparser();
+		
+		$xmlfilename = 'alamid/structure/Form_elemets.xml';
+		$xmlreader->loadXml($xmlfilename);
+		$xmlreader->arrtoxml();
+		
+		call_debug($xmlreader->mParseData);
+
 	}
 	
 
