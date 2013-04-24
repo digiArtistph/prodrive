@@ -45,7 +45,6 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_wrap;
 		global $almd_db;
 		
-		$almd_db = almdtables::get_instance();
 		$almd_wrap = new Enclose();
 	}
 }
