@@ -32,6 +32,8 @@
 
 class Alamiddbgenerator{
 	
+	public $mData;
+	
 	public function backupDatabase($pathto = ''){
 		
 		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysqldump.exe\"";
@@ -42,12 +44,14 @@ class Alamiddbgenerator{
 		$filename = '\\' . $DB_NAME .date("Ymd") . '.sql';
 		
 		if( strlen($pathto) < 1 )
-			$pathdir = realpath(ALAMIDSTRUCTURE  ) . $filename;
+			$pathdir = realpath( ALAMIDSTRUCTURE  ) . $filename;
 		else
 			$pathdir = $pathto . $filename;
 		//call_debug($path_mysqldump);
 		$command = "{$path_mysqldump}  --opt --skip-extended-insert --complete-insert --host=".$DB_HOST." --user=".$DB_USER." --password=".$DB_PASS." ".$DB_NAME." > {$pathdir}";
 		exec($command, $ret_arr, $ret_code);
+		
+		$this->mData = $pathdir;
 		
 		return true;
 	}

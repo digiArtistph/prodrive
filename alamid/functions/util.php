@@ -46,6 +46,7 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_db;
 		global $almd_xmlparser;
 		
+		
 		$almd_db = new Querytables();
 		$almd_xmlparser = new Xmlparser();
 		$almd_wrap = new Enclose();
