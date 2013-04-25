@@ -54,7 +54,7 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'alamiddbgenerator' . EXT);
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
-		require_once realpath(ALAMIDCLASSES . 'almdtables'. EXT);
+		require_once realpath(ALAMIDCLASSES . 'almdtables'. EXT); // @todo: bad design. consumes a lot of time
 		require_once realpath(ALAMIDCLASSES . 'xmlparser'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'json_parser_helper'. EXT);			
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);

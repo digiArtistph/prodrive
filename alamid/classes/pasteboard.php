@@ -23,7 +23,7 @@ class Pasteboard extends Pagesection {
 		$output ='';
 		
 		// runs hook here
-		Bootstrap::execute(/* $objChild,  */'section_pasteboard');		
+		Bootstrap::execute('section_pasteboard');		
 
 		self::$objChild = sprintf("%s", self::$objChild);
 		$dom = array(
