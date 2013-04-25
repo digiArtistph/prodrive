@@ -4,37 +4,11 @@
  * @author Mugs and Coffee
  * @written Norberto Q. Libago Jr.
  * @since Friday, April 19, 2013
- * @version 1.0.0
+ * @version 2.0.1
  *
  *
- *	1) calling the alamidDbgenerator
- *
- *			$dbhooks = AlamidDBGenerator::get_instance();
- *
- *	2)	initialize the database
- *							$config = array(
- *								'db_server' => 'database_server',
- *								'db_user' => 'database_user',
- *								'db_pass' => 'database_password',
- *								'db_name' => 'database_name',
- *								'db_tbl_prefix' => 'database_table_prefix'
- *						);
- *						$dbhooks->initialize($config);
- *		
- *			note:
- *					if $dbhooks->initialize(); has an empty parameters
- *						then 
- *							the config has a default paramerters
- *
- *							$config = array(
- *								'db_server' => 'localhost',
- *								'db_user' => 'root',
- *								'db_pass' => '',
- *								'db_name' => 'prodrivedb',
- *								'db_tbl_prefix' => 'almd'
- *						);
  *							
- *	3)	to backup database
+ *	1)	to backup database
  *				
  *				$path = <path/to/file/>
  *				$dbhooks->backupDatabase($path);
@@ -45,7 +19,7 @@
  *
  *		
  *				
- *	4) to import datase
+ *	2) to import datase
  *
  *				$path = "c:/wamp/www/prodrive/";
  *				$filename = "prodrive20130427.sql";
@@ -79,7 +53,7 @@ class Alamiddbgenerator{
 	}
 	
 	public function loadDatabase($path, $filename){
-		//call_debug('called d');
+		
 		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysql.exe\"";
 		$DBName = 'prodrivedb';
 		

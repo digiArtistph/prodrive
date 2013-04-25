@@ -16,10 +16,12 @@
  *		1) $xmlreader->loadXml($xmlfilename);			//reads xml from file
  *			
  *		
- *		2) $xmlreader->arrtoxml();	reads xmldata		//convert xml
+ *		2) $xmlreader->resetdata();	reset xmldata		//convert xml
+ *		
+ *		3) $xmlreader->arrtoxml();	reads xmldata		//convert xml
  *			
  *			
- *		3) $xmlreader->mParseData						// returns array of xml
+ *		4) $xmlreader->mParseData						// returns array of xml
  *
  *		sample controller:
  *		
@@ -40,12 +42,19 @@
  *
  */
 class Xmlparser{
-	
+		
 	public $mParseData;
 	
-	private $_mXml = array();
-	private $mData = array();
-	private $ms = array();
+	private $_mXml;
+	private $mData;
+	private $ms;
+	
+	public function __construct(){
+		$this->mParseData = array();
+		$this->_mXml = array();
+		$this->mData= array();
+		$this->ms = array();
+	}
 	
 	public function loadXml($xmlfile){
 		$truepath = FCPATH . $xmlfile;
@@ -139,6 +148,13 @@ class Xmlparser{
 			
 		$this->mParseData = $this->ms;
 	}//end of function
+	
+	public function resetdata(){
+		$this->_mXml = array();
+		$this->mData = array();
+		$this->ms = array();
+		$this->mParseData = array();
+	}
 	
 }
 ?>
