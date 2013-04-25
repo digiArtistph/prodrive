@@ -44,6 +44,8 @@ if(! function_exists('loadAlamidGlobals')) {
 	function loadAlamidGlobals() {
 		global $almd_wrap;
 		global $almd_db;
+	
+		$almd_db = new almdtables();
 		
 		$almd_wrap = new Enclose();
 	}
