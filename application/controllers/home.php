@@ -21,4 +21,9 @@ class Home extends CI_Controller {
 		$almd_xmlparser->arrtoxml();
 		call_debug($almd_xmlparser->mParseData);
 	}
+	
+	public function xml () {
+		$xml = Formelement::get_instance();
+		$xml->getAllFormElments();
+	}
 }

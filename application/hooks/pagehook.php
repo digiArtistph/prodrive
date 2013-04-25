@@ -49,9 +49,9 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'pagetemplate' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
-		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);		
+		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'formelement' . EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
-		
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'almdtables'. EXT); // @todo: bad design. consumes a lot of time
@@ -60,7 +60,7 @@ class Pagehook {
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'functions'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'alamid_gui'. EXT); 
-// 		require_once realpath(ALAMIDCLASSES . 'amldformelement' . EXT);
+		
 		
 
 		/**
