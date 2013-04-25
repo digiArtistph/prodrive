@@ -4,18 +4,17 @@ class Home extends CI_Controller {
 	
 	public function index () {
 		
-		$almd_db = new Alamiddbgenerator();
-		$almd_db->loadDatabase("c:", 'prodrivedb20130424.sql');
-		call_debug('');
-		$dbhooks = AlamidDBGenerator::get_instance();
-		$config = array(
-				'db_server' => 'localhost',
-				'db_user' => 'root',
-				'db_pass' => '',
-				'db_name' => 'prodrivedb',
-				'db_tbl_prefix' => 'to'
-				);
-		$dbhooks->initialize($config);
+		$window = almdMainFrameWindow::get_instance();
+		
+		$data['content'] = $window->createWindow();		
+		$this->load->view('test_view', $data);
+		
+		$xmlreader = new xmlparser();
+		
+		$xmlfilename = 'alamid/structure/Form_elemets.xml';
+		$xmlreader->loadXml($xmlfilename);
+		$xmlreader->arrtoxml();
+
 	}
 	
 	public function test() {
