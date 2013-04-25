@@ -30,7 +30,7 @@
  *
  */
 
-class almdtables{
+class Almdtables{
 	
 	public $_mDB = 'sdf';
 	

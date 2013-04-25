@@ -6,8 +6,8 @@ class Home extends CI_Controller {
 		
 		$window = almdMainFrameWindow::get_instance();
 		
-		$data['content'] = $window->createWindow();		
-		$this->load->view('test_view', $data);
+// 		$data['content'] = $window->createWindow();		
+// 		$this->load->view('test_view', $data);
 		
 		$xmlreader = new xmlparser();
 		

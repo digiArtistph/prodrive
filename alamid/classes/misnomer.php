@@ -6,7 +6,8 @@ class Misnomer {
 		
 		$classes = array_merge($classes,
 					array(
-							'Wrapper' => 'Enclose'							
+							'Wrapper' => 'Enclose',
+							'Almdtables' => 'Querytables'						
 							)
 				);
 		

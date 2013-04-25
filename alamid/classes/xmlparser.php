@@ -39,7 +39,7 @@
  *
  *
  */
-class xmlparser{
+class Xmlparser{
 	
 	public $mParseData;
 	
