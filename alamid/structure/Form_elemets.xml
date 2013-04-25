@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <library>
-    <input type="text" name="address" class="input-xlarge">sdf</input>
+    <input type="text" name="address" class="input-xlarge" />
     <select type="text" name="address" class="input-xlarge">
         <option id="1">car</option>
         <option id="2">truck</option>
@@ -13,6 +13,4 @@
     
      <text type="text" name="address" class="input-xlarge">sdf</text>
      <input type="text" name="address" class="input-xlarge">sdf</input>
-	
-     
 </library>

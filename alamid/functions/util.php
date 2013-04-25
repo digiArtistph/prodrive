@@ -44,11 +44,11 @@ if(! function_exists('loadAlamidGlobals')) {
 	function loadAlamidGlobals() {
 		global $almd_wrap;
 		global $almd_db;
+		global $almd_all_tables; // stores all table names in this global variable
 		global $almd_xmlparser;
 		
 		
 		$almd_db = new Querytables();
-		$almd_xmlparser = new Xmlparser();
 		$almd_wrap = new Enclose();
 	}
 }
