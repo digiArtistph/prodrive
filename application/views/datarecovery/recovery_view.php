@@ -6,9 +6,7 @@
 	<p><label>Select Source: </label><input class="dir" type="text" name="dir"></p>
 	<p><label> Data File: </label>
 		<select>
-			<option>Select Source</option>
-			<option>emyat</option>
-			<option>pangit</option>
+			<option selected="selected">Select Source</option>
 		</select>
 	</p>
 	<p><input type="submit" value="Restore" /></p>
