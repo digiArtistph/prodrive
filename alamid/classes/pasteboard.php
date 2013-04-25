@@ -12,7 +12,10 @@ class Pasteboard extends Pagesection {
 	private static $objChild;
 	
 	public static function loadSection(Pagetemplate $page) {
-		self::buildDOM();		
+		self::buildDOM();
+		
+		// dynamic loading of element from the controller
+		
 		// builds the masthead
 		$page->set_pasteboard(self::$domElem);
 		

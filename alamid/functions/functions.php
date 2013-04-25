@@ -91,18 +91,18 @@ function functpaste($arg) {
 /* tongbens edit  */
 add_settings('section_panels', 'dbconfig');
 
-function dbconfig($arg) {
-	$param = array(
-			'section_title' => 'Database Configuration',
-			'items' => array(
-					array('Back-up Database', base_url()),
-					array('Change Table Prefix', 'http://gmail.com')
-			)
-	);
+// function dbconfig($arg) {
+// 	$param = array(
+// 			'section_title' => 'Database Configuration',
+// 			'items' => array(
+// 					array('Back-up Database', base_url()),
+// 					array('Change Table Prefix', 'http://gmail.com')
+// 			)
+// 	);
 
-	almd_draw_window($param, $arg);
+// 	almd_draw_window($param, $arg);
 
-}
+// }
 
 
 

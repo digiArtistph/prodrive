@@ -47,6 +47,7 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_all_tables; // stores all table names in this global variable
 		global $almd_xmlparser;
 		
+		$almd_xmlparser = new FormElementParser();
 		$almd_db = new Querytables();
 		$almd_wrap = new Enclose();
 	}

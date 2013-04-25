@@ -7,7 +7,8 @@ class Misnomer {
 		$classes = array_merge($classes,
 					array(
 							'Wrapper' => 'Enclose',
-							'Almdtables' => 'Querytables'						
+							'Almdtables' => 'Querytables',
+							'Xmlparser' => 'FormElementParser'					
 							)
 				);
 		

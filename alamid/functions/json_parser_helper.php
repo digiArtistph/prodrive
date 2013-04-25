@@ -21,7 +21,6 @@ if(! function_exists('add_settings')) {
 		$result = $records->result();			
 		$numrow = $records->num_rows;
 		
-		
 		if($numrow < 1) {
 			// preps data
 			$setting = array($value); 
