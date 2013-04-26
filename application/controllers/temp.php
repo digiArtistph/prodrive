@@ -12,11 +12,14 @@ class Temp extends CI_Controller {
 	}
 	
 	public function databackup(){
+		
+		$data['drivers'] = $this->_loaddir();
 		$data['main_content'] = 'datarecovery/backup_view';
 		$this->load->view('includes/template', $data);
 	}
 	
 	public function loaddata(){
+		$data['drivers'] = $this->_loaddir();
 		$data['main_content'] = 'datarecovery/recovery_view';
 		$this->load->view('includes/template', $data);
 	}
@@ -32,8 +35,9 @@ class Temp extends CI_Controller {
 		} else {
 			
 			$dbgen = new Alamiddbgenerator();
-				//call_debug(  );
-			if( !$dbgen->backupDatabase( $this->input->post('dir') ) )
+			$dir = $this->input->post('dir') . '\\' . 'prodrive';
+			
+			if( !$dbgen->backupDatabase( $dir ) )
 					$data['backup_feedback'] = 'Saving Prodrive Data failed !!!';
 			else
 				$data['backup_feedback'] = 'The Prodrive Data has been sent to : "' .$dbgen->mData .'"';
@@ -49,7 +53,7 @@ class Temp extends CI_Controller {
 		$validation = $this->form_validation;
 	
 		$validation->set_rules('dir', 'Directory',  'required');
-		$validation->set_rules('datafile', 'options',  'required');
+		$validation->set_rules('datafile', 'Data file',  'required');
 		if($validation->run() === FALSE) {
 			
 			$this->loaddata();
@@ -86,6 +90,25 @@ class Temp extends CI_Controller {
 		
 		
 	}
-
+	
+	private function _loaddir(){
+		
+		$mFilesystem = new COM('Scripting.FileSystemObject');
+		$mMachinedrives = $mFilesystem->Drives;
+		$type = array("Unknown","Removable","Fixed","Network","CD-ROM","RAM Disk");
+		
+		$drivesinmachine = array();
+		$temp = array();
+		foreach($mMachinedrives as $mdrives ){
+			$drivespec = $mFilesystem->GetDrive($mdrives);
+			
+			$temp = array( $drivespec->DriveLetter. ':' => $drivespec->DriveLetter . ' - ' . $type[$drivespec->DriveType]);
+			$drivesinmachine += $temp;
+		
+		}
+		
+		return $drivesinmachine;
+	}
+		
 	
 }

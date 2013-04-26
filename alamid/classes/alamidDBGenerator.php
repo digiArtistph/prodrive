@@ -38,11 +38,20 @@ class Alamiddbgenerator{
 	
 	public function backupDatabase($pathto = ''){	//exports data to designated file
 		
-		if($pathto == '')
+		if($pathto == ''){
+			$this->mData = 'Specify a valid Directory!!!';
 			return false;
+		}
 		
-		if(!$this->_isValidDir($pathto))
+		if(!$this->_isValidDir($pathto)){
+			$this->mData = 'Specify a valid Directory!!!';
+			mkdir($pathto);
+		}
+		
+		if( !is_writable($pathto)){
+			$this->mData = 'Cannot save Data to Specified directory!!';
 			return false;
+		}
 		
 		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysqldump.exe\"";
 		$DB_HOST = 'localhost';
@@ -66,11 +75,15 @@ class Alamiddbgenerator{
 	
 	public function loadDatabase($path, $filename){		//load data to the database from which the filepath is required
 		
-		if( ($path == '') || ($filename == '') )
+		if( ($path == '') || ($filename == '') ){
+			$this->mData = 'Pls Specify Valid Directory: ' . $path .$filename;
 			return false;
+		}
 		
-		if( !$this->_isValidDir( $path ) )
+		if( !$this->_isValidDir( $path ) ){
+			$this->mData = 'Pls Specify Valid Directory: ' . $path .$filename;
 			return false;
+		}
 			
 		$path_mysql = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysql.exe\"";
 		$DBName = 'prodrivedb';
@@ -79,6 +92,11 @@ class Alamiddbgenerator{
 			$pathdir = realpath(ALAMIDSTRUCTURE  ) . '\\' .$filename;
 		else
 			$pathdir = $path . '\\' .$filename;
+		
+		if(!is_readable($pathdir)){
+			$this->mData = 'Cannot Read Data from directory: ' . $pathdir;
+			return false;
+		}
 		
 		$command = "{$path_mysql} -u root {$DBName} < {$pathdir}";
 		
@@ -93,11 +111,18 @@ class Alamiddbgenerator{
 	
 	public function getfiledir($dirpath = ''){		//returns array prodrive database
 		
-		if( !$this->_isValidDir($dirpath) )
+		if( !$this->_isValidDir($dirpath) ){
+			$this->mData = 'Pls Specify Valid Directory: ' . $path .$filename;
 			return false;
-		
-		if($dirpath == '')
+		}
+		if($dirpath == ''){
+			$this->mData = 'Pls Specify Valid Directory: ' . $path .$filename;
 			return false;
+		}
+		if(!is_readable($dirpath)){
+			$this->mData = 'Cannot Read Data from directory: ' . $dirpath;
+			return false;
+		}
 		
 		$dirfiles  = opendir($dirpath);
 		

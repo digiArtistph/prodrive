@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var dataFile = $('.datafile');
 	var option = $('.datafile option');
 	
-	dir.blur(loaddataDir);
+	dir.change(loaddataDir);
 	
 	
 	function loaddataDir(){
@@ -18,16 +18,19 @@ $(document).ready(function(){
 			dataFile.html('<option value="none">Select source file</option>');
 		}else{
 
-			dataFile.html('<option value="none">Searching Data</option>');
+			dataFile.html('<option value="none">Loading files</option>');
 			$.post(base_url + "temp/dirdata", input)
 			.success(function(data) {
-				
 				var options = jQuery.parseJSON(data);
-				dataFile.html('');
-				dataFile.html('<option>Files Loaded</option>');
-				$.each(options, function(key, val){
-					dataFile.append('<option value="' + val+ '">' + val +'</option>');
-				});
+				if(options == ''){
+					dataFile.html('<option value="none">Select source file</option>');
+				}else{
+					dataFile.html('');
+					dataFile.html('<option>Files Loaded</option>');
+					$.each(options, function(key, val){
+						dataFile.append('<option value="' + val+ '">' + val +'</option>');
+					});
+				}
 			});	
 		}
 		
