@@ -44,11 +44,50 @@ class Temp extends CI_Controller {
 		}
 	}
 	
+	public function validaterestore(){
+	
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+	
+		$validation->set_rules('dir', 'Directory',  'required');
+		$validation->set_rules('datafile', 'options',  'required');
+		if($validation->run() === FALSE) {
+			
+			$this->loaddata();
+		} else {
+				$almddb = new Alamiddbgenerator();
+				$pathto = realpath( $this->input->post('dir') );
+				
+				$almddb->loadDatabase($pathto, $this->input->post('datafile'));
+				$data['backup_feedback'] = 'success';
+				
+				$data['main_content'] = 'datarecovery/recovery_feedback';
+				$this->load->view('includes/template', $data);
+		}
+	}
+	
 	public function dirdata(){
+		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+		
+		$validation->set_rules('directory', 'Directory',  'required');
+		
+		if($validation->run() === FALSE) {
+			return false;
+		} else {
+			
+			$almdb = new Alamiddbgenerator();
+			if( !$almdb->getfiledir($this->input->post('directory') ) )
+				echo '<option value="none">Select source file</option>';
+			
+			$options = json_encode($almdb->mData);
+			echo $options;
+		}
+		
 		
 	}
 
-	
 	private function _isValidDir($dir){
 		
 		$directory = realpath($dir);
@@ -59,4 +98,21 @@ class Temp extends CI_Controller {
 			return false;
 	}
 	
+	private function _readfile($files){
+		
+		$pattern = ' /((P|p)rodrivedb)[\d]{8}(\.sql)/';
+		
+		$sqlfiles = array();
+		
+		foreach ($files as $filename){
+			
+			$filename = trim($filename);
+			
+			if(preg_match($pattern, $filename)){
+				$sqlfiles[] = $filename;
+			}
+		}
+		
+		return $sqlfiles;
+	}
 }

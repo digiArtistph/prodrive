@@ -1,35 +1,38 @@
 $(document).ready(function(){
-	/*
-	var l = window.location;
-	var base_url = l.protocol + "//" + l.host + "/" + l.pathname.split('/')[1] + "/";
-	var domainName = $('meta[name*="url"]').attr('content');
-	*/
-	
-	var base_url = $('meta[name*="url"]').attr('content');
 
-	details.blur(loaddataDir);
+	var base_url = $('meta[name*="url"]').attr('content');
+	var dir = $('.dir');
+	var dataFile = $('.datafile');
+	var option = $('.datafile option');
 	
-	//On key press
-	details.keyup(loaddataDir);
+	dir.blur(loaddataDir);
+	
 	
 	function loaddataDir(){
-		$.post(base_url + "temp/dirdata")
-		.success(function(data) {
-			$('.modal-body table tbody').empty().html(data);
-			$('.messages_gen').bind('click', function() {
-				var t = $(this).closest('tr');
-				inputm = {
-						 'message_id' : $(this).closest('tr').find('.val_message').text()
-				 		}
+		
+		var input = {
+					'directory' : dir.val()
+				}
+		
+		if(dir.val() == ""){
+			dataFile.html('<option value="none">Select source file</option>');
+		}else{
+
+			dataFile.html('<option value="none">Searching Data</option>');
+			$.post(base_url + "temp/dirdata", input)
+			.success(function(data) {
 				
-				$.post(base_url + "response/inbox/updateInboxMessage", inputm)
-				.success(function(data) {
-					t.remove();
-				});	
-				
-			}); 
-			
-		});
+				var options = jQuery.parseJSON(data);
+				dataFile.html('');
+				dataFile.html('<option>Files Loaded</option>');
+				$.each(options, function(key, val){
+					dataFile.append('<option value="' + val+ '">' + val +'</option>');
+				});
+			});	
+		}
+		
+		
+		
 	}
 	
 });

@@ -27,14 +27,16 @@
  *
  *			it will import the database file 
  *
+ *	3) returns 
+ *
  *	
  */
 
 class Alamiddbgenerator{
 	
-	public $mData;
+	public $mData;	// returns data from the function which called 
 	
-	public function backupDatabase($pathto = ''){
+	public function backupDatabase($pathto = ''){	//exports data to designated file
 		
 		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysqldump.exe\"";
 		$DB_HOST = 'localhost';
@@ -56,9 +58,9 @@ class Alamiddbgenerator{
 		return true;
 	}
 	
-	public function loadDatabase($path, $filename){
+	public function loadDatabase($path, $filename){		//load data to the database from which the filepath is required
 		
-		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysql.exe\"";
+		$path_mysql = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysql.exe\"";
 		$DBName = 'prodrivedb';
 		
 		if( strlen($path) < 1 )
@@ -72,6 +74,54 @@ class Alamiddbgenerator{
 		exec($command, $ret_arr, $ret_code);
 		
 		return true;
+	}
+	
+	
+	public function getfiledir($dirpath = ''){		//returns array prodrive database
+		
+		if( !$this->_isValidDir($dirpath) )
+			return false;
+		
+		if($dirpath == '')
+			return false;
+		
+		$dirfiles  = opendir($dirpath);
+		
+		while (false !== ($filename = readdir($dirfiles)) ) {
+			$files[] = $filename;
+		}
+		
+		$arrdbFiles = $this->_prodrivedb($files);
+		
+		$this->mData = $arrdbFiles;
+		
+		return true;
+	}
+	
+	private function _prodrivedb($files){		//return array of matches database_name.sql
+		
+			$pattern = ' /((P|p)rodrivedb)[\d]{8}(\.sql)/';
+			$arrFiles = array();
+			
+			foreach ($files as $filename){
+				$filename = trim($filename);
+				
+				if(preg_match($pattern, $filename)){
+					$arrFiles[] = $filename;
+				}
+			}
+			return $arrFiles;
+		}
+	
+
+	private function _isValidDir($dir){		//checks valid dir
+		
+		$directory = realpath($dir);
+		
+		if( is_dir( $directory) )
+			return true;
+		else
+			return false;
 	}
 	
 }

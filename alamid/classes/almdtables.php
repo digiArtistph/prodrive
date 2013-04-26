@@ -33,9 +33,6 @@
 
 class Almdtables{
 	
-	public function __construct(){
-		
-	}
 	
 	public function __get($name){
 		
