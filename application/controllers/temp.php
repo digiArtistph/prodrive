@@ -31,13 +31,12 @@ class Temp extends CI_Controller {
 			$this->datarecovery();
 		} else {
 			
-			if( $this->_isValidDir( $this->input->post('dir') ) ){
-				$dbgen = new Alamiddbgenerator();
-				$dbgen->backupDatabase( $this->input->post('dir') );
+			$dbgen = new Alamiddbgenerator();
+				//call_debug(  );
+			if( !$dbgen->backupDatabase( $this->input->post('dir') ) )
+					$data['backup_feedback'] = 'Saving Prodrive Data failed !!!';
+			else
 				$data['backup_feedback'] = 'The Prodrive Data has been sent to : "' .$dbgen->mData .'"';
-			}else{
-				$data['backup_feedback'] = 'Saving Prodrive Data failed !!!';
-			}
 			
 			$data['main_content'] = 'datarecovery/feedback_page';
 			$this->load->view('includes/template', $data);
@@ -88,31 +87,5 @@ class Temp extends CI_Controller {
 		
 	}
 
-	private function _isValidDir($dir){
-		
-		$directory = realpath($dir);
-		
-		if( is_dir( $directory) )
-			return true;
-		else
-			return false;
-	}
 	
-	private function _readfile($files){
-		
-		$pattern = ' /((P|p)rodrivedb)[\d]{8}(\.sql)/';
-		
-		$sqlfiles = array();
-		
-		foreach ($files as $filename){
-			
-			$filename = trim($filename);
-			
-			if(preg_match($pattern, $filename)){
-				$sqlfiles[] = $filename;
-			}
-		}
-		
-		return $sqlfiles;
-	}
 }

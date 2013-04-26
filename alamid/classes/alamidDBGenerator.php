@@ -38,6 +38,12 @@ class Alamiddbgenerator{
 	
 	public function backupDatabase($pathto = ''){	//exports data to designated file
 		
+		if($pathto == '')
+			return false;
+		
+		if(!$this->_isValidDir($pathto))
+			return false;
+		
 		$path_mysqldump = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysqldump.exe\"";
 		$DB_HOST = 'localhost';
 		$DB_USER = 'root';
@@ -49,7 +55,7 @@ class Alamiddbgenerator{
 			$pathdir = realpath( ALAMIDSTRUCTURE  ) . $filename;
 		else
 			$pathdir = $pathto . $filename;
-		//call_debug($path_mysqldump);
+		
 		$command = "{$path_mysqldump}  --opt --skip-extended-insert --complete-insert --host=".$DB_HOST." --user=".$DB_USER." --password=".$DB_PASS." ".$DB_NAME." > {$pathdir}";
 		exec($command, $ret_arr, $ret_code);
 		
@@ -60,6 +66,12 @@ class Alamiddbgenerator{
 	
 	public function loadDatabase($path, $filename){		//load data to the database from which the filepath is required
 		
+		if( ($path == '') || ($filename == '') )
+			return false;
+		
+		if( !$this->_isValidDir( $path ) )
+			return false;
+			
 		$path_mysql = '"' . realpath( FCPATH .  '../../') . "\\bin\\mysql\\mysql5.1.53\\bin\\mysql.exe\"";
 		$DBName = 'prodrivedb';
 		
@@ -72,6 +84,8 @@ class Alamiddbgenerator{
 		
 		set_time_limit(0);
 		exec($command, $ret_arr, $ret_code);
+		
+		$this->mData = $pathdir;
 		
 		return true;
 	}
