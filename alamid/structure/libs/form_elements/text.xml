@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <form>
-    <field type="text" name="__blank__" class="__blank__" />
+    <field type="text" attrib="class::textfield required hidden|href::'mailto:kenn_vall@yahoo.com'" siblings="label[value::'%1$'|tag::open]|%s|label[tag:close]|span[class::error hidden]" parent="p[class::defaultform masterfile|prior::1]|span[class::txtfld]" />
 </form>
