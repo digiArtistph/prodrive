@@ -17,6 +17,7 @@ if(! function_exists('add_settings')) {
 
 		global $almd_db;
 		$almd_db = new Almdtables();
+		
 		$strQry = sprintf("SELECT option_value FROM `%s` WHERE option_name='%s'", $almd_db->option, $name);
 
 		
@@ -80,6 +81,8 @@ if(! function_exists('add_settings')) {
 			// $includeindex, when TRUE, retrieves key-value pair
 			
 			$CI =& get_instance();
+			global $almd_db;
+			$almd_db = new Almdtables();
 			$setting = array();
 			$strQry = sprintf("SELECT option_value FROM `%s` WHERE option_name='%s'",$almd_db->option, $name);
 			$record = $CI->db->query($strQry);

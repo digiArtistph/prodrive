@@ -12,6 +12,8 @@
  *		$almd->customer 	returns [prefix of table]_customer
  *		$almd->joborder		returns [prefix of table]_joborder
  *
+ *	2) Dependent on "dbtables" class
+ *
  *
  *	SAMPLE CODE
  *
