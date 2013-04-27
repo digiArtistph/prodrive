@@ -9,15 +9,12 @@ $(document).ready(function(){
 	
 	
 	function loaddataDir(){
-		
-		var input = {
-					'directory' : dir.val()
-				}
-		
+
 		if(dir.val() == ""){
 			dataFile.html('<option value="none">Select source file</option>');
 		}else{
-
+			
+			var input = {'directory' : dir.val()}
 			dataFile.html('<option value="none">Loading files</option>');
 			$.post(base_url + "temp/dirdata", input)
 			.success(function(data) {
@@ -33,9 +30,6 @@ $(document).ready(function(){
 				}
 			});	
 		}
-		
-		
-		
 	}
 	
 });
