@@ -24,15 +24,16 @@ class Formelement {
 	}
 	
 	public function getAllFormElments() {
+		// calls all standard form elements
 		$this->getTextarea();
 		$this->getTextfield();
-		
+		$this->getSelect();
+		$this->getCheckbox();
 	}
 	
 	private function getTextfield() {
 		$almd_xmlparser = new Xmlparser();
 		$almd_xmlparser->loadXml('alamid/structure/libs/form_elements/text.xml');
-// 				$almd_xmlparser->resetdata();
 		$almd_xmlparser->arrtoxml();
 		call_debug($almd_xmlparser->mParseData, FALSE);
 	}
@@ -40,9 +41,23 @@ class Formelement {
 	private function getTextarea() {
 		$almd_xmlparser = new Xmlparser();
 		$almd_xmlparser->loadXml('alamid/structure/libs/form_elements/textarea.xml');
-// 				$almd_xmlparser->resetdata();
 		$almd_xmlparser->arrtoxml();
 		call_debug($almd_xmlparser->mParseData, FALSE);
 	}
+	
+	private function getSelect() {
+		$almd_xmlparser = new Xmlparser();
+		$almd_xmlparser->loadXml('alamid/structure/libs/form_elements/select.xml');
+		$almd_xmlparser->arrtoxml();
+		call_debug($almd_xmlparser->mParseData, FALSE);
+	}
+	
+	private function getCheckbox() {
+		$almd_xmlparser = new Xmlparser();
+		$almd_xmlparser->loadXml('alamid/structure/libs/form_elements/checkbox.xml');
+		$almd_xmlparser->arrtoxml();
+		call_debug($almd_xmlparser->mParseData, FALSE);
+	}
+	
 	
 }

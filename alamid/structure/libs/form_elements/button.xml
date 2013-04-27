@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<form>
+    <field type="submit" name="comments" class="comments" />
+</form>

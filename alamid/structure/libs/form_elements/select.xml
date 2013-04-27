@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<form>
+    <field type="select" name="__blank__" class="__blank__" >
+	<option value="1"> Test </option>
+    </field>
+</form>

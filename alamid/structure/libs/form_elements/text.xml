@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <form>
-    <field type="text" name="address" class="input-xlarge" />
+    <field type="text" name="__blank__" class="__blank__" />
 </form>

@@ -50,7 +50,8 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);	
-		require_once realpath(ALAMIDCLASSES . 'dbtables' . EXT);	
+		require_once realpath(ALAMIDCLASSES . 'dbtables' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'formelement' . EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
 		require_once realpath(ALAMIDLIBS . 'File_maker'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
