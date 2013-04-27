@@ -2,6 +2,13 @@
 
 class Home extends CI_Controller {
 	
+	public function __construct() {
+	
+		parent::__construct();
+	
+		// authorizes access
+		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+	}
 	public function index () {
 		
 		$window = almdMainFrameWindow::get_instance();
@@ -23,11 +30,19 @@ class Home extends CI_Controller {
 // 		almd_build_metascript($param);
 // 		$xmlreader = new Xmlparser();
 		
-// 		$xmlfilename = 'alamid/structure/Form_elemets.xml';
-// 		$xmlreader->loadXml($xmlfilename);
-// 		$xmlreader->arrtoxml();
-// 		call_debug($xmlreader->mParseData);
+
 		
+		
+		$config = array(
+				'db_server' => 'localhost',
+				'db_user' => 'root',
+				'db_name' => 'prodrive',
+				'db_pass' => '',
+				'db_tbl_prefix' => 'almd'
+		);
+		$dbhooks->_initialize();
+		call_debug($almd->customer);
+
 
 		
 	}

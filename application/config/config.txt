@@ -1,0 +1,3 @@
+uname:UNAME
+islog:ISLOGGEDIN
+fullname:FULLNAME
