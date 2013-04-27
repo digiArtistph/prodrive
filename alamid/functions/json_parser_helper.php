@@ -14,8 +14,11 @@ if(! function_exists('add_settings')) {
 	function add_settings($name, $value = '') {
 		$CI =& get_instance();
 		$setting = '';
-	
-		$strQry = sprintf("SELECT option_value FROM `option` WHERE option_name='%s'", $name);
+
+		global $almd_db;
+		$almd_db = new Almdtables();
+		$strQry = sprintf("SELECT option_value FROM `%s` WHERE option_name='%s'", $almd_db->option, $name);
+
 		
 		$records = $CI->db->query($strQry);
 		$result = $records->result();			
