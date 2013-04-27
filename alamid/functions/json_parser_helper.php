@@ -29,7 +29,7 @@ if(! function_exists('add_settings')) {
 			// preps data
 			$setting = array($value); 
 			$setting = json_encode($setting, JSON_FORCE_OBJECT);
-			$strQry = sprintf("INSERT INTO `option` SET option_name='%s', option_value='%s'", mysql_real_escape_string($name), mysql_real_escape_string($setting));
+			$strQry = sprintf("INSERT INTO `%s` SET option_name='%s', option_value='%s'",$almd_db->option, mysql_real_escape_string($name), mysql_real_escape_string($setting));
 			
 			if(! $CI->db->query($strQry))
 				return 0;
@@ -52,7 +52,7 @@ if(! function_exists('add_settings')) {
 		
 		// encodes into json
 		$setting = json_encode($setting, JSON_FORCE_OBJECT);
-		$strQryUpdate = sprintf("UPDATE `option` SET option_value='%s' WHERE option_name='%s'", mysql_real_escape_string($setting), mysql_real_escape_string($name));
+		$strQryUpdate = sprintf("UPDATE `%s` SET option_value='%s' WHERE option_name='%s'",$almd_db->option, mysql_real_escape_string($setting), mysql_real_escape_string($name));
 		
 		if(! $CI->db->query($strQryUpdate))
 			return 0;
@@ -81,7 +81,7 @@ if(! function_exists('add_settings')) {
 			
 			$CI =& get_instance();
 			$setting = array();
-			$strQry = sprintf("SELECT option_value FROM `option` WHERE option_name='%s'", $name);
+			$strQry = sprintf("SELECT option_value FROM `%s` WHERE option_name='%s'",$almd_db->option, $name);
 			$record = $CI->db->query($strQry);
 			$result = $record->result();
 			$numrows = $record->num_rows; 

@@ -37,13 +37,10 @@ class Almdtables{
 	public function __get($name){
 		
 		global $almd_all_tables;
-		global $DBT;
 		
-		if($DBT == false){
+		if(empty($almd_all_tables))
 			$almd_all_tables = Dbtables::getalltables();
-			$DBT =  true;
-		}
-		
+
 		if($almd_all_tables['rowCount']<0)
 			return false;
 		

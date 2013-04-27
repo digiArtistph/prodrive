@@ -2,7 +2,6 @@
 
 class Dbtables{
 	
-	private static $_mDB;
 	private static $tables;
 	
 	public static function getalltables(){
@@ -11,35 +10,20 @@ class Dbtables{
 	}
 	
 	private static function _dbtables(){
-		self::_connectDB('localhost', 'root', '');
+		$CI =& get_instance();
+		$strQry = sprintf('SHOW TABLES FROM prodrivedb' );
+		$query = $CI->db->query($strQry);
 		
-		$tables = array();
-		$list_tables_sql = 'SHOW TABLES FROM prodrivedb';
-		$result = mysqli_query(self::$_mDB,$list_tables_sql);
-	
-		if($result)
-			while($table = mysqli_fetch_row($result)){
-			$tables[] = $table[0];
-		}
-	
-		$results = array(
-				'rowCount' => mysqli_num_rows($result ),
-				'mData' => $tables
-				);
-		
-		self::$tables = $results;
-	}
-	
-		// 	connecting to database
-	private static function _connectDB($server, $user, $pass){
-	
-		self::$_mDB = mysqli_connect($server,$user,$pass);
-	
-		if (mysqli_connect_errno(self::$_mDB)) {
+		if( $query->num_rows() <1 )
 			return false;
-		}else
-			return true;
-	
+		
+		self::$tables['rowCount'] = $query->num_rows();
+		
+		self::$tables['mData'] = array();
+		foreach ($query->result_array() as $key){
+			self::$tables['mData'][] = $key['Tables_in_prodrivedb'];
+			
+		}
 	}
 	
 }
