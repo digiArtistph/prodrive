@@ -38,13 +38,13 @@ function parseArray(&$item) {
 				$closeTag = TRUE;
 			
 			if(!$openTag and !$closeTag)
-				$output .= sprintf(" %s ", dompropToString($prop));
+				$output .= sprintf(" %s ", trim(dompropToString($prop)));
 		}
 		//on_watch($closeTag);
 		if($openTag)
 			$item = sprintf('<%s>', $domName);
 		
-		$item = sprintf('<%s %s>', $domName, $output);
+		$item = sprintf('<%s%s>', $domName, $output);
 	
 		if($closeTag)
 			$item = sprintf('</%s>', $domName);

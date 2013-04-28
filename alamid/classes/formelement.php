@@ -25,10 +25,8 @@ class Formelement {
 	
 	public function getAllFormElments() {
 		// calls all standard form elements
-// 		$this->getTextareaDef();
 		$this->getTextfieldDef();
-		//$this->getSelectDef();
-// 		$this->getCheckboxDef();
+
 	}
 	
 	private function getTextfieldDef() {
@@ -40,26 +38,26 @@ class Formelement {
 		// traverse the array and assign values to static public variable
 		array_walk_recursive($arr, 'traverse');
 		
-		// call_debug(self::$tempArray);
 		$this->formElements = array(
 							'text' => array(
 									'attrib' => $this->_xAttribs(self::$tempArray['attrib']),
 									'siblings' => $this->_xSiblings(self::$tempArray['siblings']),
 									'parents' => $this->_xParents(self::$tempArray['parents']),
+									'defaults' => $this->_xDefaults(self::$tempArray['defaults']),
 									'compiled' => ''
 								)
 						);
 		// resets the value
 		self::$tempArray = null;
-		
 		array_walk_recursive($this->formElements['text'], 'parseArray');
-		/*
-		if(isTagOpen('p[class::defaultform masterfile||prior::1||tag::open]'))
-			echo 'has tag open<br />';
-		else 
-			echo 'has not tag open<br />';
-			*/
-		call_debug($this->formElements);
+		
+		// compiles all elements and properties
+		$node = sprintf('<input type="text" %s />', implode(" ", $this->formElements['text']['attrib']));
+		$siblings = implode("", $this->formElements['text']['siblings']);
+		$parents = implode("", $this->formElements['text']['parents']);
+		$siblings = sprintf($siblings, $node);
+		$output = sprintf($parents, $siblings);
+		$this->formElements['text']['compiled'] = preg_replace('/\d\$/', '%s', $output);
 		
 	}
 	
@@ -98,6 +96,14 @@ class Formelement {
 		return (array)$arrSiblings;
 	}
 	
+	private function _xDefaults($strDefaults = "") {
+		$pattern = '/\|/';
+		
+		$arrDefaults = preg_split($pattern, $strDefaults);
+		
+		return (array)$arrDefaults;
+	}
+	
 	private function _xParents($strParents = "") {
 		$pattern = '/(?<!\|)\|(?!\|)/';
 		$arrParents = preg_split($pattern, $strParents);
@@ -107,42 +113,31 @@ class Formelement {
 	
 
 	public function getText($callback = null) {
-		$arg = func_get_args();
+		$args = func_get_args();
+		$numargs = func_num_args();
+		$output = '';
 		
-		//call_debug($arg, FALSE);
+		$output = $this->formElements['text']['compiled'];
+		
+		switch ($numargs) {
+			case 2:	$output = sprintf($output, $args[1]); break;
+			case 3:	$output = sprintf($output, $args[1],$args[2]); break;
+			case 4:	$output = sprintf($output, $args[1],$args[2], $args[3]); break;
+			case 5:	$output = sprintf($output, $args[1],$args[2], $args[3], $args[4]); break;
+			case 6:	$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5]); break;
+			case 7:	$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6]); break;
+			case 8:	$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7]); break;
+			case 9:	$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8]); break;
+			case 10:$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9]); break;
+			case 11:$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9], $args[10]); break;
+			case 12:$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9], $args[10], $args[11]); break;
+			case 13:$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9], $args[10], $args[11], $args[12]); break;
+			case 14:$output = sprintf($output,$args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9], $args[10], $args[11], $args[12], $args[13]); break;
+			case 15:$output = sprintf($output, $args[1],$args[2], $args[3], $args[4], $args[5], $args[6], $args[7], $args[8], $args[9], $args[10], $args[11], $args[12], $args[13], $args[14]); break;
+		}
+		
+		return $output;
+		
 	}
-	
-// 	regular expression:
-// 	(?<={siblings})[\w|\s]+
-// 	(?<={attrib})[\w|\s]+
-
-	
-// 	Array
-// 	(
-// 			[0] => Array
-// 			(
-// 					[field] => Array
-// 					(
-// 							[attrib] => Array
-// 							(
-// 									[type] => select
-// 									[attrib] => class::textfield required hidden|name:skills
-// 									[siblings] => label[value::'%1$'|tag::open]|%s|label[tag:close]|span  [class::error hidden]
-// 									[parent] => p[class::defaultform masterfile|prior::1]|span[class::txtfld]
-// 							)
-	
-// 					)
-	
-// 			)
-	
-// 	)
-	
-// 	Array
-// 	(
-// 			[0] =>
-// 			[1] => {attrib}inputfield hidden shown|skill
-// 			[2] => {siblings}student|First Name|Last Name
-// 			)
-	
 	
 }
