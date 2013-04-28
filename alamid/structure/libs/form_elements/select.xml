@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <form>
-    <field type="select" attrib="class::textfield required hidden|name:skills" siblings="label[value::'%1$'|tag::open]|%s|label[tag:close]|span
-[class::error hidden]" parent="p[class::defaultform masterfile|prior::1]|span[class::txtfld]">
+    <field type="select" attrib="class::textfield required hidden|name:skills" siblings="label[value::'%1$'|tag::open]|%s|label[tag:close]|span[class::error hidden]" parent="p[class::defaultform masterfile|prior::1]|span[class::txtfld]">
 	
 </field>
 </form>

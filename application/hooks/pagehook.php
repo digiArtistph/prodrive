@@ -61,6 +61,7 @@ class Pagehook {
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'functions'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'alamid_gui'. EXT);
+		require_once realpath(ALAMIDFUNCTIONS . 'common_functions'. EXT);
 
 		/**
 		 * Activates Alamid Framework

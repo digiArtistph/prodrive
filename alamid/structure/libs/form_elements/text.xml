@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <form>
-    <field type="text" attrib="class::textfield required hidden|href::'mailto:kenn_vall@yahoo.com'" siblings="label[value::'%1$'|tag::open]|%s|label[tag:close]|span[class::error hidden]" parent="p[class::defaultform masterfile|prior::1]|span[class::txtfld]" />
+    <field type="text" attrib="class::textfield required hidden|name::fname" siblings="label[tag::open]|%1$|%s|label[tag:close]|span[class::error hidden]|%2$|span[tag:close]" parents="p[class::defaultform masterfile||prior::1||tag::open]|%^s|span[class::txtfld||tag::open]|%3$|span[tag::close]|p[tag::close]" defaults="First Name|Required Field|Another Required Field"/>
 </form>
