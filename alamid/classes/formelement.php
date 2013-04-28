@@ -93,7 +93,7 @@ class Formelement {
 	
 	private function _xSiblings($strSiblings = "") {
 		$pattern = '/(?<!\|)\|(?!\|)/';
-		$arrSiblings = preg_split($pattern, "label[tag::open]|%1$|%s|label[tag:close]|span[class::error hidden]|%2$|span[tag:close]");
+		$arrSiblings = preg_split($pattern, $strSiblings);
 		
 		return (array)$arrSiblings;
 	}

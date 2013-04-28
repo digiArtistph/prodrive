@@ -15,10 +15,42 @@ if(! function_exists('traverse')) {
 }
 
 function parseArray(&$item) {
-		
-	if(isDomProp($item)){
+	// properties of dom
+	if(isDomProp($item))
 		$item = dompropToString($item);
+	// dom
+	
+	if(isDomElem($item)) {
+		$domName = getDomName($item);
+		$openTag = FALSE;
+		$closeTag = FALSE;
+		
+		// parses the properties
+		$pattern = '/[\w]+::[\w\s]+/';
+		preg_match($pattern, $item, $matches);
+		$output = '';
+		//call_debug($matches);
+		foreach ($matches as $prop) {
+			if(preg_match('/tag::open/', $prop))
+				$openTag = TRUE;
+				
+			if(preg_match('/tag::close/', $prop))
+				$closeTag = TRUE;
+			
+			if(!$openTag and !$closeTag)
+				$output .= sprintf(" %s ", dompropToString($prop));
+		}
+		//on_watch($closeTag);
+		if($openTag)
+			$item = sprintf('<%s>', $domName);
+		
+		$item = sprintf('<%s %s>', $domName, $output);
+	
+		if($closeTag)
+			$item = sprintf('</%s>', $domName);
+		
 	}
+	
 }
 
 function dompropToString($str) {
@@ -48,6 +80,16 @@ function isDomProp($str) {
 		return TRUE;
 		
 	return FALSE;
+}
+
+function getDomName($str) {
+	$pattern = '/^[\w]+(?=\[)/';	
+	preg_match($pattern, $str, $matches);
+
+	if(count($matches) > 0)
+		return trim($matches[0]);
+	
+	return '';
 }
 
 function isTagOpen($str) {
