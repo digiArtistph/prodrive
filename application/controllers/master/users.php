@@ -43,16 +43,18 @@ class Users extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
-	private function _addusers(){
+	private function _addusers($err = ''){
+		$data['error'] = $err;
 		$data['utypes'] = $this->_usertypelists();
 		$data['main_content'] = 'master/users/add_users';
 		$this->load->view('includes/template', $data);
 	}
 	
-	private function _editusers($id = ''){
+	private function _editusers($id = '', $err = ''){
 		if(empty($id))
 			show_404();
 		
+		$data['error'] = $err;
 		$data['utypes'] = $this->_usertypelists();
 		$data['users'] = $this->_userlists($id);
 		//call_debug($data['users']);
@@ -92,6 +94,21 @@ class Users extends CI_Controller {
 		return $query->result();
 	}
 	
+	private function _isUserExist($username){
+		global $almd_db;
+		$almd_db = new Almdtables();
+		
+		
+			$strqry = sprintf('SELECT username 	FROM `%s` WHERE `username`="%s"', $almd_db->users, $username);
+		
+		$query = $this->db->query($strqry);
+		
+		if( $query->num_rows() > 0 )
+			return false;
+		
+		return true;
+	}
+	
 	public function validateaddusers(){
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
@@ -110,15 +127,20 @@ class Users extends CI_Controller {
 			global $almd_db;
 			$almd_db = new Almdtables();
 			
-			$db = $this->input;
-			$strqry = 'INSERT INTO '. $almd_db->users . ' (`u_id`, `fname`, `mname`, `lname`, `username`, `pword`, `addr`, `status`, `ut_id` ) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('username') .'", "' . md5($db->post('pword')) .'", "' . $db->post('addr') .'", "' . $db->post('status') .'", "' . $db->post('utype') .'")';
-			
-			$query = $this->db->query($strqry);
-			if(!$query){
-				$this->_addusers();
+			if(! $this->_isUserExist($this->input->post('username'))){
+				$err = 'User name Already exist';
+				$this->_addusers($err);
+			}else{
+				$db = $this->input;
+				$strqry = 'INSERT INTO '. $almd_db->users . ' (`u_id`, `fname`, `mname`, `lname`, `username`, `pword`, `addr`, `status`, `ut_id` ) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('username') .'", "' . md5($db->post('pword')) .'", "' . $db->post('addr') .'", "' . $db->post('status') .'", "' . $db->post('utype') .'")';
+				
+				$query = $this->db->query($strqry);
+				if(!$query){
+					$this->_addusers();
+				}
+				
+				redirect( base_url() . 'master/users' );
 			}
-			
-			redirect( base_url() . 'master/users' );
 		}
 	}
 	
@@ -141,16 +163,22 @@ class Users extends CI_Controller {
 		} else {
 			global $almd_db;
 			$almd_db = new Almdtables();
-			$db = $this->input;
-				
-			$strqry = sprintf('UPDATE `%s` SET `username`="%s", `ut_id`="%s", `pword`="%s", `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `status`="%s" WHERE u_id="%s" ', $almd_db->users, $this->input->post('username'), $this->input->post('utype'), md5( $this->input->post('pword') ), $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('status'),  $this->input->post('user_id') );
 			
-			$query = $this->db->query($strqry);
-			if(!$query){
-				$this->_editusers($this->input->post('user_id'));
+			if( ! $this->_isUserExist($this->input->post('username'))){
+				$err = 'User name Already exist';
+				$this->_editusers($this->input->post('user_id'), $err);
+			}else{
+				$db = $this->input;
+					
+				$strqry = sprintf('UPDATE `%s` SET `username`="%s", `ut_id`="%s", `pword`="%s", `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `status`="%s" WHERE u_id="%s" ', $almd_db->users, $this->input->post('username'), $this->input->post('utype'), md5( $this->input->post('pword') ), $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('status'),  $this->input->post('user_id') );
+				
+				$query = $this->db->query($strqry);
+				if(!$query){
+					$this->_editusers($this->input->post('user_id'));
+				}
+		
+				redirect( base_url() . 'master/users/' );
 			}
-	
-			redirect( base_url() . 'master/users/' );
 		}
 	}
 	

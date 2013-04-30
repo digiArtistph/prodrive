@@ -2,6 +2,9 @@
 <h3>User View</h3>
 	<div id="view_form">
 	<?php echo form_open( base_url() . 'master/users/validateaddusers' );?>
+		<?php if (!empty($error)):?>
+		<p><?php echo $error;?></p>
+		<?php endif;?>
 		<p><label>Username: </label><input type="text" name="username" /><span class="error"><?php echo form_error('username'); ?></span></p>
 		<p><label>User type: </label><select name="utype">
 			<option value="" selected="selected">Select User Type</option>

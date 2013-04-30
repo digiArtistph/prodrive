@@ -4,6 +4,10 @@
 	<?php if(!empty($users)):?>
 	
 	<?php echo form_open( base_url() . 'master/users/validateeditusers' );?>
+	<?php if (!empty($error)):?>
+		<p><?php echo $error;?></p>
+		<?php endif;?>
+		
 		<?php foreach ($users as $user):?>
 		<input type="hidden" name="user_id"  value="<?php echo $user->u_id;?>"/>
 		<p><label>Username: </label><input type="text" name="username" value="<?php echo $user->username; ?>" /><span class="error"><?php echo form_error('username'); ?></span></p>
