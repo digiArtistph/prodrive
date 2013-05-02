@@ -7,16 +7,40 @@ $(document).ready(function(){
 	var loadqry = $('.find_val');
 	
 	dir.change(loaddataDir);
-	loadqry.blur(function(){
-		
-				var input = {'term' : loadqry.val()}
+	loadqry.autocomplete(
+			{ minLength: 0 },
+			{ autoFocus: true },
+			{source: function(request, response) {
 				
-				$.post(base_url + "find/autocomplete", input)
-				.success(function(data) {
-					alert(data);
-				});
+					if( $('.find_tbl').val() == '' ){
+						alert('select table first');
+						loadqry.val('');
+						
+					}else if ($('.find_tblclmn').val() == '' ) {
+						alert('select table column first');
+						loadqry.val('');
+						
+					}else{
+						
+						$.ajax({
+							url: base_url + "find/autocomplete",
+							type: 'POST',
+							dataType: "json",
+							data: {
+								'term' : request.term,
+								'tbl'  : $('.find_tbl').val(),
+								'tblcln' : $('.find_tblclmn').val()
+								},
+							success: function(data) {
+								response(data);
+							}
+						});
+						
+					}
+				}
 	
-	});
+			}
+	);
 	
 	
 	function loaddataDir(){
