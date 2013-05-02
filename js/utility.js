@@ -4,8 +4,19 @@ $(document).ready(function(){
 	var dir = $('.dir');
 	var dataFile = $('.datafile');
 	var option = $('.datafile option');
+	var loadqry = $('.find_val');
 	
 	dir.change(loaddataDir);
+	loadqry.blur(function(){
+		
+				var input = {'term' : loadqry.val()}
+				
+				$.post(base_url + "find/autocomplete", input)
+				.success(function(data) {
+					alert(data);
+				});
+	
+	});
 	
 	
 	function loaddataDir(){
