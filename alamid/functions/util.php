@@ -45,9 +45,8 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_wrap;
 		global $almd_db;
 		global $almd_xmlparser;
-		
-		$CI =& get_instance();
-		$CI->benchmark->mark('code_start');
+		global $almd_formelems;
+
 		$almd_db = new Querytables();
 		$almd_wrap = new Enclose();
 	}

@@ -50,7 +50,8 @@ class Pagehook {
 		require_once realpath(ALAMIDCLASSES . 'wrapper' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'misnomer' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'bootstrap' . EXT);	
-		require_once realpath(ALAMIDCLASSES . 'dbtables' . EXT);	
+		require_once realpath(ALAMIDCLASSES . 'dbtables' . EXT);
+		require_once realpath(ALAMIDCLASSES . 'formelement' . EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'util'. EXT);
 		require_once realpath(ALAMIDCLASSES . 'alamiddbgenerator' . EXT);
 		require_once realpath(ALAMIDCLASSES . 'fileextension'. EXT);
@@ -60,7 +61,7 @@ class Pagehook {
 		require_once realpath(ALAMIDFUNCTIONS . 'dom_elem_helper'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'functions'. EXT);
 		require_once realpath(ALAMIDFUNCTIONS . 'alamid_gui'. EXT);
-		
+		require_once realpath(ALAMIDFUNCTIONS . 'common_functions'. EXT);
 
 		/**
 		 * Activates Alamid Framework

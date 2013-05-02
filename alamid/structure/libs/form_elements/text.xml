@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
 <form>
-    <input type="text" name="address" class="input-xlarge" />
+    <field type="text" 
+	attrib="class::textfield required|name::fname|id::1$" 
+	siblings="label[tag::open]|2$|%s|label[tag::close]|span[class::error hidden]|3$|span[tag::close]" 
+	parents="p[class::defaultform masterfile||prior::1||tag::open]|%s|p[tag::close]" 
+	defaults="fname|First Name|Required Field|Another Required Field"/>
 </form>

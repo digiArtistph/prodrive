@@ -9,7 +9,7 @@
  */
 class Bootstrap {
 	
-	public static function execute(/* &$DOM,  */$section) {	
+	public static function execute($section) {	
 		
 		// assigns returned recordset into array
 		// call_user_func() -- use loop here		
@@ -17,12 +17,11 @@ class Bootstrap {
 			return ;
 		
 		foreach ($hooks as $hook) {		
-			if(! call_user_func($hook, $section)) {
-				log_message('error', $hook);
-			}			
+			if(function_exists($hook)) {
+				if(! call_user_func($hook, $section)) {
+					log_message('error', $hook);
+				}
+			}
 		}
-		
-		
-		
 	}
 }
