@@ -43,14 +43,31 @@ class Dcr extends CI_Controller {
 			$this->load->view('includes/template', $data);
 		} else {
 			// redirects to a form that asks for a new beg bal
-			$data['main_content'] = 'tranx/dcr_new_view';
-			$this->load->view('includes/template', $data);
+			$this->_dcrnew();
 		}
+	}
+	
+	private function _dcrnew() {
+		$data['main_content'] = 'tranx/dcr_new_view';
+		$this->load->view('includes/template', $data);
 	}
 	
 	public function validatenewdcr() {
 		
 		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+		
+		// sets rules
+		$validation->set_rules('tranxdate', 'Tranx Date', 'required');
+		$validation->set_rules('begbal', 'Beginning Balance', 'required');
+		$validation->set_rules('cashier', 'Cashier', 'required');
+		
+		if($validation->run() === FALSE) {
+			$this->_dcrnew();
+		} else {
+			
+		}
+		
 	}
 	
 	

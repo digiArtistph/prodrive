@@ -28,6 +28,13 @@ class mdl_dcr extends CI_Model{
 		
 		$strQry = sprintf("INSERT INTO %s SET trnxdate='%s', cashier=%d, `status`=1", $almd_db->dcr, curdate(), $currentUser );
 		
+		$this->db->query($strQry);
+		$tmp = array('dcr_id' => '', 'trnxdate' => curdate(), 'begbal' => '', 'cashier' => '', 'status ' => 1);
+		
+		$tmp = array((Object)$tmp);
+		call_debug($data['dcr_id'], FALSE);
+		call_debug($tmp);
+		
 		on_watch($strQry);
 	}
 
