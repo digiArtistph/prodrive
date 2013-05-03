@@ -34,7 +34,7 @@ class Dcr extends CI_Controller {
 		 * 2. if there is then load into the form
 		 * 3. save maste detail record when save button is pressed
 		 */
-		
+		$data['dcr_id'] = '';
 		$data['main_content'] = 'tranx/dcr';
 		$this->load->view('includes/template', $data);
 		

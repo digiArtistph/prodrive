@@ -3,7 +3,6 @@ class mdl_autocomplete extends CI_Model{
 	
 	public function findkeyword($table, $culumn, $word){
 		global $almd_db;
-		$almd_db = new Almdtables();
 		
 		global $sorting;
 		if(empty($sorting))
