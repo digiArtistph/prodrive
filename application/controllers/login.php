@@ -1,7 +1,10 @@
 <?php
 class Login extends CI_Controller{
 	
-	private $mName;
+	private $_mName;
+	private $_mUtype;
+	private $_mUid;
+	private $_mAcc;
 	
 	public function index(){
 		$this->login_page();
@@ -28,7 +31,10 @@ class Login extends CI_Controller{
 				$params = array(
 						'uname' => $this->input->post('username'),
 						'islog' => TRUE,
-						'fullname' => $this->mName
+						'fullname' => $this->_mName,
+						'uid' => $this->_mUid,
+						'utype' => $this->_mUtype,
+						'uaccess' => $this->_mAcc
 				);
 				$this->sessionbrowser->setInfo($params);
 				
@@ -52,7 +58,7 @@ class Login extends CI_Controller{
 	
 	private function __isUserExists($user, $pass) {
 		
-		$strQry = sprintf('SELECT username, fname, mname, lname FROM users WHERE username="%s" and pword="%s"', $user, md5($pass) );
+		$strQry = sprintf('SELECT us.username, us.fname, us.mname, us.lname, us.u_id, ut.type, ut.access FROM users us LEFT JOIN usertype ut on ut.id = us.ut_id WHERE username="%s" and pword="%s"', $user, md5($pass) );
 		$query = $this->db->query($strQry);
 		
 		if( $query->num_rows() <1 ){
@@ -66,7 +72,10 @@ class Login extends CI_Controller{
 			else
 				$midname = '.';
 			
-			$this->mName = ucfirst($key->lname) . ', ' . ucfirst($key->fname) . $midname ;
+			$this->_mName = ucfirst($key->lname) . ', ' . ucfirst($key->fname) . $midname ;
+			$this->_mUid = $key->u_id;
+			$this->_mUtype = $key->type;
+			$this->_mAcc = $key->access;
 		}
 		
 		return true;

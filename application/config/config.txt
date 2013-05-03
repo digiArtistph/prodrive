@@ -3,3 +3,4 @@ islog:ISLOGGEDIN
 fullname:FULLNAME
 uid:UID
 utype:UTYPE
+uaccess:UACCESS
