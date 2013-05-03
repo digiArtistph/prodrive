@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	
 	var base_url = $('meta[name*="url"]').attr('content');
 	var dir = $('.dir');
 	var dataFile = $('.datafile');

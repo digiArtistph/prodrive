@@ -8,7 +8,7 @@
     <meta name="Viewport"  width="devicewidth" />
     <title>Prodrive System</title>
   	<?php getHeader(); ?>
-</head>
+
 <body>
     <div  id="container">
         <div  id="masthead">
