@@ -49,11 +49,9 @@ if (! function_exists('getSection')) {
 			case 'home':
 				$section = 'home';
 				break;
-				
-			case 'admin':
-				$section = 'admin';
+			case 'tranx':
+				$section = 'tranx';
 				break;
-				
 			case 'master':
 				$section = 'master';
 				break;
@@ -61,11 +59,7 @@ if (! function_exists('getSection')) {
 			case 'reports':
 				$section = 'reports';
 				break;
-
-			case 'accident':
-				$section = 'accident';
-				break;
-				
+	
 			default:
 				$section = 'home';
 		}
