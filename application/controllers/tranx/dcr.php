@@ -34,10 +34,23 @@ class Dcr extends CI_Controller {
 		 * 2. if there is then load into the form
 		 * 3. save maste detail record when save button is pressed
 		 */
-		$data['dcr_id'] = '';
-		$data['main_content'] = 'tranx/dcr';
-		$this->load->view('includes/template', $data);
+		$this->load->model('mdl_dcr');
+		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
+			// pass value to the controller
+			$data['dcr_id'] = $dcrNo;
+			
+			$data['main_content'] = 'tranx/dcr_view';
+			$this->load->view('includes/template', $data);
+		} else {
+			// redirects to a form that asks for a new beg bal
+			$data['main_content'] = 'tranx/dcr_new_view';
+			$this->load->view('includes/template', $data);
+		}
+	}
+	
+	public function validatenewdcr() {
 		
+		$this->load->library('form_validation');
 	}
 	
 	
