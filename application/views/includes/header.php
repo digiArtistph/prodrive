@@ -10,6 +10,7 @@
 		case 'home':
 		case 'tranx':
 		case 'master':
+			echo MAIN_CSS;
 			echo REMOTE_JQUERY_MIN;
 			echo REMOTE_JQUERY_UI_MIN;
 			echo UTILITY_JS;
@@ -17,6 +18,7 @@
 		case 'reports':
 			break;
 		default:
+			echo MAIN_CSS;
 			REMOTE_JQUERY_MIN;
 			REMOTE_JQUERY_UI_MIN;
 			UTILITY_JS;
