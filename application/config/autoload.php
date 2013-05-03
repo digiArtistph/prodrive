@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'sessionbrowser', 'sentine
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'file', 'debug_me', 'form', 'guard');
+$autoload['helper'] = array('url', 'file', 'debug_me', 'form', 'guard', 'section_site');
 
 
 /*

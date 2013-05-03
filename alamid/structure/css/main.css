@@ -6,23 +6,23 @@ a, a img, img {border:0;}
 ul {list-style-type:none;}
 
 /* container */
-#container {border:1px solid #ccc; margin:auto; width:982px; overflow:auto;}
+#container {margin:auto; width:1080px; overflow:auto;}
 
 
 /* masthead */
-#masthead {border:1px solid blue; min-height:35px;}
+#masthead { min-height:35px;}
 #masthead ul li, #masthead li a {float:left;}
 
 /* panels */
-#panels{border:1px solid red; clear:both; float:left; width:20%;}
+#panels{ clear:both; float:left; width:20%;}
 
 /* content */
-#content {border:1px solid green; float:left; width:59%; }
+#content {float:left; width:59%; }
 
 
 /* toolbars */
-#toolbars {border:1px solid blue; float:left; width:20%;}
+#toolbars {float:left; width:20%;}
 
 
 /* footer */
-#footer {border:1px solid red; clear:both;}
+#footer {clear:both;}

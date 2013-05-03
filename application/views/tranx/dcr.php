@@ -7,7 +7,7 @@
 <table>
 <thead>
 <tr>
-<th>Particular</th><th>Tender</th><th>Ref No.</th><th>Amount</th>
+<th>Particular</th><th>Tender</th><th>Ref No.</th><th>Amount</th><th>Action</th>
 </tr>
 </thead>
 <tbody>
@@ -26,6 +26,9 @@
 </td>
 <td>
 <input type="text" name="amount" />
+</td>
+<td>
+	<input type="submit" value="Add" />
 </td>
 </tr>
 </tbody>
