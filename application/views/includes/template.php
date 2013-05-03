@@ -6,6 +6,7 @@
     <meta name="keywords"  content="HTML,CSS,XML,JavaScript" />
     <meta name="author"  content="Mugs and Coffee" />
     <meta name="Viewport"  width="devicewidth" />
+    <meta name="url" content="<?php echo base_url();?>" />
     <title>Prodrive System</title>
   	<?php getHeader(); ?>
 
