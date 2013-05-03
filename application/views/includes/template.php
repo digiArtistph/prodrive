@@ -32,13 +32,7 @@
         <div  id="content">
             <?php $this->load->view($main_content); ?>
         </div>
-    
-        <div  id="toolbars">
-            <ul>
-                <li  class="menu-item"><a  href="http://facebook.com" >Facebook</a></li>
-                <li  class="menu-item"><a  href="http://twitter.com" >Twitter</a></li>
-            </ul>
-        </div>
+
         
         <div  id="footer">
         	
