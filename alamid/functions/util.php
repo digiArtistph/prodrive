@@ -47,7 +47,19 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_xmlparser;
 		global $almd_formelems;
 		global $sorting;
-
+		
+		global $almd_username;
+		global $almd_useraccess;
+		global $almd_userfullname;
+		global $almd_userisloggedin;
+		global $almd_userid;
+		
+		$almd_username = NULL;
+		$almd_useraccess = NULL;
+		$almd_userfullname = NULL;
+		$almd_userisloggedin = NULL;
+		$almd_userid = NULL;
+		
 		$almd_db = new Querytables();
 		$almd_wrap = new Enclose();
 		$sorting = 0;

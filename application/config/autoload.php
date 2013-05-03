@@ -63,8 +63,7 @@ $autoload['libraries'] = array('database', 'session', 'sessionbrowser', 'sentine
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-
-$autoload['helper'] = array('datex', 'debug_me', 'file', 'form', 'guard', 'section_site', 'url');
+$autoload['helper'] = array('url', 'file', 'debug_me', 'form', 'guard', 'section_site', 'sessionreader');
 
 
 /*

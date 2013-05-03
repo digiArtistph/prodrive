@@ -11,7 +11,7 @@
 			</select>
 		</p>
 		<p><label>Table Column: </label><input class="find_tblclmn"  type="text" /></p>
-		<p><label>Find: </label><input class="find_val"  type="text" /></p>
+		<p><label>Find: </label><input  class="find_val"  type="text" /></p>
 		
 	</form>
 </div>
