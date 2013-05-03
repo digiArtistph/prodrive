@@ -7,6 +7,7 @@ $(document).ready(function(){
 	var loadqry = $('.find_val');
 	
 	dir.change(loaddataDir);
+
 	loadqry.autocomplete(
 			{ minLength: 0 },
 			{ autoFocus: true },
@@ -44,7 +45,7 @@ $(document).ready(function(){
 	
 	
 	function loaddataDir(){
-
+		
 		if(dir.val() == ""){
 			dataFile.html('<option value="none">Select source file</option>');
 		}else{
@@ -64,6 +65,7 @@ $(document).ready(function(){
 					});
 				}
 			});	
+			
 		}
 	}
 	
