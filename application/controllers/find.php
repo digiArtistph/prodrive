@@ -11,11 +11,6 @@ class Find extends CI_Controller {
 	}
 	
 	public function index () {
-		read_session();
-		global $almd_username;
-		global $almd_useraccess;
-		echo 'username: '. $almd_useraccess; die();
-		
 		$this->_loadautocomplete();
 	}
 	

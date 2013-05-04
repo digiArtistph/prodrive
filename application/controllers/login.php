@@ -38,10 +38,6 @@ class Login extends CI_Controller{
 				);
 				$this->sessionbrowser->setInfo($params);
 				
-				//
-				$this->load->helper('sessionreader');
-				
-				read_session();
 				redirect(base_url());
 			}else{
 				$data['uerror'] = 'Hi ' . $this->input->post('username') . ' !!! Please Register First or Login again';
