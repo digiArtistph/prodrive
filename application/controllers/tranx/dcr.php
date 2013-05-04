@@ -3,10 +3,9 @@ class Dcr extends CI_Controller {
 	
 	public function __construct() {
 		parent::__construct();
-		
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
-	
+
 	}
 	
 	public function index() {
@@ -14,11 +13,11 @@ class Dcr extends CI_Controller {
 	}
 	
 	public function section() {
-		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
+		$section = ($this->uri->segment(1)) ? $this->uri->segment(1) : '';
 		$id = ($this->uri->segment(5)) ? $this->uri->segment(5) : '';
 		
 		switch($section){
-			case 'dcrtrnx':
+			case 'trnx':
 				$this->_dcr();
 				break;
 			default:

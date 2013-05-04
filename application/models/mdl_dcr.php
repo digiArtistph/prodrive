@@ -3,11 +3,11 @@ class mdl_dcr extends CI_Model{
 	
 	function hasCurrentDCR(&$dcrNo = null) {
 		global $almd_db;
+		global $almd_userid;
+		global $almd_username;
 		$curdate = curdate();
-		$params = array('uname', 'islog', 'fullname', 'uid', 'uaccess');
-		$this->sessionbrowser->getInfo($params);
-		$user = $this->sessionbrowser->mData;
-		$currentUser = $user['uid'];
+
+		$currentUser = $almd_userid;
 		$strQry = sprintf("SELECT * FROM %s WHERE trnxdate='%s' AND cashier=%d", $almd_db->dcr, $curdate, $currentUser);
 		
 		$record = $this->db->query($strQry);
@@ -21,10 +21,8 @@ class mdl_dcr extends CI_Model{
 	
 	public function newDCR(&$dcrNo = null) {
 		global $almd_db;
-		$params = array('uname', 'islog', 'fullname', 'uid', 'uaccess');
-		$this->sessionbrowser->getInfo($params);
-		$user = $this->sessionbrowser->mData;
-		$currentUser = $user['uid'];
+		global $almd_userid;
+		$currentUser = $almd_userid;
 		
 		$strQry = sprintf("INSERT INTO %s SET trnxdate='%s', cashier=%d, `status`=1", $almd_db->dcr, curdate(), $currentUser );
 		
