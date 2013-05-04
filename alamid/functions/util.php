@@ -59,9 +59,20 @@ if(! function_exists('loadAlamidGlobals')) {
 		$almd_userfullname = NULL;
 		$almd_userisloggedin = NULL;
 		$almd_userid = NULL;
+		readUserCredentials();
 		
 		$almd_db = new Querytables();
 		$almd_wrap = new Enclose();
 		$sorting = 0;
+	}
+}
+
+if(! function_exists('readUserCredentials')) {
+	function readUserCredentials() {
+		$CI =& get_instance();
+		
+		// loads helper
+		$CI->load->helper('sessionreader');
+		read_session();
 	}
 }
