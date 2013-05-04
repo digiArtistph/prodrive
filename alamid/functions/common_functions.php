@@ -101,3 +101,9 @@ function isTagOpen($str) {
 	
 	return FALSE;
 }
+
+function arrayToDBOjbect(&$Arr) {
+	$tmpArray = $Arr;
+
+	$Arr = array((Object)$tmpArray);
+}

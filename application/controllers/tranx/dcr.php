@@ -1,5 +1,6 @@
 <?php if (!defined('BASEPATH')) exit ('No direct script access allowed.');
 class Dcr extends CI_Controller {
+	private $DCR = null;
 	
 	public function __construct() {
 		parent::__construct();
@@ -36,8 +37,8 @@ class Dcr extends CI_Controller {
 		$this->load->model('mdl_dcr');
 		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
 			// pass value to the controller
-			$data['dcr_id'] = $dcrNo;
-			
+			$data['dcr'] = $dcrNo;
+					
 			$data['main_content'] = 'tranx/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {
@@ -47,6 +48,10 @@ class Dcr extends CI_Controller {
 	}
 	
 	private function _dcrnew() {
+		global $almd_userid;
+		global $almd_username;
+		$data['cashierid'] = $almd_userid;
+		$data['cashiername'] = $almd_username;
 		$data['main_content'] = 'tranx/dcr_new_view';
 		$this->load->view('includes/template', $data);
 	}
@@ -57,14 +62,17 @@ class Dcr extends CI_Controller {
 		$validation = $this->form_validation;
 		
 		// sets rules
-		$validation->set_rules('tranxdate', 'Tranx Date', 'required');
+		$validation->set_rules('trnxdate', 'Tranx Date', 'required');
 		$validation->set_rules('begbal', 'Beginning Balance', 'required');
 		$validation->set_rules('cashier', 'Cashier', 'required');
 		
 		if($validation->run() === FALSE) {
 			$this->_dcrnew();
 		} else {
+			$this->load->model('mdl_dcr');
+			$this->mdl_dcr->newDCR($this->DCR);
 			
+			redirect(base_url('tranx/dcr'));
 		}
 		
 	}
