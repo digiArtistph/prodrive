@@ -19,29 +19,29 @@
 </thead>
 <tbody>
 <tr>
-<td><input name="particular" type="text" /></td>
-<td><select name="tender">
+<td><input id="particular" name="particular" type="text" /></td>
+<td><select id="tender" name="tender">
 	<option value="1">Cash</option>
     <option value="2">Check</option>
 </select>
 </td>
-<td><select name="refno">
+<td><select id="refno" name="refno">
 	<option value="">-- Select a reference number</option>
-    <option value="1">JO04302013</option>
-    <option value="1">JO05012013</option>
+    <option value="JO04302013">JO04302013</option>
+    <option value="JO05012013">JO05012013</option>
 </select>
 </td>
 <td>
-<input type="text" name="amount" />
+<input id="amount" type="text" name="amount" />
 </td>
 <td>
-	<input type="submit" value="Add" />
+	<input type="submit" value="Add" id="dcr_add_btn" />
 </td>
 </tr>
 </tbody>
 </table>
 
-<table>
+<table  id="dcr_master_details">
 <thead>
 <tr>
 <th>Particular</th><th>Tender</th><th>Ref No.</th><th>Amount</th>
