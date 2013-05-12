@@ -1,0 +1,18 @@
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `sp_end_joborder`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_end_joborder`(
+INOUT	o_jo_id	INT,
+INOUT	flag	INT
+)
+
+BEGIN
+	IF flag = 0
+		THEN
+
+			COMMIT;
+	ELSE
+		ROLLBACK;
+	END IF;
+
+END $$
+DELIMITER ;

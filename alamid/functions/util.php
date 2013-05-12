@@ -53,12 +53,7 @@ if(! function_exists('loadAlamidGlobals')) {
 		global $almd_userfullname;
 		global $almd_userisloggedin;
 		global $almd_userid;
-		
-		$almd_username = NULL;
-		$almd_useraccess = NULL;
-		$almd_userfullname = NULL;
-		$almd_userisloggedin = NULL;
-		$almd_userid = NULL;
+
 		readUserCredentials();
 		
 		$almd_db = new Querytables();

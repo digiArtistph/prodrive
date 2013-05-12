@@ -2,16 +2,10 @@
 class test extends CI_Controller {
  
  	public function index() {
- 		
 
- 		global $almd_db;
- 		$almd_db->option;
- 		echo $almd_db->option . '<br />';
- 		echo $almd_db->user . '<br />';
+ 		$json = '{"0": [""],"1": ["labor","fds","no value","sfd","sdf","edit|delete",""],"2": ["pnm","no value","fds","sfd","dsf","edit|delete",""],"3": ["labor","fds","no value","dfs","sfd","edit|delete",""],"4": ["pnm","no value","tongbes","sdf","ds","edit|delete",""]}';
 		
- 		$this->benchmark->mark('code_end');
- 		
- 		echo $this->benchmark->elapsed_time('code_start', 'code_end');
+ 		call_debug(json_decode($json) );
 	}
 }
 ?>

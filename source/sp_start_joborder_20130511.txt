@@ -1,0 +1,12 @@
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `sp_start_joborder` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_start_joborder`(
+OUT 	flag	INT
+)
+BEGIN
+
+START TRANSACTION;
+set flag=0;
+
+END $$
+DELIMITER ;
