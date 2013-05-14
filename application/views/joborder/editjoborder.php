@@ -96,25 +96,25 @@
 		<?php else:?>
 		
 		<?php $cnt=1; foreach ($jbo_orders as $jbord):?>
-		<?php if($jbord->labor>0):?>
+		<?php if($jbord->labor > 0):?>
 			<tr>
 				<td><?php echo $cnt;?></td>
-				<td>" + jotypeqry.val() + "</td>
-				<td>" + laborqry.val() + "</td>
+				<td>labor</td>
+				<td><?php echo $jbord->labort;?></td>
 				<td></td>
-				<td>"+ $('.det').val() +"</td>
-				<td>" + $('.amnt').val() +"</td>
-				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#\">delete</a></td>
+				<td><?php echo $jbord->details;?></td>
+				<td><?php echo $jbord->laboramnt;?></td>
+				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#">delete</a></td>
 				<td></td>
 			</tr>
 		<?php else :?>
 			<tr>
 				<td><?php echo $cnt;?></td>
 				<td>Parts or Materials</td>
+				<td></td>
 				<td><?php echo $jbord->partmaterial;?></td>
-				<td><?php echo $jbord->details;?><</td>
-				<td>"+ $('.det').val() +"</td>
-				<td>" + $('.amnt').val() +"</td>
+				<td><?php echo $jbord->details;?></td>
+				<td><?php echo $jbord->partmaterialamnt;?></td>
 				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#\">delete</a></td>
 				<td></td>
 			</tr>
