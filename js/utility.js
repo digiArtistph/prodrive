@@ -22,6 +22,9 @@ $(document).ready(function(){
 	$('select[name="customer"]').combobox();
 	$('select[name="color"]').combobox();
 	
+	// DCR Plugin
+	$('#dcrdatagrid').dcrgrid();
+	
 	function html2json() {
 		   var json = '{';
 		   var otArr = [];

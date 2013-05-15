@@ -1,0 +1,1 @@
+<div id="loadplugin">Plugin here</div>
