@@ -1,6 +1,7 @@
 // JavaScript Document
 $(function(){
 	
+
 	/* add button for dcr */
 	$('#dcr_add_btn').click(function(){
 		var particular_fld = $('#particular');
@@ -34,6 +35,4 @@ $(function(){
 		
 		return false;
 	});
-	
-	
 });

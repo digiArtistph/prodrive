@@ -14,4 +14,8 @@ class mdl_joborder extends CI_Model{
 		$this->db->query($sql);
 		return true;
 	}
+
+	public function insert_joborder($params){
+		
+	}
 }

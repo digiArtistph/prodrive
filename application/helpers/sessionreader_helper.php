@@ -14,32 +14,38 @@
 			global $almd_userfullname;
 			global $almd_userisloggedin;
 			global $almd_userid;
+			global $sesarr;
 			
-			$CI = get_instance();
-			$CI->load->library('file_maker');
-			$CI->file_maker->parseData();
-			$seskey = $CI->file_maker->mData;
-			$params = array();
+			if(empty($sesarr)){
+				$CI = get_instance();
+				$CI->load->library('file_maker');
+				$CI->file_maker->parseData();
+				$seskey = $CI->file_maker->mData;
+				$params = array();
+					
+				foreach ($seskey as $key => $val){
+					array_push($params, $key);
+				}
+					
+					
+				$CI->load->library('sessionbrowser');
+					
+				$CI->sessionbrowser->getInfo($params);
+				$sesarr = $CI->sessionbrowser->mData;
+			}else{
 			
-			foreach ($seskey as $key => $val){
-				array_push($params, $key);
+				if(!empty($almd_username))
+					return false;
+				else{
+					$almd_username = $sesarr[$params[0]];
+					$almd_useraccess = $sesarr[$params[5]];
+					$almd_userfullname = $sesarr[$params[2]];
+					$almd_userisloggedin = $sesarr[$params[1]];
+					$almd_userid = $sesarr[$params[3]];
+				}
+			
 			}
-			
-			
-			$CI->load->library('sessionbrowser');
-			
-			$CI->sessionbrowser->getInfo($params);
-			$sesarr = $CI->sessionbrowser->mData;
-			
-			$almd_username = $sesarr[$params[0]];
-			$almd_useraccess = $sesarr[$params[5]];
-			$almd_userfullname = $sesarr[$params[2]];
-			$almd_userisloggedin = $sesarr[$params[1]];
-			$almd_userid = $sesarr[$params[3]];
 		}
 		
 	}
 	
-	function setGlobal(){
-		
-	}

@@ -42,7 +42,7 @@ class Almdtables{
 		
 		if(empty($almd_all_tables))
 			$almd_all_tables = Dbtables::getalltables();
-
+		
 		if($almd_all_tables['rowCount']<0)
 			return false;
 		

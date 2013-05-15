@@ -1,0 +1,41 @@
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `sp_editjoborderdet` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_editjoborderdet`(
+IN 	m_jo_id			INT,
+IN 	m_labor 		TEXT,
+IN	m_partmaterial		VARCHAR(50),
+IN 	m_details 		TEXT,
+IN	m_laboramnt 		DECIMAL(8,2),
+IN	m_partmaterialamnt 	DECIMAL(8,2),
+IN	m_status 		INT,
+INOUT 	flag	INT
+)
+
+BEGIN
+
+DECLARE stat INT;
+DECLARE lt_last_id INT DEFAULT 0;
+DECLARE EXIT handler for SQLEXCEPTION set flag = 1;
+
+	SET stat = m_status + 1; 
+	
+	
+	IF NOT EXISTS(SELECT * FROM `labortype` WHERE `name`=m_labor) 
+		THEN
+			IF (m_labor REGEXP '[0]'= 1)
+				THEN
+					INSERT INTO `jodetails` SET `jo_id`=m_jo_id, `labor`=m_labor, `partmaterial`=m_partmaterial, `details`=m_details, `laboramnt`=m_laboramnt, `partmaterialamnt`=m_partmaterialamnt, `status`=stat;
+			ELSE
+				INSERT INTO `labortype` SET `name`=m_labor, `category`="0", `status`="1";
+ 				SET lt_last_id = LAST_INSERT_ID();
+
+				INSERT INTO `jodetails` SET `jo_id`=m_jo_id, `labor`=lt_last_id, `partmaterial`=m_partmaterial, `details`=m_details, `laboramnt`=m_laboramnt, `partmaterialamnt`=m_partmaterialamnt, `status`=stat;
+			END IF;
+			
+	ELSE
+		SET lt_last_id = (SELECT `laborid` FROM `labortype` WHERE `name`=m_labor);
+		INSERT INTO `jodetails` SET `jo_id`=m_jo_id, `labor`=lt_last_id, `partmaterial`=m_partmaterial, `details`=m_details, `laboramnt`=m_laboramnt, `partmaterialamnt`=m_partmaterialamnt, `status`=stat;
+	END IF;
+
+END $$
+DELIMITER ;
