@@ -41,10 +41,10 @@ class Joborder extends CI_Controller{
 		$data['jbo_orders'] = $this->_joborders($id);
 // 		call_debug($data['jbo_orders']);
 		$data['customers'] = $this->_customer_list();
-// 		call_debug($data['jbo_orders']);
+// / 		call_debug($data['jbo_orders']);
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
-		$data['main_content'] = 'joborder/editjoborder';
+		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}
 	
@@ -90,7 +90,7 @@ class Joborder extends CI_Controller{
 		if(!$this->db->query($strqry))
 			echo 'delete failed';
 
-		redirect( base_url() . 'master/joborder');
+		redirect( base_url() . 'tranx/joborder');
 		
 
 	}
@@ -100,7 +100,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$config['base_url'] = base_url('master/joborder/section/viewjobrder');
+		$config['base_url'] = base_url('tranx/joborder/section/viewjobrder');
 		$config['total_rows'] = $this->db->query("SELECT jo_id FROM {$almd_db->joborder}")->num_rows();
 		$config['uri_segment'] = 5;
 		$config['per_page'] = 10;
@@ -112,7 +112,7 @@ class Joborder extends CI_Controller{
 		
 		$data['links'] = $this->pagination->create_links();
 		$data['joborders'] = $this->joborder_list($id ,$config['per_page']);
-		$data['main_content'] = 'joborder/viewjoborder';
+		$data['main_content'] = 'tranx/joborder/viewjoborder';
 		$this->load->view('includes/template', $data);
 	}
 	
@@ -135,7 +135,7 @@ class Joborder extends CI_Controller{
 		$data['customers'] = $this->_customer_list();
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
-		$data['main_content'] = 'joborder/addjoborder';
+		$data['main_content'] = 'tranx/joborder/addjoborder';
 		$this->load->view('includes/template', $data);
 	}
 	
@@ -213,45 +213,40 @@ class Joborder extends CI_Controller{
 			
 			if($joborder != 0){
 				
-				global $almd_db;
-				$almd_db = new Almdtables();
-				$id = $joborder;
-				
-				$strqry = sprintf('DELETE FROM `%s` WHERE `jo_id`=%d', $almd_db->jodetails, $id);
-				if(!$this->db->query($strqry))
-					echo 'delete failed';
-				
 				
 				$vehicle = $this->input->post('vehicle');
 				$color = $this->input->post('color');
 				$customer = $this->input->post('customer');
-				
+				$id = $joborder;
 				$pattern = "/^([0-9])+$/";
 				
+				$strqry = 'call sp_start_editjoborder("'. $id .'", "'. $customer .'", "", "", "", @ret_id, @flag);';
+				
 				if(!preg_match($pattern, $customer)){
-						
-					$customer = $this->_customercustom($this->input->post('customer'));
-				}
-				
-				if(preg_match($pattern, $vehicle)){
-						
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", "%d", @flag)',$vehicle , 0, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}else{
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", "%d", @flag)',$vehicle , 0, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}
-						
-				}else{
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", "%d", @flag)',0 , $vehicle, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}else{
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", "%d", @flag)',0 , $vehicle, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}
-				
+					$pattern = '/(\,\s)|(\s)(?=[\w]+\.)/';
+					$name = preg_split($pattern, $param);
+					$mname = substr($name[2], 0, strlen($name[2]) - 1);
+					$strqry = 'call sp_start_editjoborder("'. $joborder .'", "0", "' . $name[0] .'", "' . $mname .'", "' . $name[1] .'", @ret_id, @flag);';;
 				}
 				
 				$this->_querydb($strqry);
 				
+				if(preg_match($pattern, $vehicle)){
+						
+					if(preg_match($pattern, $color)){
+						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$vehicle , 0, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+					}else{
+						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$vehicle , 0, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+					}
+						
+				}else{
+					if(preg_match($pattern, $color)){
+						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',0 , $vehicle, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+					}else{
+						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',0 , $vehicle, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+					}
+				
+				}
 				
 				$samplejson = $this->input->post('order_det');
 				$ordet = json_decode($samplejson, true);
@@ -357,87 +352,7 @@ class Joborder extends CI_Controller{
 		}
 	}
 	
-	
-	private function editjoborder($joid){
-		$strqry = 'call sp_start_joborder(@flag);';
-		$this->_querydb($strqry);
-		
-		$vehicle = $this->input->post('vehicle');
-		$color = $this->input->post('color');
-		$customer = $this->input->post('customer');
-		
-		$pattern = "/^([0-9])+$/";
-		
-		if(!preg_match($pattern, $customer)){
-				
-			$customer = $this->_customercustom($this->input->post('customer'));
-		}
-		
-		if(preg_match($pattern, $vehicle)){
-				
-			if(preg_match($pattern, $color)){
-				$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$vehicle , 0, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-			}else{
-				$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$vehicle , 0, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-			}
-				
-		}else{
-			if(preg_match($pattern, $color)){
-				$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',0 , $vehicle, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-			}else{
-				$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',0 , $vehicle, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-			}
-		
-		}
-		
-		$this->_querydb($strqry);
-		
-		
-		$samplejson = $this->input->post('order_det');
-		$ordet = json_decode($samplejson, true);
-		unset( $ordet[0] );
-		
-		
-		foreach ( $ordet as $key ){
-		
-			if( $key[1] == 'Parts or Materials' ){
-				$strqry1 = sprintf('call sp_joborderdet(@o_jo_id , "0", "%s", "%s", "0", "%s", "1", @flag);', $key[3], $key[4], $key[5]);
-			}elseif( $key[1] == 'labor' ){
-				//if(preg_match($pattern, $vehicle))
-				$strqry1 = sprintf('call sp_joborderdet(@o_jo_id , "%s", "", "%s", "%s", "0", "1", @flag);', $key[2], $key[4], $key[5]);
-			}
-				
-			$this->_querydb($strqry1);
-		}
-		
-		
-		$strqry2 = 'call sp_end_joborder(@flag);';
-		$this->_querydb($strqry2);
-		
-		$strqry3 = 'select @flag as flag';
-		$query = $this->db->query($strqry3);
-		if($query);
-		$result = $query->result();
-		
-		echo $result[0]->flag;
-	}
-	
-	private function _customercustom($param){
-		
-		$pattern = '/(\,\s)|(\s)(?=[\w]+\.)/';
-		$name = preg_split($pattern, $param);
-		
-		global $almd_db;
-		$almd_db = new Almdtables();
-		$mname = substr($name[2], 0, strlen($name[2]) - 1);
-		$strqry = 'INSERT INTO `' . $almd_db->customer .'` SET `fname`="'. $name[0] .'", `mname`="'. $mname. '", `lname`="'. $name[1] . '"';
-		
-		$query = $this->db->query($strqry);
-		
-		if($query)
-			return $this->db->insert_id();
-		
-	}
+
 	
 	private function _querydb($strqry){
 		$query = $this->db->query($strqry);

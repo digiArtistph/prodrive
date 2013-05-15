@@ -1,9 +1,11 @@
 <div>
 <h3>Edit Job Order</h3>
-	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">Php 0.00</span></p></div>
+	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">
+		<?php if(!empty($jbo_orders)):?><?php $total=0; foreach ($jbo_orders as $job){ $total += ($job->laboramnt + $job->partmaterialamnt); } echo number_format($total, 2, '.', ''); else: echo 'Php 0.00'; endif;?></span></p></div>
 	<form>
 		<?php if(!empty($jbo_det)):?>
 		<?php foreach ($jbo_det as $jb):?>
+		
 		<input class="joborderid" type="hidden" name="joborderid" value="<?php echo $jb->jo_id;?>"/>
 		<p><label>Date:</label> <input type="text" name="jo_date" value="<?php echo $jb->trnxdate;?>" /></p>
 		<p><label>Customer: </label><select name="customer">
@@ -95,7 +97,7 @@
 			</tr>
 		<?php else:?>
 		
-		<?php $cnt=1; foreach ($jbo_orders as $jbord):?>
+		<?php $cnt=0; foreach ($jbo_orders as $jbord):?>
 		<?php if($jbord->labor > 0):?>
 			<tr>
 				<td><?php echo $cnt;?></td>
@@ -115,7 +117,7 @@
 				<td><?php echo $jbord->partmaterial;?></td>
 				<td><?php echo $jbord->details;?></td>
 				<td><?php echo $jbord->partmaterialamnt;?></td>
-				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#\">delete</a></td>
+				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#">delete</a></td>
 				<td></td>
 			</tr>
 		<?php endif;?>

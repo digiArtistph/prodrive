@@ -29,7 +29,7 @@
 				<td><?php echo $order->num;?></td>
 				<td><?php echo $order->addr;?></td>
 				<td><?php echo $order->date;?></td>
-				<td><a href="<?php echo base_url(). 'master/joborder/section/editjoborder/'. $order->jo_id; ?>">edit</a>|<a href="<?php echo base_url(). 'master/joborder/section/deletejobrder/' . $order->jo_id; ?>" >delete</a></td>
+				<td><a href="<?php echo base_url(). 'tranx/joborder/section/editjoborder/'. $order->jo_id; ?>">edit</a>|<a href="<?php echo base_url(). 'tranx/joborder/section/deletejobrder/' . $order->jo_id; ?>" >delete</a></td>
 			</tr>
 			<?php endforeach;?>
 			<?php endif;?>
@@ -37,5 +37,5 @@
 	</table>
 			<p><?php echo $links;?></p>
 </div>
-<p><a href="<?php echo base_url(). 'master/joborder/section/addjoborder';?>">Add Job Order</a></p>
+<p><a href="<?php echo base_url(). 'tranx/joborder/section/addjoborder';?>">Add Job Order</a></p>
 </div>

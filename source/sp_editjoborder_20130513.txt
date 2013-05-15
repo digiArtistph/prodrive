@@ -11,7 +11,7 @@ IN	m_contactnum	VARCHAR(75),
 IN	m_address		TEXT,
 IN	m_trnxdate	DATE,
 IN 	o_jo_id		INT,
-OUT	flag		INT
+INOUT	flag		INT
 )
 BEGIN
 
@@ -19,9 +19,6 @@ DECLARE status INT DEFAULT 0;
 DECLARE v_last_id INT DEFAULT 0;
 DECLARE c_last_id INT DEFAULT 0;
 DECLARE EXIT handler for sqlexception set flag = 1;
-
-START TRANSACTION;
-set flag=0;
 
 IF NOT EXISTS(SELECT `v_id` FROM `vehicle` WHERE `v_id` = `m_v_id`) 
     THEN
