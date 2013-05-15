@@ -10,13 +10,21 @@ $(document).ready(function(){
 	var jotypeqry = $('.jotype');
 	var laborqry = $('.labor');
 	var addjodetails = $('.addjodetails');
-	var trind = 0;
+	var trind = null;
 	var totalprice = 0;
 	var tempprice = 0;
 	
 	dir.change(loaddataDir);
 	jotypeqry.change(loadJobType);
 	addjodetails.click(submitadd);
+	clickbinder();
+	
+	//resettablecolor();
+	if( $('div.suggestion p span.total_amount').text() > 0){
+		var temptot =  parseFloat( $('div.suggestion p span.total_amount').text() );
+		totalprice = totalprice + temptot;
+		$('div.suggestion p span.total_amount').text( 'Php ' + totalprice.toFixed(2));
+	}
 	
 	$('select[name="vehicle"]').combobox();
 	$('select[name="customer"]').combobox();
@@ -59,8 +67,9 @@ $(document).ready(function(){
 			$('input[name="customer"]').val(tempc);
 			$('input[name="vehicle"]').val(tempv);
 			$('input[name="color"]').val(tempcr);
-			$.post(base_url + "master/joborder/validateorder", postdata)
+			$.post(base_url + "tranx/joborder/validateorder", postdata)
 			.success(function(data) {
+				
 				var item = jQuery.parseJSON(data);
 				
 				if (item.flag == 0){
@@ -182,7 +191,7 @@ $(document).ready(function(){
 			if( jotypeqry.val() == 'labor' ){
 				
 				//checks if editing job details
-				if(trind == 0){
+				if(trind == null){
 					calc_amount();
 					$('.jodet tbody').append("<tr><td></td><td>" + jotypeqry.val() + "</td><td>" + laborqry.val() + "</td><td></td><td>"+ $('.det').val() +"</td><td>" + $('.amnt').val() +"</td><td><a class=\"edit\" href=\"#\">edit</a>|<a class=\"delete\" href=\"#\">delete</a></td><td></td></tr>");
 					resettablecolor();
@@ -192,7 +201,7 @@ $(document).ready(function(){
 					$(".jodet tbody tr:eq("+ trind +")").html('');
 					$(".jodet tbody tr:eq("+ trind +")").html("<td></td><td>" + jotypeqry.val() + "</td><td>" + laborqry.val() + "</td><td></td><td>"+ $('.det').val() +"</td><td>" + $('.amnt').val() +"</td><td><a class=\"edit\" href=\"#\">edit</a>|<a class=\"delete\" href=\"#\">delete</a></td><td></td>");
 					resettablecolor();
-					trind = 0;
+					trind = null;
 					addjodetails.val('add');
 					calc_amount();
 					tempprice = 0;
@@ -205,7 +214,7 @@ $(document).ready(function(){
 			}else if( jotypeqry.val() == 'Parts or Materials' ){
 				
 				//checks if editing job details
-				if(trind == 0){
+				if(trind == null){
 					calc_amount();
 					$('.jodet tbody').append("<tr><td></td><td>" + jotypeqry.val() + "</td><td></td><td>" + laborqry.val() +"</td><td>"+ $('.det').val() +"</td><td>" + $('.amnt').val() +"</td><td><a class=\"edit\" href=\"#\">edit</a>|<a class=\"delete\" href=\"#\">delete</a></td><td></td></tr>");
 					resettablecolor();
@@ -217,7 +226,7 @@ $(document).ready(function(){
 					calc_amount();
 					tempprice = 0;
 					resettablecolor();
-					trind = 0;
+					trind = null;
 					addjodetails.val('add');
 				}
 				
@@ -282,7 +291,6 @@ $(document).ready(function(){
 		resettablecolor();
 		$(this).closest("tr").css("background-color", "#FFFF66");
 		trind = $(this).closest("tr").index();
-		
 		if( $(this).closest("tr").find("td:nth-child(2)").text() == 'labor' ){
 			
 			$(".jotype").val( "labor" ).attr('selected',true);
@@ -361,7 +369,7 @@ $(document).ready(function(){
 					{source: function(request, response) {
 						
 							$.ajax({
-									url: base_url + "master/joborder/autocomplete_labortype",
+									url: base_url + "tranx/joborder/autocomplete_labortype",
 									type: 'POST',
 									dataType: "json",
 									data: {
@@ -390,7 +398,7 @@ $(document).ready(function(){
 			{source: function(request, response) {
 				
 					$.ajax({
-							url: base_url + "master/joborder/autocomplete_color",
+							url: base_url + "tranx/joborder/autocomplete_color",
 							type: 'POST',
 							dataType: "json",
 							data: {
@@ -411,7 +419,7 @@ $(document).ready(function(){
 			{source: function(request, response) {
 				
 					$.ajax({
-							url: base_url + "master/joborder/autocomplete_vehicle",
+							url: base_url + "tranx/joborder/autocomplete_vehicle",
 							type: 'POST',
 							dataType: "json",
 							data: {

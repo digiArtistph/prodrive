@@ -1,0 +1,32 @@
+DELIMITER $$
+DROP PROCEDURE IF EXISTS `sp_start_editjoborder` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_start_editjoborder`(
+IN	m_joid		INT,
+IN 	cust_id		INT,
+IN	cust_fname	varchar(50),
+IN	cust_mname	varchar(50),
+IN	cust_lname	varchar(50),
+OUT	ret_id		INT,
+OUT	flag		INT
+)
+BEGIN
+
+DECLARE EXIT handler for sqlexception set flag = 1;
+
+START TRANSACTION;
+
+	IF(cust_id=0)
+		THEN
+			DELETE FROM `jodetails` WHERE `jo_id`=m_joid;
+			INSERT INTO `customer` SET `fname`=cust_fname, `mname`=cust_mname, `lname`=cust_lname;
+			SET ret_id=LAST_INSERT_ID();
+
+		SET flag=0;
+ 	ELSE
+		DELETE FROM `jodetails` WHERE `jo_id`=m_joid;
+		SET ret_id=cust_id;
+		SET flag=0;
+
+	END IF;
+END $$
+DELIMITER ;
