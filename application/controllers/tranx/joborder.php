@@ -225,7 +225,14 @@ class Joborder extends CI_Controller{
 				if(!preg_match($pattern, $customer)){
 					$pattern = '/(\,\s)|(\s)(?=[\w]+\.)/';
 					$name = preg_split($pattern, $customer);
-					$mname = substr($name[2], 0, strlen($name[2]) - 1);
+					if(isset($name[2]))
+						$mname = substr($name[2], 0, strlen($name[2]) - 1);
+					else
+						$mname = '';
+					if(!isset($name[0]))
+						$name[0] = '';
+					if(!isset($name[1]))
+						$name[1] = '';
 					$strqry = 'call sp_start_editjoborder("'. $id .'", "0", "' . $name[1] .'", "' . $mname .'", "' . $name[0] .'", @ret_id, @flag);';;
 				}
 				
