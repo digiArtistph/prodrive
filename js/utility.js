@@ -18,8 +18,9 @@ $(document).ready(function(){
 	jotypeqry.change(loadJobType);
 	addjodetails.click(submitadd);
 	clickbinder();
+	resettablecolor();
 	
-	//resettablecolor();
+	
 	if( $('div.suggestion p span.total_amount').text() > 0){
 		var temptot =  parseFloat( $('div.suggestion p span.total_amount').text() );
 		totalprice = totalprice + temptot;
@@ -347,9 +348,8 @@ $(document).ready(function(){
 	
 	function Validateamount(){
 		
-		var regex = /[0-9]+(\.[0-9]{0,2})?/; 
-		var input = $('.amnt').val(); 
-		if(regex.test(input)) { 
+		var decimal = $('.amnt').val(); 
+		if( decimal.match(/^[1-9]+(\.\d+){0,2}?$/) ) { 
 			return true;
 		} else { 
 			var message = 'Please use decimal input for Amount';

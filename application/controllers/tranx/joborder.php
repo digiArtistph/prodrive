@@ -41,7 +41,7 @@ class Joborder extends CI_Controller{
 		$data['jbo_orders'] = $this->_joborders($id);
 // 		call_debug($data['jbo_orders']);
 		$data['customers'] = $this->_customer_list();
-// / 		call_debug($data['jbo_orders']);
+// 		call_debug($data['jbo_orders']);
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
 		$data['main_content'] = 'tranx/joborder/editjoborder';
@@ -250,7 +250,6 @@ class Joborder extends CI_Controller{
 				
 				$samplejson = $this->input->post('order_det');
 				$ordet = json_decode($samplejson, true);
-				unset( $ordet[0] );
 				
 				foreach ( $ordet as $key ){
 				
