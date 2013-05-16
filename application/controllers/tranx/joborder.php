@@ -41,7 +41,7 @@ class Joborder extends CI_Controller{
 		$data['jbo_orders'] = $this->_joborders($id);
 // 		call_debug($data['jbo_orders']);
 		$data['customers'] = $this->_customer_list();
-// 		call_debug($data['jbo_orders']);
+//  		call_debug($data['customers']);
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
 		$data['main_content'] = 'tranx/joborder/editjoborder';
@@ -218,21 +218,20 @@ class Joborder extends CI_Controller{
 				$color = $this->input->post('color');
 				$customer = $this->input->post('customer');
 				$id = $joborder;
-				$pattern = "/^([0-9])+$/";
+				
 				
 				$strqry = 'call sp_start_editjoborder("'. $id .'", "'. $customer .'", "", "", "", @ret_id, @flag);';
-				
+				$pattern = "/^([0-9])+$/";
 				if(!preg_match($pattern, $customer)){
 					$pattern = '/(\,\s)|(\s)(?=[\w]+\.)/';
-					$name = preg_split($pattern, $param);
+					$name = preg_split($pattern, $customer);
 					$mname = substr($name[2], 0, strlen($name[2]) - 1);
-					$strqry = 'call sp_start_editjoborder("'. $joborder .'", "0", "' . $name[0] .'", "' . $mname .'", "' . $name[1] .'", @ret_id, @flag);';;
+					$strqry = 'call sp_start_editjoborder("'. $id .'", "0", "' . $name[1] .'", "' . $mname .'", "' . $name[0] .'", @ret_id, @flag);';;
 				}
 				
 				$this->_querydb($strqry);
-				
+				$pattern = "/^([0-9])+$/";
 				if(preg_match($pattern, $vehicle)){
-						
 					if(preg_match($pattern, $color)){
 						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$vehicle , 0, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
 					}else{
@@ -247,6 +246,7 @@ class Joborder extends CI_Controller{
 					}
 				
 				}
+				$this->_querydb($strqry);
 				
 				$samplejson = $this->input->post('order_det');
 				$ordet = json_decode($samplejson, true);

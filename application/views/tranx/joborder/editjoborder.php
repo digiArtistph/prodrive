@@ -10,11 +10,14 @@
 		<p><label>Date:</label> <input type="text" name="jo_date" value="<?php echo $jb->trnxdate;?>" /></p>
 		<p><label>Customer: </label><select name="customer">
 			<?php if (!empty($customers)):?>
+			<option value=""></option>
 			<?php foreach ($customers as $customer):?>
 			<?php if ($jb->customer == $customer->custid):?>
-			<option value="<?php echo $customer->custid;?>" selected="selected"><?php echo ucfirst($customer->lname) . ', ' . ucfirst($customer->fname). ' ' . ucfirst($customer->mname[0] . '.');?></option>
+			<?php if(!empty($customer->mname) ){ $mname = ucfirst($customer->mname[0]) ; }else{$mname = '';}?> 
+			<option value="<?php echo $customer->custid;?>" selected="selected"><?php echo ucfirst($customer->lname) . ', ' . ucfirst($customer->fname). ' ' . $mname;?></option>
 			<?php else:?>
-			<option value="<?php echo $customer->custid;?>"><?php echo ucfirst($customer->lname) . ', ' . ucfirst($customer->fname). ' ' . ucfirst($customer->mname[0] . '.');?></option>
+			<?php if(!empty($customer->mname) ){ $mname = ucfirst($customer->mname[0]) ; }else{$mname = '';}?>
+			<option value="<?php echo $customer->custid;?>"><?php echo ucfirst($customer->lname) . ', ' . ucfirst($customer->fname). ' ' . $mname . '.';?></option>
 			<?php endif;?>
 			<?php endforeach;?>
 			<?php endif;?>
@@ -22,6 +25,7 @@
 		</select></p>
 		<p><label>Vehicle: </label><select name="vehicle">
 			<?php if (!empty($vehicles)):?>
+			<option value=""></option>
 			<?php foreach ($vehicles as $vehicle):?>
 			<?php if ($jb->v_id == $vehicle->v_id):?>
 			<option value="<?php echo $vehicle->v_id;?>" selected="selected"><?php echo $vehicle->make;?></option>
@@ -29,6 +33,7 @@
 			<option value="<?php echo $vehicle->v_id;?>"><?php echo $vehicle->make;?></option>
 			<?php endif;?>
 			<?php endforeach;?>
+			<option value=""></option>
 			<?php endif;?>
 			
 		</select></p>
@@ -37,6 +42,7 @@
 		<p><label>Color: </label><select name="color">
 			<option value=""></option>
 			<?php if (!empty($colors)):?>
+			<option value=""></option>
 			<?php foreach ($colors as $color):?>
 			<?php if ($jb->color == $color->clr_id):?>
 			<option value="<?php echo $color->clr_id;?>" selected="selected"><?php echo $color->name;?></option>

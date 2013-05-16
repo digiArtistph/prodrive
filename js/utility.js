@@ -73,7 +73,7 @@ $(document).ready(function(){
 			$('input[name="color"]').val(tempcr);
 			$.post(base_url + "tranx/joborder/validateorder", postdata)
 			.success(function(data) {
-				
+				alert(data);
 				var item = jQuery.parseJSON(data);
 				
 				if (item.flag == 0){
@@ -136,6 +136,10 @@ $(document).ready(function(){
 		return true;
 	}
 	
+	$('input[name="customer"]').keypress(function() {
+		$('select[name="customer"]').val( "" ).attr('selected',true);
+	});
+	
 	var tempc = '';
 	function validateCustomer(){
 		tempc = $('input[name="customer"]').val();
@@ -153,6 +157,10 @@ $(document).ready(function(){
 	}
 	
 	var tempv='';
+	$('input[name="vehicle"]').keypress(function() {
+		$('select[name="vehicle"]').val( "" ).attr('selected',true);
+	});
+	
 	function validateVehicle(){
 		tempv = $('input[name="vehicle"]').val();
 		if( $('input[name="vehicle"]').val() == '' ){
