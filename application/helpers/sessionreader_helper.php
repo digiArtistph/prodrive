@@ -17,6 +17,7 @@
 			global $sesarr;
 			
 			if(empty($sesarr)){
+				
 				$CI = get_instance();
 				$CI->load->library('file_maker');
 				$CI->file_maker->parseData();
@@ -31,6 +32,11 @@
 					
 				$CI->sessionbrowser->getInfo($params);
 				$sesarr = $CI->sessionbrowser->mData;
+				$almd_username = $sesarr[$params[0]];
+				$almd_useraccess = $sesarr[$params[5]];
+				$almd_userfullname = $sesarr[$params[2]];
+				$almd_userisloggedin = $sesarr[$params[1]];
+				$almd_userid = $sesarr[$params[3]];
 				
 			}else{
 			
@@ -45,6 +51,7 @@
 				}
 			
 			}
+			
 		}
 		
 	}

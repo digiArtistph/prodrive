@@ -50,6 +50,8 @@ class Dcr extends CI_Controller {
 	private function _dcrnew() {
 		global $almd_userid;
 		global $almd_username;
+		call_debug('user name:' . $almd_userid);
+		call_debug('user id:' . $almd_userid);
 		$data['cashierid'] = $almd_userid;
 		$data['cashiername'] = $almd_username;
 		
