@@ -26,12 +26,12 @@
 				foreach ($seskey as $key => $val){
 					array_push($params, $key);
 				}
-					
-					
+				
 				$CI->load->library('sessionbrowser');
 					
 				$CI->sessionbrowser->getInfo($params);
 				$sesarr = $CI->sessionbrowser->mData;
+				
 			}else{
 			
 				if(!empty($almd_username))

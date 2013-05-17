@@ -52,6 +52,7 @@ class Dcr extends CI_Controller {
 		global $almd_username;
 		$data['cashierid'] = $almd_userid;
 		$data['cashiername'] = $almd_username;
+		
 		$data['main_content'] = 'tranx/dcr_new_view';
 		$this->load->view('includes/template', $data);
 	}

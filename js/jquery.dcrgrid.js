@@ -93,8 +93,14 @@
 		// appends new dom
 		$('#datagrid tbody').append(output);
 		
+		// appends data
+		$('tr').last().data('testdata', mParticular);
+		
 		// event handlers
+		$('.DelBtn').unbind('click', evtDelBtn);
+		$('.EditBtn').unbind('click', evtGetData);
 		$('.DelBtn').bind('click', evtDelBtn);
+		$('.EditBtn').bind('click', evtGetData);
 		
 		// clears the entry fields
 		$('input[name="particular"]').val("");
@@ -110,6 +116,14 @@
 	var evtDelBtn = function() {
 		var curObj = $(this);
 		curObj.parent().parent().remove();
+		
+		return false;
+	}
+	
+	var evtGetData = function() {
+		alert($(this).parent().parent().data('testdata'));
+		//alert('Hello');
+		return false;
 	}
 	
 })(jQuery);
