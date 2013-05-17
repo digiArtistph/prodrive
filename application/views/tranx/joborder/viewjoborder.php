@@ -4,6 +4,7 @@
 	<table>
 		<thead>
 			<tr>
+				<th>Job Order No.</th>
 				<th>Vehicle</th>
 				<th>customer</th> 	
 				<th>Plate No.</th> 	
@@ -22,6 +23,7 @@
 			<?php else :?>
 			<?php foreach ($joborders as $order):?>
 			<tr>
+				<td><?php echo $order->jo_num?></td>
 				<td><?php echo $order->vehicle;?></td>
 				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname) . ' ' . ucfirst($order->mname[0]);?></td>
 				<td><?php echo $order->plate;?></td>

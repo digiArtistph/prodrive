@@ -7,6 +7,7 @@
 		<?php foreach ($jbo_det as $jb):?>
 		
 		<input class="joborderid" type="hidden" name="joborderid" value="<?php echo $jb->jo_id;?>"/>
+		<p><label>Job Order No.:</label> <input type="text" name="jo_number" value="<?php echo $jb->jo_number;?>" /></p>
 		<p><label>Date:</label> <input type="text" name="jo_date" value="<?php echo $jb->trnxdate;?>" /></p>
 		<p><label>Customer: </label><select name="customer">
 			<?php if (!empty($customers)):?>

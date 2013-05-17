@@ -18,7 +18,6 @@ $(document).ready(function(){
 	jotypeqry.change(loadJobType);
 	addjodetails.click(submitadd);
 	clickbinder();
-	resettablecolor();
 	
 	
 	if( $('div.suggestion p span.total_amount').text() > 0){
@@ -30,6 +29,8 @@ $(document).ready(function(){
 	$('select[name="vehicle"]').combobox();
 	$('select[name="customer"]').combobox();
 	$('select[name="color"]').combobox();
+	$(".jodet tbody tr:even").css("background-color", "#5CB3FF");
+	$(".jodet tbody tr:odd").css("background-color", "#CDFFFF");
 	
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
@@ -58,6 +59,7 @@ $(document).ready(function(){
 			var message = '';
 			errorreciever(message);
 			postdata = {
+					 'jo_number'  : $('input[name="jo_number"]').val(),
 					 'joborderid' : $('.joborderid').val(),
 					 'order_det' : joborderdetails,
 					 'odate'	: $('input[name="jo_date"]').val(),
@@ -73,7 +75,7 @@ $(document).ready(function(){
 			$('input[name="color"]').val(tempcr);
 			$.post(base_url + "tranx/joborder/validateorder", postdata)
 			.success(function(data) {
-				alert(data);
+				//alert(data);
 				var item = jQuery.parseJSON(data);
 				
 				if (item.flag == 0){
@@ -87,8 +89,10 @@ $(document).ready(function(){
 				        'color': '#000000',
 				        backgroundColor: "#FFFFFF" 
 				    }, 500);
+					
 					$('.saveorder').val('Edit Job Order');
 					$('.joborderid').val(item.jo_id);
+					
 				}else{
 					var message = 'Job Order saving failed';
 					errorreciever(message);

@@ -1,6 +1,7 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS `sp_joborder` $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_joborder`(
+IN 	m_jo_num   		VARCHAR(75),
 IN 	m_v_id   		INT,
 IN 	m_v_name 		VARCHAR(12),
 IN	m_clr_id		INT,
@@ -30,11 +31,11 @@ IF NOT EXISTS(SELECT `v_id` FROM `vehicle` WHERE `v_id` = `m_v_id`)
     		THEN
 			INSERT INTO `color` set `name`=m_clr_name;
 			SET c_last_id = LAST_INSERT_ID();
-			INSERT INTO `joborder` set `v_id`=v_last_id, `customer`=m_customer, `plate`=m_plate, `color`=c_last_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
+			INSERT INTO `joborder` set `jo_number`=m_jo_num, `v_id`=v_last_id, `customer`=m_customer, `plate`=m_plate, `color`=c_last_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
 			SET jo_last_id = LAST_INSERT_ID();
 			set o_jo_id = jo_last_id;
 	ELSE
-		INSERT INTO `joborder` set `v_id`=v_last_id, `customer`=m_customer, `plate`=m_plate, `color`=m_clr_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
+		INSERT INTO `joborder` set `jo_number`=m_jo_num,`v_id`=v_last_id, `customer`=m_customer, `plate`=m_plate, `color`=m_clr_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
 		SET jo_last_id = LAST_INSERT_ID();
 		set o_jo_id = jo_last_id;
 	END IF;
@@ -42,13 +43,13 @@ IF NOT EXISTS(SELECT `v_id` FROM `vehicle` WHERE `v_id` = `m_v_id`)
 ELSE
 	IF EXISTS(SELECT `clr_id` FROM `color` WHERE `clr_id` = `m_clr_id`) 
     		THEN
-			INSERT INTO `joborder` set `v_id`=m_v_id, `customer`=m_customer, `plate`=m_plate, `color`=m_clr_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
+			INSERT INTO `joborder` set `jo_number`=m_jo_num, `v_id`=m_v_id, `customer`=m_customer, `plate`=m_plate, `color`=m_clr_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
 			SET jo_last_id = LAST_INSERT_ID();
 			set o_jo_id = jo_last_id;
 	ELSE
 		INSERT INTO `color` set `name`=m_clr_name;
 		SET c_last_id = LAST_INSERT_ID();
-		INSERT INTO `joborder` set `v_id`=m_v_id, `customer`=m_customer, `plate`=m_plate, `color`=c_last_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
+		INSERT INTO `joborder` set `jo_number`=m_jo_num,`v_id`=m_v_id, `customer`=m_customer, `plate`=m_plate, `color`=c_last_id, `contactnumber`=m_contactnum, `address`=m_address, `trnxdate`=m_trnxdate;
 		SET jo_last_id = LAST_INSERT_ID();
 		set o_jo_id = jo_last_id;
 	END IF;

@@ -41,7 +41,7 @@ class Joborder extends CI_Controller{
 		$data['jbo_orders'] = $this->_joborders($id);
 // 		call_debug($data['jbo_orders']);
 		$data['customers'] = $this->_customer_list();
-//  		call_debug($data['customers']);
+//  	call_debug($data['jbo_det']);
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
 		$data['main_content'] = 'tranx/joborder/editjoborder';
@@ -120,7 +120,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 	
-		$strqry = sprintf('SELECT jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color LIMIT %d, %d',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
+		$strqry = sprintf('SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color ORDER BY jo.`jo_id` DESC LIMIT %d, %d  ',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
 	
 		$query = $this->db->query($strqry);
 	
@@ -194,6 +194,7 @@ class Joborder extends CI_Controller{
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 		
+		$validation->set_rules('jo_number', '',  'required');
 		$validation->set_rules('joborderid', '',  'required');
 		$validation->set_rules('order_det', '',  'required');
 		$validation->set_rules('odate', '',  'required');
@@ -237,19 +238,20 @@ class Joborder extends CI_Controller{
 				}
 				
 				$this->_querydb($strqry);
+				
 				$pattern = "/^([0-9])+$/";
 				if(preg_match($pattern, $vehicle)){
 					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$vehicle , 0, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), $vehicle , 0, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
 					}else{
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$vehicle , 0, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), $vehicle , 0, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
 					}
 						
 				}else{
 					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',0 , $vehicle, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), 0 , $vehicle, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
 					}else{
-						$strqry = sprintf('call sp_editjoborder("%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',0 , $vehicle, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
+						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), 0 , $vehicle, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
 					}
 				
 				}
@@ -257,9 +259,11 @@ class Joborder extends CI_Controller{
 				
 				$samplejson = $this->input->post('order_det');
 				$ordet = json_decode($samplejson, true);
-				
+				if(empty($ordet[0])){
+					unset($ordet[0]);
+				}
 				foreach ( $ordet as $key ){
-				
+					
 					if( $key[1] == 'Parts or Materials' ){
 						$strqry1 = sprintf('call sp_editjoborderdet("%d" , "0", "%s", "%s", "0", "%s", "1", @flag);',$id, $key[3], $key[4], $key[5]);
 					}elseif( $key[1] == 'labor' ){
@@ -304,16 +308,16 @@ class Joborder extends CI_Controller{
 				if(preg_match($pattern, $vehicle)){
 						
 					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$vehicle , 0, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
+						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), $vehicle , 0, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
 					}else{
-						$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$vehicle , 0, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
+						$strqry = sprintf('call sp_joborder("%s", %d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), $vehicle , 0, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
 					}
 						
 				}else{
 					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',0 , $vehicle, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
+						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), 0 , $vehicle, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
 					}else{
-						$strqry = sprintf('call sp_joborder("%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',0 , $vehicle, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
+						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'),0 , $vehicle, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
 					}
 	
 				}
