@@ -79,9 +79,7 @@
 		var mReferenceNo;
 		var mReferenceNoCode;
 		var mAmt;
-	
-		if(mParticular == "" || mAmt == "" || mTenderCode == "")
-			return;
+
 		
 		// if button is in edit mode
 		if(mButton.attr('value')== 'Add') {
@@ -91,6 +89,9 @@
 			mReferenceNo = $('select[name="refernce"] option:selected').text();
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
+			
+			if(mParticular == "" || mAmt == "" || mTenderCode == "")
+				return;
 			
 			output += '<tr>';
 			output += '<td>' + mParticular + '</td>';
@@ -122,6 +123,9 @@
 			mReferenceNo = $('select[name="refernce"] option:selected').text();
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
+			
+			if(mParticular == "" || mAmt == "" || mTenderCode == "")
+				return;
 			
 			output += '<td>' + mParticular + '</td>';
 			output += '<td>' + mTender + '</td>';
