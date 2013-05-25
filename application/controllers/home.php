@@ -21,6 +21,7 @@ class Home extends CI_Controller {
 	}
 
 	public function test () {
+		/*
 		global $almd_xmlparser;
 			
 		$config = array(
@@ -32,7 +33,13 @@ class Home extends CI_Controller {
 		);
 		$dbhooks->_initialize();
 		call_debug($almd->customer);
+		*/
+		
+		$strQry = sprintf("INSERT INTO color SET clr_id=26,  name= 'Aqua Marine'"); // returns 1 on success
+		// $strQry = sprintf("UPDATE color SET name='Aqua M' WHERE clr_id=26"); // returns 1 on success
+		$status = $this->db->query($strQry);
 
+		call_debug($status);
 
 		
 	}

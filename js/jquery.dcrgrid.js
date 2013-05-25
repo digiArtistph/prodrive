@@ -14,7 +14,7 @@
 		// builds datagrid
 		curObj.append(tableEntry);
 		curObj.append(tablegrid);
-		curObj.append(bntSaveDcrDetails);
+		// curObj.append(bntSaveDcrDetails);
 		
 		// event listeners
 		$('#addbtn').bind('click', evtAdd);
@@ -71,7 +71,7 @@
 		output += '<tbody>';
 		output += '<tr>';
 		output += '<td><input type="text" name="particular" /></td>';
-		output += '<td><select name="tender"><option value=""> Select a tender </option><option value="cash">Cash</option><option value="check">Check</option></select></td>';
+		output += '<td><select name="tender"><option value=""> Select a tender </option><option value="1">Cash</option><option value="2">Check</option></select></td>';
 		output += '<td><select name="refernce"><option value=""> Select a reference no. </option><option value="ref1">Reference 1</option><option value="ref2">Reference 2</option></select></td>';
 		output += '<td><input type="text" name="amount" /></td>';
 		output += '<td><input type="button" id="addbtn" value="Add" /></td>';
@@ -108,8 +108,8 @@
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
 			
-			if(mParticular == "" || mAmt == "" || mTenderCode == "")
-				return;
+//			if(mParticular == "" || mAmt == "" || mTenderCode == "")
+//				return;
 			
 			output += '<tr>';
 			output += '<td>' + mParticular + '</td>';
@@ -118,18 +118,27 @@
 			output += '<td>' + mAmt + '</td>';
 			output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 			output += '</tr>';
+		
+			// AJAX part
+			$.post('http://localhost/prodrive/ajax/ajxdcr/addDcrDetail', {post_dcr: 5, post_particulars: mParticular, post_refno: mReferenceNoCode, post_amnt: mAmt, post_tender: mTenderCode})
+			.success(function(data){
+				
+				if(data == "1") {
+				// appends new dom
+				$('#datagrid tbody').append(output);
+				
+				// appends data
+				$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt});
+				// event handlers
+				$('.DelBtn').unbind('click', evtDelBtn);
+				$('.EditBtn').unbind('click', evtEditData);
+				$('.DelBtn').bind('click', evtDelBtn);
+				$('.EditBtn').bind('click', evtEditData);
+				} else {
+					alert("Insert failed.");
+				}
+			});
 			
-			// appends new dom
-			$('#datagrid tbody').append(output);
-			
-			// appends data
-			$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt});
-			
-			// event handlers
-			$('.DelBtn').unbind('click', evtDelBtn);
-			$('.EditBtn').unbind('click', evtEditData);
-			$('.DelBtn').bind('click', evtDelBtn);
-			$('.EditBtn').bind('click', evtEditData);
 			
 			// clears all entry fields
 			clearEntryFields();
