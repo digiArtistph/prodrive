@@ -107,6 +107,7 @@
 			mReferenceNo = $('select[name="refernce"] option:selected').text();
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
+			mDcrId = $('#dcr_id').val();
 			
 			if(mParticular == "" || mAmt == "" || mTenderCode == "")
 				return;
@@ -120,7 +121,7 @@
 			output += '</tr>';
 		
 			// AJAX part
-			$.post('http://localhost/prodrive/ajax/ajxdcr/addDcrDetail', {post_dcr: 5, post_particulars: mParticular, post_refno: mReferenceNoCode, post_amnt: mAmt, post_tender: mTenderCode})
+			$.post('http://localhost/prodrive/ajax/ajxdcr/addDcrDetail', {post_dcr: mDcrId , post_particulars: mParticular, post_refno: mReferenceNoCode, post_amnt: mAmt, post_tender: mTenderCode})
 			.success(function(data){
 				
 				if(data == "1") {
@@ -150,6 +151,7 @@
 			mReferenceNo = $('select[name="refernce"] option:selected').text();
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
+			mDcrId = $('#dcr_id').val();
 			
 			if(mParticular == "" || mAmt == "" || mTenderCode == "")
 				return;

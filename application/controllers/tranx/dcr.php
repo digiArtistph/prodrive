@@ -38,7 +38,7 @@ class Dcr extends CI_Controller {
 		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
 			// pass value to the controller
 			$data['dcr'] = $dcrNo;
-					
+			//call_debug($data['dcr']);	
 			$data['main_content'] = 'tranx/dcr/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {

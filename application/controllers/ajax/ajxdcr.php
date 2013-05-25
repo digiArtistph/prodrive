@@ -7,7 +7,7 @@ class Ajxdcr extends CI_Controller {
 		$particulars = $this->input->post('post_particulars');
 		$refno = $this->input->post('post_refno');
 		$amnt = $this->input->post('post_amnt');
-		$tender = 1; //$this->input->post('post_tender');
+		$tender = $this->input->post('post_tender');
 		
 		$strQry = sprintf("CALL sp_addDcrDetails(" . $dcr_id . ", '" . $particulars . "', '" . $refno . "', " . $amnt . ", " . $tender . ", @status)"); 
 		// on_watch($strQry);
