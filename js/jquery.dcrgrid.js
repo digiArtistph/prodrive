@@ -123,13 +123,16 @@
 			// AJAX part
 			$.post('http://localhost/prodrive/ajax/ajxdcr/addDcrDetail', {post_dcr: mDcrId , post_particulars: mParticular, post_refno: mReferenceNoCode, post_amnt: mAmt, post_tender: mTenderCode})
 			.success(function(data){
+				// parse returned data from ajax call
+				var returnedData = data.split("|");
 				
-				if(data == "1") {
+				if(returnedData[0] == "1") {
 				// appends new dom
+					
 				$('#datagrid tbody').append(output);
 				
 				// appends data
-				$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt});
+				$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt, 'dcrdetailid': returnedData[1]});
 				// event handlers
 				$('.DelBtn').unbind('click', evtDelBtn);
 				$('.EditBtn').unbind('click', evtEditData);

@@ -9,15 +9,27 @@ class Ajxdcr extends CI_Controller {
 		$amnt = $this->input->post('post_amnt');
 		$tender = $this->input->post('post_tender');
 		
-		$strQry = sprintf("CALL sp_addDcrDetails(" . $dcr_id . ", '" . $particulars . "', '" . $refno . "', " . $amnt . ", " . $tender . ", @status)"); 
+		$strQry = sprintf("CALL sp_addDcrDetails(" . $dcr_id . ", '" . $particulars . "', '" . $refno . "', " . $amnt . ", " . $tender . ", @status, @lastid)"); 
 		// on_watch($strQry);
 		$this->db->query($strQry);
-		$status = $this->db->query("SELECT @status AS `status`")->result();
+		$qryStatus = $this->db->query("SELECT @status AS `status`")->result();
+		$qryLastid = $this->db->query("SELECT @lastid AS `lastid`")->result();
+		$l_status = 0;
+		$l_lastid = 0;
 		
-		foreach ($status as $st) {
-			echo $st->status;
+		
+		// gets the status of the execution of the stored procedure
+		foreach ($qryStatus as $st) {
+			$l_status = $st->status;
 		}
 		
+		
+		// gets the last inserted id from the db
+		foreach($qryLastid as $lstid) {
+			$l_lastid = $lstid->lastid;
+		}
+		
+		echo $l_status . '|' . $l_lastid;	
 		
 	}
 }
