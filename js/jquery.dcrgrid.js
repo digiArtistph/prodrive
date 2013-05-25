@@ -108,8 +108,8 @@
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
 			
-//			if(mParticular == "" || mAmt == "" || mTenderCode == "")
-//				return;
+			if(mParticular == "" || mAmt == "" || mTenderCode == "")
+				return;
 			
 			output += '<tr>';
 			output += '<td>' + mParticular + '</td>';
