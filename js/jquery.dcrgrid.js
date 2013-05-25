@@ -14,11 +14,24 @@
 		// builds datagrid
 		curObj.append(tableEntry);
 		curObj.append(tablegrid);
+		curObj.append(bntSaveDcrDetails);
 		
 		// event listeners
 		$('#addbtn').bind('click', evtAdd);
+		$('#btnDcrSave').bind('click', evtbtnSaveDcrDetails);
 		
 		
+	}
+	
+	var bntSaveDcrDetails = function() {
+		var output = '';
+		
+		//<p><input id="btnDcrSave" type="button" value="Save" /></p>
+		output += '<p>';
+		output += '<input id="btnDcrSave" type="button" value="Save" />';
+		output += '</p>';
+		
+		return output;
 	}
 
 	var tablegrid = function() {
@@ -70,6 +83,11 @@
 	}
 	
 	// event handlers
+	var evtbtnSaveDcrDetails = function() {
+		alert("You've pressed the Save button");
+		return false;
+	}
+	
 	var evtAdd = function() {
 		var mButton = $('#addbtn');
 		var output = '';

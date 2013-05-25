@@ -39,7 +39,7 @@ class Dcr extends CI_Controller {
 			// pass value to the controller
 			$data['dcr'] = $dcrNo;
 					
-			$data['main_content'] = 'tranx/dcr_view';
+			$data['main_content'] = 'tranx/dcr/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {
 			// redirects to a form that asks for a new beg bal
@@ -54,7 +54,7 @@ class Dcr extends CI_Controller {
 		$data['cashierid'] = $almd_userid;
 		$data['cashiername'] = $almd_username;
 		
-		$data['main_content'] = 'tranx/dcr_new_view';
+		$data['main_content'] = 'tranx/dcr/dcr_new_view';
 		$this->load->view('includes/template', $data);
 	}
 	
