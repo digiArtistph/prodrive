@@ -77,7 +77,6 @@ class Dcr extends CI_Controller {
 			redirect(base_url('tranx/dcr'));
 		}
 		
-	}
-	
+	}	
 	
 }
