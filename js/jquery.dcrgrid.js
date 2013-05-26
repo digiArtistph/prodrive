@@ -19,19 +19,19 @@
 		// event listeners
 		$('#addbtn').bind('click', evtAdd);		
 		$('#btnDcrSave').bind('click', evtbtnSaveDcrDetails);
-//		$('#datagrid').bind('click', testLoad);
 	}
 	
-	var testLoad = function() {
+	var loadDataGridExistingData = function() {
 		// reads dcrdetails table
 		var output = '';
-		$.post(dcrbase_url + 'ajax/ajxdcr/retrieveDcrDetails', {post_dcr_id:6})
+		var mDcrId = $('#dcr_id').val();
+		
+		$.post(dcrbase_url + 'ajax/ajxdcr/retrieveDcrDetails', {post_dcr_id:mDcrId})
 		.success(function(data) {
 			data = $.parseJSON(data);
 			for(var dt in data) {
 				output += '<tr' + buildDataProp(data[dt]) + '>';
-				console.log(data[dt].dcrdtl_id + " || " + data[dt].particulars + " || " + data[dt].refno + " || " + data[dt].paytype);
-//				$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt, 'dcrdetailid': mDcrId});
+//				console.log(data[dt].dcrdtl_id + " || " + data[dt].particulars + " || " + data[dt].refno + " || " + data[dt].paytype);
 				output += '<td>' + data[dt].particulars + '</td>' + '<td>' + data[dt].paytype + '</td>' + '<td>' + data[dt].refno + '</td>' + '<td>' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 			}
@@ -45,12 +45,12 @@
 	
 	
 	var bntSaveDcrDetails = function() {
-		var output = '';
+		var output = '';		
 		
-		//<p><input id="btnDcrSave" type="button" value="Save" /></p>
 		output += '<p>';
 		output += '<input id="btnDcrSave" type="button" value="Save" />';
 		output += '</p>';
+		
 		
 		return output;
 	}
@@ -73,7 +73,10 @@
 		output += '</tbody>';
 		output += '</table>';
 		
-		testLoad();
+		
+		// loads existing data into the datagrid
+		loadDataGridExistingData();
+		
 		
 		return output;		
 	}
@@ -148,7 +151,7 @@
 				// creates new object to be passed into the attribute maker
 				var dt = {'particulars': mParticular, 'tendercode': mTenderCode, 'refno': mReferenceNoCode, 'amnt':mAmt, 'dcrdtl_id': returnedData[1]};
 				
-				output += '<tr ' + buildDataProp(dt) + '>'; // put attribs here
+				output += '<tr ' + buildDataProp(dt) + '>';
 				output += '<td>' + mParticular + '</td>';
 				output += '<td>' + mTender + '</td>';
 				output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
@@ -156,9 +159,9 @@
 				output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 				
+				// updates the datagrid that's what's been added into the underlying table
 				$('#datagrid tbody').append(output);
 				
-				// appends data
 				// event handlers
 				$('.DelBtn').unbind('click', evtDelBtn);
 				$('.EditBtn').unbind('click', evtEditData);
@@ -172,6 +175,7 @@
 			
 			// clears all entry fields
 			clearEntryFields();
+			
 			
 		} else  { /* edit button */
 			mParticular = $('input[name="particular"]').val();
@@ -243,16 +247,32 @@
 		var curObj = $(this);
 		var mButton = $('#addbtn');
 		
-		// removes the row
-		curObj.parent().parent().remove();
-		// resets the button's caption into "Add"
-		mButton.attr('value', 'Add');
-		// clears current selection on the dcr details
-		clearEditedSelection();
-		// clears all entry fields
-		clearEntryFields();
-		// sets focus
-		focusToEntryField();
+		var mDcrDtl_id = curObj.parent().parent().attr('attrdcrdtl_id');
+
+		// confirms the user to proceed deletion
+		var confirmMessage = confirm("Are you sure you want to delete this record?");
+		
+		if(confirmMessage) {
+			// AJAX part here
+			$.post(dcrbase_url + 'ajax/ajxdcr/deleteDcrDetail', {'post_dcrdtl_id': mDcrDtl_id})
+			.success(function(data) {	
+				
+				if(data == "1") {
+			// removes the row
+				curObj.parent().parent().remove();							
+			}			
+			// resets the button's caption into "Add"	
+			mButton.attr('value', 'Add');
+			// clears current selection on the dcr details
+			clearEditedSelection();
+			// clears all entry fields
+			clearEntryFields();
+			// sets focus
+				focusToEntryField();
+				
+			});		
+		}
+	
 		
 		return false;
 	}
@@ -267,7 +287,7 @@
 		toggleEditedRecord(parentRow);
 		
 		// gets the current selected row and put them into the entry field for edit
-		$(/*'input[name="particular"]',*/ entryRow).attr('attrdcrdtl_id', parentRow.attr('attrdcrdtl_id'));
+		$(entryRow).attr('attrdcrdtl_id', parentRow.attr('attrdcrdtl_id'));
 		$('input[name="particular"]', entryRow).val(parentRow.attr('attrParticulars'));
 		$('td select[name="tender"]', entryRow).val(parentRow.attr('attrTenderCode'));
 		$('select[name="refernce"]', entryRow).val(parentRow.attr('attrRefNo'));
@@ -291,7 +311,6 @@
 	
 	function buildDataProp(dt) {
 		var output = '';
-//		$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt, 'dcrdetailid': mDcrId});
 		output += ' attrParticulars="' + dt.particulars + '" attrTenderCode="' +  dt.tendercode + '" attrRefNo="' + dt.refno + '" attrAmnt="' + dt.amnt + '" attrDcrdtl_id="' + dt.dcrdtl_id + '" '; 
 		
 		return output;
@@ -304,8 +323,7 @@
 		if(flag) {
 			obj.addClass('edited');
 			mButton.attr('value', 'Edit');
-		}
-		
+		}		
 	}
 	
 	function toggleEditedRecord(obj) {

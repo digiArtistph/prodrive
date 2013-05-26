@@ -65,4 +65,20 @@ class Ajxdcr extends CI_Controller {
 		
 		echo json_encode($record);
 	}
+	
+	public function deleteDcrDetail() {
+		$dcrdtl_id = $this->input->post('post_dcrdtl_id');
+		$l_status = 0;
+		
+
+		$strQrySp = sprintf("CALL sp_deleteDcrDetail(" . $dcrdtl_id . ", @status)");
+		$this->db->query($strQrySp);
+		$qryStatus = $this->db->query("SELECT @status AS `status`")->result();
+		
+		foreach ($qryStatus as $st) {
+			$l_status = $st->status;
+		}
+		
+		echo $l_status;
+	}
 }
