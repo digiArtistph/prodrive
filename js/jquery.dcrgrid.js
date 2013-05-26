@@ -27,7 +27,6 @@
 		var output = '';
 		$.post(dcrbase_url + 'ajax/ajxdcr/retrieveDcrDetails', {post_dcr_id:6})
 		.success(function(data) {
-//			alert(data);
 			data = $.parseJSON(data);
 			for(var dt in data) {
 				output += '<tr' + buildDataProp(data[dt]) + '>';
@@ -133,16 +132,9 @@
 			mAmt = $('input[name="amount"]').val();
 			mDcrId = $('#dcr_id').val();
 			
+			
 			if(mParticular == "" || mAmt == "" || mTenderCode == "")
 				return;
-			
-			output += '<tr>';
-			output += '<td>' + mParticular + '</td>';
-			output += '<td>' + mTender + '</td>';
-			output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
-			output += '<td>' + mAmt + '</td>';
-			output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
-			output += '</tr>';
 		
 			// AJAX part
 			$.post(dcrbase_url + 'ajax/ajxdcr/addDcrDetail', {post_dcr: mDcrId , post_particulars: mParticular, post_refno: mReferenceNoCode, post_amnt: mAmt, post_tender: mTenderCode})
@@ -152,11 +144,21 @@
 				
 				if(returnedData[0] == "1") {
 				// appends new dom
-					
+				
+				// creates new object to be passed into the attribute maker
+				var dt = {'particulars': mParticular, 'tendercode': mTenderCode, 'refno': mReferenceNoCode, 'amnt':mAmt, 'dcrdtl_id': returnedData[1]};
+				
+				output += '<tr ' + buildDataProp(dt) + '>'; // put attribs here
+				output += '<td>' + mParticular + '</td>';
+				output += '<td>' + mTender + '</td>';
+				output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
+				output += '<td>' + mAmt + '</td>';
+				output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
+				output += '</tr>';
+				
 				$('#datagrid tbody').append(output);
 				
 				// appends data
-				$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt, 'dcrdetailid': returnedData[1]});
 				// event handlers
 				$('.DelBtn').unbind('click', evtDelBtn);
 				$('.EditBtn').unbind('click', evtEditData);
@@ -171,14 +173,14 @@
 			// clears all entry fields
 			clearEntryFields();
 			
-		} else  {
+		} else  { /* edit button */
 			mParticular = $('input[name="particular"]').val();
 			mTender = $('select[name="tender"] option:selected').text();
 			mTenderCode = $('select[name="tender"] option:selected').val();
 			mReferenceNo = $('select[name="refernce"] option:selected').text();
 			mReferenceNoCode = $('select[name="refernce"] option:selected').val();
 			mAmt = $('input[name="amount"]').val();
-			mDcrId = $('input[name="particular"]').data('record').dcrdetailid;
+			mDcrDtlId = $('#entryfield tbody tr:eq(0)').attr('attrdcrdtl_id');
 			
 			
 			if(mParticular == "" || mAmt == "" || mTenderCode == "")
@@ -191,16 +193,18 @@
 			output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 			
 			// AJAX part here
-			$.post(dcrbase_url + 'ajax/ajxdcr/editDcrDetail', {post_particulars:mParticular, post_refno:mReferenceNoCode, post_amnt:mAmt, post_tender:mTenderCode, post_dcrdtl_id:mDcrId})
-			.success(function(data) {
+			$.post(dcrbase_url + 'ajax/ajxdcr/editDcrDetail', {post_particulars:mParticular, post_refno:mReferenceNoCode, post_amnt:mAmt, post_tender:mTenderCode, post_dcrdtl_id:mDcrDtlId})
+			.success(function(data) {				
 				// appends new dom
-//				alert(data);
 				if(data == "1") {
-					$('#datagrid tbody tr[edited="true"]').empty().append(output);
 					
-					// appends data
-					$('tr').last().data('record', {'particular': mParticular, 'tender': mTenderCode, 'refno': mReferenceNoCode, 'amnt': mAmt, 'dcrdetailid': mDcrId});
-					
+					$('#datagrid tbody tr.edited')
+					.removeAttr('attrdcrdtl_id attramnt attrrefno attrtendercode attrparticulars')
+					.attr({'attrdcrdtl_id': mDcrDtlId, 'attramnt': mAmt, 'attrrefno': mReferenceNoCode, 'attrtendercode': mTenderCode, 'attrparticulars': mParticular})
+					.empty()
+					.append(output)
+					.removeClass('edited');
+										
 					// event handlers
 					$('.DelBtn').unbind('click', evtDelBtn);
 					$('.EditBtn').unbind('click', evtEditData);
@@ -214,6 +218,7 @@
 		}
 
 		// clears the entry fields
+		$('#entryfield tbody tr:eq(0)').removeAttr('attrdcrdtl_id');
 		$('input[name="particular"]').val("");
 		$('select[name="tender"]').val("");
 		$('select[name="refernce"]').val("");
@@ -257,15 +262,17 @@
 		var parentRow = $(this).parent().parent();
 		var entryRow = $('#entryfield tbody tr:eq(0)');
 		var recData = $(this).parent().parent().data('record');
+		
 
 		toggleEditedRecord(parentRow);
 		
 		// gets the current selected row and put them into the entry field for edit
-		$('input[name="particular"]', entryRow).data('record',{'dcrdetailid': recData.dcrdetailid});
-		$('input[name="particular"]', entryRow).val(recData.particular);
-		$('td select[name="tender"]', entryRow).val(recData.tender);
-		$('select[name="refernce"]', entryRow).val(recData.refno);
-		$('input[name="amount"]', entryRow).val(recData.amnt);
+		$(/*'input[name="particular"]',*/ entryRow).attr('attrdcrdtl_id', parentRow.attr('attrdcrdtl_id'));
+		$('input[name="particular"]', entryRow).val(parentRow.attr('attrParticulars'));
+		$('td select[name="tender"]', entryRow).val(parentRow.attr('attrTenderCode'));
+		$('select[name="refernce"]', entryRow).val(parentRow.attr('attrRefNo'));
+		$('input[name="amount"]', entryRow).val(parentRow.attr('attrAmnt'));
+
 		
 		// tags the current row being edited
 		//parentRow.attr('Edited', true);
@@ -295,10 +302,8 @@
 		flag = flag || true;
 		
 		if(flag) {
-			obj.attr('edited', flag);
+			obj.addClass('edited');
 			mButton.attr('value', 'Edit');
-		} else {
-			mButton.attr('value', 'Add');			
 		}
 		
 	}
