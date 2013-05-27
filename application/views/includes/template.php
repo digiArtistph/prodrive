@@ -47,8 +47,8 @@
                 </li>
                 <li  class="menu-item"><a  href="url4" >Utility</a>
                 	<ul>
-                    	<li><a href="#">Backup Database</a></li>
-                        <li><a href="#">Restore Database</a></li>
+                    	<li><a href="<?php echo base_url() . 'utility/backup';?>">Backup Database</a></li>
+                        <li><a href="<?php echo base_url() . 'utility/restore';?>">Restore Database</a></li>
                     </ul>
                 </li>
             </ul>
