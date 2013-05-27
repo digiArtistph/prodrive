@@ -57,10 +57,8 @@ class Ajxdcr extends CI_Controller {
 	}
 	
 	public function retrieveDcrDetails() {
-		//$dcr_id = $this->input->post('post_dcr_id');
-		$dcr_id = 6;
-		$strQry = sprintf("SELECT d.dcrdtl_id, d.particulars, d.refno, d.amnt, d.tender AS tendercode, t.name AS paytype FROM dcrdetails d LEFT JOIN tendertype t ON d.tender=t.tdr_id WHERE dcr_id=%d", $dcr_id);
-		
+		$dcr_id = $this->input->post('post_dcr_id');
+		$strQry = sprintf("SELECT d.dcrdtl_id, d.particulars, d.refno, d.amnt, d.tender AS tendercode, t.name AS paytype FROM dcrdetails d LEFT JOIN tendertype t ON d.tender=t.tdr_id WHERE dcr_id=%d ", $dcr_id);
 		$record = $this->db->query($strQry)->result();
 		
 		echo json_encode($record);
