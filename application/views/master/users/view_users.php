@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Customer View</h3>
 	<div id="view_form">
 		<?php if(!empty($users)):?>

@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Add Category</h3>
 	<div id="add_form">
 		<?php echo form_open(base_url() . 'master/categories/validateaddcategories');?>

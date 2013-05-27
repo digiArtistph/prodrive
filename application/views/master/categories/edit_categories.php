@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Edit Category</h3>
 	<div id="add_form">
 	<?php if(! empty($categories)):?>

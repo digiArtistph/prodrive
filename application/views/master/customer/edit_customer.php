@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Edit Customer</h3>
 	<div id="edit_form">
 		<?php foreach ($customers as $customer):?>

@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Labor Type View</h3>
 	<div id="view_form">
 	<?php if(! empty( $labortypes ) ):?>
