@@ -64,11 +64,11 @@
                         </ul>
 					</div>
                 </li>
-                <li><a  href="url4" >Utility</a>
+                <li><a  href="<?php echo base_url() . 'utility/datarecovery';?>" >Utility</a>
                 	<div>
                         <ul>
-                            <li><a href="<?php echo base_url() . 'utility/backup';?>">Backup Database</a></li>
-                            <li><a href="<?php echo base_url() . 'utility/restore';?>">Restore Database</a></li>
+                            <li><a href="<?php echo base_url() . 'utility/datarecovery/backup';?>">Backup Database</a></li>
+                            <li><a href="<?php echo base_url() . 'utility/datarecovery/restore';?>">Restore Database</a></li>
                         </ul>
 					</div>
                 </li>
