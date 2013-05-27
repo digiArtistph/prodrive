@@ -19,6 +19,7 @@ a {text-decoration:none;}
 .usercontextinfo ul li {display:inline;}
 .usercontextinfo ul li, .usercontextinfo ul li a {color:#fff; font-size:.8em;}
 .usercontextinfo ul li  {padding:0 1.5em;}
+.usercontextinfo ul li a:hover {text-decoration:underline;}
 .usercontextinfo ul li:last-child  {border-left:1px dotted #fff;}
 
 /* navigation menu */
@@ -57,3 +58,7 @@ a {text-decoration:none;}
 #footer .leftpane {/*background:#ccc; */float:left; padding-left:1em; width:48%;}
 
 #footer .rightpane {/*background:#aeaeae;*/ float:right; text-align:right; padding-right:1em; width:48%;}
+
+/* some UI icons */
+.welcomeusermsg {position:relative;}
+.welcomeusermsg img {position:absolute; top:-1px; left:-25px;}
