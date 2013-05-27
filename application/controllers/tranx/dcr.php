@@ -1,12 +1,15 @@
 <?php if (!defined('BASEPATH')) exit ('No direct script access allowed.');
 class Dcr extends CI_Controller {
 	private $DCR = null;
+	private $username;
 	
 	public function __construct() {
+		
 		parent::__construct();
+		
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
-
+		
 	}
 	
 	public function index() {
@@ -27,18 +30,11 @@ class Dcr extends CI_Controller {
 	}
 	
 	private function _dcr() {
-		
-		// algo
-		/*
-		 * 1. read database if there exist a current record
-		 * 2. if there is then load into the form
-		 * 3. save maste detail record when save button is pressed
-		 */
+
 		$this->load->model('mdl_dcr');
 		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
 			// pass value to the controller
 			$data['dcr'] = $dcrNo;
-			//call_debug($data['dcr']);	
 			$data['main_content'] = 'tranx/dcr/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {

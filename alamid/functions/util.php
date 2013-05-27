@@ -21,7 +21,7 @@ if(! function_exists('remove_array_index')) {
 			$tmpArr[] = $val;
 		endforeach;
 		
-		call_debug($tmpArr);
+		//call_debug($tmpArr);
 		$array = $tmpArr;
 	}
 }

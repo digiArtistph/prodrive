@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "tranx/dcr";
 $route['404_override'] = '';
 
 

@@ -1,30 +1,59 @@
+/* CSS Document */
 /* resetters */
 body, div, p, ul, li, span {margin:0; padding:0;}
 a, a img, img {border:0;}
 
-table {border-collapse:collapse;}
+/* general settings */
+div, p, ul, li {font:14px "Lucida Sans Unicode", arial, sans-serif;}
+ul, li {list-style:none;}
+a {text-decoration:none;}
 
-/* generic settings */
-ul {list-style-type:none;}
+/* header */
+#header {background:-moz-linear-gradient(top, #4a86cc, #2e57b4);/* box-shadow: 0 1px 3px 1px #bbbbbb; min-height:117px; overflow:auto;*/ float:left; width:100%;}
+/* company logo */
+#companylogo {color:#fff; font-size:18px; float:left; padding:.5em .5em .5em 1em; text-shadow:1px 2px 1px #012248; width:50%;}
+
+/* user context info */
+.usercontextinfo {float:right; padding: 1em 1.25em 1em 1.25em; width:40%;}
+.usercontextinfo ul {text-align:right;}
+.usercontextinfo ul li {display:inline;}
+.usercontextinfo ul li, .usercontextinfo ul li a {color:#fff; font-size:.8em;}
+.usercontextinfo ul li  {padding:0 1.5em;}
+.usercontextinfo ul li:last-child  {border-left:1px dotted #fff;}
+
+/* navigation menu */
+#menu {clear:both;}
+#menu .menucontainer {position:relative;}
+#menu li, #menu a {float:left;}
+#menu a {padding:.5em 2.5em;}
+#menu .menucontainer > li.selected {background:#fff;}
+#menu .menucontainer > li.selected a {color:#666666;}
+#menu .menucontainer > li {background:-moz-linear-gradient(top, #3f85ca, #5894d2); border-top-left-radius:6px; border-top-right-radius:6px; margin:0 1px;}
+#menu .menucontainer > li:first-child {margin-left:15px;}
+#menu ul.menucontainer li a {color:#fff;}
+#menu ul.menucontainer > li:hover {background:#fff;}
+#menu ul.menucontainer > li:hover a {color:#666666;}
+
+/* sub-menu */
+#menu .menucontainer li div {background:-moz-linear-gradient(top, #eaf5fb, #e0eef9);  box-shadow: 0 1px 3px 1px #bbbbbb; position:absolute; left:0px; top:31px; width:100%;}
+#menu .menucontainer ul li a {font-size:.8em; color:#666666;}
+#menu .menucontainer ul li a:hover {text-decoration:underline;}
+#menu .menucontainer li div ul li {border:none;}
+
+/* selected/hovered sub-menu */
+#menu .menucontainer li > div {visibility:hidden;}
+#menu .menucontainer li div.selected {visibility:visible;}
+#menu .menucontainer li:hover div {visibility:visible;}
+
 
 /* container */
-#container {margin:auto; width:1080px; overflow:auto;}
-
-
-/* masthead */
-#masthead { min-height:35px;}
-#masthead ul li, #masthead li a {float:left;}
-
-/* panels */
-#panels{ clear:both; float:left; width:20%;}
-
-/* content */
-#content {float:left; width:59%; }
-
-
-/* toolbars */
-#toolbars {float:left; width:20%;}
-
+#container {clear:both; padding:3em; min-height:520px;}
 
 /* footer */
-#footer {clear:both;}
+#footer {/*background:-moz-linear-gradient(top, #eaf5fb, #e0eef9)*/background:#ececec; clear:both; float:left; min-height:30px; padding-top:1.5em; width:100%;}
+#footer .leftpane p, #footer .rightpane p {font-size:.8em; color:#666666;}
+#footer .leftpane p a, #footer .rightpane p a {color:#666666; text-decoration:underline;}
+#footer .leftpane p a:hover, #footer .rightpane p a:hover {text-decoration:none;}
+#footer .leftpane {/*background:#ccc; */float:left; padding-left:1em; width:48%;}
+
+#footer .rightpane {/*background:#aeaeae;*/ float:right; text-align:right; padding-right:1em; width:48%;}
