@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Edit Vehicle View</h3>
 	<div id="edit_form">
 	<?php if(!empty($vehicles)):?>

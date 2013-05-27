@@ -24,8 +24,8 @@
                 	<ul>
                     	<li><a href="<?php echo base_url('tranx/dcr'); ?>">DCR Entry</a></li>
                         <li><a href="<?php echo base_url('tranx/joborder'); ?>">Job Order</a></li>
-                        <li><a href="#">Cash Float</a></li>
-                        <li><a href="#">Cash Lift</a></li>
+                        <li><a href="<?php echo base_url('tranx/cashfloat'); ?>">Cash Float</a></li>
+                        <li><a href="<?php echo base_url('tranx/cashlift'); ?>">Cash Lift</a></li>
                         <li><a href="#">Cut-Off</a></li>
                     </ul>
                 </li>

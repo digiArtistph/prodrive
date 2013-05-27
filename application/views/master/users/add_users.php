@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>User View</h3>
 	<div id="view_form">
 	<?php echo form_open( base_url() . 'master/users/validateaddusers' );?>

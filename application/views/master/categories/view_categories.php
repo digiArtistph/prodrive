@@ -1,4 +1,4 @@
-<div id="container">
+<div id="wrapper">
 <h3>Category View</h3>
 	<div id="view_form">
 	<?php if(! empty( $categories ) ):?>
