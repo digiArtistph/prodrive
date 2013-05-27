@@ -14,8 +14,13 @@ class Pagehook {
 	public function loadAlamidHooks() {
 		// echo 'Loading loadAlamidHooks' . '<br />';
 		
-		// initialises some member variables and globals
-		$this->init();
+		if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ){
+			
+		}else{
+			
+			$this->init();
+		}
+		
 		
 	}
 	
