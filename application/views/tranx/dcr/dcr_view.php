@@ -1,6 +1,7 @@
 <?php foreach($dcr as $hdrRec): ?>
 <?php echo form_open(); ?>
 <h3>Daily Collection Entry</h3>
+<input id="dcr_id" type="hidden" value="<?php echo $hdrRec->dcr_id; ?>" />
 <p><label>Tranx Date: </label><input type="text" name="tranxdate" value="<?php echo longDate($hdrRec->trnxdate); ?>"/></p>
 <p><label>User: </label><input type="text" name="user"  readonly="readonly" value="<?php echo $hdrRec->username; ?>"/></p>
 <p><label>Beginning Balance: </label><input type="text" value="<?php echo $hdrRec->begbal; ?>" readonly="readonly" /></p>
@@ -15,4 +16,5 @@
 <div id="dcrdatagrid">
 
 </div>
+
 <?php echo form_close(); ?>

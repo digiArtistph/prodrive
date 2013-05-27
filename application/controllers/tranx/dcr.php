@@ -38,8 +38,8 @@ class Dcr extends CI_Controller {
 		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
 			// pass value to the controller
 			$data['dcr'] = $dcrNo;
-					
-			$data['main_content'] = 'tranx/dcr_view';
+			//call_debug($data['dcr']);	
+			$data['main_content'] = 'tranx/dcr/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {
 			// redirects to a form that asks for a new beg bal
@@ -50,12 +50,11 @@ class Dcr extends CI_Controller {
 	private function _dcrnew() {
 		global $almd_userid;
 		global $almd_username;
-		call_debug('user name:' . $almd_userid);
-		call_debug('user id:' . $almd_userid);
+
 		$data['cashierid'] = $almd_userid;
 		$data['cashiername'] = $almd_username;
 		
-		$data['main_content'] = 'tranx/dcr_new_view';
+		$data['main_content'] = 'tranx/dcr/dcr_new_view';
 		$this->load->view('includes/template', $data);
 	}
 	
@@ -78,7 +77,6 @@ class Dcr extends CI_Controller {
 			redirect(base_url('tranx/dcr'));
 		}
 		
-	}
-	
+	}	
 	
 }
