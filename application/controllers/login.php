@@ -67,12 +67,8 @@ class Login extends CI_Controller{
 		
 		foreach ( $query->result() as $key){
 			
-			if( !empty($key->mname) )
-				$midname = ' ' . strtoupper( $key->mname[0] ). '.';
-			else
-				$midname = '.';
 			
-			$this->_mName = ucfirst($key->lname) . ', ' . ucfirst($key->fname) . $midname ;
+			$this->_mName = ucfirst($key->fname) . ' '  . ucfirst($key->lname);
 			$this->_mUid = $key->u_id;
 			$this->_mUtype = $key->type;
 			$this->_mAcc = $key->access;
