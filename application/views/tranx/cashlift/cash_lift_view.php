@@ -2,7 +2,7 @@
 <h3>Cash Lift</h3>
 	<div id="view_form">
 	<p><a href="<?php echo base_url('tranx/cashlift/section/addcashlift'); ?>">Add New Cash Lift</a></p>
-	<?php if(! empty( $cashfloats ) ):?>
+	<?php if(! empty( $cashlifts ) ):?>
 	
 	<table>
     	<thead>
@@ -19,7 +19,7 @@
                 	<td><?php echo $cl->particulars; ?></td>
                     <td><?php echo $cl->refno; ?></td>
                     <td><?php echo $cl->amnt; ?></td>
-                    <td><a href="<?php echo base_url('tranx/cashfloat/section/delete') . '/' . $cl->cf_id; ?>">Delete</a></td>
+                    <td><a href="<?php echo base_url('tranx/cashlift/section/delete') . '/' . $cl->cl_id; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
             <tr>

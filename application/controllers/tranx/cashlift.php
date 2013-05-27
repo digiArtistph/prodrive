@@ -35,7 +35,7 @@ class Cashlift extends CI_Controller {
 	
 	private function _deletecashlift($id = 0) {
 		
-		$strQry = sprintf("DELETE FROM cashlift WHERE cf_id=%d", $id);
+		$strQry = sprintf("DELETE FROM cashlift WHERE cl_id=%d", $id);
 		$this->db->query($strQry);
 		
 		redirect(base_url('tranx/cashlift'));
