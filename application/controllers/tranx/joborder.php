@@ -7,6 +7,7 @@ class Joborder extends CI_Controller{
 		
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+
 	}
 	
 	public function index(){
@@ -405,18 +406,24 @@ class Joborder extends CI_Controller{
 	}
 	
 	public function autocomplete_labortype(){
+		
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 	
 		$validation->set_rules('term', '',  'required');
 		if($validation->run() === FALSE) {
-			show_error('Please Check Url again');
+			return false;
 		}else{
 			$this->load->model('mdl_autocomplete');
 			$temp = $this->mdl_autocomplete->findkeyword('labortype', 'name' , $this->input->post('term'));
 			$objarr = json_encode($temp);
+// 			$temp = array(
+// 					"name" => "tongbens"
+// 					);
+// 			$objarr = json_encode($temp);
 			echo $objarr;
 		}
 	}
-	
+
+
 }
