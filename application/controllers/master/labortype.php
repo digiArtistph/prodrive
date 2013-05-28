@@ -114,14 +114,13 @@ class Labortype extends CI_Controller {
 		
 		$validation->set_rules('lname', 'Category Name',  'required');
 		$validation->set_rules('cat', 'Category Parent',  'required');
-		$validation->set_rules('status', 'Category Parent',  'required');
 		if($validation->run() === FALSE) {
 			$this->_addlabortype();
 		} else {
 			global $almd_db;
 			$almd_db = new Almdtables();
 			$db = $this->input;
-			$strqry = 'INSERT INTO '. $almd_db->labortype . ' (`laborid`, `name`, `category`, `status`) VALUES (NULL, "' . $db->post('lname') .'", "' . $db->post('cat') .'", "' . $db->post('status') .'")';
+			$strqry = 'INSERT INTO '. $almd_db->labortype . ' (`laborid`, `name`, `category`) VALUES (NULL, "' . $db->post('lname') .'", "' . $db->post('cat') .'")';
 			
 			$query = $this->db->query($strqry);
 			if(!$query){
@@ -139,7 +138,6 @@ class Labortype extends CI_Controller {
 		$validation->set_rules('lt', '',  'required');
 		$validation->set_rules('lname', 'Labor type name',  'required');
 		$validation->set_rules('cat', 'Category',  'required');
-		$validation->set_rules('status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_editlabor($this->input->post('lt'));
 		} else {
@@ -147,7 +145,7 @@ class Labortype extends CI_Controller {
 			$almd_db = new Almdtables();
 			$db = $this->input;
 			
-			$strqry = sprintf('UPDATE `%s` SET `name`="%s", `category`="%s", `status`="%s" WHERE laborid="%s" ', $almd_db->labortype, $this->input->post('lname'), $this->input->post('cat'), $this->input->post('status'), $this->input->post('lt') );
+			$strqry = sprintf('UPDATE `%s` SET `name`="%s", `category`="%s" WHERE laborid="%s" ', $almd_db->labortype, $this->input->post('lname'), $this->input->post('cat'), $this->input->post('lt') );
 			//call_debug($strqry);
 			$query = $this->db->query($strqry);
 			if(!$query){

@@ -125,14 +125,13 @@ class Customer extends CI_Controller {
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		$validation->set_rules('phone', 'Phone Number',  'required');
-		$validation->set_rules('cu_status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_addcustomer();
 		} else {
 			global $almd_db;
 			$almd_db = new Almdtables();
 			$db = $this->input;
-			$strqry = 'INSERT INTO '. $almd_db->customer . ' (`custid`, `fname`, `mname`, `lname`, `addr`, `phone`, `status`) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('addr') .'", "' . $db->post('phone') .'", "' . $db->post('cu_status') .'")';
+			$strqry = 'INSERT INTO '. $almd_db->customer . ' (`custid`, `fname`, `mname`, `lname`, `addr`, `phone`) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('addr') .'", "' . $db->post('phone') .'")';
 			$query = $this->db->query($strqry);
 			if(!$query){
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
@@ -152,7 +151,6 @@ class Customer extends CI_Controller {
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		$validation->set_rules('phone', 'Phone Number',  'required');
-		$validation->set_rules('cu_status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_editcustomer($this->input->post('ct_id'));
 		} else {
@@ -160,7 +158,7 @@ class Customer extends CI_Controller {
 			$almd_db = new Almdtables();
 			$db = $this->input;
 			
-			$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s", `status`="%s" WHERE custid="%s" ', $almd_db->customer, $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('phone'), $this->input->post('cu_status'),  $this->input->post('ct_id') );
+			$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s" WHERE custid="%s" ', $almd_db->customer, $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('phone'),  $this->input->post('ct_id') );
 			$query = $this->db->query($strqry);
 			if(!$query){
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );

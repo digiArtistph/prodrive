@@ -97,7 +97,6 @@ class Vehicle extends CI_Controller {
 		$validation = $this->form_validation;
 		
 		$validation->set_rules('make', 'User Name',  'required');
-		$validation->set_rules('status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_addvehicle();
 		} else {
@@ -105,7 +104,7 @@ class Vehicle extends CI_Controller {
 			$almd_db = new Almdtables();
 				
 			$db = $this->input;
-			$strqry = 'INSERT INTO '. $almd_db->vehicle . ' (`v_id`, `make`, `status` ) VALUES (NULL, "' . $db->post('make') .'", "' . $db->post('status') .'")';
+			$strqry = 'INSERT INTO '. $almd_db->vehicle . ' (`v_id`, `make` ) VALUES (NULL, "' . $db->post('make') .'")';
 			
 			$query = $this->db->query($strqry);
 			if(!$query){
@@ -122,7 +121,6 @@ class Vehicle extends CI_Controller {
 		
 		$validation->set_rules('vh', '',  'required');
 		$validation->set_rules('make', 'User Name',  'required');
-		$validation->set_rules('status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_editvehicle($this->input->post('vh'));
 		} else {
@@ -130,7 +128,7 @@ class Vehicle extends CI_Controller {
 			$almd_db = new Almdtables();
 		
 			$db = $this->input;
-			$strqry = sprintf('UPDATE `%s` SET `make`="%s", `status`="%s" WHERE v_id="%s" ', $almd_db->vehicle, $this->input->post('make'), $this->input->post('status'),  $this->input->post('vh') );
+			$strqry = sprintf('UPDATE `%s` SET `make`="%s" WHERE v_id="%s" ', $almd_db->vehicle, $this->input->post('make'),  $this->input->post('vh') );
 			
 			$query = $this->db->query($strqry);
 			if(!$query){

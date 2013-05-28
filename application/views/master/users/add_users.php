@@ -1,6 +1,7 @@
-<div id="wrapper">
-<h3>User View</h3>
-	<div id="view_form">
+<div class="wrapper">
+<h3 class="heading">Add User</h3>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('master/users'); ?>">Cancel New User</a></div>
+	<div id="add_form">
 	<?php echo form_open( base_url() . 'master/users/validateaddusers' );?>
 		<?php if (!empty($error)):?>
 		<p><?php echo $error;?></p>
@@ -19,8 +20,7 @@
 		<p><label>Middle name: </label><input type="text" name="mname" /><span class="error"><?php echo form_error('mname'); ?></span></p>
 		<p><label>Last name: </label><input type="text" name="lname" /><span class="error"><?php echo form_error('lname'); ?></span></p>
 		<p><label>Address: </label><input type="text" name="addr" /><span class="error"><?php echo form_error('addr'); ?></span></p>
-		<p><label>Status: </label> Active <input type="radio" name="status" value="1" checked="checked"/> In active<input type="radio" name="status" value="0"/><span class="error"><?php echo form_error('status'); ?></span></p>
-		<p><input type="submit" value="Add users" /></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 	<?php echo form_close();?>
 	</div>
 </div>

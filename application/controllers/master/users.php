@@ -120,7 +120,6 @@ class Users extends CI_Controller {
 		$validation->set_rules('mname', 'Middle Name',  'required');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
-		$validation->set_rules('status', 'Status',  'required');
 		if($validation->run() === FALSE) {
 			$this->_addusers();
 		} else {
@@ -132,7 +131,7 @@ class Users extends CI_Controller {
 				$this->_addusers($err);
 			}else{
 				$db = $this->input;
-				$strqry = 'INSERT INTO '. $almd_db->users . ' (`u_id`, `fname`, `mname`, `lname`, `username`, `pword`, `addr`, `status`, `ut_id` ) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('username') .'", "' . md5($db->post('pword')) .'", "' . $db->post('addr') .'", "' . $db->post('status') .'", "' . $db->post('utype') .'")';
+				$strqry = 'INSERT INTO '. $almd_db->users . ' (`u_id`, `fname`, `mname`, `lname`, `username`, `pword`, `addr`, `ut_id` ) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('username') .'", "' . md5($db->post('pword')) .'", "' . $db->post('addr') .'","' . $db->post('utype') .'")';
 				
 				$query = $this->db->query($strqry);
 				if(!$query){
@@ -156,7 +155,6 @@ class Users extends CI_Controller {
 		$validation->set_rules('mname', 'Middle Name',  'required');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
-		$validation->set_rules('status', 'Status',  'required');
 		
 		if($validation->run() === FALSE) {
 			$this->_editusers($this->input->post('user_id'));
@@ -170,7 +168,7 @@ class Users extends CI_Controller {
 			}else{
 				$db = $this->input;
 					
-				$strqry = sprintf('UPDATE `%s` SET `username`="%s", `ut_id`="%s", `pword`="%s", `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `status`="%s" WHERE u_id="%s" ', $almd_db->users, $this->input->post('username'), $this->input->post('utype'), md5( $this->input->post('pword') ), $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('status'),  $this->input->post('user_id') );
+				$strqry = sprintf('UPDATE `%s` SET `username`="%s", `ut_id`="%s", `pword`="%s", `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s" WHERE u_id="%s" ', $almd_db->users, $this->input->post('username'), $this->input->post('utype'), md5( $this->input->post('pword') ), $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'),   $this->input->post('user_id') );
 				
 				$query = $this->db->query($strqry);
 				if(!$query){

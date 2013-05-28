@@ -8,10 +8,7 @@
 		<p><label>Last name: </label> <input type="text" name="lname" /><?php echo form_error('lname', '<span class="error">','</span>' );?></p>
 		<p><label>Address: </label> <input type="text" name="addr" /><span class="error"><?php echo form_error('addr');?></span></p>
 		<p><label>Phone No. : </label> <input type="text" name="phone" /><span class="error"><?php echo form_error('phone');?></span></p>
-		<p><label>Status :</label> 
-		Active <input type="radio" name="cu_status" checked="checked" value="1"/>
-		In active <input type="radio" name="cu_status"  value="0"/><span class="error"><?php echo form_error('cu_status');?></span></p>
-		<p class="submit"><input type="submit" value="Add Customer"/></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 	</div>
 </div>

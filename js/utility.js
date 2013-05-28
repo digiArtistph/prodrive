@@ -406,7 +406,7 @@ $(document).ready(function(){
 	function Validateamount(){
 		
 		var decimal = $('.amnt').val(); 
-		if( decimal.match(/^[1-9]+(\.\d+){0,2}?$/) ) { 
+		if( decimal.match(/^[0-9]+(\.\d+){0,2}?$/) ) { 
 			return true;
 		} else { 
 			var message = 'Please use decimal input for Amount';

@@ -10,10 +10,7 @@
 		<p><label>Last name: </label> <input type="text" name="lname" value="<?php echo $customer->lname;?>" /><span class="error"><?php echo form_error('lname');?></span></p>
 		<p><label>Address: </label> <input type="text" name="addr" value="<?php echo $customer->addr;?>" /><span class="error"><?php echo form_error('addr');?></span></p>
 		<p><label>Phone No. : </label> <input type="text" name="phone" value="<?php echo $customer->phone;?>" /><span class="error"><?php echo form_error('phone');?></span></p>
-		<p><label>Status :</label> 
-		Active <input type="radio" name="cu_status" value="1" <?php if($customer->status == 1){echo 'checked="checked"';}?> />
-		In active <input type="radio" name="cu_status"  value="0"  <?php if($customer->status == 0){echo 'checked="checked"';}?>/><span class="error"><?php echo form_error('cu_status');?></span></p>
-		<p class="submit"><input type="submit" value="Edit Customer"/></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 		<?php endforeach;?>
 	</div>

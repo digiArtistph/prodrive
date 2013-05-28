@@ -1,6 +1,7 @@
-<div id="wrapper">
-<h3>Edit user</h3>
-	<div id="view_form">
+<div class="wrapper">
+<h3 class="heading">Edit User</h3>
+<div class="toolbar"><a class="canceleditbtn" href="<?php echo base_url('master/users'); ?>">Cancel Edit User</a></div>
+	<div id="add_form">
 	<?php if(!empty($users)):?>
 	
 	<?php echo form_open( base_url() . 'master/users/validateeditusers' );?>
@@ -35,8 +36,7 @@
 		<p><label>Middle name: </label><input type="text" name="mname" value="<?php echo $user->mname; ?>"/><span class="error"><?php echo form_error('mname'); ?></span></p>
 		<p><label>Last name: </label><input type="text" name="lname" value="<?php echo $user->lname; ?>"/><span class="error"><?php echo form_error('lname'); ?></span></p>
 		<p><label>Address: </label><input type="text" name="addr" value="<?php echo $user->addr; ?>"/><span class="error"><?php echo form_error('addr'); ?></span></p>
-		<p><label>Status: </label> Active <input type="radio" name="status" value="1" <?php if($user->status == 1){echo 'checked="checked"';}?> /> In active<input type="radio" name="status" value="0" <?php if($user->status == 0){echo 'checked="checked"';}?> /><span class="error"><?php echo form_error('status'); ?></span></p>
-		<p><input type="submit" value="Edit users" /></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php endforeach;?>
 	<?php echo form_close();?>
 	<?php else :?>
