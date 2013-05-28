@@ -26,7 +26,11 @@ a {text-decoration:none;}
 .usercontextinfo ul li:last-child  {border-left:1px dotted #fff;}
 
 /* calendar */
-.calendar {bottom:-20px; color:#fad25d; font-size:.8em; right:35px; position:absolute;}
+.calendar {bottom:-15px; color:#fad25d; font-size:.8em; right:35px; position:absolute;}
+
+/* tongbens edit quick search */
+.quicksearch {bottom: -30px; font-size:.8em; right:35px; position:absolute;}
+.quicksearch a{color:#fad25d;}
 
 /* navigation menu */
 #menu {clear:both;}

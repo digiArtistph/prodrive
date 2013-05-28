@@ -30,6 +30,13 @@ $(document).ready(function(){
 			 duration: 1000
 		 	}
 		 });
+	 
+	$('.quicksearch').click(function(){
+						//$('#container').append('<div class=\"dialog\" title=\"Restoring Database\"><p></p></div>');
+						$( ".dialog" ).dialog("open");
+						alert("sd");
+						return false;
+	});
 	$('.restore_db').click(function(){
 							var tr = $(this).closest("tr");
 							var input = {

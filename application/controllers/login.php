@@ -27,7 +27,7 @@ class Login extends CI_Controller{
 			$this->login_page('Please logged in again!!!');
 		} else {
 			if( $this->__isUserExists($this->input->post('username'), $this->input->post('pword') ) ){
-				
+				$this->_loguser($this->input->post('username'), 1);
 				$params = array(
 						'uname' => $this->input->post('username'),
 						'islog' => TRUE,
@@ -40,10 +40,13 @@ class Login extends CI_Controller{
 				
 				redirect(base_url());
 			}else{
+				$this->_loguser($this->input->post('username'), 0);
 				$data['uerror'] = 'Hi ' . $this->input->post('username') . '! Your username and password doesn\'t match';
 				$data['main_content'] = 'userlogin/login_view';
 				$this->load->view('includes/template_login', $data);
 			}
+			
+			
 		}
 	}
 	
@@ -75,5 +78,16 @@ class Login extends CI_Controller{
 		}
 		
 		return true;
+	}
+	
+	private function _loguser($username, $status) {
+	
+		$strQry = sprintf('INSERT INTO `logintrace` SET `username`="%s", `succeeded`="%d"', $username, $status);
+		$query = $this->db->query($strQry);
+	
+		if(!$query)
+			return false;
+		else
+			return true;
 	}
 }

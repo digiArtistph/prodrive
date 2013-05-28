@@ -28,6 +28,7 @@
                     <li><a href="<?php echo base_url('login/logout'); ?>">Log Out</a></li>
                 </ul>
                 <div class="calendar"><i class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
+                <div class="quicksearch"><a href="#">Job History</a></div> 
             </div>
         </div>
         <!-- navigation menu -->
