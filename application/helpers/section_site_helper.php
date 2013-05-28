@@ -12,13 +12,13 @@ if (! function_exists('getHeader')) {
 	}
 }
 
-if(! function_exists('getSideBar')) {
-	function getSideBar() {
+if(! function_exists('getMenuNav')) {
+	function getMenuNav() {
 		$CI =& get_instance();
 		
 		$data['section'] = getSection();
 		
-		$CI->load->view('includes/sidebar', $data);
+		$CI->load->view('includes/navigation', $data);
 		
 	}
 }
@@ -63,23 +63,15 @@ if (! function_exists('getSection')) {
 			default:
 				$section = 'home';
 		}
-		
-		// specific
-		
-		// special
-		
+				
 		return $section;
 	}
 }
 
-if(! function_exists('getBreadcrumbs')) {
-	function getBreadcrumbs() {
-		$CI =& get_instance();
-		
-		$data['section'] = getSection();
-		
-		$CI->load->view('includes/breadcrumbs', $data);
-	}
+if(! function_exists('isTabSelected')) {
+	function isTabSelected($section, $tag = 'selected', $part = 1) {
+		echo isSection($section, $part) ? ' class="'. $tag . '" ' : '';
+	}	
 }
 
 if(! function_exists('isSection')) {

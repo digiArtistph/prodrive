@@ -30,53 +30,8 @@
                 <div class="calendar"><i class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
             </div>
         </div>
-        
-        <div id="menu">
-        	<!-- main menus  -->
-            <ul class="menucontainer">
-                <li class="selected"><a  href="<?php echo base_url('tranx/dcr/'); ?>" >Transaction</a>
-                	<div class="selected">
-                        <ul>
-                            <li class="submenuselected"><a href="<?php echo base_url('tranx/dcr'); ?>">DCR Entry</a></li>
-                            <li><a href="<?php echo base_url('tranx/joborder'); ?>">Job Order</a></li>
-                            <li><a href="<?php echo base_url('tranx/cashfloat'); ?>">Cash Float</a></li>
-                            <li><a href="<?php echo base_url('tranx/cashlift'); ?>">Cash Lift</a></li>
-                            <li><a href="#">Cut-Off</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a  href="<?php echo base_url('master/customer'); ?>" >Master Files</a>
-                <div>
-                	<ul>
-                    	<li><a href="<?php echo base_url('master/customer'); ?>">Customers</a></li>
-                        <li><a href="<?php echo base_url('master/categories'); ?>">Categories</a></li>
-                        <li><a href="<?php echo base_url('master/labortype'); ?>">Labor Type</a></li>
-                        <li><a href="<?php echo base_url('master/users'); ?>">Users</a></li>
-                        <li><a href="<?php echo base_url('master/vehicle'); ?>">Vehicles</a></li>
-                        <li><a href="#">Colors</a></li>
-                    	</ul>
-                    </div>
-                </li>
-                <li><a  href="url3" >Reports</a>
-                	<div>
-                        <ul>
-                            <li><a href="#">Daily Cash Report</a></li>
-                            <li><a href="#">Job Order History</a></li>
-                        </ul>
-					</div>
-                </li>
-
-                <li><a  href="<?php echo base_url() . 'utility/datarecovery';?>" >Utility</a>
-
-                	<div>
-                        <ul>
-                            <li><a href="<?php echo base_url() . 'utility/datarecovery/backup';?>">Backup Database</a></li>
-                            <li><a href="<?php echo base_url() . 'utility/datarecovery/restore';?>">Restore Database</a></li>
-                        </ul>
-					</div>
-                </li>
-            </ul>
-        </div>
+        <!-- navigation menu -->
+        <?php $this->load->view('includes/navigation'); ?>
     </div>
     
     <div id="container">
