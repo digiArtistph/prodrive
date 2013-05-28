@@ -13,7 +13,7 @@ class Login extends CI_Controller{
 	public function login_page($param = ''){
 		$data['uerror'] = $param;
 		$data['main_content'] = 'userlogin/login_view';
-		$this->load->view('includes/template', $data);
+		$this->load->view('includes/template_login', $data);
 	}
 	
 	public function validatelogin(){
@@ -40,9 +40,9 @@ class Login extends CI_Controller{
 				
 				redirect(base_url());
 			}else{
-				$data['uerror'] = 'Hi ' . $this->input->post('username') . ' !!! Please Register First or Login again';
+				$data['uerror'] = 'Hi ' . $this->input->post('username') . '! Your username and password doesn\'t match';
 				$data['main_content'] = 'userlogin/login_view';
-				$this->load->view('includes/template', $data);
+				$this->load->view('includes/template_login', $data);
 			}
 		}
 	}
