@@ -83,6 +83,8 @@ $(document).ready(function(){
 	
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
+	// Data Validation
+	$('#datavaldecimal').decimal({message:'Hi error.'});
 	
 	function html2json() {
 		   var json = '{';

@@ -2,7 +2,7 @@
 	<h3 class="heading">Daily Cash Entry</h3>
     <div class="minidashboard">
     
-    </div><div class="cleafix" />
+    </div><div class="cleafix">&nbsp;</div>
 	<?php echo form_open(base_url('tranx/dcr/validatenewdcr')); ?>
         <input type="hidden" name="cashierid" value="<?php echo $cashierid; ?>" />
         

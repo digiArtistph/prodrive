@@ -1,3 +1,4 @@
+<div class="wrapper">
 <?php echo form_open(); ?>
 <h3>Daily Collection Entry</h3>
 
@@ -51,3 +52,5 @@
 <p><label>Cashier: </label><input type="text" /></p>
 </div>
 <?php echo form_close(); ?>
+</div>
+</div>

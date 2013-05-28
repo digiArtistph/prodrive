@@ -11,7 +11,7 @@
 	define('UTILITY_JS', '<script type="text/javascript" src="' . base_url('js/utility.js'). '"></script>');
 	define('DCR_UTILITY_JS', '<script type="text/javascript" src="' . base_url('js/dcr_utility.js'). '"></script>');
 	define('DCR_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.dcrgrid.js'). '"></script>');
-
+	define('DATAVALIDATION_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.datavalidation.js'). '"></script>');
 	
 	switch ($section) {
 		case 'home':
@@ -24,6 +24,7 @@
 			echo REMOTE_JQUERY_UI_MIN;
 			echo JQUERY_COMBOBOX;
 			echo DCR_PLUGIN_JS;
+			echo DATAVALIDATION_PLUGIN_JS;
 			echo UTILITY_JS;					
 			break;
 		case 'reports':
