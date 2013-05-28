@@ -1,5 +1,6 @@
-<div id="wrapper">
-<h3>Add Category</h3>
+<div class="wrapper">
+<h3 class="heading">Add Category</h3>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('master/categories'); ?>">Cancel New Category</a></div>
 	<div id="add_form">
 		<?php echo form_open(base_url() . 'master/categories/validateaddcategories');?>
 		<p><label>Category Name: </label> <input type="text" name="cat_name" /><span class="error"><?php echo form_error('cat_name');?></span></p>
@@ -12,7 +13,7 @@
 				<?php endforeach;?>
 				<?php endif;?>
 			</select><span class="error"><?php echo form_error('cat_parent');?></span>
-		<p><input type="submit" value="Add Category"/></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 	</div>
 </div>

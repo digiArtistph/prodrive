@@ -1,9 +1,14 @@
 <div class="wrapper">
-<h3 class="heading">Category View</h3>
+<h3 class="heading">Category</h3>
+<div class="minidashboard">
+    	<div class="panelOne">        	<p>Category Count: <strong><?php ''; ?></strong></p>            
+        </div>        
+  </div>
+<div class="toolbar"><a href="<?php echo base_url() . 'master/categories/section/addcategories'; ?>">Add New Category</a></div>
 	<div id="view_form">
 	<?php if(! empty( $categories ) ):?>
 	
-	<table>
+	<table class="regdatagrid">
     	<thead>
         	<tr> 
             	<th>Categories</th> 
@@ -14,7 +19,7 @@
 		<?php foreach ($categories as $category):?>
 			<tr>
 				<td><?php echo $category->category;?></td>
-            	<td><a href="<?php echo base_url() . 'master/categories/section/editcategories/' . $category->categ_id;?>">edit</a>|<a href="<?php echo base_url() . 'master/categories/section/deletecategories/' . $category->categ_id;?>">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/categories/section/editcategories/' . $category->categ_id;?>">edit</a>|<a class="reggriddelbtn" href="<?php echo base_url() . 'master/categories/section/deletecategories/' . $category->categ_id;?>">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
@@ -23,5 +28,5 @@
 		<p>No Categories Added!!!</p>
 	<?php endif;?>
 	</div>
-	<p><a href="<?php echo base_url() . 'master/categories/section/addcategories'; ?>">Add Categories</a></p>
+	
 </div>

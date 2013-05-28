@@ -1,5 +1,6 @@
-<div id="wrapper">
-<h3>Edit Category</h3>
+<div class="wrapper">
+<h3 class="heading">Edit Category</h3>
+<div class="toolbar"><a class="canceleditbtn" href="<?php echo base_url('master/categories'); ?>">Cancel Edit Category</a></div>
 	<div id="add_form">
 	<?php if(! empty($categories)):?>
 	
@@ -30,7 +31,7 @@
 				
 			</select><span class="error"><?php echo form_error('cat_parent');?></span>
 			
-		<p><input type="submit" value="Edit Category"/></p>
+		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 		
 		<?php endif;?>

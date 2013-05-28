@@ -66,6 +66,7 @@ a {text-decoration:none;}
 .wrapper form p input[type=text]{color:#505050; padding:.5em; width:15em;}
 .wrapper form p.submit {margin-left:12em;}
 .wrapper form p input[type=submit] {color:#505050; padding:.25em .5em; width:10em;}
+.wrapper form p select {color:#505050; padding:.25em .5em; width:18em;}
 
 .wrapper .heading {font-size:1em; color:#636363;}
 
