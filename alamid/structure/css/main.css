@@ -88,14 +88,29 @@ a {text-decoration:none;}
 #datagrid td .EditBtn {color:#00b940;}
 #datagrid td .DelBtn {color:#d91e00;}
 
+/* generic tables */
+.regdatagrid {border-collapse: collapse; width:100%;}
+.regdatagrid th {border-bottom:1px solid #cecece; color:#636363; font-size:.9em; text-align:left;}
+.regdatagrid td {color:#636363; font-size:.9em; padding:.5em 0;}
+.regdatagrid td.currency {font-weight:bold; text-align:right; padding-right:1em;}
+.regdatagrid tbody tr {border-bottom:1px solid #cecece !important;}
+.regdatagrid td .reggriddelbtn {color:#d91e00;}
+
+/* toolbar */
+.toolbar {margin-bottom:1em;}
+.toolbar a {background:-moz-linear-gradient(top, #4a86cc, #2e57b4); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
+.toolbar .cancenewlbtn {background:-moz-linear-gradient(top, #f4640f, #f7913e); border-radius:4px; color:#fff; font-size:.8em; margin-left:145px; padding:.5em 1em;}
+.noaddmorebtn {background:-moz-linear-gradient(top, #f4640f, #f7913e); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
+.addnmorebtn {background:-moz-linear-gradient(top, #4e9e19, #62c71f); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
+
 /* footer */
-#footer {/*background:-moz-linear-gradient(top, #eaf5fb, #e0eef9)*/background:#ececec; clear:both; float:left; min-height:30px; padding-top:1.5em; width:100%;}
+#footer {background:#ececec; clear:both; float:left; min-height:30px; padding-top:1.5em; width:100%;}
 #footer .leftpane p, #footer .rightpane p {font-size:.8em; color:#666666;}
 #footer .leftpane p a, #footer .rightpane p a {color:#666666; text-decoration:underline;}
 #footer .leftpane p a:hover, #footer .rightpane p a:hover {text-decoration:none;}
-#footer .leftpane {/*background:#ccc; */float:left; padding-left:1em; width:48%;}
+#footer .leftpane {float:left; padding-left:1em; width:48%;}
 
-#footer .rightpane {/*background:#aeaeae;*/ float:right; text-align:right; padding-right:1em; width:48%;}
+#footer .rightpane {float:right; text-align:right; padding-right:1em; width:48%;}
 
 
 /* login template */

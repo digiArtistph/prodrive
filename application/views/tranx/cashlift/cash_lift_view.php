@@ -1,10 +1,13 @@
-<div id="wrapper">
-<h3>Cash Lift</h3>
+<div class="wrapper">
+<h3 class="heading">Cash Lift</h3>
+<div class="minidashboard">
+    	<div class="panelOne">        	<p>Total Cash Lift: Php <strong><?php echo $total; ?></strong></p>            
+        </div>        
+    </div><div class="toolbar"><a href="<?php echo base_url('tranx/cashlift/section/addcashlift'); ?>">Add New Cash Lift</a></div>
 	<div id="view_form">
-	<p><a href="<?php echo base_url('tranx/cashlift/section/addcashlift'); ?>">Add New Cash Lift</a></p>
 	<?php if(! empty( $cashlifts ) ):?>
 	
-	<table>
+	<table class="regdatagrid">
     	<thead>
         	<tr> 
             	<th>Particulars</th>
@@ -18,16 +21,11 @@
             	<tr>
                 	<td><?php echo $cl->particulars; ?></td>
                     <td><?php echo $cl->refno; ?></td>
-                    <td><?php echo $cl->amnt; ?></td>
-                    <td><a href="<?php echo base_url('tranx/cashlift/section/delete') . '/' . $cl->cl_id; ?>">Delete</a></td>
+                    <td class="currency"><?php echo $cl->amnt; ?></td>
+                    <td><a class="reggriddelbtn" href="<?php echo base_url('tranx/cashlift/section/delete') . '/' . $cl->cl_id; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
-            <tr>
-            	<td colspan="4"><?php echo 'Total: Php '. $total; ?></td>
-               	<td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            
 		</tbody>
     </table>
 	<?php else:?>

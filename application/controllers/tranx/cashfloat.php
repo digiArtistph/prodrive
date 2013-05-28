@@ -109,7 +109,7 @@ class Cashfloat extends CI_Controller {
 	}
 	
 	private function getTotalCashFloatAmount($resultset = array()) {
-		$total = 0;
+		$total = 0.00;
 		
 		foreach($resultset as $rec) {
 			$total += $rec->amnt;
