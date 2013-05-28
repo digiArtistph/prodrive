@@ -1,5 +1,5 @@
-<div id="wrapper">
-<h3>Feedback</h3>
+<div class="wrapper">
+<h3 class="heading">Feedback</h3>
 	<?php if(empty($feedback)):?>
 	<p>Opps something goes wrong</p>
 	<?php else :?>

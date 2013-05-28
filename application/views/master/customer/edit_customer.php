@@ -1,5 +1,6 @@
-<div id="wrapper">
-<h3>Edit Customer</h3>
+<div class="wrapper">
+<h3 class="heading">Edit Customer</h3>
+<div class="toolbar"><a class="canceleditbtn" href="<?php echo base_url('master/customer'); ?>">Cancel Edit Customer</a></div>
 	<div id="edit_form">
 		<?php foreach ($customers as $customer):?>
 		<?php echo form_open(base_url() . 'master/customer/validateeditcustomer');?>
@@ -12,7 +13,7 @@
 		<p><label>Status :</label> 
 		Active <input type="radio" name="cu_status" value="1" <?php if($customer->status == 1){echo 'checked="checked"';}?> />
 		In active <input type="radio" name="cu_status"  value="0"  <?php if($customer->status == 0){echo 'checked="checked"';}?>/><span class="error"><?php echo form_error('cu_status');?></span></p>
-		<p><input type="submit" value="Edit Customer"/></p>
+		<p class="submit"><input type="submit" value="Edit Customer"/></p>
 		<?php echo form_close();?>
 		<?php endforeach;?>
 	</div>

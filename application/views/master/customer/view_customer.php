@@ -1,5 +1,9 @@
 <div class="wrapper">
-<h3 class="heading">Customer View</h3>
+<h3 class="heading">Customers</h3>
+<div class="minidashboard">
+    	<div class="panelOne">        	<p>Customer Count: <strong><?php ''; ?></strong></p>            
+        </div>        
+    </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/customer/section/addcustomer'; ?>">Add Customer</a></div>
 	<div id="view_form">
 	<?php if(! empty( $customers ) ):?>

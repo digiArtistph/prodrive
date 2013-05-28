@@ -101,6 +101,7 @@ a {text-decoration:none;}
 .toolbar {margin-bottom:1em;}
 .toolbar a {background:-moz-linear-gradient(top, #4a86cc, #2e57b4); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
 .toolbar .cancenewlbtn {background:-moz-linear-gradient(top, #f4640f, #f7913e); border-radius:4px; color:#fff; font-size:.8em; margin-left:145px; padding:.5em 1em;}
+.toolbar .canceleditbtn {background:-moz-linear-gradient(top, #f4640f, #f7913e); border-radius:4px; color:#fff; font-size:.8em; margin-left:145px; padding:.5em 1em;}
 .noaddmorebtn {background:-moz-linear-gradient(top, #f4640f, #f7913e); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
 .addnmorebtn {background:-moz-linear-gradient(top, #4e9e19, #62c71f); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
 
