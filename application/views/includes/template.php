@@ -27,6 +27,7 @@
                 	<li><span class="welcomeusermsg"><img src="<?php echo base_url('images/user_avatar.png'); ?>" /> <?php echo (isset($almd_userfullname)) ? $almd_userfullname . "!": "Welcome User!" ; ?></span></li>
                     <li><a href="<?php echo base_url('login/logout'); ?>">Log Out</a></li>
                 </ul>
+                <div class="calendar"><i class="sprite calendaricon"></i>Today is: <?php echo longDate(curdate()); ?></div>
             </div>
         </div>
         

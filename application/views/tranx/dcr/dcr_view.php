@@ -1,16 +1,23 @@
+<div class="wrapper">
+<h3 class="heading">Daily Cash Entry</h3>
 <?php foreach($dcr as $hdrRec): ?>
-<?php echo form_open(); ?>
-<h3>Daily Collection Entry</h3>
-<input id="dcr_id" type="hidden" value="<?php echo $hdrRec->dcr_id; ?>" />
-<p><label>Tranx Date: </label><input type="text" name="tranxdate" value="<?php echo longDate($hdrRec->trnxdate); ?>"/></p>
-<p><label>User: </label><input type="text" name="user"  readonly="readonly" value="<?php echo $hdrRec->username; ?>"/></p>
-<p><label>Beginning Balance: </label><input type="text" value="<?php echo $hdrRec->begbal; ?>" readonly="readonly" /></p>
-<p><label>Cash Float: </label><input type="text" value="0.00" readonly="readonly" /></p>
-<p><label>Cash Lift: </label><input type="text" value="0.00" readonly="readonly" /></p>
-<p><label>Total Cash: </label><input type="text" value="0.00" readonly="readonly" /></p>
-<p><label>Total Check: </label><input type="text" value="0.00" readonly="readonly" /></p>
-<p><label>Grand Total: </label><input type="text" value="0.00" readonly="readonly" /></p>
+    <div class="minidashboard">
+    	<div class="panelOne">
+        	<p>Begining Balance: Php <?php echo $hdrRec->begbal; ?></p>
+            <p>Grand Total: Php</p>
+        </div>
+        <div class="panelTwo">
+        	<p>Cash Float: Php 250.00</p>
+            <p>Cash Lift: Php 500.00</p>
+        </div>
+         <div class="panelThree">
+        	<p>Total Check: Php 2500.00</p>
+            <p>Total Cash: Php 1500.00</p>
+        </div>
+    </div><div class="cleafix">&nbsp;</div>
 
+<?php echo form_open(); ?>
+<input id="dcr_id" type="hidden" value="<?php echo $hdrRec->dcr_id; ?>" />
 <?php endforeach; ?>
 
 <div id="dcrdatagrid">
@@ -18,3 +25,5 @@
 </div>
 
 <?php echo form_close(); ?>
+
+</div>

@@ -32,7 +32,7 @@
 			for(var dt in data) {
 				output += '<tr' + buildDataProp(data[dt]) + '>';
 //				console.log(data[dt].dcrdtl_id + " || " + data[dt].particulars + " || " + data[dt].refno + " || " + data[dt].paytype);
-				output += '<td>' + data[dt].particulars + '</td>' + '<td>' + data[dt].paytype + '</td>' + '<td>' + data[dt].refno + '</td>' + '<td>' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
+				output += '<td>' + data[dt].particulars + '</td>' + '<td>' + data[dt].paytype + '</td>' + '<td>' + data[dt].refno + '</td>' + '<td class="currency">' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 			}
 			$('#datagrid tbody').append(output);
@@ -155,7 +155,7 @@
 				output += '<td>' + mParticular + '</td>';
 				output += '<td>' + mTender + '</td>';
 				output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
-				output += '<td>' + mAmt + '</td>';
+				output += '<td class="currency">' + mAmt + '</td>';
 				output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 				
@@ -193,7 +193,7 @@
 			output += '<td>' + mParticular + '</td>';
 			output += '<td>' + mTender + '</td>';
 			output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
-			output += '<td>' + mAmt + '</td>';
+			output += '<td class="currency">' + mAmt + '</td>';
 			output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 			
 			// AJAX part here
