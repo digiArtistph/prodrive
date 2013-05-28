@@ -360,3 +360,6 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+/* added settings by kenn */
+date_default_timezone_set('Asia/Manila');

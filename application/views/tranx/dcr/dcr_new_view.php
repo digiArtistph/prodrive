@@ -1,3 +1,4 @@
+<div class="wrapper">
 <?php echo form_open(base_url('tranx/dcr/validatenewdcr')); ?>
 	<input type="hidden" name="cashierid" value="<?php echo $cashierid; ?>" />
     
@@ -6,3 +7,4 @@
     <p><label>Cashier: </label><input type="text" name="cashier" value="<?php echo $cashiername; ?>" /><?php echo form_error('cashier', '<span class="error">', '</span>'); ?></p>
     <p><input type="submit" value="Save" /></p>
 <?php echo form_close(); ?>
+</div>
