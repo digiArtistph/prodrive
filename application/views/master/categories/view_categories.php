@@ -1,5 +1,5 @@
-<div id="wrapper">
-<h3>Category View</h3>
+<div class="wrapper">
+<h3 class="heading">Category View</h3>
 	<div id="view_form">
 	<?php if(! empty( $categories ) ):?>
 	

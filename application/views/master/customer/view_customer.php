@@ -1,9 +1,10 @@
-<div id="wrapper">
-<h3>Customer View</h3>
+<div class="wrapper">
+<h3 class="heading">Customer View</h3>
+<div class="toolbar"><a href="<?php echo base_url() . 'master/customer/section/addcustomer'; ?>">Add Customer</a></div>
 	<div id="view_form">
 	<?php if(! empty( $customers ) ):?>
 	
-	<table>
+	<table class="regdatagrid">
     	<thead>
         	<tr> 
             	<th>Name</th>     
@@ -20,7 +21,7 @@
                 <td><?php if( empty($customer->addr) ){echo 'No Address';}else{ echo $customer->addr;}?></td>
                 <td><?php if( empty($customer->phone) ){echo 'No Phone number';}else{ echo $customer->phone;}?></td>
                 <td><?php if ( $customer->status == 1){ echo 'Active';}else{ echo 'In Active';}?></td>
-                <td><a href="<?php echo base_url() . 'master/customer/section/editcustomer/' . $customer->custid;?>">edit</a>|<a href="<?php echo base_url() . 'master/customer/section/deletecustomer/' . $customer->custid;?>">delete</a></td>
+                <td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/customer/section/editcustomer/' . $customer->custid;?>">edit</a>|<a class="reggriddelbtn" href="<?php echo base_url() . 'master/customer/section/deletecustomer/' . $customer->custid;?>">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
@@ -29,5 +30,5 @@
 		<p>No Customer Added!!!</p>
 	<?php endif;?>
 	</div>
-	<p><a href="<?php echo base_url() . 'master/customer/section/addcustomer'; ?>">Add Customer</a></p>
+	
 </div>
