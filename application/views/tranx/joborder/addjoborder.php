@@ -1,5 +1,7 @@
-<div>
-<h3>Job Order</h3>
+<div class="wrapper">
+<h3 class="heading">Job Order</h3>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel New Job Order</a></div>
+	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">Php 0.00</span></p></div>
 	<form>
 		<input class="joborderid" type="hidden" name="joborderid" value="0"/>
@@ -79,5 +81,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<p><input class="saveorder" type="button" value="Add Job Order"  /></p>
+	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
+	</div>
 </div>

@@ -1,5 +1,7 @@
-<div>
-<h3>Edit Job Order</h3>
+<div class="wrapper">
+<h3 class="heading">Edit Job Order</h3>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a></div>
+	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">
 		<?php if(!empty($jbo_orders)):?><?php $total=0; foreach ($jbo_orders as $job){ $total += ($job->laboramnt + $job->partmaterialamnt); } echo number_format($total, 2, '.', ''); else: echo 'Php 0.00'; endif;?></span></p></div>
 	<form>
@@ -132,5 +134,6 @@
 		<?php endif;?>
 		</tbody>
 	</table>
-	<p><input class="saveorder" type="button" value="Edit Job Order"  /></p>
+	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
+	</div>
 </div>
