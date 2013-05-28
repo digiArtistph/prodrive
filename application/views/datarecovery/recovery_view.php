@@ -1,7 +1,7 @@
 <div>
 	<h3>Load Data</h3>
 	
-	<?php echo form_open(base_url() . 'utility/validaterestore');?>
+	<?php echo form_open(base_url() . 'utility/datarecovery/validaterestore');?>
 	
 	<p><label>Select Source: </label><select  class="dir" name="dir"> 
 	<?php if(!empty($drivers)):?>

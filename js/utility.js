@@ -19,6 +19,48 @@ $(document).ready(function(){
 	addjodetails.click(submitadd);
 	clickbinder();
 	
+	 $( ".dialog" ).dialog({
+		 autoOpen: false,
+		 show: {
+			 effect: "fade",
+			 duration: 1000
+		 	},
+		 hide: {
+			 effect: "clip",
+			 duration: 1000
+		 	}
+		 });
+	$('.restore_db').click(function(){
+							var tr = $(this).closest("tr");
+							var input = {
+										'ajax' : 1,
+										'file_name' : tr.find("td:nth-child(2)").text()
+										}
+							
+							$.post(base_url + "utility/datarecovery/validaterestoredefault", input)
+							.success(function(data) {
+								if(data ==1){
+									tr.animate({ 
+								        'color': '#000000',
+								        backgroundColor: "#009ACD" 
+								    }, 1000);
+									tr.animate({ 
+								        'color': '#000000',
+								        backgroundColor: "#FFFFFF" 
+								    }, 1000);
+									$( ".dialog p").text("\"" + tr.find("td:nth-child(2)").text() +"\" has been restored!");
+									$( ".dialog" ).dialog("open");
+									
+									
+								}else{
+									$( ".dialog p").text("SOMETHINE WENT WRONG");
+									$( ".dialog" ).dialog();
+								}
+							});	
+						return false;
+						}
+					);
+	
 	
 	if( $('div.suggestion p span.total_amount').text() > 0){
 		var temptot =  parseFloat( $('div.suggestion p span.total_amount').text() );
@@ -496,7 +538,7 @@ $(document).ready(function(){
 			var input = {'directory' : dir.val()}
 			dataFile.html('<option value="none">Loading files</option>');
 			
-			$.post(base_url + "temp/dirdata", input)
+			$.post(base_url + "utility/datarecovery/dirdata", input)
 			.success(function(data) {
 				var options = jQuery.parseJSON(data);
 				if(options == ''){

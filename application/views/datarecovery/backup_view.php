@@ -1,7 +1,7 @@
 <div>
 	<h3>Backup Data</h3>
 	
-	<?php echo form_open(base_url() . 'utility/validatebackup');?>
+	<?php echo form_open(base_url() . 'utility/datarecovery/validatebackup');?>
 	<p><label>Destination Folder: </label><select class="drives" name="dir"> 
 	<?php if(!empty($drivers)):?>
 	<option selected="selected" value="">Select Drive</option>
