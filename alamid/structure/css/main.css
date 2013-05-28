@@ -46,7 +46,7 @@ a {text-decoration:none;}
 #menu .menucontainer ul li a {font-size:.8em; color:#666666;}
 #menu .menucontainer ul li a:hover {text-decoration:underline;}
 #menu .menucontainer li div ul li {border:none;}
-
+#menu .menucontainer li div ul li.submenuselected a {color:#f4640f; text-decoration:underline;}
 /* selected/hovered sub-menu */
 #menu .menucontainer li > div {visibility:hidden;}
 #menu .menucontainer li div.selected {visibility:visible;}

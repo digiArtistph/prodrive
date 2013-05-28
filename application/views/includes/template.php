@@ -24,10 +24,10 @@
             
             <div class="usercontextinfo">
             	<ul>
-                	<li><span class="welcomeusermsg"><img src="<?php echo base_url('images/user_avatar.png'); ?>" /> <?php echo (isset($almd_userfullname)) ? $almd_userfullname . "!": "Welcome User!" ; ?></span></li>
+                	<li><span class="welcomeusermsg"><img src="<?php echo base_url('images/user_avatar.png'); ?>" /> <?php echo (isset($almd_userfullname)) ? $almd_userfullname : "Welcome User!" ; ?></span></li>
                     <li><a href="<?php echo base_url('login/logout'); ?>">Log Out</a></li>
                 </ul>
-                <div class="calendar"><i class="sprite calendaricon"></i>Today is: <?php echo longDate(curdate()); ?></div>
+                <div class="calendar"><i class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
             </div>
         </div>
         
@@ -37,7 +37,7 @@
                 <li class="selected"><a  href="<?php echo base_url('tranx/dcr/'); ?>" >Transaction</a>
                 	<div class="selected">
                         <ul>
-                            <li><a href="<?php echo base_url('tranx/dcr'); ?>">DCR Entry</a></li>
+                            <li class="submenuselected"><a href="<?php echo base_url('tranx/dcr'); ?>">DCR Entry</a></li>
                             <li><a href="<?php echo base_url('tranx/joborder'); ?>">Job Order</a></li>
                             <li><a href="<?php echo base_url('tranx/cashfloat'); ?>">Cash Float</a></li>
                             <li><a href="<?php echo base_url('tranx/cashlift'); ?>">Cash Lift</a></li>
