@@ -1,6 +1,30 @@
 // JavaScript Document
+/**
+ * Provides data validation on the forms
+ * @author Mugs and Coffee
+ * @coder Kenneth "digiArtist_ph" P. Vallejos
+ * @since Wednesday, May 29, 2013
+ * @version 1.1
+ * 
+ * Sample Code
+ * 	{html}
+ * 		<p><label>Beginning Balance: </label><input class="datavaldecimal" type="text" name="begbal" value="0.00" /></p>
+ * 
+ * 	{javascript file}
+ * 		// defines variable function
+ * 		var customeFunction = function() { alert ("Called from callback function"); }
+ * 		
+ * 		// Data Validation
+ *		$('.amnt, .datavaldecimal').decimal({cbFunction: customeFunction});
+ *
+ *		//parameter
+ *		message : (optional) Custome message. You need to set <prompt=true> parameter
+ *		decimalPlaces	: (optional) number of digits after the decimal point
+ *		prompt	: (optional) true|false
+ *		cbFunction	: (optional) this should be a variable function. This will enable the developer to process his/her own algo
+ *
+ */
 (function($){
-	
 	$.fn.decimal = function(options) {
 		var settings = $.extend({
 						message : 'Numeric values only',
@@ -28,10 +52,7 @@
 						
 					curElement.val('0.00');					
 				} else {
-					// calls callback function - user-defined function
-					// alert("'Calling user-defined function");
-					//alert(settings.cbFunction);
-					settings.cbFunction;
+					settings.cbFunction();
 				}
 				
 			}

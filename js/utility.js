@@ -80,11 +80,11 @@ $(document).ready(function(){
 	$('select[name="color"]').combobox();
 	$(".jodet tbody tr:even").css("background-color", "#5CB3FF");
 	$(".jodet tbody tr:odd").css("background-color", "#CDFFFF");
-	
+
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
-	$('.amnt').decimal();
+	$('.amnt, .datavaldecimal').decimal();
 	
 	function html2json() {
 		   var json = '{';
