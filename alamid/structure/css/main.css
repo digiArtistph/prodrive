@@ -7,7 +7,7 @@ a, a img, img {border:0;}
 div, p, ul, li {font:14px "Lucida Sans Unicode", arial, sans-serif;}
 ul, li {list-style:none;}
 a {text-decoration:none;}
-
+.error {color:red; font-size:.9em; padding-left:5px;}
 .clearfix {clear:both;}
 .sprite {background:url(../../../images/splashy.png);}
 
@@ -100,7 +100,7 @@ a {text-decoration:none;}
 .regdatagrid td.currency {font-weight:bold; text-align:right; padding-right:1em;}
 .regdatagrid tbody tr {border-bottom:1px solid #cecece !important;}
 .regdatagrid td .reggriddelbtn {color:#d91e00;}
-.regdatagrid td .reggrideditbtn {color:#00B940;}
+.regdatagrid td .reggrideditbtn, .regdatagrid td .restore_db {color:#00B940;}
 
 /* toolbar */
 .toolbar {margin-bottom:1em;}

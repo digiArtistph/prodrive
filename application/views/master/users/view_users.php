@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Users</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>User's Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Users Count: <strong><?php ''; ?></strong></p>            
         </div>        
   </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/users/section/addusers'; ?>">Add New User</a></div>

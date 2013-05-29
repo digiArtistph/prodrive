@@ -1,7 +1,11 @@
-<div id="wrapper">
+<div class="wrapper">
 	
-    <h3>Data Source view</h3>
-    <table>
+    <h3 class="heading">Current Backup Data</h3>
+    <div class="minidashboard">
+    	<div class="panelOne">        	<p>Backup Database Count: <strong><?php echo ''; ?></strong></p>            
+        </div>        
+    </div>
+    <table class="regdatagrid">
     	
 	<?php if(empty($sqlfiles)):?>
 	<thead>
@@ -17,7 +21,7 @@
 		<thead>
         	<tr> 
         		<th>No.</th> 
-            	<th>Stored data on datawarehouse</th> 
+            	<th>Prodrive Database</th> 
             	<th>Action</th> 
             </tr>
         </thead>

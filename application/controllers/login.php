@@ -38,7 +38,7 @@ class Login extends CI_Controller{
 				);
 				$this->sessionbrowser->setInfo($params);
 				
-				redirect(base_url());
+				redirect(base_url('tranx/dcr'));
 			}else{
 				$this->_loguser($this->input->post('username'), 0);
 				$data['uerror'] = 'Hi ' . $this->input->post('username') . '! Your username and password doesn\'t match';

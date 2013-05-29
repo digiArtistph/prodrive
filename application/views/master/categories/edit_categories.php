@@ -7,7 +7,7 @@
 	<?php foreach ($categories as $category):?>
 		<?php echo form_open(base_url() . 'master/categories/validateeditcategories');?>
 		<input type="hidden" name="cat" value="<?php echo $category->categ_id;?>" />
-		<p><label>Category Name: </label> <input type="text" name="cat_name" value="<?php echo $category->category;?>"/><span class="error"><?php echo form_error('cat_name');?></span></p>
+		<p><label>Category Name: </label> <input type="text" name="cat_name" value="<?php echo $category->category;?>"/><?php echo form_error('cat_name', '<span class="error">','</span>');?></p>
 		<?php endforeach;?>
 		
 		<p><label>Parent</label>
@@ -29,7 +29,7 @@
 			<?php endif;?>
 			
 				
-			</select><span class="error"><?php echo form_error('cat_parent');?></span>
+			</select><?php echo form_error('cat_parent','<span class="error">', '</span>');?>
 			
 		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>

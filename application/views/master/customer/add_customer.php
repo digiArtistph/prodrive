@@ -6,8 +6,8 @@
 		<p><label>First name: </label> <input type="text" name="fname" /><?php echo form_error('fname', '<span class="error">', '</span>');?></p>
 		<p><label>Middle name: </label> <input type="text" name="mname" /><?php echo form_error('mname', '<span class="error">', '</span>');?></p>
 		<p><label>Last name: </label> <input type="text" name="lname" /><?php echo form_error('lname', '<span class="error">','</span>' );?></p>
-		<p><label>Address: </label> <input type="text" name="addr" /><span class="error"><?php echo form_error('addr');?></span></p>
-		<p><label>Phone No. : </label> <input type="text" name="phone" /><span class="error"><?php echo form_error('phone');?></span></p>
+		<p><label>Address: </label> <input type="text" name="addr" /><?php echo form_error('addr', '<span class="error">','</span>' );?></p>
+		<p><label>Phone No. : </label> <input type="text" name="phone" /><?php echo form_error('phone', '<span class="error">','</span>' );?></p>
 		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 	</div>
