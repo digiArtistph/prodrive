@@ -85,6 +85,7 @@ $(document).ready(function(){
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
 	$('.amnt, .datavaldecimal').decimal();
+	$('.email').mncemail();
 	
 	function html2json() {
 		   var json = '{';

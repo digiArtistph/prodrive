@@ -61,6 +61,44 @@
 		
 	}
 
-	// email
+/**
+ * Provides data validation on the forms
+ * @author Mugs and Coffee
+ * @coder Kenneth "digiArtist_ph" P. Vallejos
+ * @since Wednesday, May 29, 2013
+ * @version 1.1
+ * 
+ */
+	$.fn.mncemail = function() {
+		
+		return this.each(function(options){
+			var settings = $.extend({
+									defaultEmail : 'info@mugsandcoffee.biz',
+									message	: "Not a valid email",
+									prompt	: true,
+									cbFunction : null
+								}, options);
+								
+			var curElement = $(this);
+			var patternEmail = /([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/;
+			 
+			// event handler
+			curElement.bind('blur', function(){
+				if(patternEmail.test(curElement.val()) == false) {
+					
+					if(null !== settings.cbFunction){
+						// implements custom algo
+						settings.cbFunction();
+					} else {
+						if(settings.prompt)
+							alert(settings.message);
+						
+						curElement.val(settings.defaultEmail);
+					}
+				}
+			});
+			
+		});		
+	}
 	
 })(jQuery);
