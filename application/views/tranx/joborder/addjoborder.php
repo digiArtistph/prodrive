@@ -63,7 +63,7 @@
 		</tbody>
 	</table>
 	
-	<table class="jodet" >
+	<table class="jodet regdatagrid" >
 		<thead>
 			<tr>
 				<th>No.</th>

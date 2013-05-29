@@ -20,7 +20,7 @@
                         <li <?php isTabSelected('labortype', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/labortype'); ?>">Labor Type</a></li>
                         <li <?php isTabSelected('users', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/users'); ?>">Users</a></li>
                         <li <?php isTabSelected('vehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/vehicle'); ?>">Vehicles</a></li>
-                        <li><a href="#">Colors</a></li>
+                        <li <?php isTabSelected('color', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/color'); ?>">Colors</a></li>
                     	</ul>
                     </div>
                 </li>

@@ -84,7 +84,7 @@ $(document).ready(function(){
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
-	$('.datavaldecimal').decimal();
+	$('.amnt').decimal();
 	
 	function html2json() {
 		   var json = '{';
@@ -252,7 +252,7 @@ $(document).ready(function(){
 	
 	function submitadd(){
 		
-		if( Validateamount() & Validatelabor() & Validatejotype() ){
+		if( Validatelabor() & Validatejotype() ){
 
 			$('.jodet tbody tr td[colspan="3"]').remove();
 			if( jotypeqry.val() == 'labor' ){
@@ -412,18 +412,6 @@ $(document).ready(function(){
 		}
 	}
 	
-	function Validateamount(){
-		
-		var decimal = $('.amnt').val(); 
-		if( decimal.match(/^[0-9]+(\.\d+){0,2}?$/) ) { 
-			return true;
-		} else { 
-			var message = 'Please use decimal input for Amount';
-			errorreciever(message);
-			return false;
-		}
-		
-	}
 	
 	laborqry.keydown( function( event ) {
 		
