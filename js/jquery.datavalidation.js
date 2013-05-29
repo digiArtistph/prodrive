@@ -3,30 +3,41 @@
 	
 	$.fn.decimal = function(options) {
 		var settings = $.extend({
-						message : 'Error',
-						decimalPlaces : 2
+						message : 'Numeric values only',
+						decimalPlaces : 2,
+						prompt : false,
+						cbFunction : null
 					}, options);
 		
 		var curElement = $(this);
-		var isNumber = false;
-		var hasDecimal = false;
-		var decimalCount = 2;
-		var patternOne = '/[\d]+\.[\d]{' + settings.decimalPlaces + '}/';
-		var patternIsNumber = /[\d]+/;
-		var patternnTwo = '';
-		
+	
 		// event handlers
 		curElement.bind('blur', function(){
-			// alert(settings.message + settings.decimalPlaces);
-			if(! isNaN(curElement.val())) {
-				alert('Number ni bai');	
-			} else {
-				alert('Dili ni number bai');	
+			
+			// checks if the input is a number
+			if(!isNaN(curElement.val())) {
+				currentValue = curElement.val();
+				currentValue = parseFloat(currentValue);
+				curElement.val(currentValue.toFixed(settings.decimalPlaces));
+				
+			} else { // not a number
+				
+				if(null === settings.cbFunction) {
+					if(settings.prompt)
+						alert(settings.message);
+						
+					curElement.val('0.00');					
+				} else {
+					// calls callback function - user-defined function
+					// alert("'Calling user-defined function");
+					//alert(settings.cbFunction);
+					settings.cbFunction;
+				}
+				
 			}
+			
 		});
-		
-		
-		
 	}
 
+	
 })(jQuery);

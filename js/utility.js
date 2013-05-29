@@ -84,7 +84,7 @@ $(document).ready(function(){
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
-	$('#datavaldecimal').decimal({message:'Hi error.'});
+	$('.datavaldecimal').decimal({decimalPlaces: 3, message: 'Please supply a numeric character only', prompt: true});
 	
 	function html2json() {
 		   var json = '{';
