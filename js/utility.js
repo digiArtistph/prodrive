@@ -80,7 +80,7 @@ $(document).ready(function(){
 	$('select[name="color"]').combobox();
 	$(".jodet tbody tr:even").css("background-color", "#5CB3FF");
 	$(".jodet tbody tr:odd").css("background-color", "#CDFFFF");
-
+	var testfunc = function(){alert("Called from callback function");}
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation

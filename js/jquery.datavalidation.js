@@ -12,10 +12,10 @@
  * 
  * 	{javascript file}
  * 		// defines variable function
- * 		var customeFunction = function() { alert ("Called from callback function"); }
+ * 		var customFunction = function() { alert ("Called from callback function"); }
  * 		
  * 		// Data Validation
- *		$('.amnt, .datavaldecimal').decimal({cbFunction: customeFunction});
+ *		$('.amnt, .datavaldecimal').decimal({cbFunction: customFunction});
  *
  *		//parameter
  *		message : (optional) Custome message. You need to set <prompt=true> parameter
@@ -26,17 +26,18 @@
  */
 (function($){
 	$.fn.decimal = function(options) {
-		var settings = $.extend({
+		return this.each(function(){ // this line ensures that method chaining will be implement on all matched elements.
+			var settings = $.extend({
 						message : 'Numeric values only',
-						decimalPlaces : 2,
-						prompt : false,
-						cbFunction : null
-					}, options);
-		
-		var curElement = $(this);
-	
-		// event handlers
-		curElement.bind('blur', function(){
+							decimalPlaces : 2,
+							prompt : false,
+							cbFunction : null
+						}, options);
+			
+			var curElement = $(this);
+			
+			// event handlers
+			curElement.bind('blur', function(){
 			
 			// checks if the input is a number
 			if(!isNaN(curElement.val())) {
@@ -51,14 +52,15 @@
 						alert(settings.message);
 						
 					curElement.val('0.00');					
-				} else {
-					settings.cbFunction();
-				}
-				
-			}
-			
+					} else {
+						settings.cbFunction();
+					}				
+				}			
+			});
 		});
+		
 	}
 
+	// email
 	
 })(jQuery);
