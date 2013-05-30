@@ -442,10 +442,6 @@ class Joborder extends CI_Controller{
 			$this->load->model('mdl_autocomplete');
 			$temp = $this->mdl_autocomplete->findkeywordsingle('labortype', 'name' , $this->input->post('term'));
 			$objarr = json_encode($temp);
-// 			$temp = array(
-// 					"name" => "tongbens"
-// 					);
-// 			$objarr = json_encode($temp);
 			echo $objarr;
 		}
 	}
