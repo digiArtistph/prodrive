@@ -92,11 +92,12 @@ $(document).ready(function(){
 	
 	$(".jodet tbody tr:even").css("background-color", "#5CB3FF");
 	$(".jodet tbody tr:odd").css("background-color", "#CDFFFF");
-
+	var testfunc = function(){alert("Called from callback function");}
 	// DCR Plugin
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
 	$('.amnt, .datavaldecimal').decimal();
+	$('.email').mncemail();
 	
 	function html2json() {
 		   var json = '{';
