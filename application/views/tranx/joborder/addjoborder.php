@@ -17,49 +17,10 @@
 		<input class="clr_id" type="hidden" value="0"/>
 		<p><label>Contact No.</label> <input type="text" name="number"/></p>
 	</form>
-	<table>
-		<thead>
-			<tr>
-				<td>Job Type</td>
-				<td class="jotypename">Labor/Parts/Material</td>
-				<td>Details</td>
-				<td>Amount</td>
-				<td>Action</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td><select class="jotype">
-					<option value="" selected="selected">Select Job Type</option>
-					<option value="labor">Labor</option>
-					<option value="Parts or Materials">Parts/Materials</option>
-				</select></td>
-				<td><input class="labor" type="text" /></td>
-				<td><input class="det" type="text" /></td>
-				<td><input class="amnt" type="text" /></td>
-				<td><input class="addjodetails" type="button" value="Add" /></td>
-			</tr>
-		</tbody>
-	</table>
-	
-	<table class="jodet regdatagrid" >
-		<thead>
-			<tr>
-				<th>No.</th>
-				<th>Job Type</th>
-				<th>Labor</th>
-				<th>Parts/Material</th>
-				<th>Details</th>
-				<th>Amount</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td colspan="3">No Data has been added</td>
-			</tr>
-		</tbody>
-	</table>
+
+	<div class="jo_buildform">
+	</div>
+
 	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
 	</div>
 </div>
