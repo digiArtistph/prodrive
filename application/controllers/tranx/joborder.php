@@ -39,6 +39,12 @@ class Joborder extends CI_Controller{
 	
 	public function testsp(){
 		$this->db->query("CALL sp_create_jo_cache()");
+		
+		
+		
+	}
+	
+	public function testsp2(){
 		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from Php', 50.35));
 		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
 		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from script', 525.50));
@@ -47,7 +53,6 @@ class Joborder extends CI_Controller{
 		$tmp = $this->db->query("SELECT * FROM tmp_jo_details_cache")->result();
 		call_debug($record, FALSE);
 		call_debug($tmp);
-		
 	}
 	
 	
