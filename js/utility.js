@@ -473,7 +473,11 @@ $(document).ready(function(){
 						});
 						
 					}
-			}
+			},
+			{select : function(evt, u) {
+				// call your function, that will fill the hidden field here
+				alert("You've click me " +  u.item.label);
+			}}
 	);
 	
 	vehicleqry.autocomplete(
