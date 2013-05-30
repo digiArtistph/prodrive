@@ -31,11 +31,26 @@ $(document).ready(function(){
 		 	}
 		 });
 	 
-	$('.quicksearch').click(function(){
-						//$('#container').append('<div class=\"dialog\" title=\"Restoring Database\"><p></p></div>');
-						$( ".dialog" ).dialog("open");
-						alert("sd");
-						return false;
+	 var quick = 0;
+	$('.quicksearch').click(function() {
+		if(quick == 0){
+			$('<div title="Job History"><p><label>Search : </label><input type="text" name="jo_date" value="" /></p></div>').dialog({
+				show: {
+					effect: "slide",
+					direction: "left",
+					duration: 1000
+			 		},
+				hide: {
+					effect: "slide",
+					direction: "left",
+					duration: 1000
+			 	}
+			});
+			quick = 1;
+		}else{
+			return false;
+		}
+		
 	});
 	$('.restore_db').click(function(){
 							var tr = $(this).closest("tr");
@@ -75,9 +90,6 @@ $(document).ready(function(){
 		$('div.suggestion p span.total_amount').text( 'Php ' + totalprice.toFixed(2));
 	}
 	
-	$('select[name="vehicle"]').combobox();
-	$('select[name="customer"]').combobox();
-	$('select[name="color"]').combobox();
 	$(".jodet tbody tr:even").css("background-color", "#5CB3FF");
 	$(".jodet tbody tr:odd").css("background-color", "#CDFFFF");
 	var testfunc = function(){alert("Called from callback function");}
@@ -122,12 +134,21 @@ $(document).ready(function(){
 					 'color'	: $('input[name="color"]').val(),
 					 'number'	: $('input[name="number"]').val()
 			 		}
-			$('input[name="customer"]').val(tempc);
-			$('input[name="vehicle"]').val(tempv);
-			$('input[name="color"]').val(tempcr);
+			
+			alert( $('input[name="jo_number"]').val() );
+			alert( $('.joborderid').val() );
+			alert( joborderdetails );
+			alert( $('input[name="jo_date"]').val() );
+			alert( $('input[name="customer"]').val() );
+			alert( $('input[name="vehicle"]').val() );
+			alert( $('input[name="addr"]').val() );
+			alert( $('input[name="plate"]').val() );
+			alert( $('input[name="color"]').val() );
+			alert( $('input[name="number"]').val() );
+			
 			$.post(base_url + "tranx/joborder/validateorder", postdata)
 			.success(function(data) {
-				//alert(data);
+				
 				var item = jQuery.parseJSON(data);
 				
 				if (item.flag == 0){
@@ -182,51 +203,37 @@ $(document).ready(function(){
 			return true;
 		}
 	}
-	
-	var tempcr='';
+
+
 	function validateColor(){
-		tempcr = $('input[name="color"]').val();
-		if( $('select[name="color"]').val() != ''  ){
-			$('input[name="color"]').val( $('select[name="color"]').val() );
+
+		if( $('input[name="color"]').val() == '' ){
+			var message = 'Job Order Color has empty field';
+				errorreciever(message);
+			return false;
+		}else{
+			return true;
 		}
-		return true;
 	}
-	
-	$('input[name="customer"]').keypress(function() {
-		$('select[name="customer"]').val( "" ).attr('selected',true);
-	});
-	
-	var tempc = '';
+
 	function validateCustomer(){
-		tempc = $('input[name="customer"]').val();
 		if( $('input[name="customer"]').val() == '' ){
 			var message = 'Job Order Customer has empty field';
 			errorreciever(message);
 			return false;
 		}else{
 			
-			if( $('select[name="customer"]').val() != ''  ){
-				$('input[name="customer"]').val( $('select[name="customer"]').val() );
-			}
 			return true;
 		}
 	}
-	
-	var tempv='';
-	$('input[name="vehicle"]').keypress(function() {
-		$('select[name="vehicle"]').val( "" ).attr('selected',true);
-	});
-	
+
 	function validateVehicle(){
-		tempv = $('input[name="vehicle"]').val();
 		if( $('input[name="vehicle"]').val() == '' ){
-			var message = 'Job Order Vehicle has empty field';
-			errorreciever(message);
-			return false;
+				var message = 'Job Order Vehicle has empty field';
+				errorreciever(message);
+				return false;
 		}else{
-			if( $('select[name="vehicle"]').val() != ''  ){
-				$('input[name="vehicle"]').val( $('select[name="vehicle"]').val() );
-			}
+			
 			return true;
 		}
 	}
