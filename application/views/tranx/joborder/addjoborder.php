@@ -5,38 +5,14 @@
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">Php 0.00</span></p></div>
 	<form>
 		<input class="joborderid" type="hidden" name="joborderid" value="0"/>
-		<p><label>Job Order No.:</label> <input type="text" name="jo_number" value="" /></p>
-		<p><label>Date:</label> <input type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
-		<p><label>Customer: </label><select name="customer">
-			<option value=""></option>
-			<?php if (!empty($customers)):?>
-			<?php foreach ($customers as $customer):?>
-			<option value="<?php echo $customer->custid;?>"><?php echo ucfirst($customer->lname) . ', ' . ucfirst($customer->fname). ' ' . ucfirst($customer->mname[0] . '.');?></option>
-			<?php endforeach;?>
-			<?php endif;?>
-			
-		</select></p>
-		<p><label>Vehicle: </label><select name="vehicle">
-			<option value=""></option>
-			<?php if (!empty($vehicles)):?>
-			<?php foreach ($vehicles as $vehicle):?>
-			<option value="<?php echo $vehicle->v_id;?>"><?php echo $vehicle->make;?></option>
-			<?php endforeach;?>
-			<?php endif;?>
-			
-		</select></p>
-		<p><label>Address:</label> <input type="text" name="addr"/></p>
-		<p><label>Plate:</label> <input type="text" name="plate"/></p>
-		<p><label>Color: </label><select name="color">
-			<option value=""></option>
-			<?php if (!empty($colors)):?>
-			<?php foreach ($colors as $color):?>
-			<option value="<?php echo $color->clr_id;?>"><?php echo $color->name;?></option>
-			<?php endforeach;?>
-			<?php endif;?>
-			
-		</select></p>
-		<p><label>Contact No.:</label> <input type="text" name="number"/></p>
+		<p><label>Job Order No.</label> <input type="text" name="jo_number" value="" /></p>
+		<p><label>Date</label> <input type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
+		<p><label>Customer </label> <input class="customer" type="text" name="customer" /></p>
+		<p><label>Vehicle </label> <input class="vehicle" type="text" name="vehicle" /></p>
+		<p><label>Address</label> <input type="text" name="addr"/></p>
+		<p><label>Plate</label> <input type="text" name="plate"/></p>
+		<p><label>Color</label> <input class="color" type="text" name="color"/></p>
+		<p><label>Contact No.</label> <input type="text" name="number"/></p>
 	</form>
 	<table>
 		<thead>

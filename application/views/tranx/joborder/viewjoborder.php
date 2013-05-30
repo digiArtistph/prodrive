@@ -9,14 +9,14 @@
 	<table class="regdatagrid">
 		<thead>
 			<tr>
-				<th>Job Order No.</th>
+				<th>Order No.</th>
 				<th>Vehicle</th>
-				<th>customer</th> 	
+				<th>Customer</th> 	
 				<th>Plate No.</th> 	
-				<th>color</th> 	
-				<th>contactnumber</th>
-				<th>address</th>
-				<th>trnxdate</th>
+				<th>Color</th> 	
+				<th>Contact No.</th>
+				<th>Address</th>
+				<th>Trnxdate</th>
 				<th>Action</th>
 			</tr>
 		</thead>

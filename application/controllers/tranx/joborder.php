@@ -192,6 +192,7 @@ class Joborder extends CI_Controller{
 	}
 	
 	public function validateorder(){
+		
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 		
@@ -214,7 +215,6 @@ class Joborder extends CI_Controller{
 			$pattern = "/^[0]$/";
 			
 			if($joborder != 0){
-				
 				
 				$vehicle = $this->input->post('vehicle');
 				$color = $this->input->post('color');
