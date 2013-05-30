@@ -384,7 +384,27 @@ class Joborder extends CI_Controller{
 			show_error('Please Check Url again');
 		}else{
 			$this->load->model('mdl_autocomplete');
-			$temp = $this->mdl_autocomplete->findkeyword('vehicle', 'make' , $this->input->post('term'));
+			$arr = $this->mdl_autocomplete->findkeyword('vehicle', 'v_id', 'make' , $this->input->post('term'));
+			$json = '[';
+			foreach ($arr as $key){
+				$json = $json . '{"label":"' . $key['make'] . '", "val": "' . $key['v_id'] . '"},';
+			}
+			$json = substr($json, 0, strlen($json)-1);
+			$json = $json. ']';
+			echo $json;
+		}
+	}
+	
+	public function autocomplete_customer(){
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+	
+		$validation->set_rules('term', '',  'required');
+		if($validation->run() === FALSE) {
+			show_error('Please Check Url again');
+		}else{
+			$this->load->model('mdl_autocomplete');
+			$temp = $this->mdl_autocomplete->findkeywordname('customer', 'fname', 'mname', 'lname' , $this->input->post('term'));
 			$objarr = json_encode($temp);
 			echo $objarr;
 		}
@@ -399,9 +419,14 @@ class Joborder extends CI_Controller{
 			show_error('Please Check Url again');
 		}else{
 			$this->load->model('mdl_autocomplete');
-			$temp = $this->mdl_autocomplete->findkeyword('color', 'name' , $this->input->post('term'));
-			$objarr = json_encode($temp);
-			echo $objarr;
+			$arr = $this->mdl_autocomplete->findkeyword('color', 'clr_id' ,'name' , $this->input->post('term'));
+			$json = '[';
+			foreach ($arr as $key){
+				$json = $json . '{"label":"' . $key['name'] . '", "val": "' . $key['clr_id'] . '"},';
+			}
+			$json = substr($json, 0, strlen($json)-1);
+			$json = $json. ']';
+			echo $json;
 		}
 	}
 	
@@ -415,7 +440,7 @@ class Joborder extends CI_Controller{
 			return false;
 		}else{
 			$this->load->model('mdl_autocomplete');
-			$temp = $this->mdl_autocomplete->findkeyword('labortype', 'name' , $this->input->post('term'));
+			$temp = $this->mdl_autocomplete->findkeywordsingle('labortype', 'name' , $this->input->post('term'));
 			$objarr = json_encode($temp);
 // 			$temp = array(
 // 					"name" => "tongbens"

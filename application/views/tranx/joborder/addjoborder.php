@@ -8,10 +8,13 @@
 		<p><label>Job Order No.</label> <input type="text" name="jo_number" value="" /></p>
 		<p><label>Date</label> <input type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
 		<p><label>Customer </label> <input class="customer" type="text" name="customer" /></p>
+		<input class="cust_id" type="hidden" value="0"/>
 		<p><label>Vehicle </label> <input class="vehicle" type="text" name="vehicle" /></p>
+		<input class="v_id" type="hidden" value="0"/>
 		<p><label>Address</label> <input type="text" name="addr"/></p>
 		<p><label>Plate</label> <input type="text" name="plate"/></p>
 		<p><label>Color</label> <input class="color" type="text" name="color"/></p>
+		<input class="clr_id" type="hidden" value="0"/>
 		<p><label>Contact No.</label> <input type="text" name="number"/></p>
 	</form>
 	<table>

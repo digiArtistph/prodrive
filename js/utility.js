@@ -468,7 +468,12 @@ $(document).ready(function(){
 								},
 							success: function(data) {
 								
-								response(data);
+								 response( $.map( data, function( item ) {
+				                        return {
+				                            label: item.label,
+				                            val: item.val
+				                        }
+				                    }));
 							}
 						});
 						
@@ -476,7 +481,7 @@ $(document).ready(function(){
 			},
 			{select : function(evt, u) {
 				// call your function, that will fill the hidden field here
-				alert("You've click me " +  u.item.label);
+				alert("You've click me " +  u.item.val);
 			}}
 	);
 	
@@ -493,14 +498,22 @@ $(document).ready(function(){
 								},
 							success: function(data) {
 								
-								response(data);
+								 response( $.map( data, function( item ) {
+				                        return {
+				                            label: item.label,
+				                            val: item.val
+				                        }
+				                    }));
 							}
 						});
 						
 					}
-			}
+			},
+			{select : function(evt, u) {
+				// call your function, that will fill the hidden field here
+				alert("You've click me " +  u.item.val);
+			}}
 	);
-	
 	//sample autocomplte base_url() . /find
 	loadqry.autocomplete(
 			{ delay: 0 },
