@@ -59,7 +59,9 @@ if (! function_exists('getSection')) {
 			case 'reports':
 				$section = 'reports';
 				break;
-	
+			case 'login':
+				$section = 'login';
+				break;
 			default:
 				$section = 'home';
 		}

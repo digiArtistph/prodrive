@@ -1,0 +1,22 @@
+/* CSS Document */
+/* resetters */
+@import url("main.css");
+body {background: url("../../../images/prodrive_bg1.png");}
+
+
+/* login template */
+#loginmaincontainer {margin:auto; width:500px;}
+#maindialog {background: -moz-linear-gradient(bottom, #f1f1f1, #fff); outline:1px solid #ececec; border-radius:8px; box-shadow:0 2px 1px  #636363; margin:9em auto; min-height:280px; overflow:hidden; position:relative; width:430px;}
+.titlebar {background:-moz-linear-gradient(top, #3675cc, #5499ff); top:0px; position:absolute; width:100%; visibility:visible;}
+.titlebar h4 {color:#fff; padding-left:1.5em; text-shadow:1px 0 0 #aeaeae;}
+.controlgroup {/*border:1px solid yellow;*/ margin: 5em auto 0; padding:1em 2em 1em 2em; width:335px;}
+.controlgroup p {color:#636363; margin:1em;}
+.controlgroup p label {float:left; font-size:.9em; padding:.5em 0; width:7em;}
+.controlgroup p input {color:#636363; padding:.5em; width:14em;}
+.controlgroup p.loginsubmit {text-align:right; padding-right:1em;}
+.controlgroup p.loginsubmit input {background:-moz-linear-gradient(bottom, #3675cc, #5499ff); border:none; border-radius:6px; box-shadow:0 2px 1px 2px #ececec; color:#fff; padding:.5em 1em; text-shadow:1px 0 0 #aeaeae; width:auto;}
+.logincalendar {bottom:20px; right:75px; color:#f4640f; font-size:.8em; position:absolute;}
+
+
+/* login template error msg */
+#loginmaincontainer .error {font-size:.8em; color:#ff0000; }

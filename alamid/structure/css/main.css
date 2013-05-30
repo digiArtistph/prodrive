@@ -11,6 +11,8 @@ a {text-decoration:none;}
 .clearfix {clear:both;}
 .sprite {background:url(../../../images/splashy.png);}
 
+
+
 /* header */
 #header {background:-moz-linear-gradient(top, #4a86cc, #2e57b4); float:left; width:100%;}
 /* company logo */
@@ -75,7 +77,7 @@ a {text-decoration:none;}
 .wrapper .heading {font-size:1em; color:#636363;}
 
 /* container */
-#container {clear:both; padding:3em; min-height:520px;}
+#container {clear:both; padding:3em; min-height:535px;}
 
 
 /* dcr datagrid */
@@ -111,31 +113,13 @@ a {text-decoration:none;}
 .addnmorebtn {background:-moz-linear-gradient(top, #4e9e19, #62c71f); border-radius:4px; color:#fff; font-size:.8em; padding:.5em 1em;}
 
 /* footer */
-#footer {background:#ececec; clear:both; float:left; min-height:30px; padding-top:1.5em; width:100%;}
-#footer .leftpane p, #footer .rightpane p {font-size:.8em; color:#666666;}
+#footer {background:#ececec; background:url(../../../images/footer_bg.gif); clear:both; float:left; min-height:30px; padding-top:1em; width:100%;}
+#footer .leftpane p, #footer .rightpane p {font-size:.7em; color:#666666;}
 #footer .leftpane p a, #footer .rightpane p a {color:#666666; text-decoration:underline;}
 #footer .leftpane p a:hover, #footer .rightpane p a:hover {text-decoration:none;}
 #footer .leftpane {float:left; padding-left:1em; width:48%;}
 
 #footer .rightpane {float:right; text-align:right; padding-right:1em; width:48%;}
-
-
-/* login template */
-#loginmaincontainer {margin:auto; width:500px;}
-#maindialog {border:1px solid #ececec; border-radius:8px; box-shadow:0 2px 1px  #ececec; margin:7em auto; min-height:280px; overflow:hidden; position:relative; width:430px;}
-.titlebar {background:-moz-linear-gradient(top, #3675cc, #5499ff); top:0px; position:absolute; width:100%; visibility:visible;}
-.titlebar h4 {color:#fff; padding-left:1.5em;}
-.controlgroup {/*border:1px solid yellow;*/ margin: 5em auto 0; padding:1em 2em 1em 2em; width:335px;}
-.controlgroup p {color:#636363; margin:1em;}
-.controlgroup p label {float:left; font-size:.9em; padding:.5em 0; width:7em;}
-.controlgroup p input {color:#636363; padding:.5em; width:14em;}
-.controlgroup p.loginsubmit {text-align:right; padding-right:1em;}
-.controlgroup p.loginsubmit input {background:-moz-linear-gradient(bottom, #3675cc, #5499ff); border:none; border-radius:6px; box-shadow:0 2px 1px 2px #ececec; color:#fff; padding:.5em 1em; width:auto;}
-.logincalendar {bottom:20px; right:75px; color:#f4640f; font-size:.8em; position:absolute;}
-
-
-/* login template error msg */
-#loginmaincontainer .error {font-size:.8em; color:#ff0000; }
 
 /* some UI icons */
 .welcomeusermsg {position:relative;}

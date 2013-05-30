@@ -62,14 +62,14 @@
 		</select></p>
 		<p><label>Contact No.:</label> <input type="text" name="number" value="<?php echo $jb->contactnumber;?>"/></p>
 	</form>
-	<table>
+	<table id="entryfield">
 		<thead>
 			<tr>
-				<td>Job Type</td>
-				<td class="jotypename">Labor/Parts/Material</td>
-				<td>Details</td>
-				<td>Amount</td>
-				<td>Action</td>
+				<th>Job Type</th>
+				<th class="jotypename">Labor/Parts/Material</td>
+				<th>Details</th>
+				<th>Amount</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -87,7 +87,7 @@
 		</tbody>
 	</table>
 	
-	<table class="jodet" >
+	<table id="datagrid" class="jodet" >
 		<thead>
 			<tr>
 				<th>No.</th>
