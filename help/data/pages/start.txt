@@ -1,0 +1,66 @@
+====== DEVELOPERS GUIDE ======
+
+----
+
+
+====== How to log in ======
+
+
+1. Create New User \\
+2. Open web browser: 
+           a. Google Chrome
+           b. Mozilla Firefox.
+3. Type localhost/prodrive.\\
+4. Log in your username and password.\\
+
+----
+
+
+====== How to Edit Daily Cash Entry ======
+
+1. Click Transaction.\\
+2. Edit Transx date, Beginning Balance, and cashier.\\
+3. Click Save.\\
+4. Input data in each form.\\
+          a. Particular
+          b. Tender
+          c. Reference No.
+          d. Amount
+5. Click "Add".\\
+
+----
+
+====== How to Add New Customer ======
+
+1. Click Master Files.\\
+2. Click "Add Customer".\\
+3. If you want to cancel adding new customer, just click "Cancel New Customer".\\
+4. Input Customer Data.\\
+5. Click Save.\\
+6. If you want to edit data of a customer:
+         a. Select a customer.
+         b. Click "Edit".
+         c. Input data.
+         d. Click "Save".
+----
+
+====== How to Backup Data ======
+
+1. Select a Prodrive Database.\\
+2. Click "Restore".\\
+----
+
+====== How to Add New Data ======
+
+Types of Data:
+        a. Customer
+        b. Categories
+        c. Labor Type
+        d. Users
+        e. Vehicles
+        f. Colors
+1. Click Master Files.\\
+2. Click a specific type of data.\\
+3. Add new type of data.\\
+
+
