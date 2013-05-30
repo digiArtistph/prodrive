@@ -1,0 +1,47 @@
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_addJO` $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addJO`(IN p_jo_number INT, IN p_v_id INT, IN p_customer INT, IN p_plate VARCHAR(50), IN p_color INT, IN p_contactnumber VARCHAR(75), IN p_address MEDIUMTEXT, IN p_trnxdate VARCHAR(32), OUT p_last_id INT)
+BEGIN
+
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION ROLLBACK;
+  DECLARE EXIT HANDLER FOR SQLWARNING ROLLBACK;
+
+  START TRANSACTION;
+
+    /* inserts new recond into joborder table*/
+    INSERT INTO joborder (jo_number, v_id, customer, plate, color, contactnumber, address, trnxdate)
+      VALUE(p_jo_number, p_v_id, p_customer, p_plate, p_color, p_contactnumber, p_address, p_trnxdate);
+
+      /* retrieves the last inserted id */
+      SET p_last_id =  LAST_INSERT_ID();
+
+      /* master details */
+      BEGIN
+        DECLARE EOF INT DEFAULT 0;
+        DECLARE l_labor INT DEFAULT 0;
+        DECLARE l_partmaterial VARCHAR(255) DEFAULT '';
+        DECLARE l_details VARCHAR(255) DEFAULT '';
+        DECLARE L_amnt DECIMAL(8,2);
+        DECLARE curjocache CURSOR FOR SELECT labor, partmaterial, details, amnt FROM tmp_jo_details_cache;
+
+        #DECLARE CONTINUE HANDLER FOR SET EOF = 1;
+
+        #/* opens cursor */
+        OPEN curjocache;
+        LOOP
+          #/* fetches each row */
+
+          #/* checks EOF */
+
+          #/* inserts into job order details table */
+
+        END LOOP ;
+
+          #/* closes cursor */
+      END;
+  COMMIT;
+
+END $$
+
+DELIMITER ;
