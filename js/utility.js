@@ -7,6 +7,69 @@ $(document).ready(function(){
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
 	$('.amnt, .datavaldecimal').decimal();
+	var dir = $('.dir');
+	dir.change(loaddataDir);
+	var dataFile = $('.datafile');
+	function loaddataDir(){
+		
+		if(dir.val() == ""){
+			
+			dataFile.html('<option value="none">Select source file</option>');
+		}else{
+			
+			var inputr = {'directory' : dir.val()}
+			
+			dataFile.html('<option value="none">Loading files</option>');
+			
+			$.post(base_url + "utility/datarecovery/dirdata", inputr)
+			.success(function(data) {
+				
+				var options = jQuery.parseJSON(data);
+				if(options == ''){
+					dataFile.html('<option value="none">Select source file</option>');
+				}else{
+					dataFile.html('');
+					dataFile.html('<option>Files Loaded</option>');
+					$.each(options, function(key, val){
+						dataFile.append('<option value="' + val+ '">' + val +'</option>');
+					});
+				}
+			});	
+			
+		}
+	}
+	$('.restore_db').click(function(){
+		
+		alert('sdf');
+		var tr = $(this).closest("tr");
+		var input = {
+					'ajax' : 1,
+					'file_name' : tr.find("td:nth-child(2)").text()
+					}
+		
+		$.post(base_url + "utility/datarecovery/validaterestoredefault", input)
+		.success(function(data) {
+			if(data ==1){
+				tr.animate({ 
+			        'color': '#000000',
+			        backgroundColor: "#009ACD" 
+			    }, 1000);
+				tr.animate({ 
+			        'color': '#000000',
+			        backgroundColor: "#FFFFFF" 
+			    }, 1000);
+				$( ".dialog p").text("\"" + tr.find("td:nth-child(2)").text() +"\" has been restored!");
+				$( ".dialog" ).dialog("open");
+				
+				
+			}else{
+				$( ".dialog p").text("SOMETHINE WENT WRONG");
+				$( ".dialog" ).dialog();
+			}
+		});	
+	return false;
+	}
+);
 	
 	//submit clicked
 	$('.submit').click(function(){

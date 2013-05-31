@@ -63,6 +63,19 @@ class Ajaxjo extends CI_Controller {
 			echo '1';
 	}
 	
+	public function deljodet(){
+		$jo_type = $this->input->post('labor');
+		
+		$strqry = sprintf('DELETE FROM `tmp_jo_details_cache` WHERE `trace_id`=%d ', $this->input->post('id') );
+		
+		$query = $this->db->query($strqry);
+		if(!$query)
+			echo '0';
+		else
+			echo '1';
+	}
+	
+	
 	public function savejoborder(){
 		$strqry = sprintf('CALL sp_addJO("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", @id );', $this->input->post('jo_num'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('clr'), $this->input->post('phone'),  $this->input->post('addr'),  $this->input->post('jo_date') );
 // 		echo $strqry; die();

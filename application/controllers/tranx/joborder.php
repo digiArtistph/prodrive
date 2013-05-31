@@ -40,11 +40,12 @@ class Joborder extends CI_Controller{
 	private function _editjoborder($id){
 		$data['jbo_det'] = $this->_jobdet($id);
 		$data['jbo_orders'] = $this->_joborders($id);
-// 		call_debug($data['jbo_orders']);
+
 		$data['customers'] = $this->_customer_list();
-//  	call_debug($data['jbo_det']);
 		$data['colors'] = $this->_color_list();
+		
 		$data['vehicles'] = $this->_vehicle_list();
+		
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}

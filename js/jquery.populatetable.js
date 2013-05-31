@@ -209,7 +209,7 @@ function cleanform(){
 }
 
 function evntjoEdit(){
-	alert('bind');
+
 	//alert ( $(this).closest('tr').attr('id') );
 	//alert ( $(this).closest('tr').find("td:nth-child(2)").text() );
 	if( $(this).closest('tr').find("td:nth-child(2)").text() == 'Labor'){
@@ -241,8 +241,19 @@ function evntjoEdit(){
 	return false;
 }
 function evntjoDel(){
-	alert('delete');
+	var curtr = $(this).closest('tr');
+	var input1 = {
+			'id': $(this).find('.jo_orders').closest('tr').attr('id')
+		}
+	
+		$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
+		.success(function(data) {
+			if(data == 1){
+				curtr.remove('tr');
+			}
+		});
 	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 	return false;
 }
+
 })(jQuery);
