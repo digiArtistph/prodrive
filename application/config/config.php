@@ -16,7 +16,6 @@
 */
 $config['base_url']	= 'http://localhost/prodrive/';
 
-// $config['base_url']	= 'http://192.168.2.100/prodrive/';
 /*
 |--------------------------------------------------------------------------
 | Index File
