@@ -37,35 +37,6 @@ class Joborder extends CI_Controller{
 		}
 	}
 	
-	public function testsp(){
-		$this->db->query("CALL sp_create_jo_cache()");
-		
-		
-		
-	}
-	
-	public function testsp2(){
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from Php', 50.35));
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from script', 525.50));
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from AJAX', 350.05));
-		$record = $this->db->query("SELECT @l_id AS id, @status AS `status`")->result();
-		
-		call_debug($record, FALSE);			
-	}
-	
-	public function addtestsp() {
-		
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
-		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
-	}
-	
-	public function resultsp() {
-		
-		$tmp = $this->db->query("SELECT * FROM tmp_jo_details_cache")->result();
-		call_debug($tmp);
-	}
-	
 	private function _editjoborder($id){
 		$data['jbo_det'] = $this->_jobdet($id);
 		$data['jbo_orders'] = $this->_joborders($id);
@@ -258,10 +229,16 @@ class Joborder extends CI_Controller{
 		if($validation->run() === FALSE) {
 			show_error('Please Check Url again');
 		}else{
+			
 			$this->load->model('mdl_autocomplete');
-			$temp = $this->mdl_autocomplete->findkeywordname('customer', 'fname', 'mname', 'lname' , $this->input->post('term'));
-			$objarr = json_encode($temp);
-			echo $objarr;
+			$arr = $this->mdl_autocomplete->findkeyword3( $this->input->post('term') );
+			$json = '[';
+			foreach ($arr as $key){
+				$json = $json . '{"label":"' . $key['name'] . '", "val": "' . $key['id'] . '"},';
+			}
+			$json = substr($json, 0, strlen($json)-1);
+			$json = $json. ']';
+			echo $json;
 		}
 	}
 	
