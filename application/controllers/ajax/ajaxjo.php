@@ -6,6 +6,15 @@ class Ajaxjo extends CI_Controller {
 		parent::__construct();
 	}
 	
+	public function createtable(){
+		$query = $this->db->query('CALL sp_create_jo_cache();');
+		if(!$query)
+			echo '1';
+		else
+			echo '0';
+	}
+	
+	
 	//	CALL sp_insert_jo_cache( p_labor INT, p_partmaterial text, p_details text, p_amnt, @p_last_id , @p_status  );
 	public function addjodet(){
 		$jo_type = $this->input->post('labor');
@@ -15,7 +24,11 @@ class Ajaxjo extends CI_Controller {
 		}else{
 			$strqry = 'CALL sp_insert_jo_cache( 0, '. $this->input->post('part') .', "'. $this->input->post('det') .'", '. $this->input->post('amnt') .', @p_last_id , @p_status  );';
 		}
-		echo $strqry; die();
+		//echo $strqry; die();
+		
+		//testing
+		$strqry = "CALL sp_insert_jo_cache( 2, '', 'fds', 1.00, @p_last_id , @p_status  );";
+		
 		$query = $this->db->query($strqry);
 
 		if(!$query)

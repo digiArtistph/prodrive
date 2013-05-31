@@ -15,20 +15,23 @@
 		$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 	}
 	
+	var cnt = 0;
 	function evtActionJodet(){
 		//in case add
+		
 		if($('.jodet_action').val() == 'Add'){
+			
 			var input = {
 					'labor' : $('.jotype').val(),
 					'part' : $('.labor').val(),
 					'det' : $('.det').val(),
 					'amnt' : $('.amnt').val()
 					}
-		$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
-		.success(function(data) {
-			alert(data);
-			return true;
-		});
+				$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
+				.success(function(data) {
+					alert(data);
+					return true;
+				});
 				
 				//$('.suggestion p span.error').text('Adding entry failed');
 			}
@@ -85,12 +88,21 @@ function init(){
 
 	_currobj.html(table_entry + jo_ordertbl);
 	populateTblBody();
+	
+	$.post(jobase_url + 'ajax/ajaxjo/createtable')
+	.success(function(data) {
+			if (data == 1)
+				alert('something goes wrong');
+			else
+				alert('create temp table success');
+	});
+	
 }
 
 var index=0;
 function populateTblBody(){
+	
 	if( index == 0 ){
-		
 		_currobj.find('.jo_orders').append('<tr><td colspan="7">No Entry Added</td></tr>');
 		index = 1;
 	}else if(index == 1){
@@ -99,7 +111,7 @@ function populateTblBody(){
 			index = 2;
 	}else{
 			generaterow( $('.jotype').val() );
-		}
+	}
 	
 }
 
