@@ -18,37 +18,27 @@
 	function evtActionJodet(){
 		//in case add
 		if($('.jodet_action').val() == 'Add'){
-			
-			// send ajax to server
-			if( sendajxaddjodetail() ){
+			var input = {
+					'labor' : $('.jotype').val(),
+					'part' : $('.labor').val(),
+					'det' : $('.det').val(),
+					'amnt' : $('.amnt').val()
+					}
+		$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
+		.success(function(data) {
+			alert(data);
+			return true;
+		});
 				
-				populateTblBody();
-				cleanform();
-			}else{
-				
-				$('.suggestion p span.error').text('Adding entry failed');
+				//$('.suggestion p span.error').text('Adding entry failed');
 			}
 		
-		//in case edit
-		}else{
-			
-		}
 		
 		
 		
 	}
 	
-	function sendajxaddjodetail(){
-		return false;
-		var data = {
-					'ajax' : $().val(),
-					'ajax' : $().val(),
-					}
-		$.post(jobase_url + 'ajax/ajaxjo/addjodet', data)
-		.success(function(data) {
-			
-		});
-	}
+	
 	
 var table_entry = '<table>';
 table_entry += '<thead>';

@@ -146,7 +146,7 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _addjoborder(){
-		
+		$this->db->query('CALL sp_create_jo_cache();');
 		$data['customers'] = $this->_customer_list();
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
