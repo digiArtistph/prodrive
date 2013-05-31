@@ -6,6 +6,7 @@ $(document).ready(function(){
 	$('.jo_buildform').populatetable();
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
+	
 	$('.amnt, .datavaldecimal').decimal();
 	var dir = $('.dir');
 	dir.change(loaddataDir);
@@ -40,7 +41,6 @@ $(document).ready(function(){
 	}
 	$('.restore_db').click(function(){
 		
-		alert('sdf');
 		var tr = $(this).closest("tr");
 		var input = {
 					'ajax' : 1,
