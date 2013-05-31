@@ -11,6 +11,8 @@ $(document).ready(function(){
 	//submit clicked
 	$('.submit').click(function(){
 		
+		if( ValidateCust() & ValidateVhcle() & ValidateAddr() ){
+			
 			var input = {
 				'jo_num' : $('input[name="jo_number"]').val(),
 				'jo_date' : $('input[name="jo_date"]').val(),
@@ -18,7 +20,7 @@ $(document).ready(function(){
 				'vehicle' : $('.v_id').val(),
 				'addr' : $('input[name="addr"]').val(),
 				'plate' : $('input[name="plate"]').val(),
-				'clr' : $('input[name="clr_id"]').val(),
+				'clr' : $('.clr_id').val(),
 				'phone' : $('input[name="number"]').val()
 				}
 			
@@ -27,7 +29,43 @@ $(document).ready(function(){
 				alert(data);
 				return true;
 			});
+		}else{
+			
+		}
 	});
+	
+	function ValidateCust(){
+		if($('.cust_id').val() == 0){
+			$('.customer').closest('p').append('<span class="error">Select a customer first</span>');
+			return false;
+		}else{
+			$('.customer').closest('p').append('<span class="error"></span>');
+			return true;
+		}
+		
+	}
+
+	function ValidateVhcle(){
+		if($('.v_id').val() == 0){
+			$('.vehicle').closest('p').append('<span class="error">Select a Vehicle first</span>');
+			return false;
+		}else{
+			$('.vehicle').closest('p').append('<span class="error"></span>');
+			return true;
+		}
+		
+	}
+	
+	function ValidateAddr(){
+		if($('input[name="addr"]').val() == ''){
+			$('input[name="addr"]').closest('p').append('<span class="error">Select a customer first</span>');
+			return false;
+		}else{
+			$('input[name="addr"]').closest('p').append('<span class="error"></span>');
+			return true;
+		}
+		
+	}
 	
 	// autocomplete vehicle
 	$('.vehicle').autocomplete(
@@ -89,6 +127,37 @@ $(document).ready(function(){
 			}}
 	);
 	
+	
+	//customer autocomplete
+	$('.customer').autocomplete(
+			{ autoFocus: true },
+			{source: function(request, response) {
+				
+					$.ajax({
+							url: base_url + "tranx/joborder/autocomplete_customer",
+							type: 'POST',
+							dataType: "json",
+							data: {
+								'term' : request.term
+								},
+							success: function(data) {
+								
+								 response( $.map( data, function( item ) {
+				                        return {
+				                            label: item.label,
+				                            val: item.val
+				                        }
+				                    }));
+							}
+						});
+						
+					}
+			},
+			{select : function(evt, u) {
+				$('.cust_id').val(u.item.val);
+			}}
+	);
+	
 	// labor autocomplete
 	$('.labor').keydown( function( event ) {
 		
@@ -123,7 +192,7 @@ $(document).ready(function(){
 					$('.lbr').val(u.item.val);
 				}}
 			);
-		}else if ( $('.jotype').val() == 'Parts or Materials' ) {
+		}else if ( $('.jotype').val() == 'parts' ) {
 			$('.labor').autocomplete({ disabled: true });
 		}else if ( $('.jotype').val() == '' ) {
 			$('.labor').autocomplete({ disabled: true });

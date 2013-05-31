@@ -19,7 +19,7 @@
 	function evtActionJodet(){
 		//in case add
 		
-		if($('.jodet_action').val() == 'Add'){
+		if( $('.jodet_action').val() == 'Add'){
 			var input = null;
 			if($('.jotype').val() == 'labor'){
 				input = {
@@ -41,17 +41,74 @@
 					var result = data.split('|');
 					if(result[1] == 1){
 						populateTblBody();
+						$('.jo_orders tr:last').attr('id', result[0]);
+						$('.jo_orders tr:last').attr('lbr', $('.lbr').val());
+						cleanform();
 					}else{
-						
+					
 					}
+					$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+					$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 					return true;
 				});
-				
+				$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 				//$('.suggestion p span.error').text('Adding entry failed');
+			}else{
+				
+				var input = null;
+				if( $('.jotype').val() == 'labor'){
+					input = {
+						'id' : $('.jodet tbody').find('tr.editon').attr('id'),
+						'labor' : $('.jotype').val(),
+						'part' : $('.lbr').val(),
+						'det' : $('.det').val(),
+						'amnt' : $('.amnt').val()
+					}
+				}else{
+					input = {
+						'id' : $('.jodet tbody').find('tr.editon').attr('id'),
+						'labor' : $('.jotype').val(),
+						'part' : $('.labor').val(),
+						'det' : $('.det').val(),
+						'amnt' : $('.amnt').val()
+						}
+				}
+					$.post(jobase_url + 'ajax/ajaxjo/editjodet', input)
+					.success(function(data) {
+						if(data == 1){
+							
+							$('.jodet_action').val('Add');
+							
+							$('.jodet tbody').find('tr.editon td:First-child').text( $('.jodet tbody').find('tr.editon').attr('num') );
+							
+								if($('.jotype').val() == 'labor'){
+									$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Labor');
+									$('.jodet tbody').find('tr.editon td:nth-child(3)').text( $('.labor').val() );
+									$('.jodet tbody').find('tr.editon').attr('lbr', $('.lbr').val());
+								}else{
+									$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Parts or Material');
+									$('.jodet tbody').find('tr.editon td:nth-child(3)').text( '' );
+									$('.jodet tbody').find('tr.editon td:nth-child(4)').text( $('.labor').val() );
+								
+								}
+							$('.jodet tbody').find('tr.editon td:nth-child(5)').text( $('.det').val() );
+							$('.jodet tbody').find('tr.editon td:nth-child(6)').text( $('.amnt').val() );
+							
+							$('.jodet tbody').find('tr.editon').removeClass('editon');
+							cleanform();
+							
+						}else{
+							cleanform();
+							$('.jodet_action').val('Add');
+						}
+						
+						return true;
+					});
 			}
 		
-		
-		
+		$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
+		$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 		
 	}
 	
@@ -152,11 +209,40 @@ function cleanform(){
 }
 
 function evntjoEdit(){
-	alert('edit');
+	alert('bind');
+	//alert ( $(this).closest('tr').attr('id') );
+	//alert ( $(this).closest('tr').find("td:nth-child(2)").text() );
+	if( $(this).closest('tr').find("td:nth-child(2)").text() == 'Labor'){
+		$('.jotype').val('labor');
+		$('.lbr').val( $(this).closest('tr').attr('lbr') );
+		$(this).closest('tr').attr('num', $(this).closest('tr').find("td:First-child").text() );
+		$('.labor').val( $(this).closest('tr').find("td:nth-child(3)").text() );
+		$('.det').val( $(this).closest('tr').find("td:nth-child(5)").text() ); 
+		$('.amnt').val( $(this).closest('tr').find("td:nth-child(6)").text() );
+		$('.jodet_action').val('Edit');
+		$(this).closest('tr').addClass("editon");
+		$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
+	}else{
+		$('.jotype').val('parts');
+		$('.lbr').val( '' );
+		$('.labor').val( $(this).closest('tr').find("td:nth-child(4)").text() );
+		$('.det').val( $(this).closest('tr').find("td:nth-child(5)").text() ); 
+		$('.amnt').val( $(this).closest('tr').find("td:nth-child(6)").text() );
+		$('.jodet_action').val('Edit');
+		$(this).closest('tr').addClass("editon");
+		$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
+		
+	}
+	$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+	$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
+	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 	return false;
 }
 function evntjoDel(){
 	alert('delete');
+	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 	return false;
 }
 })(jQuery);

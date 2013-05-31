@@ -3,7 +3,7 @@
 <div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel New Job Order</a></div>
 	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">Php 0.00</span></p></div>
-	<form>
+	<form class="jo_form">
 		<input class="joborderid" type="hidden" name="joborderid" value="0"/>
 		<p><label>Job Order No.</label> <input type="text" name="jo_number" value="" /></p>
 		<p><label>Date</label> <input type="text" name="jo_date" value="<?php echo curdate();?>" /></p>

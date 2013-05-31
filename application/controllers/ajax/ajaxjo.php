@@ -46,8 +46,26 @@ class Ajaxjo extends CI_Controller {
 		echo $result;
 	}
 	
+	public function editjodet(){
+		$jo_type = $this->input->post('labor');
+		
+		if($jo_type == 'labor'){
+			$strqry = sprintf('UPDATE `tmp_jo_details_cache` SET labor=%d, partmaterial=null,details="%s", amnt="%s" WHERE `trace_id`=%d', $this->input->post('part'),$this->input->post('det'),$this->input->post('amnt'), $this->input->post('id') );
+		}else{
+			$strqry = sprintf('UPDATE `tmp_jo_details_cache` SET labor=null, partmaterial="%s",details="%s", amnt="%s" WHERE `trace_id`=%d', $this->input->post('part'),$this->input->post('det'),$this->input->post('amnt'), $this->input->post('id') );
+		}
+		
+		
+		$query = $this->db->query($strqry);
+		if(!$query)
+			echo '0';
+		else
+			echo '1';
+	}
+	
 	public function savejoborder(){
-		$strqry = sprintf('CALL sp_addJO(%d, %d, %d, "%s", %d, "%s", "%s", "%s", @id );', $this->input->post('jo_num'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('p_plate'), $this->input->post('p_color'), $this->input->post('phone'),  $this->input->post('addr'),  $this->input->post('jo_date') );
+		$strqry = sprintf('CALL sp_addJO("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", @id );', $this->input->post('jo_num'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('clr'), $this->input->post('phone'),  $this->input->post('addr'),  $this->input->post('jo_date') );
+// 		echo $strqry; die();
 		$query = $this->db->query($strqry);
 		
 		if(!$query)
