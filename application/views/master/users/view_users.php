@@ -14,7 +14,6 @@
             	<th>User Type</th>    
             	<th>Fullname</th>
             	<th>Address</th>
-            	<th>Status</th>
             	<th>Action</th>
             </tr>
         </thead>
@@ -25,7 +24,6 @@
         		<td><?php echo $user->type;?></td>
         		<td><?php echo ucfirst($user->fname) . ' ' . ucfirst($user->mname[0]) . '. ' . ucfirst($user->lname);?></td>
         		<td><?php echo $user->addr;?></td>
-        		<td><?php if($user->status == 1){echo 'Active';}else{echo 'In Active';}?></td>
         		<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/users/section/editusers/' . $user->u_id;?>">Edit</a>|<a class="reggriddelbtn" href="<?php echo base_url() . 'master/users/section/deleteusers/' . $user->u_id;?>">delete</a></td>
         	</tr>
         <?php endforeach;?>

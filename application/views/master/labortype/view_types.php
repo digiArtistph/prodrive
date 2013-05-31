@@ -13,7 +13,6 @@
         	<tr> 
         		<th>Name</th> 
             	<th>Categories</th>  
-            	<th>Status</th>
             	<th>Action</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
 			<tr>
 				<td><?php echo $labortype->name;?></td>
 				<td><?php echo $labortype->category;?></td>
-				<td><?php if($labortype->status == 1){echo 'Active';}else{echo 'In active';} ?></td>
             	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">edit</a>|<a  class="reggriddelbtn" href="<?php echo base_url() . 'master/labortype/section/deletelabor/' . $labortype->laborid ;?>">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
