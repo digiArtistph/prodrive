@@ -20,16 +20,30 @@
 		//in case add
 		
 		if($('.jodet_action').val() == 'Add'){
-			
-			var input = {
+			var input = null;
+			if($('.jotype').val() == 'labor'){
+				input = {
+					'labor' : $('.jotype').val(),
+					'part' : $('.lbr').val(),
+					'det' : $('.det').val(),
+					'amnt' : $('.amnt').val()
+				}
+			}else{
+				input = {
 					'labor' : $('.jotype').val(),
 					'part' : $('.labor').val(),
 					'det' : $('.det').val(),
 					'amnt' : $('.amnt').val()
 					}
+			}
 				$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
 				.success(function(data) {
-					alert(data);
+					var result = data.split('|');
+					if(result[1] == 1){
+						populateTblBody();
+					}else{
+						
+					}
 					return true;
 				});
 				
@@ -47,7 +61,7 @@ var table_entry = '<table>';
 table_entry += '<thead>';
 table_entry += '<tr>';
 table_entry += '<td>Job Type</td>';
-table_entry += '<td class="jotypename">Labor/Parts/Material</td>';
+table_entry += '<td class="jotypename">Labor/Parts or Material</td>';
 table_entry += '<td>Details</td>';
 table_entry += '<td>Amount</td>';
 table_entry += '<td>Action</td>';
@@ -66,7 +80,7 @@ table_entry += '<td><input class="amnt" type="text" /></td>';
 table_entry += '<td><input class="jodet_action" type="button" value="Add" /></td>';
 table_entry += '</tr>';
 table_entry += '</tbody>';
-table_entry += '</table>';
+table_entry += '</table><input class="lbr" type="hidden" value="0" />';
 
 var jo_ordertbl = '<table class="jodet regdatagrid" >';
 jo_ordertbl += '<thead>';
@@ -88,16 +102,19 @@ function init(){
 
 	_currobj.html(table_entry + jo_ordertbl);
 	populateTblBody();
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	//change text onchange select job type
+	$('.jotype').change( function(){
+		if( $('.jotype').val() == ''){
+			$('.jotypename').text('Labor/Parts or Material');
+		}else if ( $('.jotype').val() == 'labor' ) {
+			$('.jotypename').text('Labor');
+		}else if ( $('.jotype').val() == 'parts' ) {
+			$('.jotypename').text('Parts/Material');
+		}
+	});
 }
+
 
 var index=0;
 function populateTblBody(){
@@ -117,9 +134,9 @@ function populateTblBody(){
 
 function generaterow(type){
 	if(type == 'labor'){
-		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>'+ $('.jotype').val()  +'</td><td>'+ $('.labor').val() +'</td><td></td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
+		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Labor</td><td>'+ $('.labor').val() +'</td><td></td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
 	}else if(type == 'parts'){
-		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>'+ $('.jotype').val()  +'</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
+		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Parts/Material</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
 	}else{
 		return false;
 	}

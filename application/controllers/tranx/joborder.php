@@ -161,7 +161,7 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _addjoborder(){
-		
+		$this->db->query('CALL sp_create_jo_cache()');
 		$data['customers'] = $this->_customer_list();
 		$data['colors'] = $this->_color_list();
 		$data['vehicles'] = $this->_vehicle_list();
@@ -219,181 +219,7 @@ class Joborder extends CI_Controller{
 	
 		return $query->result();
 	}
-	
-	public function validateorder(){
-		
-		$this->load->library('form_validation');
-		$validation = $this->form_validation;
-		
-		$validation->set_rules('jo_number', '',  'required');
-		$validation->set_rules('joborderid', '',  'required');
-		$validation->set_rules('order_det', '',  'required');
-		$validation->set_rules('odate', '',  'required');
-		$validation->set_rules('customer', '',  'required');
-		$validation->set_rules('vehicle', '',  'required');
-		$validation->set_rules('addr', '',  'required');
-		$validation->set_rules('plate', '',  'required');
-		$validation->set_rules('color', '',  'required');
-		$validation->set_rules('number', '',  'required');
-		
-		if($validation->run() === FALSE) {
-			show_error('Please Check Url again');
-		}else{
-			
-			$joborder = $this->input->post('joborderid');
-			$pattern = "/^[0]$/";
-			
-			if($joborder != 0){
-				
-				$vehicle = $this->input->post('vehicle');
-				$color = $this->input->post('color');
-				$customer = $this->input->post('customer');
-				$id = $joborder;
-				
-				
-				$strqry = 'call sp_start_editjoborder("'. $id .'", "'. $customer .'", "", "", "", @ret_id, @flag);';
-				$pattern = "/^([0-9])+$/";
-				if(!preg_match($pattern, $customer)){
-					$pattern = '/(\,\s)|(\s)(?=[\w]+\.)/';
-					$name = preg_split($pattern, $customer);
-					if(isset($name[2]))
-						$mname = substr($name[2], 0, strlen($name[2]) - 1);
-					else
-						$mname = '';
-					if(!isset($name[0]))
-						$name[0] = '';
-					if(!isset($name[1]))
-						$name[1] = '';
-					$strqry = 'call sp_start_editjoborder("'. $id .'", "0", "' . $name[1] .'", "' . $mname .'", "' . $name[0] .'", @ret_id, @flag);';;
-				}
-				
-				$this->_querydb($strqry);
-				
-				$pattern = "/^([0-9])+$/";
-				if(preg_match($pattern, $vehicle)){
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), $vehicle , 0, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}else{
-						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), $vehicle , 0, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}
-						
-				}else{
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), 0 , $vehicle, $color, 0, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}else{
-						$strqry = sprintf('call sp_editjoborder("%s", "%d", "%s", "%d", "%s", @ret_id, "%s", "%s", "%s", "%s", "%d", @flag);',$this->input->post('jo_number'), 0 , $vehicle, 0, $color, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate'), $id );
-					}
-				
-				}
-				$this->_querydb($strqry);
-				
-				$samplejson = $this->input->post('order_det');
-				$ordet = json_decode($samplejson, true);
-				if(empty($ordet[0])){
-					unset($ordet[0]);
-				}
-				foreach ( $ordet as $key ){
-					
-					if( $key[1] == 'Parts or Materials' ){
-						$strqry1 = sprintf('call sp_editjoborderdet("%d" , "0", "%s", "%s", "0", "%s", "1", @flag);',$id, $key[3], $key[4], $key[5]);
-					}elseif( $key[1] == 'labor' ){
-						//if(preg_match($pattern, $vehicle))
-						$strqry1 = sprintf('call sp_editjoborderdet("%d" , "%s", "", "%s", "%s", "0", "1", @flag);',$id, $key[2], $key[4], $key[5]);
-					}
-					
-					$this->_querydb($strqry1);
-				}
-				
-				
-				$strqry2 = 'call sp_end_editjoborder(@flag);';
-				$this->_querydb($strqry2);
-				
-				$strqry3 = 'select @flag as flag';
-				$query = $this->db->query($strqry3);
-				if($query);
-				$result = $query->result();
-				
-				$resultant = array(
-						'flag'	=> $result[0]->flag,
-						'jo_id'	=>	$id
-				);
-				$resulttojson = json_encode($resultant);
-				echo $resulttojson;
-			}else{
-				
-				$strqry = 'call sp_start_joborder(@flag);';
-				$this->_querydb($strqry);
-	
-				$vehicle = $this->input->post('vehicle');
-				$color = $this->input->post('color');
-				$customer = $this->input->post('customer');
-	
-				$pattern = "/^([0-9])+$/";
-	
-				if(!preg_match($pattern, $customer)){
-						
-					$customer = $this->_customercustom($this->input->post('customer'));
-				}
-	
-				if(preg_match($pattern, $vehicle)){
-						
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), $vehicle , 0, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-					}else{
-						$strqry = sprintf('call sp_joborder("%s", %d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), $vehicle , 0, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-					}
-						
-				}else{
-					if(preg_match($pattern, $color)){
-						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'), 0 , $vehicle, $color, 0, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-					}else{
-						$strqry = sprintf('call sp_joborder("%s", "%d", "%s", "%d", "%s", "%d", "%s", "%s", "%s", "%s", @o_jo_id, @flag)',$this->input->post('jo_number'),0 , $vehicle, 0, $color, $customer, $this->input->post('plate'), $this->input->post('number'), $this->input->post('addr'), $this->input->post('odate') );
-					}
-	
-				}
-					
-				$this->_querydb($strqry);
-					
-					
-				$samplejson = $this->input->post('order_det');
-				$ordet = json_decode($samplejson, true);
-				unset( $ordet[0] );
-					
-					
-				foreach ( $ordet as $key ){
-	
-					if( $key[1] == 'Parts or Materials' ){
-						$strqry1 = sprintf('call sp_joborderdet(@o_jo_id , "0", "%s", "%s", "0", "%s", "1", @flag);', $key[3], $key[4], $key[5]);
-					}elseif( $key[1] == 'labor' ){
-						//if(preg_match($pattern, $vehicle))
-						$strqry1 = sprintf('call sp_joborderdet(@o_jo_id , "%s", "", "%s", "%s", "0", "1", @flag);', $key[2], $key[4], $key[5]);
-					}
-						
-					$this->_querydb($strqry1);
-				}
-					
-					
-				$strqry2 = 'call sp_end_joborder(@o_jo_id, @flag);';
-				$this->_querydb($strqry2);
-					
-				$strqry3 = 'SELECT @flag AS flag, @o_jo_id AS jid;';
-				$query = $this->db->query($strqry3);
-				if($query);
-				$result = $query->result();
-				
-				$resultant = array(
-						'flag'	=> $result[0]->flag,
-						'jo_id'	=>	$result[0]->jid
-						);
-				$resulttojson = json_encode($resultant);
-				echo $resulttojson;
-				
-			}
-		}
-	}
-	
 
-	
 	private function _querydb($strqry){
 		$query = $this->db->query($strqry);
 		
@@ -469,9 +295,14 @@ class Joborder extends CI_Controller{
 			return false;
 		}else{
 			$this->load->model('mdl_autocomplete');
-			$temp = $this->mdl_autocomplete->findkeywordsingle('labortype', 'name' , $this->input->post('term'));
-			$objarr = json_encode($temp);
-			echo $objarr;
+			$arr = $this->mdl_autocomplete->findkeyword('labortype', 'laborid' ,'name' , $this->input->post('term'));
+			$json = '[';
+			foreach ($arr as $key){
+				$json = $json . '{"label":"' . $key['name'] . '", "val": "' . $key['laborid'] . '"},';
+			}
+			$json = substr($json, 0, strlen($json)-1);
+			$json = $json. ']';
+			echo $json;
 		}
 	}
 
