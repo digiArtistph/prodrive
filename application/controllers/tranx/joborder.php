@@ -44,12 +44,23 @@ class Joborder extends CI_Controller{
 		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from script', 525.50));
 		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from AJAX', 350.05));
 		$record = $this->db->query("SELECT @l_id AS id, @status AS `status`")->result();
-		$tmp = $this->db->query("SELECT * FROM tmp_jo_details_cache")->result();
+		
 		call_debug($record, FALSE);
-		call_debug($tmp);
+				
+	}
+	
+	public function addtestsp() {
+		
+		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
+		$this->db->query("CALL sp_insert_jo_cache(?, ?, ?, ?, @l_id, @status)", array(1, '', 'Test insert from code', 150.15));
 		
 	}
 	
+	public function resultsp() {
+		
+		$tmp = $this->db->query("SELECT * FROM tmp_jo_details_cache")->result();
+		call_debug($tmp);
+	}
 	
 	private function _editjoborder($id){
 		$data['jbo_det'] = $this->_jobdet($id);
