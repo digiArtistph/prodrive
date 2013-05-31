@@ -29,7 +29,7 @@
 					}
 				$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
 				.success(function(data) {
-					alert(data);
+					
 					return true;
 				});
 				
@@ -91,10 +91,7 @@ function init(){
 	
 	$.post(jobase_url + 'ajax/ajaxjo/createtable')
 	.success(function(data) {
-			if (data == 1)
-				alert('something goes wrong');
-			else
-				alert('create temp table success');
+			
 	});
 	
 }
