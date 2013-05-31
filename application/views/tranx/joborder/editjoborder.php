@@ -3,7 +3,7 @@
 <div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a></div>
 	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span><span class="total_amount" style="float:right">
-		<?php if(!empty($jbo_orders)):?><?php $total=0; foreach ($jbo_orders as $job){ $total += ($job->laboramnt + $job->partmaterialamnt); } echo number_format($total, 2, '.', ''); else: echo 'Php 0.00'; endif;?></span></p></div>
+		<?php if(!empty($jbo_orders)):?><?php $total=0; foreach ($jbo_orders as $job){ $total += $job->amnt; } echo number_format($total, 2, '.', ''); else: echo 'Php 0.00'; endif;?></span></p></div>
 	<form>
 		<?php if(!empty($jbo_det)):?>
 		<?php foreach ($jbo_det as $jb):?>
@@ -114,7 +114,7 @@
 				<td><?php echo $jbord->labort;?></td>
 				<td></td>
 				<td><?php echo $jbord->details;?></td>
-				<td><?php echo $jbord->laboramnt;?></td>
+				<td><?php echo $jbord->amnt;?></td>
 				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#">delete</a></td>
 				<td></td>
 			</tr>
@@ -125,7 +125,7 @@
 				<td></td>
 				<td><?php echo $jbord->partmaterial;?></td>
 				<td><?php echo $jbord->details;?></td>
-				<td><?php echo $jbord->partmaterialamnt;?></td>
+				<td><?php echo $jbord->amnt;?></td>
 				<td><a class="edit" href="#">edit</a>|<a class="delete" href="#">delete</a></td>
 				<td></td>
 			</tr>

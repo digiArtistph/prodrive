@@ -53,7 +53,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jd.jo_id, jd.labor, lt.name as labort, jd.partmaterial, jd.details, jd.laboramnt, jd.partmaterialamnt, lt.name FROM `%s` jd LEFT JOIN `labortype` lt on lt.laborid=jd.labor WHERE `jo_id`="%d"', $almd_db->jodetails ,$id);
+		$strqry = sprintf('SELECT jd.jo_id, jd.labor, lt.name as labort, jd.partmaterial, jd.details,  jd.amnt, lt.name FROM `%s` jd LEFT JOIN `labortype` lt on lt.laborid=jd.labor WHERE `jo_id`="%d"', $almd_db->jodetails ,$id);
 		
 		$query = $this->db->query($strqry);
 		
