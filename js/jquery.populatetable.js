@@ -57,7 +57,7 @@
 	
 	
 	
-var table_entry = '<table>';
+var table_entry = '<table id="entryfield">';
 table_entry += '<thead>';
 table_entry += '<tr>';
 table_entry += '<td>Job Type</td>';

@@ -19,6 +19,7 @@
 		case 'home':
 		case 'tranx':
 		case 'master':
+		case 'reports':
 			echo MAIN_CSS;
 			echo FAVICON;
 			echo JQUERY_CSS;
@@ -28,8 +29,6 @@
 			echo DCR_PLUGIN_JS;
 			echo DATAVALIDATION_PLUGIN_JS;
 			echo UTILITY_JS;					
-			break;
-		case 'reports':
 			break;
 		case 'login':
 			echo LOGIN_CSS;

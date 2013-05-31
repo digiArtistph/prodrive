@@ -25,10 +25,10 @@
                     </div>
                 </li>
                 <li <?php isTabSelected('reports'); ?>><a  href="<?php echo base_url() . 'reports/dcr';?>" >Reports</a>
-                	<div>
+                	<div  <?php isTabSelected('reports'); ?>>
                         <ul>
-                            <li <?php isTabSelected('reports/dcr', 'submenuselected', 3); ?>><a href="#">Daily Cash Report</a></li>
-                            <li <?php isTabSelected('reports/joborderhistory', 'submenuselected', 3); ?>><a href="#">Job Order History</a></li>
+                            <li <?php isTabSelected('dcr', 'submenuselected', 2); ?>><a href="<?php echo base_url('reports/dcr'); ?>">Daily Cash Report</a></li>
+                            <li <?php isTabSelected('joborderhistory', 'submenuselected', 2); ?>><a href="#">Job Order History</a></li>
                         </ul>
 					</div>
                 </li>
