@@ -89,13 +89,13 @@ function init(){
 	_currobj.html(table_entry + jo_ordertbl);
 	populateTblBody();
 	
-	$.post(jobase_url + 'ajax/ajaxjo/createtable')
-	.success(function(data) {
-			if (data == 1)
-				alert('something goes wrong');
-			else
-				alert('create temp table success');
-	});
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
