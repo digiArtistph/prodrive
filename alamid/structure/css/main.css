@@ -101,6 +101,7 @@ a {text-decoration:none;}
 .regdatagrid td {color:#636363; font-size:.9em; padding:.5em 0;}
 .regdatagrid td.currency {font-weight:bold; text-align:right; padding-right:1em;}
 .regdatagrid tbody tr {border-bottom:1px solid #cecece !important;}
+.regdatagrid tbody tr:hover {background:#ececec;}
 .regdatagrid td .reggriddelbtn {color:#d91e00;}
 .regdatagrid td .reggrideditbtn, .regdatagrid td .restore_db {color:#00B940;}
 

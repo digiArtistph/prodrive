@@ -41,4 +41,26 @@ class mdl_autocomplete extends CI_Model{
 		return $rows;
 	}
 	
+	public function findkeyword3($word){
+	
+	
+		$strqry = 'SELECT custid as cid, fname, mname, lname FROM customer  WHERE fname like "'. $word .'%"  UNION SELECT custid as cid, fname, mname, lname FROM customer  WHERE mname like "'. $word .'%" UNION SELECT custid as cid, fname, mname, lname FROM customer  WHERE lname like "'. $word .'%" ';
+	
+		$query = $this->db->query($strqry);
+	
+		if( $query->num_rows() <1 )
+			return false;
+	
+		$rows = array();
+		//call_debug($query->result_array());
+		foreach($query->result_array() as $row )
+		{
+			$name = ucfirst($row['fname']) . ' ' . ucfirst($row['mname'][0]) . '.' . ucfirst($row['lname']);
+			$temp = array('id' => $row['cid'], 'name' => $name);
+			array_push($rows, $temp);
+	
+		}
+		return $rows;
+	}
+	
 }

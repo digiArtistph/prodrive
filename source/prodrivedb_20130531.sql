@@ -31,7 +31,7 @@ CREATE TABLE `cashfloat` (
   `cashier` tinyint(4) DEFAULT '0',
   `status` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`cf_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `cashfloat` (
 
 LOCK TABLES `cashfloat` WRITE;
 /*!40000 ALTER TABLE `cashfloat` DISABLE KEYS */;
+INSERT INTO `cashfloat` VALUES (1,'abc123','From sir Mike',750.00,'2013-05-31',4,'1'),(2,'abc124','From Ma\'am Zen',200.00,'2013-05-31',4,'1');
 /*!40000 ALTER TABLE `cashfloat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `cashlift` (
   `cashier` tinyint(4) DEFAULT '0',
   `status` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`cl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +69,7 @@ CREATE TABLE `cashlift` (
 
 LOCK TABLES `cashlift` WRITE;
 /*!40000 ALTER TABLE `cashlift` DISABLE KEYS */;
+INSERT INTO `cashlift` VALUES (1,'bca321','For snacks as per Ma\'am Zen\'s instruction',150.00,'2013-05-31',4,'1');
 /*!40000 ALTER TABLE `cashlift` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +118,7 @@ CREATE TABLE `color` (
 
 LOCK TABLES `color` WRITE;
 /*!40000 ALTER TABLE `color` DISABLE KEYS */;
-INSERT INTO `color` VALUES (1,'red'),(2,'blue'),(3,'green'),(6,'skyblue'),(25,'yellow'),(10,'dark black'),(24,'brown'),(23,'dsf'),(13,'dark red'),(22,'white'),(26,'Aqua M'),(27,'fuscha'),(28,'0'),(29,'0'),(30,'0');
+INSERT INTO `color` VALUES (1,'Red'),(2,'Blue'),(3,'Green'),(6,'Sky Blue'),(25,'Yellow'),(10,'Silver'),(24,'Brown'),(23,'Black Forest'),(13,'Dark Red'),(22,'White'),(26,'Aqua Marine'),(27,'Fuschia');
 /*!40000 ALTER TABLE `color` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +147,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (3,'Emelie','Cepe','Nagales','Valencia Bukidnun','09353738295',''),(5,'Norberto','Mab','Libago Sr','Poblacion','09352689566','1'),(9,'Kenneth','Palmero','Vallejos','Cugman Cagayan De Oro','09167958734','1'),(13,'romualdo','peidad','xavier justine',NULL,NULL,'1'),(12,'limbago','Quirta','john paul',NULL,NULL,'1'),(18,'libago jr','Q','norberto',NULL,NULL,'1'),(19,'Kenn','palmero','valejos',NULL,NULL,'1'),(20,'jun','quisil','Tongbes',NULL,NULL,'1');
+INSERT INTO `customer` VALUES (3,'Emelie','Cepe','Nagales','Valencia Bukidnun','09353738295',''),(5,'Norberto','Mab','Libago Sr','Poblacion','09352689566','1'),(9,'Kenneth','Palmero','Vallejos','Cugman Cagayan De Oro','09167958734','1');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +165,7 @@ CREATE TABLE `dcr` (
   `cashier` tinyint(4) DEFAULT NULL,
   `status` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`dcr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +174,7 @@ CREATE TABLE `dcr` (
 
 LOCK TABLES `dcr` WRITE;
 /*!40000 ALTER TABLE `dcr` DISABLE KEYS */;
-INSERT INTO `dcr` VALUES (2,'2013-05-17',1500.00,4,'1'),(3,'2013-05-18',1250.00,4,'1'),(4,'2013-05-24',1500.00,4,'1'),(5,'2013-05-25',1500.00,4,'1'),(6,'2013-05-26',1500.00,4,'1'),(7,'2013-05-27',1500.00,4,'1'),(8,'2013-05-27',1500.00,0,'1'),(9,'2013-05-30',500.00,4,'1');
+INSERT INTO `dcr` VALUES (2,'2013-05-17',1500.00,4,'1'),(3,'2013-05-18',1250.00,4,'1'),(4,'2013-05-24',1500.00,4,'1'),(5,'2013-05-25',1500.00,4,'1'),(6,'2013-05-26',1500.00,4,'1'),(7,'2013-05-27',1500.00,4,'1'),(8,'2013-05-27',1500.00,0,'1'),(9,'2013-05-30',500.00,4,'1'),(10,'2013-05-31',500.00,4,'1');
 /*!40000 ALTER TABLE `dcr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +195,7 @@ CREATE TABLE `dcrdetails` (
   UNIQUE KEY `dcrdtl_id` (`dcrdtl_id`),
   KEY `FK_dcrdetails_1` (`dcr_id`),
   CONSTRAINT `FK_dcrdetails_1` FOREIGN KEY (`dcr_id`) REFERENCES `dcr` (`dcr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +204,7 @@ CREATE TABLE `dcrdetails` (
 
 LOCK TABLES `dcrdetails` WRITE;
 /*!40000 ALTER TABLE `dcrdetails` DISABLE KEYS */;
-INSERT INTO `dcrdetails` VALUES (7,56,'Car Wash','ref1',150.00,1),(7,57,'Change Oil','ref1',1750.00,1),(9,58,'Change Oil','ref1',1500.00,1);
+INSERT INTO `dcrdetails` VALUES (7,56,'Car Wash','ref1',150.00,1),(7,57,'Change Oil','ref1',1750.00,1),(9,58,'Change Oil','ref1',1500.00,1),(10,59,'Change Tire','ref1',225.00,1),(10,60,'Change Oil','ref1',2250.00,2),(10,61,'Car Wash','',250.00,1);
 /*!40000 ALTER TABLE `dcrdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +226,7 @@ CREATE TABLE `joborder` (
   `address` mediumtext,
   `trnxdate` date DEFAULT NULL,
   PRIMARY KEY (`jo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1 COMMENT='enforces referential integrity';
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1 COMMENT='enforces referential integrity';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +235,7 @@ CREATE TABLE `joborder` (
 
 LOCK TABLES `joborder` WRITE;
 /*!40000 ALTER TABLE `joborder` DISABLE KEYS */;
-INSERT INTO `joborder` VALUES (120,'tongbens',28,3,'12',1,'21','12','2013-05-12'),(121,NULL,23,16,'12',25,'12','21','2013-05-12'),(122,NULL,1,3,'21',2,'21','21','2013-05-12'),(123,NULL,1,3,'21',2,'21','21','2013-05-12'),(124,NULL,1,3,'21',1,'12','12','2013-05-12'),(127,NULL,3,3,'21',1,'21','21','2013-05-12'),(128,NULL,1,3,'hss',1,'23','12','2013-05-12'),(131,'45',1,3,'3',1,'3','3','2013-05-17'),(132,'13',3,3,'12',2,'12','12','2013-05-17'),(133,'333',3,5,'23',3,'23','32','2013-05-17'),(134,'pot',3,3,'re',6,'12','re','2013-05-17'),(135,'122',1,5,'12',1,'12','12','2013-05-29'),(136,'121',30,12,'12',28,'21','21','2013-05-30'),(137,'12',21,21,'21',2,'2','12','2013-05-30'),(138,'12',31,12,'12',29,'21','21','2013-05-30'),(139,'12',32,12,'12',30,'12','12','2013-05-30');
+INSERT INTO `joborder` VALUES (120,'tongbens',28,3,'12',1,'21','12','2013-05-12'),(131,'45',1,3,'3',1,'3','3','2013-05-17'),(132,'13',3,3,'12',2,'12','12','2013-05-17'),(134,'pot',3,3,'re',6,'12','re','2013-05-17'),(135,'122',1,5,'12',1,'12','12','2013-05-29'),(140,'12345',1,3,'KPV563',1,'+639277745663','Cugman','2013-05-30'),(141,'12345',1,3,'KPV563',1,'+639277745663','Baloy','2013-05-30'),(142,'12345',1,3,'NQL654',1,'+639277745663','Baloy','2013-05-30'),(143,'12345',1,3,'NQL654',1,'+639277745663','Baloy','2013-05-30');
 /*!40000 ALTER TABLE `joborder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +263,7 @@ CREATE TABLE `jodetails` (
 
 LOCK TABLES `jodetails` WRITE;
 /*!40000 ALTER TABLE `jodetails` DISABLE KEYS */;
-INSERT INTO `jodetails` VALUES (135,20,'','12',12.00,'1');
+INSERT INTO `jodetails` VALUES (135,20,'','12',12.00,'1'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1');
 /*!40000 ALTER TABLE `jodetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +289,7 @@ CREATE TABLE `labortype` (
 
 LOCK TABLES `labortype` WRITE;
 /*!40000 ALTER TABLE `labortype` DISABLE KEYS */;
-INSERT INTO `labortype` VALUES (1,'Car Wash',1,'1'),(2,'painting',3,'1'),(4,'breaking',5,'1'),(22,'change mirror',0,'1'),(7,'change oil',0,'1'),(10,'change tire',0,'1'),(14,'preventive maintenance',0,'1'),(21,'tongbens',0,'1'),(20,'12',0,'1');
+INSERT INTO `labortype` VALUES (1,'Car Wash',1,'1'),(2,'Painting',1,'1'),(4,'Breaking',5,'1'),(22,'Change Mirror',1,'1'),(7,'change oil',0,'1'),(10,'change tire',0,'1');
 /*!40000 ALTER TABLE `labortype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +306,7 @@ CREATE TABLE `logintrace` (
   `succeeded` enum('0','1') DEFAULT '0',
   `tracetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +315,7 @@ CREATE TABLE `logintrace` (
 
 LOCK TABLES `logintrace` WRITE;
 /*!40000 ALTER TABLE `logintrace` DISABLE KEYS */;
-INSERT INTO `logintrace` VALUES (1,'juntals','1','2013-05-28 16:44:07'),(2,'juntals','1','2013-05-28 16:55:26'),(3,'juntals01','0','2013-05-28 16:56:06'),(4,'juntals','1','2013-05-28 16:57:03'),(5,'juntals','1','2013-05-29 07:18:22'),(6,'juntals','1','2013-05-29 10:05:58'),(7,'juntals','1','2013-05-29 14:12:50'),(8,'juntals','1','2013-05-29 23:52:24'),(9,'juntals','1','2013-05-30 00:32:29'),(10,'kenn','1','2013-05-30 06:46:08');
+INSERT INTO `logintrace` VALUES (1,'juntals','1','2013-05-28 16:44:07'),(2,'juntals','1','2013-05-28 16:55:26'),(3,'juntals01','0','2013-05-28 16:56:06'),(4,'juntals','1','2013-05-28 16:57:03'),(5,'juntals','1','2013-05-29 07:18:22'),(6,'juntals','1','2013-05-29 10:05:58'),(7,'juntals','1','2013-05-29 14:12:50'),(8,'juntals','1','2013-05-29 23:52:24'),(9,'juntals','1','2013-05-30 00:32:29'),(10,'kenn','1','2013-05-30 06:46:08'),(11,'kenn','1','2013-05-30 14:14:46'),(12,'kenn','1','2013-05-30 22:39:41'),(13,'kenn','1','2013-05-31 04:19:19'),(14,'kenn','0','2013-05-31 04:19:44'),(15,'kenn','1','2013-05-31 04:19:51');
 /*!40000 ALTER TABLE `logintrace` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,6 +367,32 @@ LOCK TABLES `tendertype` WRITE;
 /*!40000 ALTER TABLE `tendertype` DISABLE KEYS */;
 INSERT INTO `tendertype` VALUES (1,'Cash'),(2,'Check');
 /*!40000 ALTER TABLE `tendertype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tmp_jo_details_cache`
+--
+
+DROP TABLE IF EXISTS `tmp_jo_details_cache`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tmp_jo_details_cache` (
+  `trace_id` int(11) NOT NULL AUTO_INCREMENT,
+  `labor` int(11) NOT NULL DEFAULT '0',
+  `partmaterial` varchar(255) DEFAULT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  `amnt` decimal(8,2) DEFAULT NULL,
+  UNIQUE KEY `trace_id` (`trace_id`)
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tmp_jo_details_cache`
+--
+
+LOCK TABLES `tmp_jo_details_cache` WRITE;
+/*!40000 ALTER TABLE `tmp_jo_details_cache` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tmp_jo_details_cache` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -473,7 +501,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES (1,'porsche','1'),(3,'lamborgini','1'),(28,'mitsubishi','1'),(23,'ford','1'),(22,'porschew','1'),(21,'raider','1'),(20,'highland','1'),(13,'toyota revo','1'),(30,'0','1'),(31,'0','1'),(32,'0','1');
+INSERT INTO `vehicle` VALUES (1,' Porsche  ','1'),(3,'Toyota','1'),(28,' Mitsubishi  ','1'),(23,'ford','1'),(22,'porschew','1'),(21,'raider','1'),(20,'highland','1'),(13,'toyota revo','1');
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -486,4 +514,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-30 18:15:06
+-- Dump completed on 2013-05-31 13:38:25

@@ -224,7 +224,7 @@ CREATE TABLE `joborder` (
   `address` mediumtext,
   `trnxdate` date DEFAULT NULL,
   PRIMARY KEY (`jo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=latin1 COMMENT='enforces referential integrity';
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=latin1 COMMENT='enforces referential integrity';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +233,7 @@ CREATE TABLE `joborder` (
 
 LOCK TABLES `joborder` WRITE;
 /*!40000 ALTER TABLE `joborder` DISABLE KEYS */;
-INSERT INTO `joborder` VALUES (120,'tongbens',28,3,'12',1,'21','12','2013-05-12'),(121,NULL,23,16,'12',25,'12','21','2013-05-12'),(122,NULL,1,3,'21',2,'21','21','2013-05-12'),(123,NULL,1,3,'21',2,'21','21','2013-05-12'),(124,NULL,1,3,'21',1,'12','12','2013-05-12'),(127,NULL,3,3,'21',1,'21','21','2013-05-12'),(128,NULL,1,3,'hss',1,'23','12','2013-05-12'),(131,'45',1,3,'3',1,'3','3','2013-05-17'),(132,'13',3,3,'12',2,'12','12','2013-05-17'),(133,'333',3,5,'23',3,'23','32','2013-05-17'),(134,'pot',3,3,'re',6,'12','re','2013-05-17'),(135,'122',1,5,'12',1,'12','12','2013-05-29'),(136,'121',30,12,'12',28,'21','21','2013-05-30'),(137,'12',21,21,'21',2,'2','12','2013-05-30'),(138,'12',31,12,'12',29,'21','21','2013-05-30'),(139,'12',32,12,'12',30,'12','12','2013-05-30');
+INSERT INTO `joborder` VALUES (120,'tongbens',28,3,'12',1,'21','12','2013-05-12'),(121,NULL,23,16,'12',25,'12','21','2013-05-12'),(122,NULL,1,3,'21',2,'21','21','2013-05-12'),(123,NULL,1,3,'21',2,'21','21','2013-05-12'),(124,NULL,1,3,'21',1,'12','12','2013-05-12'),(127,NULL,3,3,'21',1,'21','21','2013-05-12'),(128,NULL,1,3,'hss',1,'23','12','2013-05-12'),(131,'45',1,3,'3',1,'3','3','2013-05-17'),(132,'13',3,3,'12',2,'12','12','2013-05-17'),(133,'333',3,5,'23',3,'23','32','2013-05-17'),(134,'pot',3,3,'re',6,'12','re','2013-05-17'),(135,'122',1,5,'12',1,'12','12','2013-05-29'),(136,'121',30,12,'12',28,'21','21','2013-05-30'),(137,'12',21,21,'21',2,'2','12','2013-05-30'),(138,'12',31,12,'12',29,'21','21','2013-05-30'),(139,'12',32,12,'12',30,'12','12','2013-05-30'),(140,'12345',1,3,'KPV563',1,'+639277745663','Cugman','2013-05-30'),(141,'12345',1,3,'KPV563',1,'+639277745663','Baloy','2013-05-30'),(142,'12345',1,3,'NQL654',1,'+639277745663','Baloy','2013-05-30'),(143,'12345',1,3,'NQL654',1,'+639277745663','Baloy','2013-05-30');
 /*!40000 ALTER TABLE `joborder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +261,7 @@ CREATE TABLE `jodetails` (
 
 LOCK TABLES `jodetails` WRITE;
 /*!40000 ALTER TABLE `jodetails` DISABLE KEYS */;
-INSERT INTO `jodetails` VALUES (135,20,'','12',12.00,'1');
+INSERT INTO `jodetails` VALUES (135,20,'','12',12.00,'1'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(140,0,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(141,1,'','Testing insert',500.25,'0'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(142,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1'),(143,1,'','Testing insert',500.25,'1');
 /*!40000 ALTER TABLE `jodetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,4 +486,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-30 18:15:06
+-- Dump completed on 2013-05-30 20:52:03
