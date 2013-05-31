@@ -29,7 +29,7 @@
                     <li><a href="http://localhost/prodrivehelpsystem/doku.php?id=start" target="_new">Help</a></li>
                 </ul>
                 <div class="calendar"><i class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
-                <div class="quicksearch"><a href="#">Job History</a></div> 
+                <!--<div class="quicksearch"><a href="#">Job History</a></div>--> 
             </div>
         </div>
         <!-- navigation menu -->
