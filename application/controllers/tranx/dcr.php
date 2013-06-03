@@ -35,6 +35,12 @@ class Dcr extends CI_Controller {
 		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
 			// pass value to the controller
 			$data['dcr'] = $dcrNo;
+			$data['begbal'] = $this->_getbegbal();
+			$data['cashfloat'] = $this->_getcashfloat();
+			$data['cashlift'] = $this->_getcashlift();	
+			$data['salescash'] = $this->_getsalescash();
+			$data['salescheck'] = $this->_getsalescheck();
+			$data['coh'] = ($data['begbal'] + $data['cashfloat'] + $data['salescash']) -($data['cashlift']);
 			$data['main_content'] = 'tranx/dcr/dcr_view';
 			$this->load->view('includes/template', $data);
 		} else {
@@ -73,6 +79,63 @@ class Dcr extends CI_Controller {
 			redirect(base_url('tranx/dcr'));
 		}
 		
-	}	
+	}
+	
+private function _getcashfloat() {
+		global $almd_userid;
+		
+		$strQry = sprintf("SELECT SUM(amnt) AS total FROM cashfloat c WHERE cashier=%d AND trnxdate='%s' AND `status`='1'", $almd_userid, curdate());		
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) {
+			return ($rec->total != '') ? $rec->total : '0.00';
+		}
+		
+	}
+	
+	private function _getcashlift() {
+		global $almd_userid;
+		
+		$strQry = sprintf("SELECT SUM(amnt) AS total FROM cashlift c WHERE cashier=%d AND trnxdate='%s' AND `status`='1'", $almd_userid, curdate());		
+		$record = $this->db->query($strQry)->result();
+
+		foreach($record as $rec) {
+			return ($rec->total != '') ? $rec->total : '0.00';
+		}
+	}
+	
+	private function _getsalescash() {
+		global $almd_userid;
+		
+		$strQry = sprintf("SELECT SUM(amnt) AS total FROM dcrdetails d WHERE dcr_id=(SELECT dcr_id FROM dcr d WHERE cashier=%d AND trnxdate='%s' AND `status`='1') AND tender=1", $almd_userid, curdate());
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) {
+			return ($rec->total != '') ? $rec->total : '0.00';
+		}
+	}
+	
+	private function _getsalescheck() {
+		global $almd_userid;
+		
+		$strQry = sprintf("SELECT SUM(amnt) AS total FROM dcrdetails d WHERE dcr_id=(SELECT dcr_id FROM dcr d WHERE cashier=%d AND trnxdate='%s' AND `status`='1') AND tender=2", $almd_userid, curdate());
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) {
+			return ($rec->total != '') ? $rec->total : '0.00';
+		}
+	}
+	
+	private function _getbegbal() {
+		global $almd_username;
+		global $almd_userid;
+		
+		$strQry = sprintf("SELECT * FROM dcr WHERE cashier=%d AND trnxdate='%s' AND `status`='1'", $almd_userid, curdate());
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) {
+			return ($rec->begbal != '') ? $rec->begbal : '0.00';
+		}
+	}
 	
 }

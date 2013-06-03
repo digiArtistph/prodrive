@@ -99,7 +99,7 @@ class Cutoff extends CI_Controller {
 		$record = $this->db->query($strQry)->result();
 		
 		foreach($record as $rec) {
-			return $rec->begbal;
+			return ($rec->begbal != '') ? $rec->begbal : '0.00';
 		}
 	}
 	
@@ -136,7 +136,7 @@ class Cutoff extends CI_Controller {
 		}
 	}
 	
-private function _getcheckcash() {
+	private function _getcheckcash() {
 		global $almd_userid;
 		
 		$strQry = sprintf("SELECT SUM(amnt) AS total FROM dcrdetails d WHERE dcr_id=(SELECT dcr_id FROM dcr d WHERE cashier=%d AND trnxdate='%s' AND `status`='1') AND tender=2", $almd_userid, curdate());

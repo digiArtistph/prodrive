@@ -4,15 +4,15 @@
     <div class="minidashboard">
     	<div class="panelOne">
         	<p>Begining Balance: Php <?php echo $hdrRec->begbal; ?></p>
-            <p>Grand Total: Php</p>
+            <p>Cash on Hand: Php <?php echo $coh; ?></p>
         </div>
         <div class="panelTwo">
-        	<p>Cash Float: Php 250.00</p>
-            <p>Cash Lift: Php 500.00</p>
+        	<p>Cash Float: Php <?php echo $cashfloat; ?></p>
+            <p>Cash Lift: Php <?php echo $cashfloat; ?></p>
         </div>
          <div class="panelThree">
-        	<p>Total Check: Php 2500.00</p>
-            <p>Total Cash: Php 1500.00</p>
+        	<p>Total Check: Php <?php echo $salescheck; ?></p>
+            <p>Total Cash: Php <?php echo $salescash; ?></p>
         </div>
     </div><div class="cleafix">&nbsp;</div>
 
