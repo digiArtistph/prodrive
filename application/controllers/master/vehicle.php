@@ -29,9 +29,6 @@ class Vehicle extends CI_Controller {
 			case 'editvehicle':
 				$this->_editvehicle($id);
 				break;
-			case 'deletevehicle':
-				$this->_deletevehicle($id);
-				break;
 			default:
 				$this->_vehicle();
 		}
@@ -55,24 +52,15 @@ class Vehicle extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
-	private function _deletevehicle($id){
-		if($this->_delvehicle($id))
-			redirect( base_url() . 'master/vehicle');
+	public function ajaxdelveh(){
+		$strQry = sprintf("DELETE FROM `vehicle` WHERE `v_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
-	private function _delvehicle($id){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `v_id`="%s"', $almd_db->vehicle, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( !$query )
-			return false;
-		
-		return true;
-	}
 	
 	private function _vehiclelists($id = ''){
 		

@@ -19,7 +19,7 @@
 		<?php foreach ($colors as $color):?>
 			<tr>
 				<td><?php echo $color->name;?></td>
-            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/color/section/editcolor/' . $color->clr_id;?>">edit</a>|<a class="reggriddelbtn" href="<?php echo base_url() . 'master/color/section/deletecolor/' . $color->clr_id;?>">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/color/section/editcolor/' . $color->clr_id;?>">edit</a>|<a class="reggriddelbtn delclrs" clrcode="<?php echo $color->clr_id;?>" href="#">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
@@ -29,5 +29,5 @@
 	<?php endif;?>
 	
 	</div>
-	
+<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>	
 </div>

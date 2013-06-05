@@ -19,7 +19,7 @@
 		<?php foreach ($categories as $category):?>
 			<tr>
 				<td><?php echo $category->category;?></td>
-            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/categories/section/editcategories/' . $category->categ_id;?>">edit</a>|<a class="reggriddelbtn" href="<?php echo base_url() . 'master/categories/section/deletecategories/' . $category->categ_id;?>">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/categories/section/editcategories/' . $category->categ_id;?>">edit</a>|<a class="reggriddelbtn delcategory" catcode="<?php echo $category->categ_id;?>" href="#">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
@@ -28,5 +28,5 @@
 		<p>No Categories Added!!!</p>
 	<?php endif;?>
 	</div>
-	
+<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
 </div>

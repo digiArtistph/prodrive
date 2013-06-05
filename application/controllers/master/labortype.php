@@ -29,9 +29,6 @@ class Labortype extends CI_Controller {
 			case 'editlabor':
 				$this->_editlabor($id);
 				break;
-			case 'deletelabor':
-				$this->_deletelabor($id);
-				break;
 			default:
 				$this->_laborview();
 		}
@@ -94,18 +91,13 @@ class Labortype extends CI_Controller {
 		return $query->result();
 	}
 	
-	private function _del_labor($id){
-		global $almd_db;
-		$almd_db = new Almdtables();
-	
-		$strqry = sprintf('DELETE FROM `%s` WHERE `laborid`="%s"', $almd_db->labortype, $id);
-	
-		$query = $this->db->query($strqry);
-	
-		if( !$query )
-			return false;
-	
-		return true;
+	public function ajaxdeltype(){
+		$strQry = sprintf("DELETE FROM `labortype` WHERE `laborid`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
 	public function validateaddlabor(){

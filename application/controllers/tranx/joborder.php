@@ -29,9 +29,6 @@ class Joborder extends CI_Controller{
 			case 'editjoborder':
 				$this->_editjoborder($id);
 				break;
-			case 'deletejobrder':
-				$this->_deletejoborder($id);
-				break;
 			default:
 				$this->_joborder($id);
 		}
@@ -78,23 +75,19 @@ class Joborder extends CI_Controller{
 		return $query->result();
 	}
 	
-	private function _deletejoborder($id){
+	public function ajaxdeljo(){
 		
-		global $almd_db;
-		$almd_db = new Almdtables();
+		$strQry = sprintf("DELETE FROM `jodetails` WHERE `jo_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			return false;
 		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `jo_id`=%d', $almd_db->jodetails, $id);
-		if(!$this->db->query($strqry))
-			echo 'delete failed'; 
-		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `jo_id`=%d', $almd_db->joborder, $id);
-		
-		if(!$this->db->query($strqry))
-			echo 'delete failed';
-
-		redirect( base_url() . 'tranx/joborder');
-		
-
+		$strQry = sprintf("DELETE FROM `joborder` WHERE `jo_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
 	private function _joborder($id){

@@ -29,9 +29,6 @@ class Users extends CI_Controller {
 			case 'editusers':
 				$this->_editusers($id);
 				break;
-			case 'deleteusers':
-				$this->_deleteusers($id);
-				break;
 			default:
 				$this->_users();
 		}
@@ -180,24 +177,13 @@ class Users extends CI_Controller {
 		}
 	}
 	
-	private function _deleteusers($id){
-		if( $this->_deleteuserlist($id) )
-			redirect(base_url(). 'master/users');
-		
-	}
-	
-	private function _deleteuserlist($id){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `u_id`="%s"', $almd_db->users, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( !$query )
-			return false;
-		
-		return true;
+	public function ajaxdeluser(){
+		$strQry = sprintf("DELETE FROM `users` WHERE `u_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
 }

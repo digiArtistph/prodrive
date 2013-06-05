@@ -29,9 +29,6 @@ class Customer extends CI_Controller {
 			case 'editcustomer':
 				$this->_editcustomer($id);
 				break;
-			case 'deletecustomer':
-				$this->_deletecustomer($id);
-				break;
 			case 'feedbackcustomer':
 				$this->_feedbackcustomer($id);
 				break;
@@ -102,18 +99,13 @@ class Customer extends CI_Controller {
 		return $query->result();
 	}
 	
-	private function _del_customer($id){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `custid`="%s"', $almd_db->customer, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( !$query )
-			return false;
-		
-		return true;
+	public function ajaxdelcust(){
+		$strQry = sprintf("DELETE FROM `customer` WHERE `custid`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
 	public function validateaddcustomer(){
