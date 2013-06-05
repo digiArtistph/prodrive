@@ -6,6 +6,7 @@
                         <ul>
                             <li <?php isTabSelected('dcr', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/dcr'); ?>">DCR Entry</a></li>
                             <li  <?php isTabSelected('joborder', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/joborder'); ?>">Job Order</a></li>
+                            <li  <?php isTabSelected('receiving', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/receiving'); ?>">Recieving</a></li>
                             <li <?php isTabSelected('cashfloat', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/cashfloat'); ?>">Cash Float</a></li>
                             <li <?php isTabSelected('cashlift', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/cashlift'); ?>">Cash Lift</a></li>
                             <li <?php isTabSelected('cutoff', 'submenuselected', 2); ?>><a href="<?php echo base_url('tranx/cutoff'); ?>">Cut-Off</a></li>

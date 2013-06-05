@@ -1,4 +1,5 @@
 <?php if (!defined('BASEPATH')) exit ('No direct script access allowed.');
+
 class Dcr extends CI_Controller {
 	private $DCR = null;
 	private $username;

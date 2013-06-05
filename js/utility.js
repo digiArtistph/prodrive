@@ -131,9 +131,18 @@ $(document).ready(function(){
 	}
 	
 	/* autocomplete bye digiArtist_ph */
-	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'});
-	$(".vehiclecolor").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/color'});
-	$(".vehiclecustomer").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'});
+	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){
+			$('input[name="makecode"]').val(ui.item.index);
+		}});
+	$(".vehiclecolor").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/color'}, {select: function(evt, ui){
+			$('input[name="colorcode"]').val(ui.item.index);
+		}});
+	$(".vehiclecustomer").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
+			$('input[name="customercode"]').val(ui.item.index);
+		}});
+	
+	/* datepicker */
+	$( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
 	
 	// autocomplete vehicle
 	$('.vehicle').autocomplete(
