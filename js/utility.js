@@ -89,7 +89,7 @@ $(document).ready(function(){
 			
 			$.post(base_url + 'ajax/ajaxjo/savejoborder', input)
 			.success(function(data) {
-				alert(data);
+				//alert(data);
 				return true;
 			});
 		}else{
@@ -316,5 +316,36 @@ $(document).ready(function(){
 		}
 
 	})
+	
+	$('.delvehicle').click(function(){
+		// alert( $(this).attr('vehiclecode') );
+		//$("#dialog-confirm p").text();
+		var currtr = $(this);
+		$("#dialog-confirm p").text("Delete Vehicle with Plate No. \"" + $(this).closest('tr').find('td:eq(1)').text() + "\"");
+		 $("#dialog-confirm").dialog({
+							resizable : false,
+							height : 140,
+							modal : true,
+							buttons : {
+								"Delete" : function() {
+									
+									var inputownvehicle = {'id' : currtr.attr('vehiclecode') }
+									$.post(base_url + 'master/ownedvehicle/ajaxdelvehicle', inputownvehicle)
+									.success(function(data) {
+										if(data == 1){
+											currtr.closest('tr').remove('tr');
+										}else{
+											alert('data cannot be deleted');
+										}
+									});
+									$(this).dialog("close");
+								},
+								Cancel : function() {
+									$(this).dialog("close");
+								}
+							}
+						});
+		 return false;
+	});
 	
 });	//end of parent Dom
