@@ -24,7 +24,7 @@ class Mdl_receiving extends CI_Model {
 	
 	public function retrieve() {
 		
-		$strQry = "SELECT vr.vr_id, CONCAT(c.lname, ', ', c.fname) AS `customer`, CONCAT(vo.plateno, ', ', v.make) AS `plateno` FROM (((vehicle_receive vr LEFT JOIN customer c ON vr.customer=c.custid) LEFT JOIN vehicle_owner vo ON vr.vehicle=vo.vo_id) LEFT JOIN vehicle v ON vo.make=v.v_id)ORDER BY c.lname ASC";
+		$strQry = "SELECT vr.vr_id, CONCAT(c.lname, ', ', c.fname) AS `customer`, CONCAT(vo.plateno, ', ', v.make) AS `plateno` FROM (((vehicle_receive vr LEFT JOIN customer c ON vr.customer=c.custid) LEFT JOIN vehicle_owner vo ON vr.vehicle=vo.vo_id) LEFT JOIN vehicle v ON vo.make=v.v_id)  WHERE vr.`status`='1' ORDER BY c.lname ASC";
 		$resultset = $this->db->query($strQry);
 		
 		$data['count'] = $resultset->num_rows;
