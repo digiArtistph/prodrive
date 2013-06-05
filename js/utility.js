@@ -324,14 +324,15 @@ $(document).ready(function(){
 
 	})
 	
+	
+	//delete function in baseurl() . master/ownedvehicle
 	$('.delvehicle').click(function(){
-		// alert( $(this).attr('vehiclecode') );
-		//$("#dialog-confirm p").text();
+		
 		var currtr = $(this);
-		$("#dialog-confirm p").text("Delete Vehicle with Plate No. \"" + $(this).closest('tr').find('td:eq(1)').text() + "\"");
-		 $("#dialog-confirm").dialog({
+			$("#dialog-confirm p").text("Delete Vehicle with Plate No. \"" + $(this).closest('tr').find('td:eq(1)').text() + "\" ?");
+		 	$("#dialog-confirm").dialog({
 							resizable : false,
-							height : 140,
+							height : 145,
 							modal : true,
 							buttons : {
 								"Delete" : function() {
@@ -346,12 +347,20 @@ $(document).ready(function(){
 										}
 									});
 									$(this).dialog("close");
+									
 								},
 								Cancel : function() {
 									$(this).dialog("close");
 								}
 							}
 						});
+		 return false;
+	});
+	
+	//delete function in baseurl() . master/customer
+	$('.delcust').click(function(){
+		var currtr = $(this);
+		alert( currtr.attr('custcode') );
 		 return false;
 	});
 	
