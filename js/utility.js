@@ -149,9 +149,16 @@ $(document).ready(function(){
 				// appends dom
 				data = $.parseJSON(data);
 				var output = '';
+				var cntr = 0;
 				
 				for(x in data) {
-					output += '<option value="' + data[x].index  + '">' + data[x].value + '</option>';
+					
+					if(cntr == 0)
+						output += '<option selected="selected" value="' + data[x].index  +  '">' + data[x].value + '</option>';
+					else
+						output += '<option value="' + data[x].index  +  '">' + data[x].value + '</option>';
+					
+					cntr++;
 				}
 				
 				$('#dialog-receiving select').empty().append(output);
