@@ -7,7 +7,7 @@ $(document).ready(function(){
 	$('#dcrdatagrid').dcrgrid();
 	// Data Validation
 	
-	$('.amnt, .datavaldecimal').decimal();
+	$('.amnt, .datavaldecimal, input[name="tax"], input[name="discount"]').decimal();
 	var dir = $('.dir');
 	dir.change(loaddataDir);
 	var dataFile = $('.datafile');
@@ -74,7 +74,7 @@ $(document).ready(function(){
 	//submit clicked
 	$('.submit').click(function(){
 		
-		if( ValidateCust() & ValidateVhcle() ){
+		if( ValidateDiscnt() & ValidateTax() & ValidateCust() & ValidateVhcle() ){
 			
 			var input = {
 				'jo_orid' : $('input[name="jo_number"]').val(),
@@ -88,8 +88,20 @@ $(document).ready(function(){
 			
 			$.post(base_url + 'ajax/ajaxjo/savejoborder', input)
 			.success(function(data) {
-				alert(data);
-				return true;
+				if(data != 0){
+					window.location = base_url + "tranx/joborder/section/editjoborder/" + data;
+				}else{
+					$("#dialogerror p").text('');
+					$("#dialogerror p").append('Opps!!! saving record to database has error');
+					 $("#dialogerror").dialog({
+						modal : true,
+						buttons : {
+							Ok : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+				}
 			});
 		}else{
 			
@@ -123,6 +135,29 @@ $(document).ready(function(){
 		
 	}
 	
+	function ValidateTax(){
+		$('input[name="tax"]').closest('p').children('span').remove('span.error');
+		$('input[name="tax"]').closest('p').children('span').text('');
+		if( ($('input[name="tax"]').val() == 'NaN') || ($('input[name="tax"]').val() == '') ){
+			$('input[name="tax"]').closest('p').append('<span class="error">Select a Tax first</span>');
+			return false;
+		}else{
+			$('input[name="tax"]').closest('p').append('<span class="error"></span>');
+			return true;
+		}
+	}
+	
+	function ValidateDiscnt(){
+		$('input[name="discount"]').closest('p').children('span').remove('span.error');
+		$('input[name="discount"]').closest('p').children('span').text('');
+		if( ($('input[name="discount"]').val() == 'NaN')|| ($('input[name="discount"]').val() == '') ){
+			$('input[name="discount"]').closest('p').append('<span class="error">Select a Discount first</span>');
+			return false;
+		}else{
+			$('input[name="discount"]').closest('p').append('<span class="error"></span>');
+			return true;
+		}
+	}
 	
 	/* autocomplete bye digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){
