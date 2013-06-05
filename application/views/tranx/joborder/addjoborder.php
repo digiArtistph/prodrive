@@ -17,10 +17,7 @@
 		<p><label>Job Order No.</label> <input readonly="readonly" type="text" name="jo_number" value="" /></p>
 		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
 		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo set_value('cust_id'); ?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo set_value('customer'); ?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
-		
 		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="0"/><input readonly="readonly" class="vehicle" type="text" name="vehicle" /></p>
-		
-		
 		<p><label>Tax</label> <input  type="text" name="tax"/></p>
         <p><label>Discount</label> <input  type="text" name="discount"/></p>
 		
