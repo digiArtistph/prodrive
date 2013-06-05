@@ -25,6 +25,10 @@ class Receiving extends CI_Controller{
 	
 	private function _receiving() {
 		
+		$this->load->model('mdl_receiving');
+		$dataset = $this->mdl_receiving->retrieve();
+		$data['records'] = $dataset['records'];
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'tranx/vehicle_receiving/vehicle_receiving_view';
 		$this->load->view('includes/template', $data);
 		
@@ -34,6 +38,31 @@ class Receiving extends CI_Controller{
 		
 		$data['main_content'] = 'tranx/vehicle_receiving/vehicle_receiving_add_view';
 		$this->load->view('includes/template', $data);
+		
+	}
+	
+	public function validateaddreceivedvehicle() {
+		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+		
+		$validation->set_rules('recdate', 'Date Received', 'required');
+		$validation->set_rules('customercode', 'Customer Code');
+		$validation->set_rules('customer', 'Customer', 'required');
+		$validation->set_rules('ownedvehiclecode', 'Vehicle Code');
+		$validation->set_rules('ownedvehicle', 'Vehicle', 'required');
+		
+		if($validation->run() === FALSE) {
+			$this->_addreceiving();
+		} else {
+			$this->load->model('mdl_receiving');
+			
+			if($this->mdl_receiving->add()) {
+				redirect(base_url('tranx/receiving'));
+			} else {
+				echo 'Inserting new record failed.';
+			}
+		}
 		
 	}
 	

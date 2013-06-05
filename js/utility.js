@@ -140,6 +140,53 @@ $(document).ready(function(){
 	$(".vehiclecustomer").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
 			$('input[name="customercode"]').val(ui.item.index);
 		}});
+	$(".vehiclecustomer-ownedvehicle").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
+			$('input[name="customercode"]').val(ui.item.index);	
+			var customerid = ui.item.index;	
+			// loads the filtered data
+			$.post(base_url + 'ajax/ajxautocomplete/ownedvehicle', {post_customer: customerid})
+			.success(function(data){
+				// appends dom
+				data = $.parseJSON(data);
+				var output = '';
+				var cntr = 0;
+				
+				for(x in data) {
+					
+					if(cntr == 0)
+						output += '<option selected="selected" value="' + data[x].index  +  '">' + data[x].value + '</option>';
+					else
+						output += '<option value="' + data[x].index  +  '">' + data[x].value + '</option>';
+					
+					cntr++;
+				}
+				
+				$('#dialog-receiving select').empty().append(output);
+				// opens the dialog box
+				$("#dialog-receiving").dialog("open");
+			});
+			
+		}});
+		
+	$('.ownedvehicle')
+	 $("#dialog-receiving").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		title: "Select a vehicle",
+		buttons: {
+				"Select this vehicle": function(){
+					var selectedVehicleCode = $('select option:selected', this).val();
+					var selectedVehicleDescription = $('select option:selected', this).text();
+					// closes the dialog box
+					// assigns seleted record into some form element
+					$('input[name="ownedvehiclecode"]').val(selectedVehicleCode);
+					$('input[name="ownedvehicle"]').val(selectedVehicleDescription);					
+					$(this).dialog("close");
+				}
+			}
+		});
 	
 	/* datepicker */
 	$( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
