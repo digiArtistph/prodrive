@@ -65,8 +65,9 @@ class Ajaxjo extends CI_Controller {
 	
 	public function deljodet(){
 		$jo_type = $this->input->post('labor');
-		
-		$strqry = sprintf('DELETE FROM `tmp_jo_details_cache` WHERE `trace_id`=%d ', $this->input->post('id') );
+		$jo_type = 1;
+// 		echo $jo_type; die();
+		$strqry = sprintf('DELETE FROM `tmp_jo_details_cache` WHERE `trace_id`=%d ', $jo_type );
 		
 		$query = $this->db->query($strqry);
 		if(!$query)
