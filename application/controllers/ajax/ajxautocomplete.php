@@ -29,5 +29,14 @@ class Ajxautocomplete extends CI_Controller {
 		echo $record;
 	}
 	
+	public function ownedvehicle() {
+		
+		$this->load->model('mdl_autocomplete');
+		$record = $this->mdl_autocomplete->ownedvehicle();
+		$record = json_encode($record);
+		
+		echo $record;
+	}
+	
 }
 	

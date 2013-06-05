@@ -90,4 +90,14 @@ class mdl_autocomplete extends CI_Model{
 		
 		return $resultset;
 	}
+	
+	public function ownedvehicle() {
+		$customer = $this->input->post('post_customer');
+		
+		$strQry = sprintf("SELECT vo.vo_id AS `index`, CONCAT(v.make, ' -- ', vo.plateno) AS `value` FROM vehicle_owner vo LEFT JOIN vehicle v ON vo.make=v.v_id WHERE owner=%d", $customer);
+		$resultset = $this->db->query($strQry)->result();
+		
+		return $resultset;
+	}
+	
 }
