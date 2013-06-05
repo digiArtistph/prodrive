@@ -332,22 +332,42 @@ function evntjoDel(){
 	var input1 = {
 			'id': $(this).find('.jo_orders').closest('tr').attr('id')
 		}
-	
-		$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
-		.success(function(data) {
-			if(data == 1){
-				var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
-				var amnt = parseFloat( curtr.find("td:nth-child(6)").text() );
-				if( (totalamnt-amnt) == 0 ){
-					$('.panelOne p strong span.total_amount').text( '0' );
-				}else{
-					$('.panelOne p strong span.total_amount').text( totalamnt-amnt );
-				}
-				
-				curtr.remove('tr');
-			}
-		});
-	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
+	$("#dialogerror p").text('');
+	$("#dialogerror p").text("Delete Job Details No. : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+ 	$("#dialogerror").dialog({
+					resizable : false,
+					height : 150,
+					autoOpen: true,
+					width	: 350,
+					modal : true,
+					buttons : {
+						"Delete" : function() {
+							
+							$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
+							.success(function(data) {
+								if(data == 1){
+									var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
+									var amnt = parseFloat( curtr.find("td:nth-child(6)").text() );
+									if( (totalamnt-amnt) == 0 ){
+										$('.panelOne p strong span.total_amount').text( '0' );
+									}else{
+										$('.panelOne p strong span.total_amount').text( totalamnt-amnt );
+									}
+									
+									curtr.remove('tr');
+								}
+							});
+							$(this).dialog("close");
+							
+						},
+						Cancel : function() {
+							
+							$(this).dialog("close");
+						}
+					}
+				});
+ 	
+	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);
 	return false;
 }
 
