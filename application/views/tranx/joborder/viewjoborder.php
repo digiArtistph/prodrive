@@ -36,7 +36,7 @@
 				<td><?php echo $order->num;?></td>
 				<td><?php echo $order->addr;?></td>
 				<td><?php echo $order->date;?></td>
-				<td><a class="reggrideditbtn" href="<?php echo base_url(). 'tranx/joborder/section/editjoborder/'. $order->jo_id; ?>">edit</a>|<a class="reggriddelbtn" href="<?php echo base_url(). 'tranx/joborder/section/deletejobrder/' . $order->jo_id; ?>" >delete</a></td>
+				<td><a class="reggrideditbtn" href="<?php echo base_url(). 'tranx/joborder/section/editjoborder/'. $order->jo_id; ?>">edit</a>|<a class="reggriddelbtn deljo" jocode="<?php echo  $order->jo_id;;?>" href="#">delete</a></td>
 			</tr>
 			<?php endforeach;?>
 			<?php endif;?>
@@ -44,4 +44,5 @@
 	</table>
 			<p><?php echo $links;?></p>
 </div>
+<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>	
 </div>

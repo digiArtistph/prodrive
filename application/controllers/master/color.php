@@ -116,4 +116,12 @@ class Color extends CI_Controller {
 		}
 	}
 	
+	public function ajaxdelclr(){
+		$strQry = sprintf("DELETE FROM `color` WHERE `clr_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
+	}
 }

@@ -360,8 +360,233 @@ $(document).ready(function(){
 	//delete function in baseurl() . master/customer
 	$('.delcust').click(function(){
 		var currtr = $(this);
-		alert( currtr.attr('custcode') );
-		 return false;
+		//alert( currtr.attr('custcode') );
+		$("#dialog-confirm p").text("Delete Customer : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 145,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('custcode') }
+								$.post(base_url + 'master/customer/ajaxdelcust', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		
+		return false;
 	});
 	
+	//delete function in baseurl() . master/categories
+	$('.delcategory').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("catcode"));
+		$("#dialog-confirm p").text("Delete Category : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('catcode') }
+								$.post(base_url + 'master/categories/ajaxdelcat', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
+	
+	//delete function in baseurl() . master/labortype
+	$('.dellbrtype').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("lbrtypecode"));
+		$("#dialog-confirm p").text("Delete Labor-type : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('lbrtypecode') }
+								$.post(base_url + 'master/labortype/ajaxdeltype', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
+	
+	//delete function in baseurl() . master/users
+	$('.deluser').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("usercode"));
+		$("#dialog-confirm p").text("Delete User : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('usercode') }
+								$.post(base_url + 'master/users/ajaxdeluser', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
+	
+	
+	//delete function in baseurl() . master/vehicle
+	$('.delveh').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("vehcode"));
+		$("#dialog-confirm p").text("Delete Vehicle : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('vehcode') }
+								$.post(base_url + 'master/vehicle/ajaxdelveh', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
+	
+	//delete function in baseurl() . master/color
+	$('.delclrs').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("clrcode"));
+		$("#dialog-confirm p").text("Delete Color : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('clrcode') }
+								$.post(base_url + 'master/color/ajaxdelclr', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
+	
+	
+	//delete function in baseurl() . tranx/joborder
+	$('.deljo').click(function(){
+		var currtr = $(this);
+		//alert(currtr.attr("jocode"));
+		$("#dialog-confirm p").text("Delete Order No. : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('jocode') }
+								$.post(base_url + 'tranx/joborder/ajaxdeljo', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
+	});
 });	//end of parent Dom

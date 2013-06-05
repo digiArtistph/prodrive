@@ -29,9 +29,6 @@ class Categories extends CI_Controller {
 			case 'editcategories':
 				$this->_editcategories($id);
 				break;
-			case 'deletecategories':
-				$this->_deletecategories($id);
-				break;
 			case 'feedbackcategories':
 				$this->_feedbackcategories($id);
 				break;
@@ -104,18 +101,13 @@ class Categories extends CI_Controller {
 		return $query->result();
 	}
 	
-	private function _del_categories($id){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		$strqry = sprintf('DELETE FROM `%s` WHERE `categ_id`="%s"', $almd_db->categories, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( !$query )
-			return false;
-		
-		return true;
+	public function ajaxdelcat(){
+		$strQry = sprintf("DELETE FROM `categories` WHERE `categ_id`=%d", $this->input->post('id'));
+		$query = $this->db->query($strQry);
+		if(!$query)
+			echo "0";
+		else
+			echo "1";
 	}
 	
 	public function validateaddcategories(){
