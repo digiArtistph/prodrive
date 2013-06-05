@@ -51,8 +51,7 @@ class mdl_autocomplete extends CI_Model{
 		if( $query->num_rows() <1 )
 			return false;
 	
-		$rows = array();
-		//call_debug($query->result_array());
+		$rows = array();		
 		foreach($query->result_array() as $row )
 		{
 			$name = ucfirst($row['fname']) . ' ' . ucfirst($row['mname'][0]) . '.' . ucfirst($row['lname']);
@@ -63,4 +62,31 @@ class mdl_autocomplete extends CI_Model{
 		return $rows;
 	}
 	
+	
+	public function vehicle() {
+		
+		$term = $this->input->get('term');
+		$strQry = "SELECT v_id AS `index`, make AS `value`  FROM vehicle WHERE make LIKE '%" . $term . "%'";
+		$resultset= $this->db->query($strQry)->result();
+		
+		return $resultset;
+	}
+	
+	public function color() {
+		
+		$term = $this->input->get('term');
+		$strQry = "SELECT clr_id AS `index`, name AS `value`  FROM color WHERE name LIKE '%" . $term . "%'";
+		$resultset= $this->db->query($strQry)->result();
+		
+		return $resultset;
+	}
+	
+	public function customer() {
+		
+		$term = $this->input->get('term');
+		$strQry = "SELECT custid AS `index`, CONCAT(lname, ', ', fname)  AS `value`  FROM customer WHERE lname LIKE '%" . $term . "%' ORDER BY lname";
+		$resultset= $this->db->query($strQry)->result();
+		
+		return $resultset;
+	}
 }

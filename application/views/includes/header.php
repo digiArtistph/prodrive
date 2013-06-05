@@ -5,9 +5,7 @@
 	define('LOGIN_CSS', '<link type="text/css"  href="http://localhost/prodrive/alamid/structure/css/login.css"  rel="stylesheet">');
 	define('JQUERY_CSS', '<link type="text/css"  href="'. base_url('js/jquery-ui-1.10.2.custom/css/prodrive/jquery-ui-1.10.2.custom.css') .'"  rel="stylesheet">');
 	define('FAVICON', '<link rel="shortcut icon" href="' . base_url('images/favicon.ico') . '" />');
-	/*define('REMOTE_JQUERY_MIN', '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');*/
 	define('LOCAL_JQUERY_MIN', '<script src="' . base_url() . 'js/jquery-ui-1.10.2.custom/development-bundle/jquery-1.9.1.js"></script>');
-	/*define('REMOTE_JQUERY_UI_MIN', '<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>');*/
 	define('LOCAL_JQUERY_UI_MIN', '<script src="' . base_url() . 'js/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>');
 	define('JQUERY_COMBOBOX', '<script type="text/javascript" src="' . base_url('js/jquery-ui-1.10.2.custom/js/jquery-combobox.js'). '"></script>');
 	define('UTILITY_JS', '<script type="text/javascript" src="' . base_url('js/utility.js'). '"></script>');
@@ -15,6 +13,7 @@
 	define('DCR_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.dcrgrid.js'). '"></script>');
 	define('JOTBL_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.populatetable.js'). '"></script>');
 	define('DATAVALIDATION_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.datavalidation.js'). '"></script>');
+	define('VEHICLE_OWNER_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.owned.vehicle.js'). '"></script>');
 	
 	switch ($section) {
 		case 'home':
@@ -29,6 +28,7 @@
 			echo JOTBL_PLUGIN_JS;
 			echo DCR_PLUGIN_JS;
 			echo DATAVALIDATION_PLUGIN_JS;
+			echo VEHICLE_OWNER_PLUGIN_JS;
 			echo UTILITY_JS;					
 			break;
 		case 'login':

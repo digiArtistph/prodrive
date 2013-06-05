@@ -19,7 +19,8 @@
                         <li <?php isTabSelected('categories', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/categories'); ?>">Categories</a></li>
                         <li <?php isTabSelected('labortype', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/labortype'); ?>">Labor Type</a></li>
                         <li <?php isTabSelected('users', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/users'); ?>">Users</a></li>
-                        <li <?php isTabSelected('vehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/vehicle'); ?>">Vehicles</a></li>
+                        <li <?php isTabSelected('ownedvehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/ownedvehicle'); ?>">Owned-Vehicle</a></li>
+                        <li <?php isTabSelected('vehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/vehicle'); ?>">Make</a></li>
                         <li <?php isTabSelected('color', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/color'); ?>">Colors</a></li>
                     	</ul>
                     </div>

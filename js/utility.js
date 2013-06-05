@@ -130,6 +130,11 @@ $(document).ready(function(){
 		
 	}
 	
+	/* autocomplete bye digiArtist_ph */
+	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'});
+	$(".vehiclecolor").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/color'});
+	$(".vehiclecustomer").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'});
+	
 	// autocomplete vehicle
 	$('.vehicle').autocomplete(
 			{ autoFocus: true },
