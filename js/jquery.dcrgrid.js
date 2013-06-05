@@ -99,7 +99,7 @@
 		output += '<td><input type="text" name="particular" /></td>';
 		output += '<td><select name="tender"><option value=""> Select a tender </option><option value="1">Cash</option><option value="2">Check</option></select></td>';
 		output += '<td><select name="refernce"><option value=""> Select a reference no. </option><option value="ref1">Reference 1</option><option value="ref2">Reference 2</option></select></td>';
-		output += '<td><input class="datavaldecimal" type="text" name="amount" /></td>';
+		output += '<td><input class="datavaldecimal" type="text" name="amount" value="0.00" /></td>';
 		output += '<td><input type="button" id="addbtn" value="Add" /></td>';
 		output += '</tr>';
 		output += '</tbody>';
