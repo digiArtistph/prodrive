@@ -23,4 +23,5 @@
 
 	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
 	</div>
+<div id="dialogerror"><p></p></div>
 </div>
