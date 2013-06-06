@@ -200,11 +200,11 @@
 var table_entry = '<table id="entryfield">';
 table_entry += '<thead>';
 table_entry += '<tr>';
-table_entry += '<td>Job Type</td>';
-table_entry += '<td class="jotypename">Labor/Parts or Material</td>';
-table_entry += '<td>Details</td>';
-table_entry += '<td>Amount</td>';
-table_entry += '<td>Action</td>';
+table_entry += '<th>Job Type</th>';
+table_entry += '<th class="jotypename">Labor/Parts or Material</th>';
+table_entry += '<th>Details</th>';
+table_entry += '<th>Amount</th>';
+table_entry += '<th>Action</th>';
 table_entry += '</tr>';
 table_entry += '</thead>';
 table_entry += '<tbody>';
