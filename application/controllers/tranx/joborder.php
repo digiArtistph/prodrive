@@ -36,13 +36,18 @@ class Joborder extends CI_Controller{
 	
 	private function _editjoborder($id){
 		$data['jbo_order'] = $this->_joborders($id);
+		
 		$this->db->query('CALL sp_create_jo_cache()');
 		$this->db->query('START TRANSACTION');
+		$detailsqry = $this->_jobdet($id);
 		
-		foreach ($this->_jobdet($id) as $ordet){
-			//call_debug($ordet->lbrid);
-			$this->db->query('INSERT INTO `tmp_jo_details_cache` SET labor='. $ordet->lbrid .', partmaterial="'.$ordet->parts .'", details="'. $ordet->det .'", amnt="'. $ordet->amount .'"');
-		
+		if(!empty($detailsqry) ){
+			//call_debug($detailsqry);
+			foreach ($detailsqry as $ordet){
+				//call_debug($ordet->lbrid);
+				$this->db->query('INSERT INTO `tmp_jo_details_cache` SET labor="'. $ordet->lbrid .'", partmaterial="'.$ordet->parts .'", details="'. $ordet->det .'", amnt="'. $ordet->amnt .'"');
+			
+			}
 		}
 		$this->db->query('COMMIT');
 		$data['jbo_det'] = $this->_getJobDet();
@@ -65,7 +70,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number,jo.trnxdate as trnxdate, jo.plate as plate, v.v_id as vehicleid, vo.owner as custid , concat(cust.lname, ", ", cust.fname) as custname, jo.tax, jo.discount FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN vehicle AS v on v.v_id=vo.make LEFT JOIN customer AS cust ON cust.custid=vo.owner WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
+		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number,jo.trnxdate as trnxdate, jo.plate as plate, v.v_id as vehicleid, cust.custid as custid , concat(cust.lname, ", ", cust.fname) as custname, jo.tax, jo.discount FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN vehicle AS v on v.v_id=jo.v_id LEFT JOIN customer AS cust ON cust.custid=jo.customer  WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
 		
 		$query = $this->db->query($strqry);
 		
@@ -79,12 +84,13 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jdet.jo_id as id, jdet.labor as lbrid, lt.name as lbrname, jdet.partmaterial as parts, jdet.details as det, jdet.amnt as amount FROM `%s` as jdet LEFT JOIN labortype as lt on lt.laborid=jdet.labor WHERE jdet.jo_id=%d and jdet.`status`="1"', $almd_db->jodetails ,$id);
+		$strqry = sprintf('SELECT jo.jo_id as id, jdet.labor as lbrid,jdet.partmaterial as parts, jdet.details as det, jdet.amnt 	 FROM joborder jo LEFT JOIN jodetails jdet ON jo.jo_id=jdet.jo_id  WHERE jdet.jo_id=%d ',$id);
 
 		$query = $this->db->query($strqry);
 		
 		if( $query->num_rows() <1 )
 			return false;
+		
 		
 		return $query->result();
 	}

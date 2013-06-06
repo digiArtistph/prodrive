@@ -97,5 +97,26 @@ class Ajaxjo extends CI_Controller {
 		
 		echo $result;
 	}
+
+	public function savejoborderedit(){
+		$strqry = sprintf('CALL sp_editJO( %d, "%s", %d, %d, "%s", "%s", %s, %s, @id);',$this->input->post('id'), $this->input->post('jo_orid'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('jo_date'), $this->input->post('tax'),  $this->input->post('discount') );
+		$query = $this->db->query($strqry);
+		//echo $strqry; die();
+		if(!$query)
+			return false;
+	
+		$strqry2 = sprintf('SELECT @id as id');
+		$query2 = $this->db->query($strqry2);
+	
+		if(!$query2)
+			return false;
+	
+		$result = '';
+		foreach ( $query2->result() as $res){
+			$result = $res->id;
+		}
+	
+		echo $result;
+	}
 	
 }

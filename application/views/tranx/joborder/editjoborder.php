@@ -68,7 +68,7 @@
 			</table>
 		</div>
 
-	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
+	<p class="submitedit"><input class="submitedit" type="submit" value="Save"/></p>
 	</div>
 	<?php endif;?>
 <div id="dialogerror"><p></p></div>
