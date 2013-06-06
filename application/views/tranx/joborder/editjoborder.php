@@ -12,23 +12,64 @@
         
         </select>
     </div>
+    <?php if(!empty($jbo_order)):?>
+    <?php foreach ($jbo_order as $order):?>
 	<form class="jo_form">
-		<input class="joborderid" type="hidden" name="joborderid" value="0"/>
+		<input class="joborderid" type="hidden" name="joborderid" value="<?php echo $order->id;?>"/>
 
-		<p><label>Job Order No.</label> <input readonly="readonly" type="text" name="jo_number" value="<?php echo dmax(); ?>" /></p>
+		<p><label>Job Order No.</label> <input readonly="readonly" type="text" name="jo_number" value="<?php echo $order->number;?>" /></p>
 
-		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
-		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo set_value('cust_id'); ?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo set_value('customer'); ?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
-		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="0"/><input readonly="readonly" tabindex="0" class="vehicle" type="text" name="vehicle" /></p>
-		<p><label>Tax</label> <input  type="text" name="tax" /></p>
-        <p><label>Discount</label> <input  type="text" name="discount"/></p>
+		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo $order->trnxdate;?>" /></p>
+		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo $order->custid;?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo $order->custname;?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
+		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="<?php echo $order->vehicleid;?>"/><input readonly="readonly" tabindex="0" class="vehicle" type="text" name="vehicle" value="<?php echo $order->plate;?>"/></p>
+		<p><label>Tax</label> <input  type="text" name="tax" value="<?php echo $order->tax;?>"/></p>
+        <p><label>Discount</label> <input  type="text" name="discount" value="<?php echo $order->discount;?>" /></p>
 		
 	</form>
-
+	<?php endforeach;?>
+	
 	<div class="jo_buildform">
-	</div>
+			<table class="jodet regdatagrid">
+				<thead>
+					<tr>
+						<th>No.</th>
+						<th>Job Type</th>
+						<th>Labor</th>
+						<th>Parts/Material</th>
+						<th>Details</th>
+						<th>Amount</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<?php if ( !empty($jbo_det) ):?>
+				<tbody class="jo_orders">
+					<?php $cnt=1; foreach ($jbo_det as $ordet):?>
+					<tr id="<?php echo $ordet->trace_id;?>" lbr="<?php echo $ordet->labor;?>">
+						<td><?php echo $cnt;?></td>
+						
+						<?php if($ordet->labor == 0):?>
+						<td>Parts or Material</td>
+						<td></td>
+						<td><?php echo $ordet->partmaterial;?></td>
+						<?php else:?>
+						<td>Labor</td>
+						<td><?php echo $ordet->lbrname;?></td>
+						<td></td>
+						<?php endif;?>
+						
+						<td><?php echo $ordet->details;?></td>
+						<td><?php echo $ordet->amnt;?></td>
+						<td><a class="edit_jodet reggrideditbtn" href="#">Edit</a> | <a class="del_jodet reggriddelbtn" href="#">Delete</a>
+						</td>
+					</tr>
+					<?php $cnt++; endforeach;?>
+				</tbody>
+				<?php endif;?>
+			</table>
+		</div>
 
 	<p class="submit"><input class="saveorder" type="submit" value="Save"/></p>
 	</div>
+	<?php endif;?>
 <div id="dialogerror"><p></p></div>
 </div>

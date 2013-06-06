@@ -35,18 +35,37 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _editjoborder($id){
-		$data['jbo_det'] = $this->_jobdet($id);
 		$data['jbo_order'] = $this->_joborders($id);
-// 		call_debug( $data['jbo_det'] );
+		$this->db->query('CALL sp_create_jo_cache()');
+		$this->db->query('START TRANSACTION');
+		
+		foreach ($this->_jobdet($id) as $ordet){
+			//call_debug($ordet->lbrid);
+			$this->db->query('INSERT INTO `tmp_jo_details_cache` SET labor='. $ordet->lbrid .', partmaterial="'.$ordet->parts .'", details="'. $ordet->det .'", amnt="'. $ordet->amount .'"');
+		
+		}
+		$this->db->query('COMMIT');
+		$data['jbo_det'] = $this->_getJobDet();
+// 		call_debug($data['jbo_det']);
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
+	}
+	
+	private function _getJobDet(){
+		$strqry = sprintf('SELECT tdc.trace_id, tdc.labor, lt.name as lbrname, tdc.partmaterial, tdc.details, tdc.amnt FROM `tmp_jo_details_cache` tdc LEFT JOIN labortype lt ON lt.laborid=tdc.labor');
+		$query = $this->db->query($strqry);
+		
+		if( $query->num_rows() <1 )
+			return false;
+		
+		return $query->result();
 	}
 	
 	private function _joborders($id){
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number, vo.plateno as plate, vo.color as colorid, clr.name as colorname, v.v_id as vehicleid, v.make as vehiclename, vo.description, vo.owner as custid , concat(cust.lname, ", ", cust.fname) as custname FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN color AS clr ON clr.clr_id=vo.color LEFT JOIN vehicle AS v on v.v_id=vo.make LEFT JOIN customer AS cust ON cust.custid=vo.owner WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
+		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number,jo.trnxdate as trnxdate, jo.plate as plate, v.v_id as vehicleid, vo.owner as custid , concat(cust.lname, ", ", cust.fname) as custname, jo.tax, jo.discount FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN vehicle AS v on v.v_id=vo.make LEFT JOIN customer AS cust ON cust.custid=vo.owner WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
 		
 		$query = $this->db->query($strqry);
 		

@@ -12,6 +12,8 @@
 	$.fn.populatetable = function(options) {
 		_currobj = $(this);
 		init();
+		$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 		$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
 	}
 	
@@ -237,10 +239,15 @@ jo_ordertbl += '</thead>';
 jo_ordertbl += '<tbody class="jo_orders">';	
 jo_ordertbl += '</tbody>';
 jo_ordertbl += '</table>';
-
+var index=0;
 function init(){
-
-	_currobj.html(table_entry + jo_ordertbl);
+	//alert(_currobj.children('.jodet').children('.jo_orders').length);
+	if(_currobj.children('.jodet').children('.jo_orders').length == 0){
+		_currobj.html(table_entry + jo_ordertbl);
+	}else{
+		index = 2;
+		_currobj.prepend(table_entry);
+	}
 	populateTblBody();
 
 	//change text onchange select job type
@@ -260,7 +267,7 @@ function init(){
 }
 
 
-var index=0;
+
 function populateTblBody(){
 	
 	if( index == 0 ){
@@ -284,6 +291,7 @@ function generaterow(type){
 	}else{
 		return false;
 	}
+	
 	$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
 	$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 }
