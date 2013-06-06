@@ -18,7 +18,7 @@
 	var cnt = 0;
 	function evtActionJodet(){
 		//in case add
-		if( Validatejobtype() & Validatelabor() ){
+		if( Validateamnt() & Validatelabor() & Validatejobtype() ){
 			
 			
 			if( $('.jodet_action').val() == 'Add'){
@@ -43,6 +43,9 @@
 						var result = data.split('|');
 						if(result[1] == 1){
 							populateTblBody();
+							var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
+							var amnt = parseFloat( $('.amnt').val() );
+							$('.panelOne p strong span.total_amount').text( totalamnt + amnt );
 							$('.jo_orders tr:last').attr('id', result[0]);
 							$('.jo_orders tr:last').attr('lbr', $('.lbr').val());
 							cleanform();
@@ -78,6 +81,13 @@
 						$.post(jobase_url + 'ajax/ajaxjo/editjodet', input)
 						.success(function(data) {
 							if(data == 1){
+								var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
+								var amnt = parseFloat( $('.amnt').val() );
+								if( ( (totalamnt - tempval ) + amnt ) == 0 ){
+									$('.panelOne p strong span.total_amount').text( '0' );
+								}else{
+									$('.panelOne p strong span.total_amount').text( (totalamnt - tempval ) + amnt );
+								}
 								
 								$('.jodet_action').val('Add');
 								
@@ -134,10 +144,10 @@
 	}
 	
 	function Validatelabor(){
-		if ( $('.jotype') == 'labor' ) {
+		if ( $('.jotype').val() == 'labor' ) {
 			if( $('.lbr').val() == ''){
 				$("#dialogerror p").text('');
-				$("#dialogerror p").append('Please use autocomplete function');
+				$("#dialogerror p").append('You missed to input a Labor');
 				 $("#dialogerror").dialog({
 					modal : true,
 					buttons : {
@@ -148,10 +158,42 @@
 				});
 				return false;
 			}else{
-				
+				return true;
 			}
 		}else{
-			
+			if( $('.labor').val() == ''){
+				$("#dialogerror p").text('');
+				$("#dialogerror p").append('You missed to input Parts or Material');
+				 $("#dialogerror").dialog({
+					modal : true,
+					buttons : {
+						Ok : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	
+	function Validateamnt(){
+		if($('.amnt').val() == ''){
+			$("#dialogerror p").text('');
+			$("#dialogerror p").append('You missed to input Amount');
+			 $("#dialogerror").dialog({
+				modal : true,
+				buttons : {
+					Ok : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+			return false;
+		}else{
+			return true;
 		}
 	}
 	
@@ -205,11 +247,14 @@ function init(){
 	$('.jotype').change( function(){
 		if( $('.jotype').val() == ''){
 			$('.jotypename').text('Labor/Parts or Material');
+			$('.lbr').val('');
 		}else if ( $('.jotype').val() == 'labor' ) {
 			$('.jotypename').text('Labor');
 			$('.labor').val('');
+			$('.lbr').val('');
 		}else if ( $('.jotype').val() == 'parts' ) {
 			$('.jotypename').text('Parts/Material');
+			$('.lbr').val('');
 		}
 	});
 }
@@ -233,9 +278,9 @@ function populateTblBody(){
 
 function generaterow(type){
 	if(type == 'labor'){
-		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Labor</td><td>'+ $('.labor').val() +'</td><td></td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
+		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Labor</td><td>'+ $('.labor').val() +'</td><td></td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet reggrideditbtn" href="#">Edit</a>|<a  class="del_jodet reggriddelbtn" href="#">Delete</a></td></tr>');
 	}else if(type == 'parts'){
-		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Parts or Material</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
+		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Parts or Material</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet reggrideditbtn" href="#">Edit</a>|<a  class="del_jodet reggriddelbtn" href="#">Delete</a></td></tr>');
 	}else{
 		return false;
 	}
@@ -250,10 +295,9 @@ function cleanform(){
 	$('.amnt').val('');
 }
 
+var tempval = 0;
 function evntjoEdit(){
 
-	//alert ( $(this).closest('tr').attr('id') );
-	//alert ( $(this).closest('tr').find("td:nth-child(2)").text() );
 	if( $(this).closest('tr').find("td:nth-child(2)").text() == 'Labor'){
 		$('.jotype').val('labor');
 		$('.lbr').val( $(this).closest('tr').attr('lbr') );
@@ -277,6 +321,7 @@ function evntjoEdit(){
 		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 		
 	}
+	tempval = parseFloat($('.amnt').val());
 	$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
 	$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
@@ -287,14 +332,42 @@ function evntjoDel(){
 	var input1 = {
 			'id': $(this).find('.jo_orders').closest('tr').attr('id')
 		}
-	
-		$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
-		.success(function(data) {
-			if(data == 1){
-				curtr.remove('tr');
-			}
-		});
-	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
+	$("#dialogerror p").text('');
+	$("#dialogerror p").text("Delete Job Details No. : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+ 	$("#dialogerror").dialog({
+					resizable : false,
+					height : 150,
+					autoOpen: true,
+					width	: 350,
+					modal : true,
+					buttons : {
+						"Delete" : function() {
+							
+							$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
+							.success(function(data) {
+								if(data == 1){
+									var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
+									var amnt = parseFloat( curtr.find("td:nth-child(6)").text() );
+									if( (totalamnt-amnt) == 0 ){
+										$('.panelOne p strong span.total_amount').text( '0' );
+									}else{
+										$('.panelOne p strong span.total_amount').text( totalamnt-amnt );
+									}
+									
+									curtr.remove('tr');
+								}
+							});
+							$(this).dialog("close");
+							
+						},
+						Cancel : function() {
+							
+							$(this).dialog("close");
+						}
+					}
+				});
+ 	
+	$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);
 	return false;
 }
 
