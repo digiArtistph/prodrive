@@ -74,22 +74,21 @@ $(document).ready(function(){
 	//submit clicked
 	$('.submit').click(function(){
 		
-		if( ValidateCust() & ValidateVhcle() & ValidateAddr() ){
+		if( ValidateCust() & ValidateVhcle() ){
 			
 			var input = {
-				'jo_num' : $('input[name="jo_number"]').val(),
+				'jo_orid' : $('input[name="jo_number"]').val(),
 				'jo_date' : $('input[name="jo_date"]').val(),
 				'cust' : $('.cust_id').val(),
 				'vehicle' : $('.v_id').val(),
-				'addr' : $('input[name="addr"]').val(),
-				'plate' : $('input[name="plate"]').val(),
-				'clr' : $('.clr_id').val(),
-				'phone' : $('input[name="number"]').val()
+				'plate' : $('.vehicle').val(),
+				'tax' : $('input[name="tax"]').val(),
+				'discount' : $('input[name="discount"]').val()
 				}
 			
 			$.post(base_url + 'ajax/ajaxjo/savejoborder', input)
 			.success(function(data) {
-				//alert(data);
+				alert(data);
 				return true;
 			});
 		}else{
@@ -98,17 +97,22 @@ $(document).ready(function(){
 	});
 	
 	function ValidateCust(){
-		if($('.cust_id').val() == 0){
-			$('.customer').closest('p').append('<span class="error">Select a customer first</span>');
+		$('.jocustomer').parent().children('span').remove('span.error');
+		$('.jocustomer').parent().children('span').text('');
+		if($('.cust_id').val() == ''){
+			$('.jocustomer').parent().append('<span class="error">Select a customer first</span>');
 			return false;
 		}else{
-			$('.customer').closest('p').append('<span class="error"></span>');
+			$('.jocustomer').parent().children('span').removeClass('error');
+			$('.jocustomer').parent().children('span').text('');
 			return true;
 		}
 		
 	}
 
 	function ValidateVhcle(){
+		$('.vehicle').closest('p').children('span').remove('span.error');
+		$('.vehicle').closest('p').children('span').text('');
 		if($('.v_id').val() == 0){
 			$('.vehicle').closest('p').append('<span class="error">Select a Vehicle first</span>');
 			return false;
@@ -119,16 +123,6 @@ $(document).ready(function(){
 		
 	}
 	
-	function ValidateAddr(){
-		if($('input[name="addr"]').val() == ''){
-			$('input[name="addr"]').closest('p').append('<span class="error">Select a customer first</span>');
-			return false;
-		}else{
-			$('input[name="addr"]').closest('p').append('<span class="error"></span>');
-			return true;
-		}
-		
-	}
 	
 	/* autocomplete bye digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){

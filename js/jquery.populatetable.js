@@ -329,9 +329,11 @@ function evntjoEdit(){
 }
 function evntjoDel(){
 	var curtr = $(this).closest('tr');
+	var curRow = $(this).parent().parent();
 	var input1 = {
-			'id': $(this).find('.jo_orders').closest('tr').attr('id')
+			'id': curRow.attr('id')
 		}
+	
 	$("#dialogerror p").text('');
 	$("#dialogerror p").text("Delete Job Details No. : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
  	$("#dialogerror").dialog({
@@ -345,6 +347,7 @@ function evntjoDel(){
 							
 							$.post(jobase_url + 'ajax/ajaxjo/deljodet', input1)
 							.success(function(data) {
+								console.log(data);
 								if(data == 1){
 									var totalamnt = parseFloat( $('.panelOne p strong span.total_amount').text() );
 									var amnt = parseFloat( curtr.find("td:nth-child(6)").text() );

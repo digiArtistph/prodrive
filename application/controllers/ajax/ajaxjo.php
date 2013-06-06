@@ -65,8 +65,9 @@ class Ajaxjo extends CI_Controller {
 	
 	public function deljodet(){
 		$jo_type = $this->input->post('labor');
-		
-		$strqry = sprintf('DELETE FROM `tmp_jo_details_cache` WHERE `trace_id`=%d ', $this->input->post('id') );
+		$jo_type = 1;
+// 		echo $jo_type; die();
+		$strqry = sprintf('DELETE FROM `tmp_jo_details_cache` WHERE `trace_id`=%d ', $jo_type );
 		
 		$query = $this->db->query($strqry);
 		if(!$query)
@@ -77,8 +78,8 @@ class Ajaxjo extends CI_Controller {
 	
 	
 	public function savejoborder(){
-		$strqry = sprintf('CALL sp_addJO("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", @id );', $this->input->post('jo_num'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('clr'), $this->input->post('phone'),  $this->input->post('addr'),  $this->input->post('jo_date') );
-// 		echo $strqry; die();
+		$strqry = sprintf('CALL sp_addJO( "%s", %d, %d, "%s", "%s", %s, %s, @id);', $this->input->post('jo_orid'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('jo_date'), $this->input->post('tax'),  $this->input->post('discount') );
+ 		echo $strqry; die();
 		$query = $this->db->query($strqry);
 		
 		if(!$query)
