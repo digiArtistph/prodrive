@@ -18,47 +18,13 @@
 	var cnt = 0;
 	function evtActionJodet(){
 		//in case add
-		
-		if( $('.jodet_action').val() == 'Add'){
-			var input = null;
-			if($('.jotype').val() == 'labor'){
-				input = {
-					'labor' : $('.jotype').val(),
-					'part' : $('.lbr').val(),
-					'det' : $('.det').val(),
-					'amnt' : $('.amnt').val()
-				}
-			}else{
-				input = {
-					'labor' : $('.jotype').val(),
-					'part' : $('.labor').val(),
-					'det' : $('.det').val(),
-					'amnt' : $('.amnt').val()
-					}
-			}
-				$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
-				.success(function(data) {
-					var result = data.split('|');
-					if(result[1] == 1){
-						populateTblBody();
-						$('.jo_orders tr:last').attr('id', result[0]);
-						$('.jo_orders tr:last').attr('lbr', $('.lbr').val());
-						cleanform();
-					}else{
-					
-					}
-					$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
-					$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
-					return true;
-				});
-				$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
-				//$('.suggestion p span.error').text('Adding entry failed');
-			}else{
-				
+		if( Validatejobtype() & Validatelabor() ){
+			
+			
+			if( $('.jodet_action').val() == 'Add'){
 				var input = null;
-				if( $('.jotype').val() == 'labor'){
+				if($('.jotype').val() == 'labor'){
 					input = {
-						'id' : $('.jodet tbody').find('tr.editon').attr('id'),
 						'labor' : $('.jotype').val(),
 						'part' : $('.lbr').val(),
 						'det' : $('.det').val(),
@@ -66,53 +32,128 @@
 					}
 				}else{
 					input = {
-						'id' : $('.jodet tbody').find('tr.editon').attr('id'),
 						'labor' : $('.jotype').val(),
 						'part' : $('.labor').val(),
 						'det' : $('.det').val(),
 						'amnt' : $('.amnt').val()
 						}
 				}
-					$.post(jobase_url + 'ajax/ajaxjo/editjodet', input)
+					$.post(jobase_url + 'ajax/ajaxjo/addjodet', input)
 					.success(function(data) {
-						if(data == 1){
-							
-							$('.jodet_action').val('Add');
-							
-							$('.jodet tbody').find('tr.editon td:First-child').text( $('.jodet tbody').find('tr.editon').attr('num') );
-							
-								if($('.jotype').val() == 'labor'){
-									$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Labor');
-									$('.jodet tbody').find('tr.editon td:nth-child(3)').text( $('.labor').val() );
-									$('.jodet tbody').find('tr.editon').attr('lbr', $('.lbr').val());
-								}else{
-									$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Parts or Material');
-									$('.jodet tbody').find('tr.editon td:nth-child(3)').text( '' );
-									$('.jodet tbody').find('tr.editon td:nth-child(4)').text( $('.labor').val() );
-								
-								}
-							$('.jodet tbody').find('tr.editon td:nth-child(5)').text( $('.det').val() );
-							$('.jodet tbody').find('tr.editon td:nth-child(6)').text( $('.amnt').val() );
-							
-							$('.jodet tbody').find('tr.editon').removeClass('editon');
+						var result = data.split('|');
+						if(result[1] == 1){
+							populateTblBody();
+							$('.jo_orders tr:last').attr('id', result[0]);
+							$('.jo_orders tr:last').attr('lbr', $('.lbr').val());
 							cleanform();
-							
 						}else{
-							cleanform();
-							$('.jodet_action').val('Add');
-						}
 						
+						}
+						$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+						$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
 						return true;
 					});
-			}
-		
-		$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
-		$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
-		$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
-		
+					$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
+					//$('.suggestion p span.error').text('Adding entry failed');
+				}else{
+					
+					var input = null;
+					if( $('.jotype').val() == 'labor'){
+						input = {
+							'id' : $('.jodet tbody').find('tr.editon').attr('id'),
+							'labor' : $('.jotype').val(),
+							'part' : $('.lbr').val(),
+							'det' : $('.det').val(),
+							'amnt' : $('.amnt').val()
+						}
+					}else{
+						input = {
+							'id' : $('.jodet tbody').find('tr.editon').attr('id'),
+							'labor' : $('.jotype').val(),
+							'part' : $('.labor').val(),
+							'det' : $('.det').val(),
+							'amnt' : $('.amnt').val()
+							}
+					}
+						$.post(jobase_url + 'ajax/ajaxjo/editjodet', input)
+						.success(function(data) {
+							if(data == 1){
+								
+								$('.jodet_action').val('Add');
+								
+								$('.jodet tbody').find('tr.editon td:First-child').text( $('.jodet tbody').find('tr.editon').attr('num') );
+								
+									if($('.jotype').val() == 'labor'){
+										$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Labor');
+										$('.jodet tbody').find('tr.editon td:nth-child(3)').text( $('.labor').val() );
+										$('.jodet tbody').find('tr.editon td:nth-child(4)').text( '' );
+										$('.jodet tbody').find('tr.editon').attr('lbr', $('.lbr').val());
+									}else{
+										$('.jodet tbody').find('tr.editon td:nth-child(2)').text('Parts or Material');
+										$('.jodet tbody').find('tr.editon td:nth-child(3)').text( '' );
+										$('.jodet tbody').find('tr.editon td:nth-child(4)').text( $('.labor').val() );
+									
+									}
+								$('.jodet tbody').find('tr.editon td:nth-child(5)').text( $('.det').val() );
+								$('.jodet tbody').find('tr.editon td:nth-child(6)').text( $('.amnt').val() );
+								
+								$('.jodet tbody').find('tr.editon').removeClass('editon');
+								cleanform();
+								
+							}else{
+								cleanform();
+								$('.jodet_action').val('Add');
+							}
+							
+							return true;
+						});
+				}
+			
+			$('.jodet_action').unbind('click', evtActionJodet).bind('click', evtActionJodet);	
+			$('.edit_jodet').unbind('click', evntjoEdit).bind('click', evntjoEdit);
+			$('.del_jodet').unbind('click', evntjoDel).bind('click', evntjoDel);
+		}
 	}
 	
+	function Validatejobtype(){
+		if( $('.jotype').val() == '' ){
+			$("#dialogerror p").text('');
+			$("#dialogerror p").append('You missed to select a job type');
+			 $("#dialogerror").dialog({
+				modal : true,
+				buttons : {
+					Ok : function() {
+						$(this).dialog("close");
+					}
+				}
+			});
+			return false;
+		}else{
+			return true;
+		}
+	}
 	
+	function Validatelabor(){
+		if ( $('.jotype') == 'labor' ) {
+			if( $('.lbr').val() == ''){
+				$("#dialogerror p").text('');
+				$("#dialogerror p").append('Please use autocomplete function');
+				 $("#dialogerror").dialog({
+					modal : true,
+					buttons : {
+						Ok : function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+				return false;
+			}else{
+				
+			}
+		}else{
+			
+		}
+	}
 	
 var table_entry = '<table id="entryfield">';
 table_entry += '<thead>';
@@ -166,6 +207,7 @@ function init(){
 			$('.jotypename').text('Labor/Parts or Material');
 		}else if ( $('.jotype').val() == 'labor' ) {
 			$('.jotypename').text('Labor');
+			$('.labor').val('');
 		}else if ( $('.jotype').val() == 'parts' ) {
 			$('.jotypename').text('Parts/Material');
 		}
@@ -193,7 +235,7 @@ function generaterow(type){
 	if(type == 'labor'){
 		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Labor</td><td>'+ $('.labor').val() +'</td><td></td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
 	}else if(type == 'parts'){
-		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Parts/Material</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
+		_currobj.find('.jo_orders').append('<tr><td>'+ (_currobj.find('.jo_orders tr').length + 1) + '</td><td>Parts or Material</td><td></td><td>'+ $('.labor').val() +'</td><td>'+ $('.det').val() +'</td><td>'+ $('.amnt').val() +'</td><td><a class="edit_jodet" href="#">Edit</a>|<a  class="del_jodet" href="#">Delete</a></td></tr>');
 	}else{
 		return false;
 	}
