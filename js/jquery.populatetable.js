@@ -22,7 +22,7 @@
 		//in case add
 		if( Validateamnt() & Validatelabor() & Validatejobtype() ){
 			
-			
+			$('.jotype').focus();
 			if( $('.jodet_action').val() == 'Add'){
 				var input = null;
 				if($('.jotype').val() == 'labor'){
@@ -305,7 +305,7 @@ function cleanform(){
 
 var tempval = 0;
 function evntjoEdit(){
-
+	$('.jotype').focus();
 	if( $(this).closest('tr').find("td:nth-child(2)").text() == 'Labor'){
 		$('.jotype').val('labor');
 		$('.lbr').val( $(this).closest('tr').attr('lbr') );
