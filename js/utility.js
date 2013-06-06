@@ -71,7 +71,7 @@ $(document).ready(function(){
 	}
 );
 	
-	//submit clicked
+	//submit add order
 	$('.submit').click(function(){
 		
 		if( ValidateDiscnt() & ValidateTax() & ValidateCust() & ValidateVhcle() ){
@@ -109,7 +109,7 @@ $(document).ready(function(){
 	});
 	
 	
-	//submit clicked
+	//submit edit order clicked
 	$('.submitedit').click(function(){
 		
 		if( ValidateDiscnt() & ValidateTax() & ValidateCust() & ValidateVhcle() ){

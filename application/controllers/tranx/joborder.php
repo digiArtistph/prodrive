@@ -51,7 +51,7 @@ class Joborder extends CI_Controller{
 		}
 		$this->db->query('COMMIT');
 		$data['jbo_det'] = $this->_getJobDet();
-// 		call_debug($data['jbo_det']);
+// 		call_debug($data['jbo_order']);
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}
@@ -70,7 +70,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number,jo.trnxdate as trnxdate, jo.plate as plate, v.v_id as vehicleid, cust.custid as custid , concat(cust.lname, ", ", cust.fname) as custname, jo.tax, jo.discount FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN vehicle AS v on v.v_id=jo.v_id LEFT JOIN customer AS cust ON cust.custid=jo.customer  WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
+		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number,jo.trnxdate as trnxdate, jo.plate as plate, jo.v_id as vehicleid, cust.custid as custid , concat(cust.lname, ", ", cust.fname) as custname, jo.tax, jo.discount FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN vehicle AS v on v.v_id=jo.v_id LEFT JOIN customer AS cust ON cust.custid=jo.customer  WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
 		
 		$query = $this->db->query($strqry);
 		
