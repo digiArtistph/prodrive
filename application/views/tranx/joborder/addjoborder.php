@@ -22,6 +22,7 @@
 		
 		
 		<p><label>Tax</label> <input  type="text" name="tax"/></p>
+        <p><label>Discount</label> <input  type="text" name="discount"/></p>
 		
 	</form>
 

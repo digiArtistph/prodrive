@@ -216,7 +216,7 @@ table_entry += '<option value="parts">Parts/Materials</option>';
 table_entry += '</select></td>';
 table_entry += '<td><input class="labor" type="text" /></td>';
 table_entry += '<td><input class="det" type="text" /></td>';
-table_entry += '<td><input class="amnt" type="text" /></td>';
+table_entry += '<td><input class="amnt" type="text" value="0.00"/></td>';
 table_entry += '<td><input class="jodet_action" type="button" value="Add" /></td>';
 table_entry += '</tr>';
 table_entry += '</tbody>';
