@@ -726,4 +726,10 @@ $(document).ready(function(){
 					});
 		return false;
 	});
+	
+	//delete function in baseurl() . tranx/joborder
+	$('.delrcv').click(function(){
+		alert('sd');
+	});
+	
 });	//end of parent Dom

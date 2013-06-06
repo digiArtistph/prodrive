@@ -33,4 +33,14 @@ class Mdl_receiving extends CI_Model {
 		return $data;
 	}
 	
+	public function retrieveqry($id = ''){
+	
+		$strqry = sprintf('SELECT * FROM `vehicle_receive` WHERE vr_id=%d', $id);
+	
+		$data['count'] = $resultset->num_rows;
+		$data['records'] = $resultset->result();
+		
+		return $data;
+	}
+	
 }

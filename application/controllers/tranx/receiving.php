@@ -18,6 +18,9 @@ class Receiving extends CI_Controller{
 			case 'addreceiving':
 				$this->_addreceiving();
 				break;
+			case 'editreceiving':
+				$this->_editreceiving($id);
+				break;
 			default:
 				$this->_receiving();
 		}
@@ -35,6 +38,11 @@ class Receiving extends CI_Controller{
 	}
 	
 	private function _addreceiving() {
+// 		retrieveqry
+		$this->load->model('mdl_receiving');
+		$dataset = $this->mdl_receiving->retrieve();
+		$data['records'] = $dataset['records'];
+		$data['count'] = $dataset['count'];
 		
 		$data['main_content'] = 'tranx/vehicle_receiving/vehicle_receiving_add_view';
 		$this->load->view('includes/template', $data);
@@ -65,5 +73,12 @@ class Receiving extends CI_Controller{
 		}
 		
 	}
+	
+	private function _editreceiving($id){
+		$data['id'] = $id;
+		$data['main_content'] = 'tranx/vehicle_receiving/vehicle_receiving_edit_view';
+		$this->load->view('includes/template', $data);
+	}
+	
 	
 }
