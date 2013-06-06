@@ -111,7 +111,7 @@ $(document).ready(function(){
 	
 	//submit edit order clicked
 	$('.submitedit').click(function(){
-		
+		console.log('clicked!!1');
 		if( ValidateDiscnt() & ValidateTax() & ValidateCust() & ValidateVhcle() ){
 			
 			var input = {
@@ -127,14 +127,16 @@ $(document).ready(function(){
 			
 			$.post(base_url + 'ajax/ajaxjo/savejoborderedit', input)
 			.success(function(data) {
-				alert(data);
+				
 				if(data == 0){
+					
 					$("#dialogerror p").text('');
-					$("#dialogerror p").append('Record Saved');
+					$("#dialogerror p").append('Record saved');
 					 $("#dialogerror").dialog({
 						modal : true,
 						buttons : {
 							Ok : function() {
+								window.location = base_url + "tranx/joborder/section/editjoborder/" + $('.joborderid').val();
 								$(this).dialog("close");
 							}
 						}
