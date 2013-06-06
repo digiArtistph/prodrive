@@ -87,7 +87,7 @@ class Customer extends CI_Controller {
 		$almd_db = new Almdtables();
 		
 		if(empty($id))
-			$strqry = mysql_real_escape_string('SELECT * FROM ' . $almd_db->customer);
+			$strqry = 'SELECT * FROM ' . $almd_db->customer . ' WHERE `status`="1"';
 		else
 			$strqry = sprintf('SELECT * FROM `%s` WHERE custid="%s"',$almd_db->customer, $id);
 		

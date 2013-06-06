@@ -61,7 +61,7 @@ class Login extends CI_Controller{
 	
 	private function __isUserExists($user, $pass) {
 		
-		$strQry = sprintf('SELECT us.username, us.fname, us.mname, us.lname, us.u_id, ut.type, ut.access FROM users us LEFT JOIN usertype ut on ut.id = us.ut_id WHERE username="%s" and pword="%s"', $user, md5($pass) );
+		$strQry = sprintf('SELECT us.username, us.fname, us.mname, us.lname, us.u_id, ut.type, ut.access FROM users us LEFT JOIN usertype ut on ut.id = us.ut_id WHERE username="%s" and pword="%s" and status like 1', $user, md5($pass) );
 		$query = $this->db->query($strQry);
 		
 		if( $query->num_rows() <1 ){
