@@ -79,7 +79,6 @@ class Ajaxjo extends CI_Controller {
 	
 	public function savejoborder(){
 		$strqry = sprintf('CALL sp_addJO( "%s", %d, %d, "%s", "%s", %s, %s, @id);', $this->input->post('jo_orid'),  $this->input->post('vehicle'), $this->input->post('cust'), $this->input->post('plate'), $this->input->post('jo_date'), $this->input->post('tax'),  $this->input->post('discount') );
- 		echo $strqry; die();
 		$query = $this->db->query($strqry);
 		
 		if(!$query)

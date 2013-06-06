@@ -36,13 +36,8 @@ class Joborder extends CI_Controller{
 	
 	private function _editjoborder($id){
 		$data['jbo_det'] = $this->_jobdet($id);
-		$data['jbo_orders'] = $this->_joborders($id);
-
-		$data['customers'] = $this->_customer_list();
-		$data['colors'] = $this->_color_list();
-		
-		$data['vehicles'] = $this->_vehicle_list();
-		
+		$data['jbo_order'] = $this->_joborders($id);
+// 		call_debug( $data['jbo_det'] );
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}
@@ -51,7 +46,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT jd.jo_id, jd.labor, lt.name as labort, jd.partmaterial, jd.details,  jd.amnt, lt.name FROM `%s` jd LEFT JOIN `labortype` lt on lt.laborid=jd.labor WHERE `jo_id`="%d"', $almd_db->jodetails ,$id);
+		$strqry = sprintf('SELECT jo.jo_id as id, jo.jo_number as number, vo.plateno as plate, vo.color as colorid, clr.name as colorname, v.v_id as vehicleid, v.make as vehiclename, vo.description, vo.owner as custid , concat(cust.lname, ", ", cust.fname) as custname FROM `%s` AS jo LEFT JOIN vehicle_owner AS vo ON vo.vo_id=jo.v_id LEFT JOIN color AS clr ON clr.clr_id=vo.color LEFT JOIN vehicle AS v on v.v_id=vo.make LEFT JOIN customer AS cust ON cust.custid=vo.owner WHERE jo.jo_id=%d AND jo.`status`="1"', $almd_db->joborder, $id);
 		
 		$query = $this->db->query($strqry);
 		
@@ -65,8 +60,8 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 		
-		$strqry = sprintf('SELECT * FROM `%s` WHERE `jo_id`="%d"', $almd_db->joborder ,$id);
-		
+		$strqry = sprintf('SELECT jdet.jo_id as id, jdet.labor as lbrid, lt.name as lbrname, jdet.partmaterial as parts, jdet.details as det, jdet.amnt as amount FROM `%s` as jdet LEFT JOIN labortype as lt on lt.laborid=jdet.labor WHERE jdet.jo_id=%d and jdet.`status`="1"', $almd_db->jodetails ,$id);
+
 		$query = $this->db->query($strqry);
 		
 		if( $query->num_rows() <1 )
@@ -127,64 +122,10 @@ class Joborder extends CI_Controller{
 	
 	private function _addjoborder(){
 		$this->db->query('CALL sp_create_jo_cache()');
-		$data['customers'] = $this->_customer_list();
-		$data['colors'] = $this->_color_list();
-		$data['vehicles'] = $this->_vehicle_list();
 		$data['main_content'] = 'tranx/joborder/addjoborder';
 		$this->load->view('includes/template', $data);
 	}
 	
-	private function _vehicle_list($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		if(empty($id))
-			$strqry = sprintf('SELECT v_id, make FROM `%s`', $almd_db->vehicle);
-		else
-			$strqry = sprintf('SELECT * FROM `%s` WHERE categ_id="%s"',$almd_db->vehicle, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( $query->num_rows() <1 )
-			return false;
-		
-		return $query->result();
-	}
-	
-	private function _color_list($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
-		
-		if(empty($id))
-			$strqry = sprintf('SELECT clr_id, name FROM `%s`', $almd_db->color);
-		else
-			$strqry = sprintf('SELECT clr_id, name FROM `%s` WHERE categ_id="%s"',$almd_db->color, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( $query->num_rows() <1 )
-			return false;
-		
-		return $query->result();
-	}
-	
-	private function _customer_list($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
-	
-		if(empty($id))
-			$strqry = sprintf('SELECT custid, fname, mname, lname FROM `%s`', $almd_db->customer);
-		else
-			$strqry = sprintf('SELECT custid, fname, mname, lname FROM  FROM `%s` WHERE categ_id="%s"',$almd_db->customer, $id);
-	
-		$query = $this->db->query($strqry);
-	
-		if( $query->num_rows() <1 )
-			return false;
-	
-		return $query->result();
-	}
-
 	private function _querydb($strqry){
 		$query = $this->db->query($strqry);
 		
