@@ -108,6 +108,55 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	//submit clicked
+	$('.submitedit').click(function(){
+		
+		if( ValidateDiscnt() & ValidateTax() & ValidateCust() & ValidateVhcle() ){
+			
+			var input = {
+				'id'	  : $('.joborderid').val(),
+				'jo_orid' : $('input[name="jo_number"]').val(),
+				'jo_date' : $('input[name="jo_date"]').val(),
+				'cust' : $('.cust_id').val(),
+				'vehicle' : $('.v_id').val(),
+				'plate' : $('.vehicle').val(),
+				'tax' : $('input[name="tax"]').val(),
+				'discount' : $('input[name="discount"]').val()
+				}
+			
+			$.post(base_url + 'ajax/ajaxjo/savejoborderedit', input)
+			.success(function(data) {
+				alert(data);
+				if(data == 0){
+					$("#dialogerror p").text('');
+					$("#dialogerror p").append('Record Saved');
+					 $("#dialogerror").dialog({
+						modal : true,
+						buttons : {
+							Ok : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+				}else{
+					$("#dialogerror p").text('');
+					$("#dialogerror p").append('Opps!!! saving record to database has error');
+					 $("#dialogerror").dialog({
+						modal : true,
+						buttons : {
+							Ok : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+				}
+			});
+		}else{
+			
+		}
+	});
+	
 	function ValidateCust(){
 		$('.jocustomer').parent().children('span').remove('span.error');
 		$('.jocustomer').parent().children('span').text('');
