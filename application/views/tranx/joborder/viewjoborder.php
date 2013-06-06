@@ -13,10 +13,10 @@
 				<th>Vehicle</th>
 				<th>Customer</th> 	
 				<th>Plate No.</th> 	
-				<th>Color</th> 	
+			<!--	<th>Color</th> 	
 				<th>Contact No.</th>
-				<th>Address</th>
-				<th>Trnxdate</th>
+				<th>Address</th>-->
+				<th>Received Date</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -32,10 +32,10 @@
 				<td><?php echo $order->vehicle;?></td>
 				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname) . ' ' . ucfirst($order->mname[0]);?></td>
 				<td><?php echo $order->plate;?></td>
-				<td><?php echo $order->color;?></td>
+				<!--<td><?php echo $order->color;?></td>
 				<td><?php echo $order->num;?></td>
-				<td><?php echo $order->addr;?></td>
-				<td><?php echo $order->date;?></td>
+				<td><?php echo $order->addr;?></td>-->
+				<td><?php echo longDate($order->date);?></td>
 				<td><a class="reggrideditbtn" href="<?php echo base_url(). 'tranx/joborder/section/editjoborder/'. $order->jo_id; ?>">edit</a>|<a class="reggriddelbtn deljo" jocode="<?php echo  $order->jo_id;;?>" href="#">delete</a></td>
 			</tr>
 			<?php endforeach;?>
