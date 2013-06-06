@@ -142,9 +142,9 @@ $(document).ready(function(){
 		}});
 	$(".vehiclecustomer-ownedvehicle").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
 			$('input[name="customercode"]').val(ui.item.index);	
-			var customerid = ui.item.index;	
+			var customerId = ui.item.index;	
 			// loads the filtered data
-			$.post(base_url + 'ajax/ajxautocomplete/ownedvehicle', {post_customer: customerid})
+			$.post(base_url + 'ajax/ajxautocomplete/ownedvehicle', {post_customer: customerId})
 			.success(function(data){
 				// appends dom
 				data = $.parseJSON(data);
@@ -188,12 +188,60 @@ $(document).ready(function(){
 			}
 		});
 	
+	$('.jovehicledialog').dialog({
+		autoOpen:false,
+		height:300,
+		width: 350,
+		modal: true,
+		title: "Select a vehicle",
+		buttons: {
+				"Select this vehicle" : function(){
+					var joVehicleCode = $('select option:selected', this).val();
+					var joVehicleDescript = $('select option:selected', this).text();
+					
+					
+					// assings selected record into some form element
+					$('input[name="v_id"]').val(joVehicleCode);
+					$('input[name="vehicle"]').val(joVehicleDescript);
+					
+					$(this).dialog("close");
+					}
+			}	
+		});
 	/* jo customer */
 	$('.jocustomer').autocomplete(
 			{autoFocus: true},
-			{source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'},
-			{select: function(evt, ui){
-				alert(ui.item.index);
+			{source: base_url + 'ajax/ajxautocomplete/customer'},
+			{select: function(evt, ui){		
+			var customerId = ui.item.index;
+			$('input[name="cust_id"]').val(customerId);				
+				$.post(base_url + 'ajax/ajxautocomplete/vehiclereceived', {post_customer: customerId})
+				.success(function(data){
+					data = $.parseJSON(data);
+					var output = '';
+					var vehicleCode = $('input[name="v_id"]');
+					var vehicle = $('input[name="vehicle"]');
+					var vehicle = $('input[name="plate"]');
+					var cntr = 0;
+
+					for(x in data) {
+						
+						if(cntr == 0)
+							output += '<option selected="selected" value="' +  data[x].ownedvehicle + '"> '  +  data[x].plateno + ' -- ' + data[x].make + '</option>'
+						else
+							output += '<option value="' +  data[x].ownedvehicle + '"> '  +  data[x].plateno + ' -- ' + data[x].make + '</option>'
+							
+						cntr++;	
+					}
+					
+					// appends dom
+					$('.jovehicledialog select').empty().append(output);
+					
+					// opends dialog box
+					$('.jovehicledialog').dialog("open");
+				});
+				
+				
 			}}
 		);
 	

@@ -100,4 +100,16 @@ class mdl_autocomplete extends CI_Model{
 		return $resultset;
 	}
 	
+	public function getvehiclereceived() {
+		
+		$customer = $this->input->post('post_customer');
+		$strQry = sprintf("SELECT c.custid, CONCAT(c.lname, ', ', c.fname) AS `customer`, vr.vehicle AS `ownedvehicle`, vo.plateno, v.make  FROM (((customer c LEFT JOIN vehicle_receive vr ON c.custid=vr.customer) LEFT JOIN vehicle_owner vo ON vr.vehicle=vo.vo_id) LEFT JOIN vehicle v ON vo.make=v.v_id) WHERE c.`status`='1' AND vr.`status`='1' AND vo.`status`='1' AND c.custid=%d",
+			$customer);
+		$resultset = $this->db->query($strQry)->result();
+		
+		return $resultset;
+		
+	}
+	//SELECT CONCAT(c.lname, ', ', c.fname) AS `customer`, vr.vehicle FROM (customer c LEFT JOIN vehicle_receive vr ON c.custid=vr.customer) WHERE c.`status`='1' AND vr.`status`='1';
+	// SELECT c.custid, CONCAT(c.lname, ', ', c.fname) AS `customer`, vr.vehicle AS `ownedvehicle`, vo.plateno  FROM ((customer c LEFT JOIN vehicle_receive vr ON c.custid=vr.customer) LEFT JOIN vehicle_owner vo ON vr.vehicle=vo.vo_id) WHERE c.`status`='1' AND vr.`status`='1' AND vo.`status`='1';
 }

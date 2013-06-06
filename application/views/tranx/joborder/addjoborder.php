@@ -7,16 +7,21 @@
 <div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel New Job Order</a></div>
 	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span></p></div>
+    <div class="jovehicledialog">
+    	<select style="width:100%; height:100%;" name="jovehicleselection" multiple="multiple">
+        
+        </select>
+    </div>
 	<form class="jo_form">
 		<input class="joborderid" type="hidden" name="joborderid" value="0"/>
 		<p><label>Job Order No.</label> <input readonly="readonly" type="text" name="jo_number" value="" /></p>
 		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
-		<p><label>Customer </label> <input class="cust_id" type="hidden" value="<?php echo set_value('cust_id'); ?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo set_value('customer'); ?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
+		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo set_value('cust_id'); ?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo set_value('customer'); ?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
 		
-		<p><label>Vehicle </label><input class="v_id" type="hidden" value="0"/><input readonly="readonly" class="vehicle" type="text" name="vehicle" /></p>
+		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="0"/><input readonly="readonly" class="vehicle" type="text" name="vehicle" /></p>
 		
 		
-		<p><label>Plate</label> <input readonly="readonly" type="text" name="plate"/></p>
+		<p><label>Tax</label> <input  type="text" name="tax"/></p>
 		
 	</form>
 
