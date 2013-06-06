@@ -188,6 +188,15 @@ $(document).ready(function(){
 			}
 		});
 	
+	/* jo customer */
+	$('.jocustomer').autocomplete(
+			{autoFocus: true},
+			{source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'},
+			{select: function(evt, ui){
+				alert(ui.item.index);
+			}}
+		);
+	
 	/* datepicker */
 	$( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
 	
