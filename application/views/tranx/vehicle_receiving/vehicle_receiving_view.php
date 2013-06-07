@@ -24,7 +24,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    
+    <div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
     <?php else: ?>
     	<p>No record found.</p>    
     <?php endif; ?>
