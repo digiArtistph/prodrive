@@ -58,7 +58,7 @@ class Ajxdcr extends CI_Controller {
 	
 	public function retrieveDcrDetails() {
 		$dcr_id = $this->input->post('post_dcr_id');
-		$strQry = sprintf("SELECT d.dcrdtl_id, d.particulars, d.refno, d.amnt, d.tender AS tendercode, t.name AS paytype FROM dcrdetails d LEFT JOIN tendertype t ON d.tender=t.tdr_id WHERE dcr_id=%d ", $dcr_id);
+		$strQry = sprintf("SELECT d.dcrdtl_id, d.particulars, d.refno, d.amnt, d.tender AS tendercode, t.name AS paytype, j.jo_number, j.plate, CONCAT(c.lname, ', ', c.fname) AS `customer`  FROM (((dcrdetails d LEFT JOIN tendertype t ON d.tender=t.tdr_id)LEFT JOIN joborder j ON d.refno=j.jo_id) LEFT JOIN customer c ON j.customer=c.custid) WHERE dcr_id=%d", $dcr_id);
 		$record = $this->db->query($strQry)->result();
 		
 		echo json_encode($record);
@@ -96,6 +96,17 @@ class Ajxdcr extends CI_Controller {
 		$strQry = sprintf("SELECT * FROM tendertype t;");
 		$record = $this->db->query($strQry)->result();
 		
+		$record = json_encode($record);
+		
+		echo $record;
+		
+	}
+	
+	public function getJoItems() {
+		
+		$joId = $this->input->post('post_joid');
+		$strQry = sprintf("SELECT j.jo_id, IF(l.name IS NULL, j.partmaterial, l.name) AS `particulars`, j.partmaterial, j.amnt FROM jodetails j LEFT JOIN labortype l ON j.labor=l.laborid WHERE j.jo_id=%d AND j.`status`='1'", $joId);
+		$record = $this->db->query($strQry)->result();
 		$record = json_encode($record);
 		
 		echo $record;

@@ -268,6 +268,22 @@ $(document).ready(function(){
 				}
 			}
 		});
+		
+		$("#dcr_dialog").dialog({
+		autoOpen: false,
+		height: 300,
+		width: 350,
+		modal: true,
+		title: "Select a vehicle",
+		buttons: {
+				"Select this particular": function(){
+					
+					var selectedItem = $('select option:selected', this).text();
+					$('input[name="particular"]').val(selectedItem);
+					$(this).dialog("close");
+				}
+			}
+		});
 	
 	$('.jovehicledialog').dialog({
 		autoOpen:false,

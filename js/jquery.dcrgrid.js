@@ -32,8 +32,7 @@
 			data = $.parseJSON(data);
 			for(var dt in data) {
 				output += '<tr' + buildDataProp(data[dt]) + '>';
-//				console.log(data[dt].dcrdtl_id + " || " + data[dt].particulars + " || " + data[dt].refno + " || " + data[dt].paytype);
-				output += '<td>' + data[dt].refno + '</td> ' + '<td>' + data[dt].paytype + '</td>' +  '<td>' + data[dt].particulars + '</td>' + '<td class="currency">' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
+				output += '<td>' + data[dt].jo_number + " || " + data[dt].plate + " || " + data[dt].customer + '</td> ' + '<td>' + data[dt].paytype + '</td>' +  '<td>' + data[dt].particulars + '</td>' + '<td class="currency">' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 			}
 			$('#datagrid tbody').append(output);
@@ -113,9 +112,33 @@
 	
 	// event handlers
 	var evtChangeReference = function(){
-		alert($('option:selected',this).text());
+		var joid = $('option:selected',this).val();
+		
+		$.post(dcrbase_url + 'ajax/ajxdcr/getJoItems', {post_joid: joid})
+		.success(function(data) {
+			data = $.parseJSON(data);
+			
+			var output = '';
+			var cntr = 0;
+			for(x in data) {
+				
+				if(cntr == 0)
+					output += '<option selected="selected" value="' + data[x].jo_id + '">' + data[x].particulars + " || " + data[x].amnt + '</option>';	
+				else
+					output += '<option value="' + data[x].jo_id + '">' + data[x].particulars + " || " + data[x].amnt + '</option>';	
+					
+				cntr++;
+			}
+			
+			$('#dcr_dialog select').empty().append(output);
+			
+			$("#dcr_dialog").dialog("open");
+		});
+		
 	}
 	
+	
+		
 	var evtbtnSaveDcrDetails = function() {
 		alert("You've pressed the Save button");
 		return false;

@@ -25,5 +25,10 @@
 </div>
 
 <?php echo form_close(); ?>
-
+    <div id="dcr_dialog">
+        <select style="width:100%; height:100%;" name="jovehicleselection" 
+        multiple="multiple">
+        
+        </select>
+    </div>
 </div>
