@@ -729,7 +729,35 @@ $(document).ready(function(){
 	
 	//delete function in baseurl() . tranx/joborder
 	$('.delrcv').click(function(){
-		alert('sd');
+		var currtr = $(this);
+		//alert(currtr.attr("delrcv"));
+		$("#dialog-confirm p").text("Delete Order No. : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+	 	$("#dialog-confirm").dialog({
+						resizable : false,
+						height : 150,
+						width	: 350,
+						modal : true,
+						buttons : {
+							"Delete" : function() {
+								
+								var inputcust = {'id' : currtr.attr('delrcv') }
+								$.post(base_url + 'tranx/receiving/ajaxdelvr', inputcust)
+								.success(function(data) {
+									if(data == 1){
+										currtr.closest('tr').remove('tr');
+									}else{
+										alert('data cannot be deleted');
+									}
+								});
+								$(this).dialog("close");
+								
+							},
+							Cancel : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+		return false;
 	});
 	
 });	//end of parent Dom
