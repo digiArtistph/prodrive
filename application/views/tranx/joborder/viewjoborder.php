@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Job Order</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Job Order Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Job Order Count: <strong><?php echo $total_rows; ?></strong></p>            
         </div>        
   </div>
 <div class="toolbar"><a href="<?php echo base_url(). 'tranx/joborder/section/addjoborder';?>">Add Job Order</a></div>
@@ -27,7 +27,7 @@
 			</tr>
 			<?php else :?>
 			<?php foreach ($joborders as $order):?>
-			<tr>
+			<tr title="Balance: Php <?php echo $order->balance; ?> &nbsp;&nbsp; Payment: Php <?php echo $order->payment; ?>">
 				<td><?php echo $order->jo_num?></td>
 				<td><?php echo $order->vehicle;?></td>
 				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname) . ' ' . ucfirst($order->mname[0]);?></td>

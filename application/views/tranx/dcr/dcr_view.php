@@ -26,9 +26,12 @@
 
 <?php echo form_close(); ?>
     <div id="dcr_dialog">
-        <select style="width:100%; height:100%;" name="jovehicleselection" 
+        <select disabled="disabled" name="jovehicleselection" 
         multiple="multiple">
         
         </select>
+        <p class="dcrpaymentamnt">Payment: Php 0.00</p>
+        <p class="jobalanceamnt">Balance: Php 0.00</p>
+        <p><label>Particulars: </label><input class="dcrparticular" type="text" name="dcrparticular" /></p>
     </div>
 </div>

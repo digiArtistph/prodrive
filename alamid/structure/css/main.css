@@ -135,3 +135,7 @@ a {text-decoration:none;}
 .loginusernameicon {background-position:-23px -83px; display:inline-block; height:15px; margin-top:2px; padding-right:2px; width:12px;}
 .loginpasswordicon {background-position:-44px -1189px; display:inline-block; height:15px; margin-top:2px; padding-right:2px; width:12px;}
 
+/* dcr dialog */
+#dcr_dialog select {height:60%; margin-bottom:1.25em; width:100%;}
+#dcr_dialog p {color:#636363; margin:.5em 0;}
+#dcr_dialog .dcrparticular {color:#636363; padding:.5em 0; width:15.5em;}

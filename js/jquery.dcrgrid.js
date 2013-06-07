@@ -113,24 +113,25 @@
 	// event handlers
 	var evtChangeReference = function(){
 		var joid = $('option:selected',this).val();
+		var joBalance = 0.00;
+		var dcrPayment = 0.00;
 		
 		$.post(dcrbase_url + 'ajax/ajxdcr/getJoItems', {post_joid: joid})
 		.success(function(data) {
 			data = $.parseJSON(data);
 			
 			var output = '';
-			var cntr = 0;
+			/*var cntr = 0;*/
 			for(x in data) {
-				
-				if(cntr == 0)
-					output += '<option selected="selected" value="' + data[x].jo_id + '">' + data[x].particulars + " || " + data[x].amnt + '</option>';	
-				else
+
 					output += '<option value="' + data[x].jo_id + '">' + data[x].particulars + " || " + data[x].amnt + '</option>';	
-					
-				cntr++;
+					joBalance = data[x].balance;
+					dcrPayment = data[x].payment;
 			}
 			
 			$('#dcr_dialog select').empty().append(output);
+			$('.dcrpaymentamnt').empty().text("Payment: Php " + dcrPayment);
+			$('.jobalanceamnt').empty().text("Balance: Php " + joBalance);
 			
 			$("#dcr_dialog").dialog("open");
 		});

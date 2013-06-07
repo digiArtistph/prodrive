@@ -53,6 +53,8 @@ class Joborder extends CI_Controller{
 		$data['jbo_det'] = $this->_getJobDet();
 		$this->load->model('mdl_joborder');
 		$data['total'] = $this->mdl_joborder->getJoTotal($id);
+		$data['balance'] = $this->mdl_joborder->getJoBalance($id);
+		$data['payments'] = $this->mdl_joborder->getDcrPayments($id);
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}
@@ -125,7 +127,7 @@ class Joborder extends CI_Controller{
 		$data['paginate'] = paginate_helper($this->pagination->create_links());
 		
 		$this->pagination->initialize($config);
-		
+		$data['total_rows'] = $config['total_rows'];
 		$data['links'] = $this->pagination->create_links();
 		$data['joborders'] = $this->joborder_list($id ,$config['per_page']);
 		$data['main_content'] = 'tranx/joborder/viewjoborder';
@@ -136,7 +138,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 	
-		$strqry = sprintf('SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color ORDER BY jo.`jo_id` DESC LIMIT %d, %d  ',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
+		$strqry = sprintf('SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date, fnc_joPayment(jo.jo_id) AS `balance`, fnc_dcrPayments(jo.jo_id) AS `payment` FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color ORDER BY jo.`jo_id` DESC LIMIT %d, %d  ',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
 	
 		$query = $this->db->query($strqry);
 	

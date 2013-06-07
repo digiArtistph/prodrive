@@ -105,7 +105,7 @@ class Ajxdcr extends CI_Controller {
 	public function getJoItems() {
 		
 		$joId = $this->input->post('post_joid');
-		$strQry = sprintf("SELECT j.jo_id, IF(l.name IS NULL, j.partmaterial, l.name) AS `particulars`, j.partmaterial, j.amnt FROM jodetails j LEFT JOIN labortype l ON j.labor=l.laborid WHERE j.jo_id=%d AND j.`status`='1'", $joId);
+		$strQry = sprintf("SELECT j.jo_id, IF(l.name IS NULL, j.partmaterial, l.name) AS `particulars`, j.partmaterial, j.amnt, fnc_joPayment(j.jo_id) AS `balance`, fnc_dcrPayments(j.jo_id) AS `payment` FROM jodetails j LEFT JOIN labortype l ON j.labor=l.laborid WHERE j.jo_id=%d AND j.`status`='1'", $joId);
 		$record = $this->db->query($strQry)->result();
 		$record = json_encode($record);
 		

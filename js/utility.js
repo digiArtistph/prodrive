@@ -211,7 +211,10 @@ $(document).ready(function(){
 		}
 	}
 	
-	/* autocomplete bye digiArtist_ph */
+	/* tooltips */
+	$( document ).tooltip({track:true});
+	
+	/* autocomplete by digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){
 			$('input[name="makecode"]').val(ui.item.index);
 		}});
@@ -271,15 +274,16 @@ $(document).ready(function(){
 		
 		$("#dcr_dialog").dialog({
 		autoOpen: false,
-		height: 300,
+		height: 390,
 		width: 350,
 		modal: true,
-		title: "Select a vehicle",
+		title: "Enter particulars",
 		buttons: {
-				"Select this particular": function(){
+				"Ok": function(){
 					
-					var selectedItem = $('select option:selected', this).text();
-					$('input[name="particular"]').val(selectedItem);
+					/*var selectedItem = $('select option:selected', this).text();*/
+					var customedParticular = $('input[name="dcrparticular"]', this).val();
+					$('input[name="particular"]').val(customedParticular);
 					$(this).dialog("close");
 				}
 			}

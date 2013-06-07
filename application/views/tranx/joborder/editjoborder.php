@@ -1,8 +1,15 @@
 <div class="wrapper">
 <h3 class="heading">Job Order</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Total : Php <strong><span class="total_amount"><?php echo $total; ?></span></strong></p>            
-        </div>        
+    	<div class="panelOne">        	<p>Total Payable: Php <strong><span class="total_amount"><?php echo $total; ?></span></strong></p>
+			<p>
+        		Payment: Php <strong><span class="total_amount"><?php echo $payments; ?></span></strong>
+
+            </p>
+            <p>
+        		Balance: Php <strong><span class="total_amount"><?php echo $balance; ?></span></strong>
+        	</p>
+    </div>        
     </div>
 <div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a></div>
 	<div id="add_form">
