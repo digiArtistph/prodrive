@@ -1,7 +1,8 @@
 <?php
 
 	// define constants here for our CSS & SCRIPTS
-	define('MAIN_CSS', '<link type="text/css"  href="http://localhost/prodrive/alamid/structure/css/main.css"  rel="stylesheet">');
+	define('MAIN_CSS', '<link type="text/css"  href="http://localhost/prodrive/alamid/structure/css/main.css"  rel="stylesheet" media="screen" />');
+	define('PRINT_CSS', '<link type="text/css"  href="http://localhost/prodrive/alamid/structure/css/print.css"  rel="stylesheet" media="print" />');
 	define('LOGIN_CSS', '<link type="text/css"  href="http://localhost/prodrive/alamid/structure/css/login.css"  rel="stylesheet">');
 	define('JQUERY_CSS', '<link type="text/css"  href="'. base_url('js/jquery-ui-1.10.2.custom/css/prodrive/jquery-ui-1.10.2.custom.css') .'"  rel="stylesheet">');
 	define('FAVICON', '<link rel="shortcut icon" href="' . base_url('images/favicon.ico') . '" />');
@@ -21,6 +22,7 @@
 		case 'master':
 		case 'reports':
 			echo MAIN_CSS;
+			echo PRINT_CSS;
 			echo FAVICON;
 			echo JQUERY_CSS;
 			echo LOCAL_JQUERY_MIN;
