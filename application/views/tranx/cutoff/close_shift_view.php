@@ -9,8 +9,10 @@
         </div>        
     </div>
 	<div id="view_form">
+    <p class="error">This process will permanently close your current shift; thus, you won't be able to add more payments for this shift.</p>
+    <p>To continue to close shift, just enter your password and press the "Close Shift" button.</p><p>&nbsp;</p>
     	<?php echo form_open(base_url('tranx/cutoff/validatecutoff')); ?>
-        	<p><label>Enter your password</label><input type="password" name="pword" /><?php echo form_error('pword', '<span class="error">', '</span>'); ?></p>        	
+        	<p><label>Enter your password</label><input type="password" name="pword" /><?php echo ($msg != '') ? "<span class='error'>$msg</span>": ''; ?><?php echo form_error('pword', '<span class="error">', '</span>'); ?></p>        	
             <p class="submit"><input type="submit" value="Close Shift" /></p>
         <?php echo form_close(); ?>
     </div>

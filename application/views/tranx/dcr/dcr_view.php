@@ -8,7 +8,7 @@
         </div>
         <div class="panelTwo">
         	<p>Cash Float: Php <?php echo $cashfloat; ?></p>
-            <p>Cash Lift: Php <?php echo $cashfloat; ?></p>
+            <p>Cash Lift: Php <?php echo $cashlift; ?></p>
         </div>
          <div class="panelThree">
         	<p>Total Check: Php <?php echo $salescheck; ?></p>

@@ -33,20 +33,25 @@ class Dcr extends CI_Controller {
 	private function _dcr() {
 
 		$this->load->model('mdl_dcr');
-		if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
-			// pass value to the controller
-			$data['dcr'] = $dcrNo;
-			$data['begbal'] = $this->_getbegbal();
-			$data['cashfloat'] = $this->_getcashfloat();
-			$data['cashlift'] = $this->_getcashlift();	
-			$data['salescash'] = $this->_getsalescash();
-			$data['salescheck'] = $this->_getsalescheck();
-			$data['coh'] = ($data['begbal'] + $data['cashfloat'] + $data['salescash']) -($data['cashlift']);
-			$data['main_content'] = 'tranx/dcr/dcr_view';
-			$this->load->view('includes/template', $data);
+		if(!$this->mdl_dcr->hasClosedDCR()) {
+			if($this->mdl_dcr->hasCurrentDCR($dcrNo)) {
+				// pass value to the controller
+				$data['dcr'] = $dcrNo;
+				$data['begbal'] = $this->_getbegbal();
+				$data['cashfloat'] = $this->_getcashfloat();
+				$data['cashlift'] = $this->_getcashlift();
+				$data['salescash'] = $this->_getsalescash();
+				$data['salescheck'] = $this->_getsalescheck();
+				$data['coh'] = ($data['begbal'] + $data['cashfloat'] + $data['salescash']) -($data['cashlift']);
+				$data['main_content'] = 'tranx/dcr/dcr_view';
+				$this->load->view('includes/template', $data);
+			} else {
+				// redirects to a form that asks for a new beg bal
+				$this->_dcrnew();
+			}
 		} else {
-			// redirects to a form that asks for a new beg bal
-			$this->_dcrnew();
+			$data['main_content'] = 'tranx/dcr/dcr_has_closed_view';
+			$this->load->view('includes/template', $data);
 		}
 	}
 	

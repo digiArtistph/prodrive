@@ -31,9 +31,10 @@ class Cutoff extends CI_Controller {
 			$this->_closeshift();
 		} else {
 			if($this->usermatched()) {
+				// deactivate cashier's status
 				$this->_dcrview();
 			} else {
-				echo 'Username and Password are not matched';
+				$this->_closeshift("Your username and password do not match.");
 			}
 		}
 	}
@@ -48,8 +49,14 @@ class Cutoff extends CI_Controller {
 		$data['totalsales'] = ($data['salescash'] + $data['salescheck']);
 		$data['successlogin'] = $this->_getsuccesslogin();
 		$data['failurelogin'] = $this->_getfailurelogin();
-		$data['main_content'] = 'tranx/cutoff/dcr_single_report_view';
-		$this->load->view('includes/template', $data);
+		
+		if($this->_cashiercutoff()) {
+			$data['main_content'] = 'tranx/cutoff/dcr_single_report_view';
+			$this->load->view('includes/template', $data);
+		} else {
+			echo 'Closing shift was unsccessful.';
+		} 
+		
 				
 	}
 	
@@ -66,8 +73,9 @@ class Cutoff extends CI_Controller {
 		return FALSE;
 	}
 	
-	private function _closeshift() {
+	private function _closeshift($msg = '') {
 		
+		$data['msg'] = $msg;
 		$data['main_content'] = 'tranx/cutoff/close_shift_view';
 		$this->load->view('includes/template', $data);	
 		
@@ -145,6 +153,18 @@ class Cutoff extends CI_Controller {
 		foreach($record as $rec) {
 			return $rec->total;
 		}
+	}
+	
+	private function _cashiercutoff() {
+		global $almd_userid;
+		$curDate = curdate();
+		
+		$strQry = sprintf("UPDATE dcr SET `status`= '0'  WHERE trnxdate='%s' AND cashier=%d", $curDate, $almd_userid);
+		
+		if(! $this->db->query($strQry))
+			return FALSE;
+			
+		return TRUE;			
 	}
 	
 }

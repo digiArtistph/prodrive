@@ -19,6 +19,24 @@ class mdl_dcr extends CI_Model{
 		return TRUE;
 	}
 	
+function hasClosedDCR() {
+		global $almd_db;
+		global $almd_userid;
+		global $almd_username;
+		$curdate = curdate();
+
+		$currentUser = $almd_userid;
+		$strQry = sprintf("SELECT d.dcr_id, d.trnxdate, d.begbal, d.cashier, d.`status`, u.username FROM dcr d LEFT JOIN users u ON d.cashier=u.u_id WHERE (d.trnxdate='%s' AND d.cashier=%d AND d.`status`='0')", $curdate, $almd_userid);
+		$record = $this->db->query($strQry);
+		
+		if($record->num_rows < 1)
+			return FALSE;
+		
+		$dcrNo = $record->result();
+		
+		return TRUE;
+	}
+	
 	public function newDCR(&$dcrNo = null) {
 		global $almd_db;
 		$currentDate = $this->input->post('trnxdate');
