@@ -3,8 +3,14 @@
 body, div, p, ul, li, span {margin:0; padding:0;}
 a, a img, img {border:0;}
 
-body {color: #000; background: blue;}
+body {color: #000; background: #fff;}
 a, a:hover, a:visited {text-decoration:none; color:#000;}
+
+/* page size */
+@page {size: 8.25in 5.5in; margin: 1in .75in;}
+
+/* header */
+.usercontextinfo {display:none;}
 
 /* tabs and menus */
 #menu {display:none;}
@@ -12,14 +18,34 @@ a, a:hover, a:visited {text-decoration:none; color:#000;}
 /* toolbar */
 .toolbar {display:none;}
 
+
 /* table entry */	
 #entryfield, .submitedit {display:none;}
 
+
+/* wrapper */
+.wrapper {font: 11px/1.5em Arial, Helvetica, sans-serif}
+
+
+/* data grid */
+.regdatagrid {100%;}
+.regdatagrid td:last-child, .regdatagrid th:last-child {display:none;}
+.regdatagrid {border-collapse: collapse; width:100%;}
+.regdatagrid th {border-bottom:2px solid #000; color:#636363; font-size:.9em; text-align:left;}
+.regdatagrid td {color:#636363; font-size:.9em; padding:.5em 0;}
+.regdatagrid td.currency {font-weight:bold; text-align:right; padding-right:1em;}
+.regdatagrid tbody tr {border-bottom:1px solid #000 !important;}
+.regdatagrid tbody tr:hover {background:#ececec;}
+.regdatagrid td .reggriddelbtn {color:#d91e00;}
+.regdatagrid td .reggrideditbtn, .regdatagrid td .restore_db {color:#00B940;}
 
 /* default container */
 form p input {border:none;}
 
 /* heading */
+h3 {display:none;}
 
-/* page size */
-@page {size: 8.25in 5.5in; margin: 0;}
+
+
+/* footer */
+#footer {display:none;}

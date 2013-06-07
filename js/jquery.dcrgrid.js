@@ -19,6 +19,7 @@
 		// event listeners
 		$('#addbtn').bind('click', evtAdd);		
 		$('#btnDcrSave').bind('click', evtbtnSaveDcrDetails);
+		$('select[name="refernce"]').bind('change',evtChangeReference);
 	}
 	
 	var loadDataGridExistingData = function() {
@@ -32,7 +33,7 @@
 			for(var dt in data) {
 				output += '<tr' + buildDataProp(data[dt]) + '>';
 //				console.log(data[dt].dcrdtl_id + " || " + data[dt].particulars + " || " + data[dt].refno + " || " + data[dt].paytype);
-				output += '<td>' + data[dt].particulars + '</td>' + '<td>' + data[dt].paytype + '</td>' + '<td>' + data[dt].refno + '</td>' + '<td class="currency">' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
+				output += '<td>' + data[dt].refno + '</td> ' + '<td>' + data[dt].paytype + '</td>' +  '<td>' + data[dt].particulars + '</td>' + '<td class="currency">' + data[dt].amnt + '</td>' + '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
 			}
 			$('#datagrid tbody').append(output);
@@ -42,7 +43,6 @@
 			$('.EditBtn').bind('click', evtEditData);
 		});
 	} 
-	
 	
 	var bntSaveDcrDetails = function() {
 		var output = '';		
@@ -62,9 +62,9 @@
 		output += '<table id="datagrid">';
 		output += '<thead>';
 		output += '<tr>';
-		output += '<th>Particular</th>';
-		output += '<th>Tender</th>';
 		output += '<th>Reference No.</th>';
+		output += '<th>Tender</th>';
+		output += '<th>Particular</th>';		
 		output += '<th>Amount</th>';
 		output += '<th>Action</th>';
 		output += '</tr>';
@@ -84,21 +84,24 @@
 	var tableEntry = function() {
 		var output = '';
 		
+		getTender();
+		getDcrReference();
+		
 		output += '<table id="entryfield">';
 		output += '<thead>';
 		output += '<tr>';
-		output += '<th>Particular</th>';
-		output += '<th>Tender</th>';
 		output += '<th>Reference No.</th>';
+		output += '<th>Tender</th>';
+		output += '<th>Particular</th>';
 		output += '<th>Amount</th>';
 		output += '<th>Action</th>';
 		output += '</tr>';
 		output += '</thead>';
 		output += '<tbody>';
 		output += '<tr>';
-		output += '<td><input type="text" name="particular" /></td>';
-		output += '<td><select name="tender"><option value=""> Select a tender </option><option value="1">Cash</option><option value="2">Check</option></select></td>';
-		output += '<td><select name="refernce"><option value=""> Select a reference no. </option><option value="ref1">Reference 1</option><option value="ref2">Reference 2</option></select></td>';
+		output += '<td><select name="refernce"><option value=""> Select a reference no. </option><option value="walk-in">Walk-In</option></select></td>';
+		output += '<td><select name="tender"><option value=""> Select a tender </option></select></td>';
+		output += '<td><input type="text" name="particular" /></td>';		
 		output += '<td><input class="datavaldecimal" type="text" name="amount" value="0.00" /></td>';
 		output += '<td><input type="button" id="addbtn" value="Add" /></td>';
 		output += '</tr>';
@@ -109,6 +112,10 @@
 	}
 	
 	// event handlers
+	var evtChangeReference = function(){
+		alert($('option:selected',this).text());
+	}
+	
 	var evtbtnSaveDcrDetails = function() {
 		alert("You've pressed the Save button");
 		return false;
@@ -152,9 +159,9 @@
 				var dt = {'particulars': mParticular, 'tendercode': mTenderCode, 'refno': mReferenceNoCode, 'amnt':mAmt, 'dcrdtl_id': returnedData[1]};
 				
 				output += '<tr ' + buildDataProp(dt) + '>';
-				output += '<td>' + mParticular + '</td>';
+				output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';				
 				output += '<td>' + mTender + '</td>';
-				output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
+				output += '<td>' + mParticular + '</td>';
 				output += '<td class="currency">' + mAmt + '</td>';
 				output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 				output += '</tr>';
@@ -189,10 +196,9 @@
 			
 			if(mParticular == "" || mAmt == "" || mTenderCode == "")
 				return;
-			
-			output += '<td>' + mParticular + '</td>';
-			output += '<td>' + mTender + '</td>';
 			output += '<td>' + ((mReferenceNoCode!="") ? mReferenceNo : "" ) + '</td>';
+			output += '<td>' + mTender + '</td>';
+			output += '<td>' + mParticular + '</td>';			
 			output += '<td class="currency">' + mAmt + '</td>';
 			output += '<td><a class="EditBtn" href="#">Edit</a>&nbsp;<a class="DelBtn" href="#">Delete</a></td>';
 			
@@ -239,7 +245,8 @@
 		focusToEntryField();
 		
 		// sets focus
-		$('#entryfield input[name="particular"]').focus();
+		//$('#entryfield input[name="particular"]').focus();
+		clearEntryFields()
 		
 	}
 	
@@ -305,8 +312,40 @@
 		return false;
 	}
 	
+	function getTender() {
+		var output = '';
+		
+		$.post(dcrbase_url + 'ajax/ajxdcr/dcrTender')
+		.success(function(data){
+			data = $.parseJSON(data);	
+			
+			for(y in data) {
+				output += '<option value="' + data[y].tdr_id + '">' + data[y].name + '</option>';	
+			}
+			
+			$('select[name="tender"]').append(output);
+		});
+	}
+	
+	function getDcrReference() {
+		var output = '';
+		
+		$.post(dcrbase_url + 'ajax/ajxdcr/dcrReference')
+		.success(function(data) {			
+			data = $.parseJSON(data);
+			
+			for(x in data) {
+				// console.log(data[x].plate);	
+				output += '<option value="' + data[x].jo_id + '">' + data[x].jo_number + " || " + data[x].plate + " || " + data[x].customer + '</option>';
+			}
+			
+			$('select[name="refernce"]').append(output);
+		});		
+	}
+	
 	function focusToEntryField() {
-		$('#entryfield input[name="particular"]').focus();
+		//$('#entryfield input[name="particular"]').focus();
+		$('select[name="refernce"]').focus();
 	}
 	
 	function buildDataProp(dt) {

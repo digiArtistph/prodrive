@@ -79,4 +79,27 @@ class Ajxdcr extends CI_Controller {
 		
 		echo $l_status;
 	}
+	
+	public function dcrReference() {
+		
+		$strQry = sprintf("SELECT j.jo_id, j.jo_number, j.plate , CONCAT(c.lname, ', ', c.fname) AS `customer`, j.trnxdate FROM joborder j LEFT JOIN customer c ON j.customer=c.custid WHERE j.`status`='1'");
+		$record = $this->db->query($strQry)->result();
+		
+		$record = json_encode($record);
+		
+		echo $record;
+		
+	}
+	
+	public function dcrTender() {
+		
+		$strQry = sprintf("SELECT * FROM tendertype t;");
+		$record = $this->db->query($strQry)->result();
+		
+		$record = json_encode($record);
+		
+		echo $record;
+		
+	}
+	
 }
