@@ -51,7 +51,8 @@ class Joborder extends CI_Controller{
 		}
 		$this->db->query('COMMIT');
 		$data['jbo_det'] = $this->_getJobDet();
-// 		call_debug($data['jbo_order']);
+		$this->load->model('mdl_joborder');
+		$data['total'] = $this->mdl_joborder->getJoTotal($id);
 		$data['main_content'] = 'tranx/joborder/editjoborder';
 		$this->load->view('includes/template', $data);
 	}
@@ -242,6 +243,7 @@ class Joborder extends CI_Controller{
 			echo $json;
 		}
 	}
+	
 
 
 }

@@ -134,6 +134,7 @@ $(document).ready(function(){
 					$("#dialogerror p").append('Record saved');
 					 $("#dialogerror").dialog({
 						modal : true,
+						title: 'Job Order',
 						buttons : {
 							Ok : function() {
 								window.location = base_url + "tranx/joborder/section/editjoborder/" + $('.joborderid').val();

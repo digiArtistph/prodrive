@@ -50,7 +50,8 @@ class Cutoff extends CI_Controller {
 		$data['successlogin'] = $this->_getsuccesslogin();
 		$data['failurelogin'] = $this->_getfailurelogin();
 		
-		if($this->_cashiercutoff()) {
+		$this->load->model('mdl_cutoff');
+		if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {
 			$data['main_content'] = 'tranx/cutoff/dcr_single_report_view';
 			$this->load->view('includes/template', $data);
 		} else {
@@ -75,9 +76,16 @@ class Cutoff extends CI_Controller {
 	
 	private function _closeshift($msg = '') {
 		
-		$data['msg'] = $msg;
-		$data['main_content'] = 'tranx/cutoff/close_shift_view';
-		$this->load->view('includes/template', $data);	
+		$this->load->model('mdl_dcr');
+		if($this->mdl_dcr->hasCurrentDCR()) {
+			$data['msg'] = $msg;
+			$data['main_content'] = 'tranx/cutoff/close_shift_view';
+			$this->load->view('includes/template', $data);
+		} else {
+			$data['main_content'] = 'tranx/cutoff/close_shift_unable_view';
+			$this->load->view('includes/template', $data);
+		}
+			
 		
 	}
 	
@@ -155,16 +163,6 @@ class Cutoff extends CI_Controller {
 		}
 	}
 	
-	private function _cashiercutoff() {
-		global $almd_userid;
-		$curDate = curdate();
-		
-		$strQry = sprintf("UPDATE dcr SET `status`= '0'  WHERE trnxdate='%s' AND cashier=%d", $curDate, $almd_userid);
-		
-		if(! $this->db->query($strQry))
-			return FALSE;
-			
-		return TRUE;			
-	}
+	
 	
 }

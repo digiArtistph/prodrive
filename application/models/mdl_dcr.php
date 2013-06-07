@@ -1,4 +1,5 @@
-<?php
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+
 class mdl_dcr extends CI_Model{
 	
 	function hasCurrentDCR(&$dcrNo = null) {

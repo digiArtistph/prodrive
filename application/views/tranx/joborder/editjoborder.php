@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Job Order</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Total : Php <strong><span class="total_amount">0.00<?php echo ''; ?></span></strong></p>            
+    	<div class="panelOne">        	<p>Total : Php <strong><span class="total_amount"><?php echo $total; ?></span></strong></p>            
         </div>        
     </div>
 <div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a></div>
@@ -68,7 +68,7 @@
 			</table>
 		</div>
 
-	<p><input class="submitedit" type="submit" value="Save"/></p>
+	<p class="jo-save-btn"><input class="submitedit" type="submit" value="Save"/></p>
 	</div>
 	<?php endif;?>
 <div id="dialogerror"><p></p></div>

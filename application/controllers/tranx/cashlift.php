@@ -17,6 +17,15 @@ class Cashlift extends CI_Controller {
 		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
 		$id = ($this->uri->segment(5)) ? $this->uri->segment(5) : '';
 		
+		$this->load->model('mdl_cashlift');
+		$this->_mRedFlag = $this->mdl_cashlift->hasActiveShift();
+		
+		// redirects
+		if(!$this->_mRedFlag) {
+			$this->_cashLifttUnable();
+			return;
+		}
+		
 		switch($section){			
 			case 'viewcashlift':
 				$this->_cashlifts();
@@ -118,5 +127,11 @@ class Cashlift extends CI_Controller {
 		return $total;
 	}
 	
+	private function _cashLifttUnable() {
+		
+		$data['main_content'] = 'tranx/cashlift/cash_liftt_unable_view';
+		$this->load->view('includes/template', $data);
+		
+	}
 	
 }

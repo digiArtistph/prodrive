@@ -15,7 +15,14 @@ class mdl_joborder extends CI_Model{
 		return true;
 	}
 
-	public function insert_joborder($params){
+	public function getJoTotal($id) {
+		
+		$strQry = sprintf("SELECT SUM(amnt) AS `total` FROM jodetails WHERE jo_id=%d", $id);
+		$record = $this->db->query($strQry)->result();
+		
+		foreach($record as $rec) {
+			return ($rec->total != '') ? $rec->total : '0.00';
+		}
 		
 	}
 

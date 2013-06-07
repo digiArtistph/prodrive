@@ -1,6 +1,7 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cashfloat extends CI_Controller {
+	private $_mRedFlag;
 	
 	public function __construct() {
 		parent::__construct();
@@ -16,6 +17,15 @@ class Cashfloat extends CI_Controller {
 	
 		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
 		$id = ($this->uri->segment(5)) ? $this->uri->segment(5) : '';
+		
+		$this->load->model('mdl_cashfloat');
+		$this->_mRedFlag = $this->mdl_cashfloat->hasActiveShift();
+		
+		// redirects
+		if(!$this->_mRedFlag) {
+			$this->_cashFloatUnable();
+			return;
+		}
 		
 		switch($section){			
 			case 'viewcashfloat':
@@ -118,5 +128,11 @@ class Cashfloat extends CI_Controller {
 		return $total;
 	}
 	
+	private function _cashFloatUnable() {
+		
+		$data['main_content'] = 'tranx/cashfloat/cash_float_unable_view';
+		$this->load->view('includes/template', $data);
+		
+	}
 	
 }

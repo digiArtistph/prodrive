@@ -4,7 +4,12 @@
     <div class="minidashboard">
     
     </div><div class="cleafix">&nbsp;</div>
-	<div id="view_form">
-    	<p class="error"><strong>Sorry <?php echo $almd_userfullname; ?></strong>! The system has detected that you have closed your shift for this day.</p>
+	<div id="view_form">    	
+        <div class="ui-widget">
+        <div style="padding: 0 .7em;" class="ui-state-error ui-corner-all">
+            <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
+            <strong>Alert:</strong> Sorry! The system has detected that you have closed your shift for this day.</p>
+        </div>
+    </div>
     </div>
 </div>
