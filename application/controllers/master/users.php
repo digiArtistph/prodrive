@@ -2,6 +2,8 @@
 
 class Users extends CI_Controller {
 	
+	private $_mRedFlag;
+	
 	public function __construct() {
 	
 		parent::__construct();
@@ -19,6 +21,15 @@ class Users extends CI_Controller {
 		$section = ($this->uri->segment(4)) ? $this->uri->segment(4) : '';
 		$id = ($this->uri->segment(5)) ? $this->uri->segment(5) : '';
 	
+		$this->load->model('mdl_users');
+		$this->_mRedFlag = $this->mdl_users->userHasAccess();
+		
+		// redirects
+		if(!$this->_mRedFlag) {
+			$this->_usersRestricted();
+			return;
+		}
+		
 		switch($section){
 			case 'viewusers':
 				$this->_users();
@@ -176,7 +187,6 @@ class Users extends CI_Controller {
 			}
 		}
 	}
-	
 	public function ajaxdeluser(){
 		$strQry = sprintf("DELETE FROM `users` WHERE `u_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
@@ -184,6 +194,13 @@ class Users extends CI_Controller {
 			echo "0";
 		else
 			echo "1";
+	}
+	
+	private function _usersRestricted() {
+		
+		$data['main_content'] = 'master/users/view_users_restricted';
+		$this->load->view('includes/template', $data);
+		
 	}
 	
 }

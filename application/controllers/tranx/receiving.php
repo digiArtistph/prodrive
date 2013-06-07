@@ -1,6 +1,11 @@
 <?php if( !defined('BASEPATH')) exit('Direct script access not allowed');
 
-class Receiving extends CI_Controller{
+class Receiving extends CI_Controller{	
+
+	function __construct(){
+		parent::__construct();
+		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+	}
 	
 	public function index() {
 		$this->section();

@@ -2,6 +2,11 @@
 
 class Cutoff extends CI_Controller {
 	
+	function __construct(){
+		parent::__construct();
+		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+	}
+	
 	public function index() {
 		$this->section();
 	}

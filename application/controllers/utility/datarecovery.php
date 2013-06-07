@@ -1,6 +1,8 @@
 <?php
 class Datarecovery extends CI_Controller {
 	
+	private $_mRedFlag;
+	
 	function __construct() {
 	
 		parent::__construct();
@@ -9,6 +11,15 @@ class Datarecovery extends CI_Controller {
 	}
 	
 	public function index(){
+		
+		$this->load->model('mdl_utility');
+		$this->_mRedFlag = $this->mdl_utility->userHasAccess();
+		
+		// redirects
+		if(!$this->_mRedFlag) {
+			$this->_usersRestricted();
+			return;
+		}
 		
 		$data['sqlfiles'] = $this->_defaultdir_files();
 		$data['main_content'] = 'datarecovery/datarecovery_view';
@@ -68,6 +79,12 @@ class Datarecovery extends CI_Controller {
 	}
 	
 	public function restore(){
+		
+		// redirects
+		if(!$this->_mRedFlag) {
+			$this->_usersRestricted();
+			return;
+		}
 		
 		$data['drivers'] = $this->_loaddir();
 		$data['main_content'] = 'datarecovery/recovery_view';
@@ -154,4 +171,10 @@ class Datarecovery extends CI_Controller {
 			
 		}
 	}
+	
+	private function _usersRestricted() {
+		$data['main_content'] = 'utility/backup_restore_restricted';
+		$this->load->view('includes/template', $data);
+	}
+	
 }
