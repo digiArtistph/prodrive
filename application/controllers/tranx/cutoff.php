@@ -45,7 +45,7 @@ class Cutoff extends CI_Controller {
 	}
 	
 	private function _dcrview() {
-		
+		global $almd_userfullname;
 		
 		$this->load->model('mdl_cutoff');
 		// calls sp
@@ -64,6 +64,7 @@ class Cutoff extends CI_Controller {
 		$data['advances'] = $datasets['advances'];
 		$data['cashliftdetails'] = $datasets = $this->mdl_cutoff->getCashLiftDetails();
 		$data['cashfloatdetails'] = $datasets = $this->mdl_cutoff->getCashFloatDetails();
+		$data['userfullname'] = $almd_userfullname; 
 		
 		//call_debug($data);
 		//if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {

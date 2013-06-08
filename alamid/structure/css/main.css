@@ -139,3 +139,14 @@ a {text-decoration:none;}
 #dcr_dialog select {height:60%; margin-bottom:1.25em; width:100%;}
 #dcr_dialog p {color:#636363; margin:.5em 0;}
 #dcr_dialog .dcrparticular {color:#636363; padding:.5em 0; width:15.5em;}
+
+/* printables should be hidden */
+.prntview {display:none;}
+h4 {font-size:.9em; margin:.5em 0;}
+.prnt-regdatagrid {width:70%;}
+.prnt-regdatagrid {border-collapse:collapse; font-size:.9em;}
+.prnt-regdatagrid th {border-bottom:1px solid #636363 !important;}
+.prnt-regdatagrid th:first-child, .prnt-regdatagrid td:first-child {width:60%;}
+.prnt-regdatagrid th:last-child, .prnt-regdatagrid td:last-child {text-align:right; width:30%;}
+.prnt-regdatagrid td {padding:.25em 0;}
+.prnt-cash-float-box {visibility:hidden;}
