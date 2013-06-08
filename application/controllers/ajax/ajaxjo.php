@@ -119,4 +119,11 @@ class Ajaxjo extends CI_Controller {
 		echo $result;
 	}
 	
+	public function formatCurrency() {
+		
+		$currency = $this->input->post('post_currency');
+		
+		echo sCurrency($currency);
+	}
+	
 }
