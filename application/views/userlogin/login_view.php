@@ -1,7 +1,7 @@
 <div id="loginmaincontainer">
 	<div id="maindialog">
     	<div class="titlebar">
-        	<h4>Prodrive Motowerks System</h4>
+        	<h4>Prodrive Motorwerks System</h4>
         </div>
         <?php echo form_open(base_url('login/validatelogin')); ?>
 	        

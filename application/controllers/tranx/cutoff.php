@@ -45,23 +45,33 @@ class Cutoff extends CI_Controller {
 	}
 	
 	private function _dcrview() {
+		
+		
+		$this->load->model('mdl_cutoff');
+		// calls sp
+		$datasets = $this->mdl_cutoff->getDailyCollection();
+		$data['cashlift'] = $this->mdl_cutoff->getCashLiftTotal();//$this->_getcashlift();
 		$data['begbal'] = $this->_getbegbal();
 		$data['salescash'] = $this->_getsalescash();
 		$data['salescheck'] = $this->_getcheckcash();
-		$data['cashfloat'] = $this->_getcashfloat();
-		$data['cashlift'] = $this->_getcashlift();
+		$data['cashfloat'] =  $this->mdl_cutoff->getCashFloatTotal();//$this->_getcashfloat();
+		
 		$data['coh'] = ($data['begbal'] + $data['cashfloat'] + $data['salescash']) -($data['cashlift']);
 		$data['totalsales'] = ($data['salescash'] + $data['salescheck']);
 		$data['successlogin'] = $this->_getsuccesslogin();
 		$data['failurelogin'] = $this->_getfailurelogin();
+		$data['fullpaid'] = $datasets['fullpaid'];
+		$data['advances'] = $datasets['advances'];
+		$data['cashliftdetails'] = $datasets = $this->mdl_cutoff->getCashLiftDetails();
+		$data['cashfloatdetails'] = $datasets = $this->mdl_cutoff->getCashFloatDetails();
 		
-		$this->load->model('mdl_cutoff');
-		if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {
+		//call_debug($data);
+		//if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {
 			$data['main_content'] = 'tranx/cutoff/dcr_single_report_view';
 			$this->load->view('includes/template', $data);
-		} else {
-			echo 'Closing shift was unsccessful.';
-		} 
+		//} else {
+		//	echo 'Closing shift was unsccessful.';
+		//} 
 		
 				
 	}

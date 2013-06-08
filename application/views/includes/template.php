@@ -20,7 +20,7 @@
 	<div id="header">
     	<div id="masthead">
         	<!-- logo and user-context info -->
-            <div id="companylogo">Prodrive Motowerks System</div>
+            <div id="companylogo">Prodrive Motorwerks System</div>
             
             <div class="usercontextinfo">
             	<ul>
