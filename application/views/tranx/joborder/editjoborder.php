@@ -11,7 +11,7 @@
         	</p>
     </div>        
     </div>
-<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a></div>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a> &nbsp; <a class="jotagaspaidbtn" href="#">Tag as Paid</a></div>
 	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span></p></div>
     <div class="jovehicledialog">
@@ -79,4 +79,8 @@
 	</div>
 	<?php endif;?>
 <div id="dialogerror"><p></p></div>
+</div>
+
+<div id="dialog-close-jo">
+	<p>Tagging this job order as "Paid" will remove from the current list of job orders. Are you sure?</p>
 </div>

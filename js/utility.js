@@ -214,6 +214,14 @@ $(document).ready(function(){
 	/* tooltips */
 	$( document ).tooltip({track:true});
 	
+	/* closes JO - tag as paid */
+	$('.jotagaspaidbtn').click(function(){
+		//alert('You are going to close this Job Order.');
+		$("#dialog-close-jo").dialog("open");
+		return false;
+	});
+	
+	
 	/* autocomplete by digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){
 			$('input[name="makecode"]').val(ui.item.index);
@@ -269,6 +277,33 @@ $(document).ready(function(){
 					$('input[name="ownedvehicle"]').val(selectedVehicleDescription);					
 					$(this).dialog("close");
 				}
+			}
+		});
+		
+		
+		 $("#dialog-close-jo").dialog({
+		autoOpen: false,
+		height: 200,
+		width: 350,
+		modal: true,
+		title: "Tagging job order as PAID",
+		buttons: {
+				"Cancel" : function() {
+					$(this).dialog("close");
+				},
+				"Tag as Paid": function(){
+					var jo_id = $('.joborderid').val();
+					
+					$.post(base_url + 'ajax/ajaxjo/tagJoAsPaid', {post_jo_id: jo_id})
+					.success(function(data){
+						if(data == 1)
+							window.location = base_url + 'tranx/joborder'
+						else
+							alert("Failed");
+					});
+					
+					$(this).dialog("close");
+				}				
 			}
 		});
 		

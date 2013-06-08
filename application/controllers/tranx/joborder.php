@@ -119,7 +119,7 @@ class Joborder extends CI_Controller{
 		$almd_db = new Almdtables();
 		
 		$config['base_url'] = base_url('tranx/joborder/section/viewjobrder');
-		$config['total_rows'] = $this->db->query("SELECT jo_id FROM {$almd_db->joborder}")->num_rows();
+		$config['total_rows'] = $this->db->query("SELECT jo_id FROM {$almd_db->joborder} WHERE `status`='1'")->num_rows();
 		$config['uri_segment'] = 5;
 		$config['per_page'] = 10;
 		$config['num_links'] = 5;
@@ -138,7 +138,7 @@ class Joborder extends CI_Controller{
 		global $almd_db;
 		$almd_db = new Almdtables();
 	
-		$strqry = sprintf('SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date, fnc_joPayment(jo.jo_id) AS `balance`, fnc_dcrPayments(jo.jo_id) AS `payment` FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color ORDER BY jo.`jo_id` DESC LIMIT %d, %d  ',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
+		$strqry = sprintf('SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date, fnc_joPayment(jo.jo_id) AS `balance`, fnc_dcrPayments(jo.jo_id) AS `payment` FROM `%s` jo LEFT JOIN `%s` ve on ve.v_id=jo.v_id LEFT JOIN `%s` cr on cr.custid=jo.customer LEFT JOIN `%s` cl on cl.clr_id=jo.color WHERE jo.`status`="1" ORDER BY jo.`jo_id` DESC LIMIT %d, %d  ',$almd_db->joborder, $almd_db->vehicle, $almd_db->customer, $almd_db->color, $start, $end);
 	
 		$query = $this->db->query($strqry);
 	

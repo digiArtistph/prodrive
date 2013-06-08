@@ -126,4 +126,15 @@ class Ajaxjo extends CI_Controller {
 		echo sCurrency($currency);
 	}
 	
+	public function tagJoAsPaid() {
+		$jo_id = $this->input->post('post_jo_id');
+		$strQry = sprintf("UPDATE joborder SET `status`='0' WHERE jo_id=%d", $jo_id);
+		
+		if(!$this->db->query($strQry))
+			echo 0;
+		else 
+			echo 1;
+
+	}
+	
 }
