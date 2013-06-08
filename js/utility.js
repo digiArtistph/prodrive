@@ -283,8 +283,12 @@ $(document).ready(function(){
 					
 					/*var selectedItem = $('select option:selected', this).text();*/
 					var customedParticular = $('input[name="dcrparticular"]', this).val();
-					$('input[name="particular"]').val(customedParticular);
+					var currrentJoBalance = $('.curJoBalance').text();
+					
+					$('input[name="particular"]').val(customedParticular);					
 					$(this).dialog("close");
+					
+					$('input[name="amount"]').val(currrentJoBalance);					
 				}
 			}
 		});

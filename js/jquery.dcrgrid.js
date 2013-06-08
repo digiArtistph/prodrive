@@ -130,9 +130,10 @@
 			}
 			
 			$('#dcr_dialog select').empty().append(output);
+			$('#dcr_dialog .curJoBalance').empty().append(joBalance);
 			$('.dcrpaymentamnt').empty().text("Payment: Php " + dcrPayment);
 			$('.jobalanceamnt').empty().text("Balance: Php " + joBalance);
-			
+
 			$("#dcr_dialog").dialog("open");
 		});
 		

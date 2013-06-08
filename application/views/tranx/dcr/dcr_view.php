@@ -1,5 +1,5 @@
 <div class="wrapper">
-<h3 class="heading">Daily Cash Entry</h3>
+<h3 class="heading">Daily Collection Entry</h3>
 <?php foreach($dcr as $hdrRec): ?>
     <div class="minidashboard">
     	<div class="panelOne">
@@ -12,7 +12,7 @@
         </div>
          <div class="panelThree">
         	<p>Total Check: Php <?php echo $salescheck; ?></p>
-            <p>Total Cash: Php <?php echo $salescash; ?></p>
+            <p>Total Collection: Php <?php echo $salescash; ?></p>
         </div>
     </div><div class="cleafix">&nbsp;</div>
 
@@ -26,9 +26,10 @@
 
 <?php echo form_close(); ?>
     <div id="dcr_dialog">
+		<p class="curJoBalance" style="display:none;"></p>
         <select disabled="disabled" name="jovehicleselection" 
         multiple="multiple">
-        
+		
         </select>
         <p class="dcrpaymentamnt">Payment: Php 0.00</p>
         <p class="jobalanceamnt">Balance: Php 0.00</p>
