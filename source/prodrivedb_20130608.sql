@@ -31,7 +31,7 @@ CREATE TABLE `cashfloat` (
   `cashier` tinyint(4) DEFAULT '0',
   `status` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`cf_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `cashfloat` (
 
 LOCK TABLES `cashfloat` WRITE;
 /*!40000 ALTER TABLE `cashfloat` DISABLE KEYS */;
+INSERT INTO `cashfloat` VALUES (1,'','from sir Mike',1500.00,'2013-06-08',4,'1');
 /*!40000 ALTER TABLE `cashfloat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `cashlift` (
   `cashier` tinyint(4) DEFAULT '0',
   `status` enum('0','1') DEFAULT '1',
   PRIMARY KEY (`cl_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,6 +69,7 @@ CREATE TABLE `cashlift` (
 
 LOCK TABLES `cashlift` WRITE;
 /*!40000 ALTER TABLE `cashlift` DISABLE KEYS */;
+INSERT INTO `cashlift` VALUES (1,'','1 pc. Shim Brush',70.00,'2013-06-08',4,'1'),(2,'','Fuel (Santino)',50.00,'2013-06-08',4,'1');
 /*!40000 ALTER TABLE `cashlift` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +195,7 @@ CREATE TABLE `dcrdetails` (
   UNIQUE KEY `dcrdtl_id` (`dcrdtl_id`),
   KEY `FK_dcrdetails_1` (`dcr_id`),
   CONSTRAINT `FK_dcrdetails_1` FOREIGN KEY (`dcr_id`) REFERENCES `dcr` (`dcr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +204,7 @@ CREATE TABLE `dcrdetails` (
 
 LOCK TABLES `dcrdetails` WRITE;
 /*!40000 ALTER TABLE `dcrdetails` DISABLE KEYS */;
-INSERT INTO `dcrdetails` VALUES (1,6,'Overhaul || 1000.00','2',750.00,1),(1,7,'Yokohama Tire || 5000.00','1',10.00,1),(2,8,'Nagales, Emelie','1',150.00,1);
+INSERT INTO `dcrdetails` VALUES (1,6,'Overhaul || 1000.00','2',750.00,1),(1,7,'Yokohama Tire || 5000.00','1',10.00,1),(2,8,'Nagales, Emelie','1',150.00,1),(2,9,'Nagales, Emelie (Downpayment)','1',2500.00,1),(2,10,'Libago Sr., Norberto','2',250.00,1);
 /*!40000 ALTER TABLE `dcrdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +239,7 @@ CREATE TABLE `joborder` (
 
 LOCK TABLES `joborder` WRITE;
 /*!40000 ALTER TABLE `joborder` DISABLE KEYS */;
-INSERT INTO `joborder` VALUES (1,'000001',4,3,' KVM012 --  Mitsubishi  ',0,NULL,NULL,'2013-06-07',0.00,0.00,'1'),(2,'000002',3,5,' KVP867 -- Toyota',0,NULL,NULL,'2013-06-07',0.00,0.00,'1');
+INSERT INTO `joborder` VALUES (1,'000001',4,3,' KVM012 --  Mitsubishi  ',0,NULL,NULL,'2013-06-07',0.00,0.00,'1'),(2,'000002',3,5,' KVP867 -- Toyota',0,NULL,NULL,'2013-06-07',0.00,0.00,'0');
 /*!40000 ALTER TABLE `joborder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,8 +258,8 @@ CREATE TABLE `jodetails` (
   `amnt` decimal(8,2) DEFAULT '0.00',
   `status` enum('0','1','2','3') DEFAULT '0' COMMENT '0:deactivated, 1:active, 2:reserved, 3:reserved',
   KEY `FK_jodetails_1` (`jo_id`),
-  CONSTRAINT `jodetails_ibfk_2` FOREIGN KEY (`jo_id`) REFERENCES `joborder` (`jo_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `jodetails_ibfk_1` FOREIGN KEY (`jo_id`) REFERENCES `joborder` (`jo_id`)
+  CONSTRAINT `jodetails_ibfk_1` FOREIGN KEY (`jo_id`) REFERENCES `joborder` (`jo_id`),
+  CONSTRAINT `jodetails_ibfk_2` FOREIGN KEY (`jo_id`) REFERENCES `joborder` (`jo_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -310,7 +312,7 @@ CREATE TABLE `logintrace` (
   `succeeded` enum('0','1') DEFAULT '0',
   `tracetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +321,7 @@ CREATE TABLE `logintrace` (
 
 LOCK TABLES `logintrace` WRITE;
 /*!40000 ALTER TABLE `logintrace` DISABLE KEYS */;
-INSERT INTO `logintrace` VALUES (1,'juntals','1','2013-05-28 16:44:07'),(2,'juntals','1','2013-05-28 16:55:26'),(3,'juntals01','0','2013-05-28 16:56:06'),(4,'juntals','1','2013-05-28 16:57:03'),(5,'juntals','1','2013-05-29 07:18:22'),(6,'juntals','1','2013-05-29 10:05:58'),(7,'juntals','1','2013-05-29 14:12:50'),(8,'juntals','1','2013-05-29 23:52:24'),(9,'juntals','1','2013-05-30 00:32:29'),(10,'kenn','1','2013-05-30 06:46:08'),(11,'kenn','1','2013-05-30 14:14:46'),(12,'kenn','1','2013-05-30 22:39:41'),(13,'kenn','1','2013-05-31 04:19:19'),(14,'kenn','0','2013-05-31 04:19:44'),(15,'kenn','1','2013-05-31 04:19:51'),(16,'kenn','1','2013-06-02 07:11:17'),(17,'kenn','1','2013-06-03 07:51:42'),(18,'kenn','1','2013-06-03 19:03:47'),(19,'kenn','1','2013-06-04 02:03:11'),(20,'kenn','1','2013-06-04 23:20:57'),(21,'kenn','1','2013-06-05 01:48:00'),(22,'kenn','1','2013-06-05 15:27:53'),(23,'kenn','1','2013-06-05 18:59:57'),(24,'digiartist','0','2013-06-05 22:54:00'),(25,'kenn','0','2013-06-05 22:54:06'),(26,'kenn','0','2013-06-05 22:54:17'),(27,'kenn','1','2013-06-05 22:54:30'),(28,'kenn','1','2013-06-06 06:29:59'),(29,'kenn','1','2013-06-06 15:11:03'),(30,'kenn','0','2013-06-06 18:07:33'),(31,'kenn','1','2013-06-06 18:07:39'),(32,'kenn','1','2013-06-07 18:09:18'),(33,'kenn','1','2013-06-07 06:36:08'),(34,'kenn','1','2013-06-08 06:45:25'),(35,'kenn','1','2013-06-09 06:45:58'),(36,'kenn','1','2013-06-07 06:50:12'),(37,'marc','1','2013-06-07 07:28:23'),(38,'kenn','1','2013-06-07 07:30:08'),(39,'kenn','1','2013-06-07 09:30:37'),(40,'kenn','1','2013-06-07 11:24:21'),(41,'kenn','1','2013-06-07 17:41:40'),(42,'kenn','1','2013-06-07 17:49:54'),(43,'emz','0','2013-06-07 17:55:25'),(44,'emz','0','2013-06-07 17:55:32'),(45,'emz','0','2013-06-07 17:56:02'),(46,'emz','0','2013-06-07 17:56:28'),(47,'kenn','1','2013-06-07 17:59:52'),(48,'emz','1','2013-06-07 18:00:59'),(49,'kenn','1','2013-06-07 18:10:15'),(50,'emz','1','2013-06-07 18:12:47'),(51,'kenn','1','2013-06-07 18:18:18');
+INSERT INTO `logintrace` VALUES (1,'juntals','1','2013-05-28 16:44:07'),(2,'juntals','1','2013-05-28 16:55:26'),(3,'juntals01','0','2013-05-28 16:56:06'),(4,'juntals','1','2013-05-28 16:57:03'),(5,'juntals','1','2013-05-29 07:18:22'),(6,'juntals','1','2013-05-29 10:05:58'),(7,'juntals','1','2013-05-29 14:12:50'),(8,'juntals','1','2013-05-29 23:52:24'),(9,'juntals','1','2013-05-30 00:32:29'),(10,'kenn','1','2013-05-30 06:46:08'),(11,'kenn','1','2013-05-30 14:14:46'),(12,'kenn','1','2013-05-30 22:39:41'),(13,'kenn','1','2013-05-31 04:19:19'),(14,'kenn','0','2013-05-31 04:19:44'),(15,'kenn','1','2013-05-31 04:19:51'),(16,'kenn','1','2013-06-02 07:11:17'),(17,'kenn','1','2013-06-03 07:51:42'),(18,'kenn','1','2013-06-03 19:03:47'),(19,'kenn','1','2013-06-04 02:03:11'),(20,'kenn','1','2013-06-04 23:20:57'),(21,'kenn','1','2013-06-05 01:48:00'),(22,'kenn','1','2013-06-05 15:27:53'),(23,'kenn','1','2013-06-05 18:59:57'),(24,'digiartist','0','2013-06-05 22:54:00'),(25,'kenn','0','2013-06-05 22:54:06'),(26,'kenn','0','2013-06-05 22:54:17'),(27,'kenn','1','2013-06-05 22:54:30'),(28,'kenn','1','2013-06-06 06:29:59'),(29,'kenn','1','2013-06-06 15:11:03'),(30,'kenn','0','2013-06-06 18:07:33'),(31,'kenn','1','2013-06-06 18:07:39'),(32,'kenn','1','2013-06-07 18:09:18'),(33,'kenn','1','2013-06-07 06:36:08'),(34,'kenn','1','2013-06-08 06:45:25'),(35,'kenn','1','2013-06-09 06:45:58'),(36,'kenn','1','2013-06-07 06:50:12'),(37,'marc','1','2013-06-07 07:28:23'),(38,'kenn','1','2013-06-07 07:30:08'),(39,'kenn','1','2013-06-07 09:30:37'),(40,'kenn','1','2013-06-07 11:24:21'),(41,'kenn','1','2013-06-07 17:41:40'),(42,'kenn','1','2013-06-07 17:49:54'),(43,'emz','0','2013-06-07 17:55:25'),(44,'emz','0','2013-06-07 17:55:32'),(45,'emz','0','2013-06-07 17:56:02'),(46,'emz','0','2013-06-07 17:56:28'),(47,'kenn','1','2013-06-07 17:59:52'),(48,'emz','1','2013-06-07 18:00:59'),(49,'kenn','1','2013-06-07 18:10:15'),(50,'emz','1','2013-06-07 18:12:47'),(51,'kenn','1','2013-06-07 18:18:18'),(52,'kenn','1','2013-06-08 01:19:20');
 /*!40000 ALTER TABLE `logintrace` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,4 +579,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-08  2:31:37
+-- Dump completed on 2013-06-08 16:11:28

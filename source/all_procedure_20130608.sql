@@ -46,6 +46,105 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `fnc_getBegBal`(p_cashier TINYINT, p_curdate DATE, p_status CHAR(1)) RETURNS decimal(8,2)
+    DETERMINISTIC
+BEGIN
+
+  DECLARE l_begbal DECIMAL(8,2) DEFAULT 0.00;
+
+  SELECT begbal INTO l_begbal FROM dcr WHERE cashier=p_cashier AND trnxdate=p_curdate AND `status`=p_status;
+
+  RETURN l_begbal;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `fnc_getCashFloat`(p_cashier TINYINT, p_curdate DATE, p_status CHAR(1)) RETURNS decimal(8,2)
+    DETERMINISTIC
+BEGIN
+
+  DECLARE l_cash_float DECIMAL(8,2) DEFAULT 0.00;
+
+
+  SELECT SUM(amnt) INTO l_cash_float FROM cashfloat c WHERE cashier=p_cashier AND trnxdate=p_curdate AND `status`=p_status;
+
+  RETURN l_cash_float;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `fnc_getCashLift`(p_cashier TINYINT, p_curdate DATE, p_status CHAR(1)) RETURNS decimal(8,2)
+    DETERMINISTIC
+BEGIN
+
+  DECLARE l_cash_lift DECIMAL(8,2) DEFAULT 0.00;
+
+  SELECT SUM(amnt) INTO l_cash_lift FROM cashlift c WHERE cashier=p_cashier AND trnxdate=p_curdate AND `status`=p_status;
+
+  RETURN l_cash_lift;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `fnc_isJoFullyPaid`(p_jo_id INT) RETURNS tinyint(4)
+    DETERMINISTIC
+BEGIN
+
+  DECLARE l_paid INT DEFAULT 0;
+
+  SELECT COUNT(j.customer) AS paid INTO l_paid FROM joborder j WHERE j.jo_id=p_jo_id AND j.`status`='0';
+
+  RETURN l_paid;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
 /*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `fnc_joPayment`(p_jo_id INT) RETURNS decimal(8,2)
     DETERMINISTIC
 BEGIN
@@ -316,6 +415,76 @@ BEGIN
 
     UNIQUE KEY (trace_id)) ENGINE = MEMORY;
 
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `sp_DailyCollection`(IN p_cashier TINYINT, IN p_curdate DATE, IN p_status CHAR(1))
+BEGIN
+
+  DECLARE l_EOF INT DEFAULT 0;
+  DECLARE l_trnxdate DATE DEFAULT '0000-00-00';
+  DECLARE l_cashier TINYINT DEFAULT 0;
+  DECLARE l_status CHAR(1) DEFAULT '1';
+  DECLARE l_particulars VARCHAR(255) DEFAULT NULL;
+  DECLARE l_refno INT DEFAULT 0;
+  DECLARE l_amnt DECIMAL(8,2) DEFAULT 0.00;
+  DECLARE l_tender TINYINT DEFAULT 0;
+
+  DECLARE curDCR CURSOR FOR SELECT d.trnxdate, d.cashier, d.`status`, dd.particulars, dd.refno, dd.amnt, dd.tender FROM dcr d LEFT JOIN dcrdetails dd ON d.dcr_id=dd.dcr_id WHERE (d.trnxdate=p_curdate AND d.cashier=p_cashier AND d.`status`=p_status);
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET l_EOF = 1;
+
+  DROP TEMPORARY TABLE IF EXISTS `tmp_daily_collection`;
+  CREATE TEMPORARY TABLE `tmp_daily_collection` (
+    trnxdate DATE DEFAULT '0000-00-00',
+    cashier TINYINT DEFAULT 0,
+    `status` ENUM('0', '1') DEFAULT '1',
+    refno INT NOT NULL DEFAULT 0,
+    amnt DECIMAL(8,2) DEFAULT 0.00,
+    tender TINYINT DEFAULT 0,
+    particulars VARCHAR(255) DEFAULT NULL,
+    paid TINYINT DEFAULT 0) ENGINE=INNODB;
+
+
+  /* opens cursor */
+  OPEN curDCR;
+
+  main_loop:LOOP
+    /* fetches each row */
+    FETCH curDCR INTO l_trnxdate, l_cashier, l_status, l_particulars, l_refno, l_amnt, l_tender;
+
+    /* is end of record */
+    IF l_EOF = 1 THEN
+      LEAVE main_loop;
+    END IF;
+
+    /* inserts each record into temporary table */
+    IF fnc_isJoFullyPaid(l_refno) = 1 THEN
+        INSERT INTO `tmp_daily_collection` (trnxdate,cashier,`status`, refno, amnt, tender, particulars, paid)
+          VALUES(l_trnxdate,l_cashier,l_status,l_refno,l_amnt,l_tender, l_particulars, 1);
+    ELSE
+        INSERT INTO `tmp_daily_collection` (trnxdate,cashier,`status`, refno, amnt, tender, particulars, paid)
+          VALUES(l_trnxdate,l_cashier,l_status,l_refno,l_amnt,l_tender, l_particulars, 0);
+    END IF;
+
+  END LOOP main_loop;
+
+  /* closes cursor */
+  CLOSE curDCR;
+
+
+
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -802,4 +971,4 @@ DELIMITER ;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-06-08  2:31:01
+-- Dump completed on 2013-06-08 16:10:55
