@@ -67,12 +67,12 @@ class Cutoff extends CI_Controller {
 		$data['userfullname'] = $almd_userfullname; 
 		
 		//call_debug($data);
-		//if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {
+		if($this->mdl_cutoff->cashierCutOff() && $this->mdl_cutoff->cashFloatCutOff() && $this->mdl_cutoff->cashLiftCutOff()) {
 			$data['main_content'] = 'tranx/cutoff/dcr_single_report_view';
 			$this->load->view('includes/template', $data);
-		//} else {
-		//	echo 'Closing shift was unsccessful.';
-		//} 
+		} else {
+			echo 'Closing shift was unsccessful.';
+		} 
 		
 				
 	}
