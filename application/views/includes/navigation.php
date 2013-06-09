@@ -23,6 +23,7 @@
                         <li <?php isTabSelected('ownedvehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/ownedvehicle'); ?>">Owned-Vehicle</a></li>
                         <li <?php isTabSelected('vehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/vehicle'); ?>">Make</a></li>
                         <li <?php isTabSelected('color', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/color'); ?>">Colors</a></li>
+                        <li <?php isTabSelected('company', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/company'); ?>">Company</a></li>
                     	</ul>
                     </div>
                 </li>

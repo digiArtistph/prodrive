@@ -101,11 +101,12 @@ class Labortype extends CI_Controller {
 	}
 	
 	public function validateaddlabor(){
-		$this->load->library('form_validation');
-		$validation = $this->form_validation;
 		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;		
 		$validation->set_rules('lname', 'Category Name',  'required');
-		$validation->set_rules('cat', 'Category Parent',  'required');
+		$validation->set_rules('cat', 'Category Parent');
+		
 		if($validation->run() === FALSE) {
 			$this->_addlabortype();
 		} else {
@@ -124,12 +125,13 @@ class Labortype extends CI_Controller {
 	}
 	
 	public function validateeditlabor(){
-		$this->load->library('form_validation');
-		$validation = $this->form_validation;
 		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;		
 		$validation->set_rules('lt', '',  'required');
 		$validation->set_rules('lname', 'Labor type name',  'required');
-		$validation->set_rules('cat', 'Category',  'required');
+		$validation->set_rules('cat', 'Category');
+		
 		if($validation->run() === FALSE) {
 			$this->_editlabor($this->input->post('lt'));
 		} else {

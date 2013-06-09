@@ -560,10 +560,24 @@ $(document).ready(function(){
 	});
 	
 	//delete function in baseurl() . master/customer
-	$('.delcust').click(function(){
+	/*
+	 * Generic AJAX delete record from view list
+	 * required:
+	 *     post-url & reggriddelbtn classname in the <a> tag
+	 *     <div> tag with an id of dialog-confirm
+	 *     
+	 * sample code:
+	 *     <a class="reggriddelbtn delete-record-view" href="#" post-url="master/customer/ajaxdelcust" custcode="<?php echo $customer->custid;?>">delete</a>
+	 *     <div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
+	 *
+	 */
+	$('.delete-record-view').click(function(){
 		var currtr = $(this);
-		//alert( currtr.attr('custcode') );
-		$("#dialog-confirm p").text("Delete Customer : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
+		var currentRow = currtr.parent().parent();
+		var fieldValue =  $('td:first', currentRow).text();
+		var postUrl = currtr.attr('post-url');
+
+		$("#dialog-confirm p").text("Delete Customer : " + fieldValue + " ?");
 	 	$("#dialog-confirm").dialog({
 						resizable : false,
 						height : 145,
@@ -572,10 +586,10 @@ $(document).ready(function(){
 							"Delete" : function() {
 								
 								var inputcust = {'id' : currtr.attr('custcode') }
-								$.post(base_url + 'master/customer/ajaxdelcust', inputcust)
+								$.post(base_url + postUrl, inputcust)
 								.success(function(data) {
 									if(data == 1){
-										currtr.closest('tr').remove('tr');
+										currentRow.remove();
 									}else{
 										alert('data cannot be deleted');
 									}
