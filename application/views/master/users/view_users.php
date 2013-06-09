@@ -24,7 +24,7 @@
         		<td><?php echo $user->type;?></td>
         		<td><?php echo ucfirst($user->fname) . ' ' . ucfirst($user->mname[0]) . '. ' . ucfirst($user->lname);?></td>
         		<td><?php echo $user->addr;?></td>
-        		<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/users/section/editusers/' . $user->u_id;?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/users/ajaxdeluser" code="<?php echo $user->u_id;?>" href="#">delete</a></td>
+        		<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/users/section/editusers/' . $user->u_id;?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/users/ajaxdeluser" code="<?php echo $user->u_id;?>" href="#">Delete</a></td>
         	</tr>
         <?php endforeach;?>
         </tbody>

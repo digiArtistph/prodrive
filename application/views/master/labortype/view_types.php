@@ -21,7 +21,7 @@
 			<tr>
 				<td><?php echo $labortype->name;?></td>
 				<td><?php echo $labortype->category;?></td>
-            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">edit</a>|<a  class="reggriddelbtn delete-record-view" post-url="master/labortype/ajaxdeltype" code="<?php echo $labortype->laborid;?>" href="#">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">Edit</a>|<a  class="reggriddelbtn delete-record-view" post-url="master/labortype/ajaxdeltype" code="<?php echo $labortype->laborid;?>" href="#">Delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>

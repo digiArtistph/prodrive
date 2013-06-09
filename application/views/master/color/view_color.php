@@ -19,7 +19,7 @@
 		<?php foreach ($colors as $color):?>
 			<tr>
 				<td><?php echo $color->name;?></td>
-            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/color/section/editcolor/' . $color->clr_id;?>">edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/color/ajaxdelclr" code="<?php echo $color->clr_id;?>" href="#">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/color/section/editcolor/' . $color->clr_id;?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/color/ajaxdelclr" code="<?php echo $color->clr_id;?>" href="#">Delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>

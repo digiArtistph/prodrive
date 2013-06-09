@@ -17,6 +17,9 @@
 		  <label>Company </label>
           <select name="company">
 		  	<option value="">-- Select a company --</option>
+            <?php foreach($companies as $company): ?>
+            	<option <?php echo ($customer->company == $company->co_id) ? 'selected="selected"' : '' ; ?> value="<?php echo $company->co_id; ?>"><?php echo $company->name; ?></option>
+            <?php endforeach; ?>
 		  </select></p>
 		<p>
 		  <label>Phone No.  </label> <input type="text" name="phone" value="<?php echo $customer->phone;?>" /></p>

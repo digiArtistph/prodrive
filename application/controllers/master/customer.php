@@ -2,12 +2,18 @@
 
 class Customer extends CI_Controller {
 	
+	private $_mModel;
+	
 	public function __construct() {
 	
 		parent::__construct();
 	
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_customer');
+		$this->_mModel = $this->mdl_customer;
+		
 	}
 	
 	public function index(){
@@ -44,11 +50,13 @@ class Customer extends CI_Controller {
 	}
 	
 	private function _addcustomer(){
+		$data['companies'] = $this->_mModel->retrieveAllCompany();
 		$data['main_content'] = 'master/customer/add_customer';
 		$this->load->view('includes/template', $data);
 	}
 	
 	private function _editcustomer($id){
+		$data['companies'] = $this->_mModel->retrieveAllCompany();
 		$customer = $this->_custom_list($id);
 		if(false == $customer)
 			show_404();

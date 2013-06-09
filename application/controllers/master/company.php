@@ -33,6 +33,9 @@ class Company extends CI_Controller {
 			case 'addcompany':
 				$this->_addcompany();
 				break;
+			case 'editcompany':
+				$this->_editcompany($id);
+				break;
 			default:
 				$this->_company();
 		}
@@ -78,6 +81,29 @@ class Company extends CI_Controller {
 		return TRUE;
 	}
 	
+	public function validateeditcompany() {
+		
+		$this->load->library('form_validation');
+		$validation = $this->form_validation;
+		
+		$validation->set_rules('companyname', 'Company Name', 'required');
+		$validation->set_rules('addr');
+		$validation->set_rules('phone', 'Phone', 'required');
+		$validation->set_rules('fax');
+		$validation->set_rules('email');
+		$validation->set_rules('url');
+		
+		if($validation->run() === FALSE) {
+			$this->_editcompany($this->input->post('co_id'));
+		} else {
+			if($this->_mModel->updateCompany($this->input->post('co_id')))
+				redirect(base_url('master/company'));
+			else
+				echo 'Inserting new record failed.';	
+		}
+		
+	}
+	
 	private function _company() {
 		
 		$this->load->model('mdl_company');
@@ -95,4 +121,12 @@ class Company extends CI_Controller {
 		$this->load->view('includes/template', $data);
 		
 	}
+	
+	private function _editcompany($id) {
+		
+		$data['companies'] = $this->_mModel->retrieveCompany($id);
+		$data['main_content'] = 'master/company/company_edit_view';
+		$this->load->view('includes/template', $data);
+	}
+	
 }

@@ -526,7 +526,7 @@ $(document).ready(function(){
 
 	})
 	
-	//delete function in baseurl() . master/customer
+
 	/*
 	 * Generic AJAX delete record from view list
 	 * required:
