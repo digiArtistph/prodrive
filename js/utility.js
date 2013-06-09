@@ -221,6 +221,11 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	/* print tasks */
+	$('.prnt-print-button').click(function() {
+		window.print();
+		return false;
+	});
 	
 	/* autocomplete by digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){

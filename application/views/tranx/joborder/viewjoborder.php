@@ -13,9 +13,7 @@
 				<th>Vehicle</th>
 				<th>Customer</th> 	
 				<th>Plate No.</th> 	
-			<!--	<th>Color</th> 	
-				<th>Contact No.</th>
-				<th>Address</th>-->
+
 				<th>Received Date</th>
 				<th>Action</th>
 			</tr>
@@ -30,7 +28,7 @@
 			<tr title="Balance: Php <?php echo sCurrency($order->balance); ?> &nbsp;&nbsp; Payment: Php <?php echo sCurrency($order->payment); ?>">
 				<td><?php echo $order->jo_num?></td>
 				<td><?php echo $order->vehicle;?></td>
-				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname) . ' ' . ucfirst($order->mname[0]);?></td>
+				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname);?></td>
 				<td><?php echo $order->plate;?></td>
 				<!--<td><?php echo $order->color;?></td>
 				<td><?php echo $order->num;?></td>

@@ -113,7 +113,7 @@ class Customer extends CI_Controller {
 		$validation = $this->form_validation;
 		
 		$validation->set_rules('fname', 'First Name',  'required');
-		$validation->set_rules('mname', 'Middle Name',  'required');
+		$validation->set_rules('mname', 'Middle Name');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		$validation->set_rules('phone', 'Phone Number',  'required');
@@ -139,7 +139,7 @@ class Customer extends CI_Controller {
 		
 		$validation->set_rules('ct_id', '',  'required');
 		$validation->set_rules('fname', 'First Name',  'required');
-		$validation->set_rules('mname', 'Middle Name',  'required');
+		$validation->set_rules('mname', 'Middle Name');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		$validation->set_rules('phone', 'Phone Number',  'required');

@@ -20,7 +20,8 @@
 		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo curdate();?>" /></p>
 		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo set_value('cust_id'); ?>"/><input tabindex="1" class="jocustomer" type="text" name="customer" value="<?php echo set_value('customer'); ?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
 		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="0"/><input disabled="disabled" tabindex="2" class="vehicle" type="text" name="vehicle" /></p>
-		<p><label>Tax</label> <input tabindex="3"  type="text" name="tax" value="0.00"/></p>
+		<p>
+		  <label>WithholdingTax</label> <input tabindex="3"  type="text" name="tax" value="0.00"/></p>
         <p><label>Discount</label> <input tabindex="4"  type="text" name="discount" value="0.00"/></p>
 
 		

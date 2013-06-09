@@ -29,8 +29,9 @@
 		<p><label>Date</label> <input class="datepicker" type="text" name="jo_date" value="<?php echo $order->trnxdate;?>" /></p>
 		<p><label>Customer </label> <input name="cust_id" class="cust_id" type="hidden" value="<?php echo $order->custid;?>"/><input class="jocustomer" type="text" name="customer" value="<?php echo $order->custname;?>"/><?php echo form_error('customer', '<span class="error">','</span>'); ?></p>
 		<p><label>Vehicle </label><input name="v_id" class="v_id" type="hidden" value="<?php echo $order->vehicleid;?>"/><input readonly="readonly" tabindex="0" class="vehicle" type="text" name="vehicle" value="<?php echo $order->plate;?>"/></p>
-		<p><label>Tax</label> <input  type="text" name="tax" value="<?php echo $order->tax;?>"/></p>
-        <p><label>Discount</label> <input  type="text" name="discount" value="<?php echo $order->discount;?>" /></p>
+		<p>WithholdingTax
+	    <input  type="text" name="tax" value="<?php echo $order->tax;?>"/></p>
+      <p><label>Discount</label> <input  type="text" name="discount" value="<?php echo $order->discount;?>" /></p>
 		
 	</form>
 	<?php endforeach;?>
