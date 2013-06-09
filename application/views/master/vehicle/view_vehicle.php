@@ -18,7 +18,7 @@
         <?php foreach ($vehicles as $vehicle):?>
         	<tr>
         		<td><?php echo $vehicle->make;?></td>        		
-        		<td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/vehicle/section/editvehicle/' . $vehicle->v_id; ?>">edit</a>|<a class="reggriddelbtn delveh" vehcode="<?php echo $vehicle->v_id;?>" href="#">delete</a></td>
+        		<td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/vehicle/section/editvehicle/' . $vehicle->v_id; ?>">edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/vehicle/ajaxdelveh" code="<?php echo $vehicle->v_id;?>" href="#">delete</a></td>
         	</tr>
         <?php endforeach;?>
         </tbody>
@@ -27,5 +27,5 @@
 		<p>No Vehicles</p>
 		<?php endif;?>
 	</div>
-<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
+<div id="dialog-confirm" title="Delete Record"><p></p></div>
 </div>

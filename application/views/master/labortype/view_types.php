@@ -21,7 +21,7 @@
 			<tr>
 				<td><?php echo $labortype->name;?></td>
 				<td><?php echo $labortype->category;?></td>
-            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">edit</a>|<a  class="reggriddelbtn dellbrtype" lbrtypecode="<?php echo $labortype->laborid;?>" href="#">delete</a></td>
+            	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">edit</a>|<a  class="reggriddelbtn delete-record-view" post-url="master/labortype/ajaxdeltype" code="<?php echo $labortype->laborid;?>" href="#">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
@@ -30,5 +30,5 @@
 		<p>No labor types Added!!!</p>
 	<?php endif;?>
 	</div>
-<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
+<div id="dialog-confirm" title="Delete Record"><p></p></div>
 </div>

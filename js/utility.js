@@ -526,39 +526,6 @@ $(document).ready(function(){
 
 	})
 	
-	
-	//delete function in baseurl() . master/ownedvehicle
-	$('.delvehicle').click(function(){
-		
-		var currtr = $(this);
-			$("#dialog-confirm p").text("Delete Vehicle with Plate No. \"" + $(this).closest('tr').find('td:eq(1)').text() + "\" ?");
-		 	$("#dialog-confirm").dialog({
-							resizable : false,
-							height : 145,
-							modal : true,
-							buttons : {
-								"Delete" : function() {
-									
-									var inputownvehicle = {'id' : currtr.attr('vehiclecode') }
-									$.post(base_url + 'master/ownedvehicle/ajaxdelvehicle', inputownvehicle)
-									.success(function(data) {
-										if(data == 1){
-											currtr.closest('tr').remove('tr');
-										}else{
-											alert('data cannot be deleted');
-										}
-									});
-									$(this).dialog("close");
-									
-								},
-								Cancel : function() {
-									$(this).dialog("close");
-								}
-							}
-						});
-		 return false;
-	});
-	
 	//delete function in baseurl() . master/customer
 	/*
 	 * Generic AJAX delete record from view list
@@ -577,7 +544,7 @@ $(document).ready(function(){
 		var fieldValue =  $('td:first', currentRow).text();
 		var postUrl = currtr.attr('post-url');
 
-		$("#dialog-confirm p").text("Delete Customer : " + fieldValue + " ?");
+		$("#dialog-confirm p").text("Delete " + fieldValue + " ?");
 	 	$("#dialog-confirm").dialog({
 						resizable : false,
 						height : 145,
@@ -585,7 +552,7 @@ $(document).ready(function(){
 						buttons : {
 							"Delete" : function() {
 								
-								var inputcust = {'id' : currtr.attr('custcode') }
+								var inputcust = {'id' : currtr.attr('code') }
 								$.post(base_url + postUrl, inputcust)
 								.success(function(data) {
 									if(data == 1){
@@ -605,174 +572,7 @@ $(document).ready(function(){
 		
 		return false;
 	});
-	
-	//delete function in baseurl() . master/categories
-	$('.delcategory').click(function(){
-		var currtr = $(this);
-		//alert(currtr.attr("catcode"));
-		$("#dialog-confirm p").text("Delete Category : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
-	 	$("#dialog-confirm").dialog({
-						resizable : false,
-						height : 150,
-						width	: 350,
-						modal : true,
-						buttons : {
-							"Delete" : function() {
-								
-								var inputcust = {'id' : currtr.attr('catcode') }
-								$.post(base_url + 'master/categories/ajaxdelcat', inputcust)
-								.success(function(data) {
-									if(data == 1){
-										currtr.closest('tr').remove('tr');
-									}else{
-										alert('data cannot be deleted');
-									}
-								});
-								$(this).dialog("close");
-								
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-		return false;
-	});
-	
-	//delete function in baseurl() . master/labortype
-	$('.dellbrtype').click(function(){
-		var currtr = $(this);
-		//alert(currtr.attr("lbrtypecode"));
-		$("#dialog-confirm p").text("Delete Labor-type : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
-	 	$("#dialog-confirm").dialog({
-						resizable : false,
-						height : 150,
-						width	: 350,
-						modal : true,
-						buttons : {
-							"Delete" : function() {
-								
-								var inputcust = {'id' : currtr.attr('lbrtypecode') }
-								$.post(base_url + 'master/labortype/ajaxdeltype', inputcust)
-								.success(function(data) {
-									if(data == 1){
-										currtr.closest('tr').remove('tr');
-									}else{
-										alert('data cannot be deleted');
-									}
-								});
-								$(this).dialog("close");
-								
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-		return false;
-	});
-	
-	//delete function in baseurl() . master/users
-	$('.deluser').click(function(){
-		var currtr = $(this);
-		//alert(currtr.attr("usercode"));
-		$("#dialog-confirm p").text("Delete User : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
-	 	$("#dialog-confirm").dialog({
-						resizable : false,
-						height : 150,
-						width	: 350,
-						modal : true,
-						buttons : {
-							"Delete" : function() {
-								
-								var inputcust = {'id' : currtr.attr('usercode') }
-								$.post(base_url + 'master/users/ajaxdeluser', inputcust)
-								.success(function(data) {
-									if(data == 1){
-										currtr.closest('tr').remove('tr');
-									}else{
-										alert('data cannot be deleted');
-									}
-								});
-								$(this).dialog("close");
-								
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-		return false;
-	});
-	
-	
-	//delete function in baseurl() . master/vehicle
-	$('.delveh').click(function(){
-		var currtr = $(this);
-		//alert(currtr.attr("vehcode"));
-		$("#dialog-confirm p").text("Delete Vehicle : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
-	 	$("#dialog-confirm").dialog({
-						resizable : false,
-						height : 150,
-						width	: 350,
-						modal : true,
-						buttons : {
-							"Delete" : function() {
-								
-								var inputcust = {'id' : currtr.attr('vehcode') }
-								$.post(base_url + 'master/vehicle/ajaxdelveh', inputcust)
-								.success(function(data) {
-									if(data == 1){
-										currtr.closest('tr').remove('tr');
-									}else{
-										alert('data cannot be deleted');
-									}
-								});
-								$(this).dialog("close");
-								
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-		return false;
-	});
-	
-	//delete function in baseurl() . master/color
-	$('.delclrs').click(function(){
-		var currtr = $(this);
-		//alert(currtr.attr("clrcode"));
-		$("#dialog-confirm p").text("Delete Color : " + $(this).closest('tr').find('td:eq(0)').text() + " ?");
-	 	$("#dialog-confirm").dialog({
-						resizable : false,
-						height : 150,
-						width	: 350,
-						modal : true,
-						buttons : {
-							"Delete" : function() {
-								
-								var inputcust = {'id' : currtr.attr('clrcode') }
-								$.post(base_url + 'master/color/ajaxdelclr', inputcust)
-								.success(function(data) {
-									if(data == 1){
-										currtr.closest('tr').remove('tr');
-									}else{
-										alert('data cannot be deleted');
-									}
-								});
-								$(this).dialog("close");
-								
-							},
-							Cancel : function() {
-								$(this).dialog("close");
-							}
-						}
-					});
-		return false;
-	});
-	
-	
+
 	//delete function in baseurl() . tranx/joborder
 	$('.deljo').click(function(){
 		var currtr = $(this);

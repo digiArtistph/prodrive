@@ -19,7 +19,7 @@
                 	<td><?php echo $record->make; ?></td>
                     <td><?php echo $record->plateno; ?></td>
                     <td><?php echo $record->owner; ?></td>
-                    <td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/ownedvehicle/section/editownedvehicle/' . $record->vo_id;?>">Edit</a> <a class="reggriddelbtn delvehicle" vehiclecode="<?php echo $record->vo_id;?>" href="#">Delete</a></td>
+                    <td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/ownedvehicle/section/editownedvehicle/' . $record->vo_id;?>">Edit</a> <a class="reggriddelbtn delete-record-view" post-url="master/ownedvehicle/ajaxdelvehicle" code="<?php echo $record->vo_id;?>" href="#">Delete</a></td>
                 </tr>          
             <?php endforeach; ?>
         </tbody>
@@ -28,6 +28,6 @@
     <?php else: ?>
     	<p>No Record Found.</p>
     <?php endif; ?>
-<div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
+<div id="dialog-confirm" title="Delete Record"><p></p></div>
 </div>
 </div>

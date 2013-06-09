@@ -18,7 +18,7 @@
                 	<ul>
                     	<li <?php isTabSelected('customer', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/customer'); ?>">Customers</a></li>
                         <li <?php isTabSelected('categories', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/categories'); ?>">Categories</a></li>
-                        <li <?php isTabSelected('labortype', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/labortype'); ?>">Labor Type</a></li>
+                        <li <?php isTabSelected('labortype', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/labortype'); ?>">Labor Types</a></li>
                         <li <?php isTabSelected('users', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/users'); ?>">Users</a></li>
                         <li <?php isTabSelected('ownedvehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/ownedvehicle'); ?>">Owned-Vehicle</a></li>
                         <li <?php isTabSelected('vehicle', 'submenuselected', 2); ?>><a href="<?php echo base_url('master/vehicle'); ?>">Make</a></li>

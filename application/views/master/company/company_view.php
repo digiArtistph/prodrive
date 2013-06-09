@@ -23,7 +23,7 @@
             	<td><?php echo $company->name ; ?></td>
                 <td><?php  echo ($company->addr) ? $company->addr : '' ; ?></td>
                 <td><?php if( empty($company->phone) ){echo 'No Phone number';}else{ echo $company->phone;}?></td>
-                <td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/customer/section/editcustomer/' . $company->co_id;?>">edit</a>|<a post-url="ajax/ajxcompany/deleteCompany" class="reggriddelbtn delete-record-view" href="#" custcode="<?php echo $company->co_id;?>">delete</a></td>
+                <td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/customer/section/editcustomer/' . $company->co_id;?>">edit</a>|<a post-url="ajax/ajxcompany/deleteCompany" class="reggriddelbtn delete-record-view" href="#" code="<?php echo $company->co_id;?>">delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
