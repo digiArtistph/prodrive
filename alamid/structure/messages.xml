@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<messages>
+	<!-- generic: 0 - 99, master files: 100 - 199, transaction: 200 - 299 -->
+	<message msg-code="1" type="info" section="generic" sec-code="1">
+		Current logged in user.
+	</message>
+	
+	<message msg-code="2" type="info" section="generic" sec-code="1">
+		Is this the correct date?
+	</message>
+	
+	<message msg-code="100" type="info" section="masterfiles-customers" sec-code="2" >
+		
+	</message>
+</messages>
