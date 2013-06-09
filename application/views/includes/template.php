@@ -24,11 +24,11 @@
             
             <div class="usercontextinfo">
             	<ul>
-                	<li><span class="welcomeusermsg"><img src="<?php echo base_url('images/user_avatar.png'); ?>" /> <?php echo (isset($almd_userfullname)) ? $almd_userfullname : "Welcome User!" ; ?></span></li>
+                	<li><span class="welcomeusermsg"><img title="Current logged in user." src="<?php echo base_url('images/user_avatar.png'); ?>" /> <?php echo (isset($almd_userfullname)) ? $almd_userfullname : "Welcome User!" ; ?></span></li>
                     <li><a href="<?php echo base_url('login/logout'); ?>">Log Out</a></li>
                     <li><a href="http://localhost/prodrivehelpsystem/doku.php?id=start" target="_new">Help</a></li>
                 </ul>
-                <div class="calendar"><i class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
+                <div class="calendar"><i title="Is this the correct date?" class="sprite calendaricon"></i>Today is <?php echo longDate(curdate()); ?></div>
                 <!--<div class="quicksearch"><a href="#">Job History</a></div>--> 
             </div>
         </div>

@@ -122,7 +122,7 @@
     <?php else: ?>
     	<p>---</p>
     <?php endif; ?>
-    <p class="prnt-button-container"><a title="This will pop out the printer settings" class="prnt-print-button" href="#">Print</a></p>
+    <p class="prnt-button-container"><a title="This will pop out the printer dialog box" class="prnt-print-button" href="#">Print</a></p>
     </div>
     
         <div class="prnt-cash-float-box">

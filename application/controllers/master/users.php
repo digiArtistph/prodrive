@@ -121,13 +121,14 @@ class Users extends CI_Controller {
 		$this->load->library('form_validation');
 		$validation = $this->form_validation;
 		
-		$validation->set_rules('username', 'User Name',  'required');
+		$validation->set_rules('username', 'User Name', 'required');
 		$validation->set_rules('utype', 'User Type',  'required');
 		$validation->set_rules('pword', 'Password',  'required');
 		$validation->set_rules('fname', 'First Name',  'required');
-		$validation->set_rules('mname', 'Middle Name',  'required');
+		$validation->set_rules('mname', 'Middle Name');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
+		
 		if($validation->run() === FALSE) {
 			$this->_addusers();
 		} else {
@@ -160,7 +161,7 @@ class Users extends CI_Controller {
 		$validation->set_rules('utype', 'User Type',  'required');
 		$validation->set_rules('pword', 'Password',  'required');
 		$validation->set_rules('fname', 'First Name',  'required');
-		$validation->set_rules('mname', 'Middle Name',  'required');
+		$validation->set_rules('mname', 'Middle Name');
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		
@@ -169,24 +170,24 @@ class Users extends CI_Controller {
 		} else {
 			global $almd_db;
 			$almd_db = new Almdtables();
-			
-			if( ! $this->_isUserExist($this->input->post('username'))){
-				$err = 'User name Already exist';
-				$this->_editusers($this->input->post('user_id'), $err);
-			}else{
-				$db = $this->input;
-					
-				$strqry = sprintf('UPDATE `%s` SET `username`="%s", `ut_id`="%s", `pword`="%s", `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s" WHERE u_id="%s" ', $almd_db->users, $this->input->post('username'), $this->input->post('utype'), md5( $this->input->post('pword') ), $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'),   $this->input->post('user_id') );
+
+				$strQry = sprintf("UPDATE $almd_db->users SET username='%s', ut_id='%s', pword='%s', fname='%s', mname='%s', lname='%s', addr='%s' WHERE u_id=%d",
+					mysql_real_escape_string($this->input->post('username')),
+					mysql_real_escape_string($this->input->post('utype')),
+					mysql_real_escape_string(md5($this->input->post('pword'))),
+					mysql_real_escape_string($this->input->post('fname')),
+					mysql_real_escape_string($this->input->post('mname')),
+					mysql_real_escape_string($this->input->post('lname')),
+					mysql_real_escape_string($this->input->post('addr')),
+					mysql_real_escape_string($this->input->post('user_id')));
 				
-				$query = $this->db->query($strqry);
-				if(!$query){
+				if(!$this->db->query($strQry))
 					$this->_editusers($this->input->post('user_id'));
-				}
 		
-				redirect( base_url() . 'master/users/' );
-			}
+				redirect( base_url() . 'master/users/' );		
 		}
 	}
+	
 	public function ajaxdeluser(){
 		$strQry = sprintf("DELETE FROM `users` WHERE `u_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);

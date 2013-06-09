@@ -31,7 +31,7 @@
 			<?php endif;?>
 		<?php foreach ($users as $user):?>
 		</select><?php echo form_error('utype', '<span class="error">','</span>'); ?></p>
-		<p><label>Password: </label><input type="password" name="pword" /><span class="error"><?php echo form_error('pword'); ?></span></p>
+		<p><label>Password: </label><input type="password" name="pword" /><span class="error"><?php echo form_error('pword', '<span class="error"', '</span>'); ?></span></p>
 		<p><label>First name: </label><input type="text" name="fname" value="<?php echo $user->fname; ?>"/><?php echo form_error('fname', '<span class="error">','</span>'); ?></p>
 		<p><label>Middle name: </label><input type="text" name="mname" value="<?php echo $user->mname; ?>"/><?php echo form_error('mname', '<span class="error">','</span>'); ?></p>
 		<p><label>Last name: </label><input type="text" name="lname" value="<?php echo $user->lname; ?>"/><?php echo form_error('lname', '<span class="error">','</span>'); ?></p>
