@@ -125,13 +125,20 @@ class Customer extends CI_Controller {
 		$validation->set_rules('lname', 'Last Name',  'required');
 		$validation->set_rules('addr', 'Address',  'required');
 		$validation->set_rules('phone', 'Phone Number',  'required');
+		
 		if($validation->run() === FALSE) {
 			$this->_addcustomer();
 		} else {
 			global $almd_db;
 			$almd_db = new Almdtables();
-			$db = $this->input;
-			$strqry = 'INSERT INTO '. $almd_db->customer . ' (`custid`, `fname`, `mname`, `lname`, `addr`, `phone`) VALUES (NULL, "' . $db->post('fname') .'", "' . $db->post('mname') .'", "' . $db->post('lname') .'", "' . $db->post('addr') .'", "' . $db->post('phone') .'")';
+			$strqry = sprintf("INSERT INTO $almd_db->customer (fname, mname, lname, addr, phone, company) VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
+				mysql_real_escape_string($this->input->post('fname')), 
+				mysql_real_escape_string($this->input->post('mname')), 
+				mysql_real_escape_string($this->input->post('lname')),
+				mysql_real_escape_string($this->input->post('addr')),
+				mysql_real_escape_string($this->input->post('phone')),
+				mysql_real_escape_string($this->input->post('company'))
+				);
 			$query = $this->db->query($strqry);
 			if(!$query){
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
@@ -158,7 +165,7 @@ class Customer extends CI_Controller {
 			$almd_db = new Almdtables();
 			$db = $this->input;
 			
-			$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s" WHERE custid="%s" ', $almd_db->customer, $this->input->post('fname'), $this->input->post('mname'), $this->input->post('lname'), $this->input->post('addr'), $this->input->post('phone'),  $this->input->post('ct_id') );
+			$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s" , `company`="%s" WHERE custid="%s" ', $almd_db->customer, $this->input->post('fname'), mysql_real_escape_string($this->input->post('mname')), mysql_real_escape_string($this->input->post('lname')), mysql_real_escape_string($this->input->post('addr')), mysql_real_escape_string($this->input->post('phone')), $this->input->post('company'), $this->input->post('ct_id') );
 			$query = $this->db->query($strqry);
 			if(!$query){
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
