@@ -235,7 +235,7 @@ $(document).ready(function(){
 			$('input[name="colorcode"]').val(ui.item.index);
 		}});
 	$(".vehiclecustomer").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
-			$('input[name="customercode"]').val(ui.item.index);
+			$('input[name="customercode"]').val(ui.item.index);			
 		}});
 	$(".vehiclecustomer-ownedvehicle").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/customer'}, {select: function(evt, ui){
 			$('input[name="customercode"]').val(ui.item.index);	
