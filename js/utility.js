@@ -544,7 +544,7 @@ $(document).ready(function(){
 		var fieldValue =  $('td:first', currentRow).text();
 		var postUrl = currtr.attr('post-url');
 
-		$("#dialog-confirm p").text("Delete " + fieldValue + " ?");
+		$("#dialog-confirm p").text("Delete " + fieldValue + "?");
 	 	$("#dialog-confirm").dialog({
 						resizable : false,
 						height : 145,
