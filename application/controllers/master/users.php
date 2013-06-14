@@ -3,6 +3,7 @@
 class Users extends CI_Controller {
 	
 	private $_mRedFlag;
+	private $_mModel;
 	
 	public function __construct() {
 	
@@ -10,6 +11,10 @@ class Users extends CI_Controller {
 	
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model("mdl_users");
+		$this->_mModel = $this->mdl_users;
+		
 	}
 	
 	public function index(){
@@ -46,9 +51,13 @@ class Users extends CI_Controller {
 	}
 	
 	private function _users(){
-		$data['users'] = $this->_userlists();
+		
+		$dataset = $this->_mModel->retrieveAllUsers();
+		$data['users'] =$dataset['records']; // $this->_userlists();
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/users/view_users';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _addusers($err = ''){
@@ -64,7 +73,8 @@ class Users extends CI_Controller {
 		
 		$data['error'] = $err;
 		$data['utypes'] = $this->_usertypelists();
-		$data['users'] = $this->_userlists($id);
+		$dataset = $this->_mModel->retrieveAllUsers($id); 
+		$data['users'] = $dataset['records']; // $this->_userlists($id);
 		//call_debug($data['users']);
 		$data['main_content'] = 'master/users/edit_users';
 		$this->load->view('includes/template', $data);
@@ -84,6 +94,7 @@ class Users extends CI_Controller {
 		return $query->result();
 	}
 	
+	/*
 	private function _userlists($id = ''){
 		
 		global $almd_db;
@@ -101,6 +112,7 @@ class Users extends CI_Controller {
 		
 		return $query->result();
 	}
+	*/
 	
 	private function _isUserExist($username){
 		global $almd_db;

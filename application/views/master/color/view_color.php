@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Color</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Color Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Color Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
 </div>
 	<div class="toolbar"><a href="<?php echo base_url() . 'master/color/section/addcolor'; ?>">Add New Color</a></div>

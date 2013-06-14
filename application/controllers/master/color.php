@@ -2,9 +2,15 @@
 
 class Color extends CI_Controller {
 	
+	private $_mModel;
+	
 	function __construct(){
 		parent::__construct();
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_colors');
+		$this->_mModel = $this->mdl_colors;
+		
 	}
 	
 	public function index(){
@@ -32,7 +38,10 @@ class Color extends CI_Controller {
 	}
 	
 	private function _colors(){
-		$data['colors'] = $this->_colorlist();
+		
+		$dataset = $this->_mModel->retrieveAllColors();
+		$data['colors'] = $dataset['records'];// $this->_colorlist();
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/color/view_color';
 		$this->load->view('includes/template', $data);
 	}
@@ -87,7 +96,8 @@ class Color extends CI_Controller {
 		if(empty($id))
 			show_404();
 		
-		$data['colors'] = $this->_colorlist($id);
+		$dataset = $this->_mModel->retrieveAllColors($id);
+		$data['colors'] = $dataset['records']; // $this->_colorlist($id);
 		$data['main_content'] = 'master/color/edit_color';
 		$this->load->view('includes/template', $data);
 	}

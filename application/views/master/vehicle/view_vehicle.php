@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Vehicle</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Category Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Category Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
   </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/vehicle/section/addvehicle'; ?>">Add New Vehicle</a></div>

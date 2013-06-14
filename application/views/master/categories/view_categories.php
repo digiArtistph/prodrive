@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Category</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Category Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Category Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
   </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/categories/section/addcategories'; ?>">Add New Category</a></div>

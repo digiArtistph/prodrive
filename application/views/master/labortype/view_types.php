@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Labor Type</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Labor Type Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne">        	<p>Labor Type Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
     </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/labortype/section/addlabortype'; ?>">Add Labor type</a></div>

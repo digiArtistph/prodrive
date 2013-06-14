@@ -44,9 +44,13 @@ class Customer extends CI_Controller {
 	}
 	
 	private function _customer(){
-		$data['customers'] = $this->_custom_list();
+		
+		$dataset = $this->_mModel->retrieveAllCustomers();
+		$data['customers'] = $dataset['records'];
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/customer/view_customer';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _addcustomer(){
@@ -57,7 +61,8 @@ class Customer extends CI_Controller {
 	
 	private function _editcustomer($id){
 		$data['companies'] = $this->_mModel->retrieveAllCompany();
-		$customer = $this->_custom_list($id);
+		$dataset = $this->_mModel->retrieveAllCustomers($id);
+		$customer = $dataset['records']; //$this->_custom_list($id);
 		if(false == $customer)
 			show_404();
 		
@@ -67,7 +72,8 @@ class Customer extends CI_Controller {
 	}
 	
 	private function _deletecustomer($id){
-		$customer = $this->_custom_list($id);
+		$dataset = $this->_mModel->retrieveAllCustomers($id);
+		$customer = $dataset['records']; // $this->_custom_list($id);
 		if(false == $customer)
 			show_404();
 		
@@ -90,6 +96,7 @@ class Customer extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
+	/*
 	private function _custom_list($id = ''){
 		global $almd_db;
 		$almd_db = new Almdtables();
@@ -106,6 +113,7 @@ class Customer extends CI_Controller {
 		
 		return $query->result();
 	}
+	*/
 	
 	public function ajaxdelcust(){
 		$strQry = sprintf("DELETE FROM `customer` WHERE `custid`=%d", $this->input->post('id'));

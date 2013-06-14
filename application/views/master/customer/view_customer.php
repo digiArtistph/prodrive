@@ -1,7 +1,7 @@
 <div class="wrapper">
 <h3 class="heading">Customers</h3>
 <div class="minidashboard">
-    	<div class="panelOne">        	<p>Customer Count: <strong><?php ''; ?></strong></p>            
+    	<div class="panelOne"><p>Customer Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
     </div>
 <div class="toolbar"><a href="<?php echo base_url() . 'master/customer/section/addcustomer'; ?>">Add New Customer</a></div>

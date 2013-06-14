@@ -1,6 +1,8 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Labortype extends CI_Controller {
+
+	private $_mModel;
 	
 	public function __construct() {
 	
@@ -8,6 +10,10 @@ class Labortype extends CI_Controller {
 	
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_labortype');
+		$this->_mModel = $this->mdl_labortype;
+		
 	}
 	
 	public function index(){
@@ -35,7 +41,9 @@ class Labortype extends CI_Controller {
 	}
 	
 	private function _laborview(){
-		$data['labortypes'] = $this->_laborlist();
+		$dataset = $this->_mModel->retrieveAllLaborType();
+		$data['labortypes'] = $dataset['records']; //$this->_laborlist();
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/labortype/view_types';
 		$this->load->view('includes/template', $data);
 	}
@@ -47,7 +55,8 @@ class Labortype extends CI_Controller {
 	}
 	
 	private function _editlabor($id){
-		$data['laborlists'] = $this->_laborlist($id);
+		$dataset = $this->_mModel->retrieveAllLaborType($id);
+		$data['laborlists'] = $dataset['records']; //$this->_laborlist($id);
 		//call_debug($data['laborlists']);
 		$data['categories'] = $this->_categ_list();
 		$data['main_content'] = 'master/labortype/edit_types';
@@ -74,6 +83,7 @@ class Labortype extends CI_Controller {
 		return $query->result();
 	}
 	
+	/*
 	private function _laborlist($id = ''){
 		global $almd_db;
 		$almd_db = new Almdtables();
@@ -90,6 +100,7 @@ class Labortype extends CI_Controller {
 	
 		return $query->result();
 	}
+	*/
 	
 	public function ajaxdeltype(){
 		$strQry = sprintf("DELETE FROM `labortype` WHERE `laborid`=%d", $this->input->post('id'));

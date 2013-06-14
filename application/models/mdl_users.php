@@ -10,4 +10,25 @@ class Mdl_users extends CI_Model {
 			
 		return TRUE;
 	}
+	
+	public function retrieveAllUsers($id = '') {
+		
+		if(empty($id)) {
+			$strQry = sprintf("SELECT us.u_id, us.fname, us.mname, us.lname, us.username, us.addr, us.status, ut.type, ut.id FROM users us LEFT JOIN usertype ut ON us.ut_id=ut.id");
+		} else {
+			$strQry = sprintf("SELECT us.u_id, us.fname, us.mname, us.lname, us.username, us.addr, us.status, ut.type, ut.id FROM users us LEFT JOIN usertype ut ON us.ut_id=ut.id WHERE us.u_id=%d", $id);
+		}
+
+		$resultset = $this->db->query($strQry);
+		
+		if($resultset->num_rows < 1)
+			return FALSE;
+		
+		$record['count'] = $resultset->num_rows;
+		$record['records'] = $resultset->result();
+		
+		return $record;
+		
+	}
 }
+

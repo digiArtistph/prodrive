@@ -24,7 +24,7 @@ class Login extends CI_Controller{
 		$validation->set_rules('username', 'Username',  'required');
 		$validation->set_rules('pword', 'Password',  'required');
 		if($validation->run() === FALSE) {
-			$this->login_page('Please logged in again!!!');
+			$this->login_page('Please log in again!');
 		} else {
 			if( $this->__isUserExists($this->input->post('username'), $this->input->post('pword') ) ){
 				$this->_loguser($this->input->post('username'), 1);

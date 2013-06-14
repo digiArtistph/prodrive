@@ -1,6 +1,7 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Categories extends CI_Controller {
+	private $_mModel;
 	
 	public function __construct() {
 	
@@ -8,6 +9,9 @@ class Categories extends CI_Controller {
 	
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_category');
+		$this->_mModel = $this->mdl_category;
 	}
 	
 	public function index(){
@@ -38,30 +42,35 @@ class Categories extends CI_Controller {
 	}
 	
 	private function _categories(){
-		$data['categories'] = $this->_categ_list();
+		$dataset = $this->_mModel->retrieveAllCategories();
+		$data['categories'] = $dataset['records']; // $this->_categ_list();
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/categories/view_categories';
 		$this->load->view('includes/template', $data);
 	}
 	
 	private function _addcategories(){
-		$data['categories'] = $this->_categ_list();
+		$dataset = $this->_mModel->retrieveAllCategories();
+		$data['categories'] = $dataset['records']; //$this->_categ_list();
 		$data['main_content'] = 'master/categories/add_categories';
 		$this->load->view('includes/template', $data);
 	}
 	
 	private function _editcategories($id){
-		$categories = $this->_categ_list($id);
+		$dataset = $this->_mModel->retrieveAllCategories($id);
+		$categories = $dataset['records']; // $this->_categ_list($id);
 		if(false == $categories)
 			show_404();
 		
-		$data['parents'] = $this->_categ_list();
+		$data['parents'] = $dataset['records']; //$this->_categ_list();
 		$data['categories'] = $categories;
 		$data['main_content'] = 'master/categories/edit_categories';
 		$this->load->view('includes/template', $data);
 	}
 	
 	private function _deletecategories($id){
-		$categories = $this->_categ_list($id);
+		$dataset = $this->_mModel->retrieveAllCategories($id);
+		$categories =  $dataset['records']; //$this->_categ_list($id);
 		if(false == $categories)
 			show_404();
 		
@@ -84,6 +93,7 @@ class Categories extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
+	/*
 	private function _categ_list($id = ''){
 		global $almd_db;
 		$almd_db = new Almdtables();
@@ -100,6 +110,7 @@ class Categories extends CI_Controller {
 		
 		return $query->result();
 	}
+	*/
 	
 	public function ajaxdelcat(){
 		$strQry = sprintf("DELETE FROM `categories` WHERE `categ_id`=%d", $this->input->post('id'));

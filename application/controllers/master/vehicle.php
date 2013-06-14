@@ -2,12 +2,18 @@
 
 class Vehicle extends CI_Controller {
 	
+	private $_mModel;
+	
 	public function __construct() {
 	
 		parent::__construct();
 	
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_vehicle');
+		$this->_mModel = $this->mdl_vehicle;
+		
 	}
 	
 	public function index(){
@@ -35,7 +41,10 @@ class Vehicle extends CI_Controller {
 	}
 	
 	private function _vehicle(){
-		$data['vehicles'] = $this->_vehiclelists();
+		
+		$dataset = $this->_mModel->retrieveAllVehicles();
+		$data['vehicles'] = $dataset['records']; // $this->_vehiclelists();
+		$data['count'] = $dataset['count'];
 		$data['main_content'] = 'master/vehicle/view_vehicle';
 		$this->load->view('includes/template', $data);
 	}
@@ -46,7 +55,9 @@ class Vehicle extends CI_Controller {
 	}
 	
 	private function _editvehicle($id){
-		$data['vehicles'] = $this->_vehiclelists($id);
+		
+		$dataset = $this->_mModel->retrieveAllVehicles($id);
+		$data['vehicles'] = $dataset['records']; // $this->_vehiclelists($id);
 		
 		$data['main_content'] = 'master/vehicle/edit_vehicle';
 		$this->load->view('includes/template', $data);
@@ -62,6 +73,7 @@ class Vehicle extends CI_Controller {
 	}
 	
 	
+	/*
 	private function _vehiclelists($id = ''){
 		
 		global $almd_db;
@@ -79,6 +91,7 @@ class Vehicle extends CI_Controller {
 		
 		return $query->result();
 	}
+	*/
 	
 	public function validateaddvehicle(){
 		$this->load->library('form_validation');
