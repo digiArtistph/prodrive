@@ -45,9 +45,10 @@ class Customer extends CI_Controller {
 	
 	private function _customer(){
 		
-		$dataset = $this->_mModel->retrieveAllCustomers();
+		$dataset = $this->_mModel->paginate();// $this->_mModel->retrieveAllCustomers();
 		$data['customers'] = $dataset['records'];
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/customer/view_customer';
 		$this->load->view('includes/template', $data);
 		

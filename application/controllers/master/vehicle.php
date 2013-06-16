@@ -42,9 +42,10 @@ class Vehicle extends CI_Controller {
 	
 	private function _vehicle(){
 		
-		$dataset = $this->_mModel->retrieveAllVehicles();
+		$dataset = $this->_mModel->paginate(); // $this->_mModel->retrieveAllVehicles();
 		$data['vehicles'] = $dataset['records']; // $this->_vehiclelists();
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/vehicle/view_vehicle';
 		$this->load->view('includes/template', $data);
 	}

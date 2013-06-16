@@ -41,9 +41,10 @@ class Labortype extends CI_Controller {
 	}
 	
 	private function _laborview(){
-		$dataset = $this->_mModel->retrieveAllLaborType();
+		$dataset = $this->_mModel->paginate(); // $this->_mModel->retrieveAllLaborType();
 		$data['labortypes'] = $dataset['records']; //$this->_laborlist();
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/labortype/view_types';
 		$this->load->view('includes/template', $data);
 	}

@@ -59,4 +59,12 @@ class Mdl_ownedvehicle extends CI_Model {
 	
 		return TRUE;
 	}
+	
+	public function paginate() {
+		
+		$config['base_url'] = base_url('master/ownedvehicle/section/ownedvehicle');
+		$config['query'] = sprintf("SELECT vo.vo_id, v.make, vo.plateno, CONCAT(lname, ', ', fname) AS `owner`  FROM ((vehicle_owner vo LEFT JOIN vehicle v ON vo.make=v.v_id) LEFT JOIN customer c ON vo.owner=c.custid) ORDER BY c.lname %s", '');
+		$result = paginate($config);
+		return $result;
+	}
 }

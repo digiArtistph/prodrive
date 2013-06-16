@@ -21,4 +21,14 @@ class Mdl_vehicle extends CI_Model {
 		return $record;		
 	}
 	
+	public function paginate() {
+		
+		$config['base_url'] = base_url('master/vehicle/section/viewvehicle');
+		$config['query'] = sprintf("SELECT * FROM vehicle WHERE `status`='1' %s", '');
+		$result = paginate($config);
+		
+		return $result;
+	}
+	
+	
 }

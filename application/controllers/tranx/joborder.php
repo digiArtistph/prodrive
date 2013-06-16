@@ -7,7 +7,7 @@ class Joborder extends CI_Controller{
 		
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
-
+		
 	}
 	
 	public function index(){

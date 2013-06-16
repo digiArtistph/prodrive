@@ -2,9 +2,15 @@
 
 class Ownedvehicle extends CI_Controller {
 	
-	function __construct(){
+	private $_mModel;
+	
+	public function __construct(){
 		parent::__construct();
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_ownedvehicle');
+		$this->_mModel = $this->mdl_ownedvehicle;
+		
 	}
 	
 	public function index() {
@@ -37,10 +43,11 @@ class Ownedvehicle extends CI_Controller {
 	
 	private function _ownedVehicle() {
 		
-		$this->load->model('mdl_ownedvehicle');		
-		$dataset = $this->mdl_ownedvehicle->retrieve();
+				
+		$dataset = $this->_mModel->paginate();
 		$data['records'] = $dataset['records'];
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/vehicle_owner/vehicle_owner_view';
 		$this->load->view('includes/template', $data);
 	}

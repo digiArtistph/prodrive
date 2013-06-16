@@ -22,5 +22,17 @@ class Mdl_labortype extends CI_Model{
 		
 	}
 	
+	public function paginate() {
+		
+		$config = array(
+						'base_url' => base_url('master/labortype/section/viewlabortype'),
+						'query' => sprintf("SELECT * FROM labortype lt LEFT JOIN categories c ON lt.category=c.categ_id %s", '')
+					);
+		
+		$result = paginate($config);
+		
+		return $result;
+	}
+	
 	
 }
