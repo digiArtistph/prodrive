@@ -22,4 +22,14 @@ class Mdl_colors extends CI_Model {
 		
 	}
 	
+	public function paginate() {
+		
+		$config['base_url'] = base_url('master/color/section/viewcolor');
+		$config['query'] = sprintf("SELECT * FROM color ORDER BY name ASC %s", '');
+		$result = paginate($config);
+		
+		return $result;
+		
+	}
+	
 }

@@ -22,5 +22,15 @@ class Mdl_category extends CI_Model{
 		
 	}
 	
+	public function paginate() {
+		
+		$config['base_url'] = base_url('master/categories/section/viewcategories');
+		$config['query'] = sprintf("SELECT * FROM categories ORDER BY category ASC %s", '');
+		$result = paginate($config);
+		
+		return $result;
+		
+	}
+	
 	
 }

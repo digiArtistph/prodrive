@@ -52,9 +52,10 @@ class Users extends CI_Controller {
 	
 	private function _users(){
 		
-		$dataset = $this->_mModel->retrieveAllUsers();
+		$dataset = $this->_mModel->paginate();
 		$data['users'] =$dataset['records']; // $this->_userlists();
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/users/view_users';
 		$this->load->view('includes/template', $data);
 		

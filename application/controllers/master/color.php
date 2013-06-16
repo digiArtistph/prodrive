@@ -39,9 +39,10 @@ class Color extends CI_Controller {
 	
 	private function _colors(){
 		
-		$dataset = $this->_mModel->retrieveAllColors();
+		$dataset = $this->_mModel->paginate(); //$this->_mModel->retrieveAllColors();
 		$data['colors'] = $dataset['records'];// $this->_colorlist();
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/color/view_color';
 		$this->load->view('includes/template', $data);
 	}

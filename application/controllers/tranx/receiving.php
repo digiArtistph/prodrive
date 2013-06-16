@@ -1,10 +1,16 @@
 <?php if( !defined('BASEPATH')) exit('Direct script access not allowed');
 
 class Receiving extends CI_Controller{	
-
+	
+	private $_mModel;
+	
 	function __construct(){
 		parent::__construct();
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_receiving');
+		$this->_mModel = $this->mdl_receiving;
+		
 	}
 	
 	public function index() {
@@ -33,10 +39,10 @@ class Receiving extends CI_Controller{
 	
 	private function _receiving() {
 		
-		$this->load->model('mdl_receiving');
-		$dataset = $this->mdl_receiving->retrieve();
+		$dataset = $this->_mModel->paginate();
 		$data['records'] = $dataset['records'];
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'tranx/vehicle_receiving/vehicle_receiving_view';
 		$this->load->view('includes/template', $data);
 		

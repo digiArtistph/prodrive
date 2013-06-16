@@ -1,12 +1,17 @@
 <?php if( !defined('BASEPATH')) exit('Direct script access not allowed');
 class Joborder extends CI_Controller{
 	
+	private $_mModel;
+	
 	public function __construct() {
 		
 		parent::__construct();
 		
 		// authorizes access
 		authUser(array('sessvar' => array('uname', 'islog', 'fullname')));
+		
+		$this->load->model('mdl_joborder');
+		$this->_mModel = $this->mdl_joborder;
 		
 	}
 	
@@ -114,6 +119,7 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _joborder($id){
+		/*
 		$this->load->library('pagination');
 		global $almd_db;
 		$almd_db = new Almdtables();
@@ -130,6 +136,11 @@ class Joborder extends CI_Controller{
 		$data['total_rows'] = $config['total_rows'];
 		$data['links'] = $this->pagination->create_links();
 		$data['joborders'] = $this->joborder_list($id ,$config['per_page']);
+		*/
+		$dataset = $this->_mModel->paginate();
+		$data['joborders'] = $dataset['records'];
+		$data['total_rows'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'tranx/joborder/viewjoborder';
 		$this->load->view('includes/template', $data);
 	}

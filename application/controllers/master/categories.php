@@ -42,9 +42,10 @@ class Categories extends CI_Controller {
 	}
 	
 	private function _categories(){
-		$dataset = $this->_mModel->retrieveAllCategories();
+		$dataset = $this->_mModel->paginate();
 		$data['categories'] = $dataset['records']; // $this->_categ_list();
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/categories/view_categories';
 		$this->load->view('includes/template', $data);
 	}

@@ -5,6 +5,20 @@
         </div>        
   </div>
 <div class="toolbar"><a href="<?php echo base_url(). 'tranx/joborder/section/addjoborder';?>">Add Job Order</a></div>
+<div class="pagination-record">
+	<div class="pagination-controls">
+    	<!--1&nbsp;<a href="#">2</a>&nbsp;<a href="#">3</a>&nbsp;<a href="#">4</a>--><?php echo $paginate; ?>
+    </div>
+    <div class="record-filter"><select name="viewperpage">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="75">75</option>
+        <option value="100">100</option>
+        <option value="-1">All</option>
+        </select> per page</div>
+    </div>
 	<div id="view_form">
 	<table class="regdatagrid">
 		<thead>
@@ -40,7 +54,6 @@
 			<?php endif;?>
 		</tbody>
 	</table>
-			<p><?php echo $links;?></p>
 </div>
 <div id="dialog-confirm" title="Delete Record!!!"><p></p></div>	
 </div>

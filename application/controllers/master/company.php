@@ -105,11 +105,11 @@ class Company extends CI_Controller {
 	}
 	
 	private function _company() {
-		
-		$this->load->model('mdl_company');
-		$dataset = $this->mdl_company->retrieveAllCompany();
+				
+		$dataset = $this->_mModel->paginate();
 		$data['companies'] = $dataset['records'];
-		$data['count'] = $dataset['count'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/company/company_view';
 		$this->load->view('includes/template', $data);
 		

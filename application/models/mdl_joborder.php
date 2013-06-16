@@ -38,7 +38,7 @@ class mdl_joborder extends CI_Model{
 		}
 	}
 	
-public function getDcrPayments($id) {
+	public function getDcrPayments($id) {
 		
 		$strQry = sprintf("SELECT fnc_dcrPayments(%d) AS `total`", $id);
 		
@@ -49,4 +49,14 @@ public function getDcrPayments($id) {
 		}
 	}
 
+	public function paginate() {
+		
+		$config['base_url'] = base_url('tranx/joborder/section/viewjobrder');
+		$config['query'] = sprintf("SELECT jo.jo_number as jo_num,jo.jo_id, ve.make as vehicle, cl.name as color, cr.fname, cr.mname, cr.lname, jo.plate, jo.contactnumber as num, jo.address as addr, jo.trnxdate as date, fnc_joPayment(jo.jo_id) AS `balance`, fnc_dcrPayments(jo.jo_id) AS `payment` FROM joborder jo LEFT JOIN vehicle ve on ve.v_id=jo.v_id LEFT JOIN customer cr on cr.custid=jo.customer LEFT JOIN color cl on cl.clr_id=jo.color WHERE jo.`status`='1' ORDER BY jo.`jo_id` DESC %s", '');
+		$result = paginate($config);
+		
+		return $result;
+		
+	}
+	
 }
