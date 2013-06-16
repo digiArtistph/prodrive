@@ -24,11 +24,8 @@ if( ! function_exists('paginate')) {
 		
 		// checks if index 'query' exists otherwise use the default sql statement
 		// use sprintf function inorder this helper to work properly; and ADD a %s on the last part of your sql statemement and add a empty string for the sprintf's replacement variable
-		$strQry = (array_key_exists('query', $params)) ? $params['query'] : sprintf("SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM customer WHERE `status`='1' ORDER BY lname %s", '');
-		//$strQry = sprintf("SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM customer WHERE `status`='1' ORDER BY lname %s", '');	
-		
+		$strQry = (array_key_exists('query', $params)) ? $params['query'] : sprintf("SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM customer WHERE `status`='1' ORDER BY lname %s", '');		
 		$base_url = (array_key_exists('base_url', $params)) ? $params['base_url'] : base_url('master/customer/section/viewcustomer'); 
-		//$base_url = base_url('master/customer/section/viewcustomer');
 		
 		$config = array(
 						'base_url' => $base_url,
