@@ -4,22 +4,27 @@
     	<div class="panelOne">        	<p>Received Vehicles Count: <strong><?php echo $count; ?></strong></p>            
         </div>        
     </div><div class="toolbar"><a href="<?php echo base_url('tranx/receiving/section/addreceiving'); ?>">Add New Received Vehicle</a></div>
-    
-    <?php if(! empty($records)): ?>
+    <div class="clearthis">&nbsp;</div>
     <div class="pagination-record">
 	<div class="pagination-controls">
-    	<!--1&nbsp;<a href="#">2</a>&nbsp;<a href="#">3</a>&nbsp;<a href="#">4</a>--><?php echo $paginate; ?>
+    	<?php echo $paginate; ?>
     </div>
-    <div class="record-filter"><select name="viewperpage">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="50">50</option>
-        <option value="75">75</option>
-        <option value="100">100</option>
-        <option value="-1">All</option>
-        </select> per page</div>
+    
+    <div class="record-filter">
+	    <?php if($paginate !=""): ?>
+            View <select name="viewperpage">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+            <option value="100">100</option>
+            <option value="-1">All</option>
+            </select> per page</div>
+        <?php endif; ?>
     </div>
+    <?php if(! empty($records)): ?>
+    
     <table class="regdatagrid">
     	<thead>
         	<tr>
@@ -38,6 +43,25 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="clearthis">&nbsp;</div>
+    <div class="pagination-record">
+	<div class="pagination-controls">
+    	<?php echo $paginate; ?>
+    </div>
+    
+    <div class="record-filter">
+	    <?php if($paginate !=""): ?>
+            View <select name="viewperpage">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="75">75</option>
+            <option value="100">100</option>
+            <option value="-1">All</option>
+            </select> per page</div>
+        <?php endif; ?>
+    </div>
     <div id="dialog-confirm" title="Delete Record!!!"><p></p></div>
     <?php else: ?>
     	<p>No record found.</p>    
