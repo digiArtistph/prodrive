@@ -30,7 +30,16 @@ function dmax() {
 	
 	
 if( ! function_exists('paginate')) {
-	
+	/**
+	 * 
+	 * Generates pagination and returns resultset ...
+	 * @param array $params
+	 * @author Mugs and Coffee
+	 * @coder Kenneth "digiArtist_ph" P. Vallejos
+	 * @since Sunday, June 16, 2013
+	 * @version 1.1.0
+	 * 
+	 */
 	function paginate($params = array()) {
 		
 		$CI =& get_instance();
