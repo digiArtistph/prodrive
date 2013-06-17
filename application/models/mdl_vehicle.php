@@ -25,6 +25,7 @@ class Mdl_vehicle extends CI_Model {
 		
 		$config['base_url'] = base_url('master/vehicle/section/viewvehicle');
 		$config['query'] = sprintf("SELECT * FROM vehicle WHERE `status`='1' %s", '');
+		$config['callback'] = 'readFilterPerPage';
 		$result = paginate($config);
 		
 		return $result;

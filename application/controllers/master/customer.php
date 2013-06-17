@@ -44,11 +44,13 @@ class Customer extends CI_Controller {
 	}
 	
 	private function _customer(){
-		
-		$dataset = $this->_mModel->paginate();// $this->_mModel->retrieveAllCustomers();
+				
+		$dataset = $this->_mModel->paginate();
 		$data['customers'] = $dataset['records'];
 		$data['count'] = $dataset['overallcount'];
 		$data['paginate'] = $dataset['paginate'];
+		
+		// clears bookmark session
 		$data['main_content'] = 'master/customer/view_customer';
 		$this->load->view('includes/template', $data);
 		
@@ -61,13 +63,18 @@ class Customer extends CI_Controller {
 	}
 	
 	private function _editcustomer($id){
+		
+		$pageBookMark = ($this->uri->segment(6)) ? $this->uri->segment(6) : 0;		
 		$data['companies'] = $this->_mModel->retrieveAllCompany();
 		$dataset = $this->_mModel->retrieveAllCustomers($id);
-		$customer = $dataset['records']; //$this->_custom_list($id);
+		$customer = $dataset['records'];
 		if(false == $customer)
 			show_404();
+
+		// saves bookmark into session
 		
 		$data['customers'] = $customer;
+		$data['bookmark'] = $pageBookMark;
 		$data['main_content'] = 'master/customer/edit_customer';
 		$this->load->view('includes/template', $data);
 	}
@@ -153,7 +160,8 @@ class Customer extends CI_Controller {
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
 			}
 			
-			redirect( base_url() . 'master/customer/' );
+			// 
+			redirect( base_url() . 'master/customer/section/' );
 		}
 	}
 	
@@ -179,8 +187,8 @@ class Customer extends CI_Controller {
 			if(!$query){
 				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
 			}
-				
-			redirect( base_url() . 'master/customer/' );
+			// clears bookmark session.
+			redirect( base_url() . 'master/customer/section/viewcustomer/' . $this->input->post('bookmark'));
 		}
 	}
 }

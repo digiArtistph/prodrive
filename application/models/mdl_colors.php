@@ -26,6 +26,7 @@ class Mdl_colors extends CI_Model {
 		
 		$config['base_url'] = base_url('master/color/section/viewcolor');
 		$config['query'] = sprintf("SELECT * FROM color ORDER BY name ASC %s", '');
+		$config['callback'] = 'readFilterPerPage';
 		$result = paginate($config);
 		
 		return $result;

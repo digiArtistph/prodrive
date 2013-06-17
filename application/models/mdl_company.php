@@ -84,6 +84,7 @@ class Mdl_company extends CI_Model {
 		
 		$config['base_url'] = base_url('master/company/section/company');
 		$config['query'] = sprintf("SELECT * FROM company WHERE `status`='1' %s", '');
+		$config['callback'] = 'readFilterPerPage';
 		$result = paginate($config);
 		
 		return $result;

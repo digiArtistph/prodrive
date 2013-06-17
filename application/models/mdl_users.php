@@ -35,6 +35,7 @@ class Mdl_users extends CI_Model {
 		
 		$config['base_url'] = base_url('aster/users/section/viewusers');
 		$config['query'] = sprintf("SELECT us.u_id, us.fname, us.mname, us.lname, us.username, us.addr, us.status, ut.type, ut.id FROM users us LEFT JOIN usertype ut ON us.ut_id=ut.id ORDER BY lname ASC %s", '');
+		$config['callback'] = 'readFilterPerPage';
 		$result = paginate($config);
 		
 		return $result;

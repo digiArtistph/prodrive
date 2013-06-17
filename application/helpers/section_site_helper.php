@@ -12,6 +12,14 @@ if (! function_exists('getHeader')) {
 	}
 }
 
+if(! function_exists('getPagination')) {
+	function getPagination() {
+		$CI =& get_instance();
+		
+		$CI->load->view('includes/pagination');
+	}
+}
+
 if(! function_exists('getMenuNav')) {
 	function getMenuNav() {
 		$CI =& get_instance();

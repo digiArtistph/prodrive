@@ -4,3 +4,5 @@ fullname:FULLNAME
 uid:UID
 utype:UTYPE
 uaccess:UACCESS
+pgbookmark:PGBOOKMARK
+pgperpage:PGPERPAGE

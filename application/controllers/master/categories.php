@@ -42,36 +42,41 @@ class Categories extends CI_Controller {
 	}
 	
 	private function _categories(){
+		
 		$dataset = $this->_mModel->paginate();
-		$data['categories'] = $dataset['records']; // $this->_categ_list();
-		$data['count'] = $dataset['overallcount'];
-		$data['paginate'] = $dataset['paginate'];
+		$data['categories'] = $dataset['records'];
+		$data['paginate'] = $dataset['paginate'];	
+		$data['count'] = $dataset['count'];	
 		$data['main_content'] = 'master/categories/view_categories';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _addcategories(){
+		
 		$dataset = $this->_mModel->retrieveAllCategories();
-		$data['categories'] = $dataset['records']; //$this->_categ_list();
+		$data['categories'] = $dataset['records'];
 		$data['main_content'] = 'master/categories/add_categories';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _editcategories($id){
 		$dataset = $this->_mModel->retrieveAllCategories($id);
-		$categories = $dataset['records']; // $this->_categ_list($id);
+		$categories = $dataset['records'];
 		if(false == $categories)
 			show_404();
 		
-		$data['parents'] = $dataset['records']; //$this->_categ_list();
+		$data['parents'] = $dataset['records'];
 		$data['categories'] = $categories;
 		$data['main_content'] = 'master/categories/edit_categories';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _deletecategories($id){
 		$dataset = $this->_mModel->retrieveAllCategories($id);
-		$categories =  $dataset['records']; //$this->_categ_list($id);
+		$categories =  $dataset['records'];
 		if(false == $categories)
 			show_404();
 		
@@ -93,26 +98,7 @@ class Categories extends CI_Controller {
 		$data['main_content'] = 'master/categories/feedback_categories';
 		$this->load->view('includes/template', $data);
 	}
-	
-	/*
-	private function _categ_list($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
 		
-		if(empty($id))
-			$strqry = mysql_real_escape_string('SELECT * FROM ' . $almd_db->categories);
-		else
-			$strqry = sprintf('SELECT * FROM `%s` WHERE categ_id="%s"',$almd_db->categories, $id);
-		
-		$query = $this->db->query($strqry);
-		
-		if( $query->num_rows() <1 )
-			return false;
-		
-		return $query->result();
-	}
-	*/
-	
 	public function ajaxdelcat(){
 		$strQry = sprintf("DELETE FROM `categories` WHERE `categ_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);

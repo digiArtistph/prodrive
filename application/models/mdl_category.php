@@ -26,6 +26,7 @@ class Mdl_category extends CI_Model{
 		
 		$config['base_url'] = base_url('master/categories/section/viewcategories');
 		$config['query'] = sprintf("SELECT * FROM categories ORDER BY category ASC %s", '');
+		$config['callback'] = 'readFilterPerPage';
 		$result = paginate($config);
 		
 		return $result;

@@ -21,31 +21,25 @@ class Home extends CI_Controller {
 	}
 
 	public function test () {
-		/*
-		global $almd_xmlparser;
-			
-		$config = array(
-				'db_server' => 'localhost',
-				'db_user' => 'root',
-				'db_name' => 'prodrive',
-				'db_pass' => '',
-				'db_tbl_prefix' => 'almd'
-		);
-		$dbhooks->_initialize();
-		call_debug($almd->customer);
-		*/
+		$string = 'master/labortype/sectionviewlabortype/30';
+		$pattern = '/'.addcslashes('^master/labortype', '/').'/';
 		
-		$strQry = sprintf("INSERT INTO color SET clr_id=26,  name= 'Aqua Marine'"); // returns 1 on success
-		// $strQry = sprintf("UPDATE color SET name='Aqua M' WHERE clr_id=26"); // returns 1 on success
-		$status = $this->db->query($strQry);
+		if(preg_match($pattern, $string))
+			echo 'matched';
+		else
+			echo 'not matched';
 
-		call_debug($status);
-
+		echo '<br />';
+	
+		$cntr = array('test' => 'Hello');
+		call_user_func('arrayToDBOjbects');
+		
+		echo $cntr;
 		
 	}
-	
-	
+		
 }
-	function traversethis($item, $key) {
-			echo "$key -> $item" . "<br />";
-		}
+
+function arrayToDBOjbects() {
+
+}

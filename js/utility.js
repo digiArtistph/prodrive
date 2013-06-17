@@ -227,6 +227,11 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	
+	/* filter pagination  */
+	$('select[name="viewperpage"]').filterperpage();
+	
+		
 	/* autocomplete by digiArtist_ph */
 	$(".vehicleowner").autocomplete({ autoFocus: true }, {source: 'http://localhost/prodrive/ajax/ajxautocomplete/vehicle'}, {select: function(evt, ui){
 			$('input[name="makecode"]').val(ui.item.index);

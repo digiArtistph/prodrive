@@ -40,6 +40,13 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _editjoborder($id){
+		/*	
+		$params = array('pgperpage', 'pgbookmark');
+ 		$this->sessionbrowser->getInfo($params);
+ 		$arr = $this->sessionbrowser->mData;
+ 		call_debug($arr); 		
+ 		*/
+		
 		$data['jbo_order'] = $this->_joborders($id);
 		
 		$this->db->query('CALL sp_create_jo_cache()');
@@ -119,30 +126,14 @@ class Joborder extends CI_Controller{
 	}
 	
 	private function _joborder($id){
-		/*
-		$this->load->library('pagination');
-		global $almd_db;
-		$almd_db = new Almdtables();
 		
-		$config['base_url'] = base_url('tranx/joborder/section/viewjobrder');
-		$config['total_rows'] = $this->db->query("SELECT jo_id FROM {$almd_db->joborder} WHERE `status`='1'")->num_rows();
-		$config['uri_segment'] = 5;
-		$config['per_page'] = 10;
-		$config['num_links'] = 5;
-		$this->pagination->initialize($config);
-		$data['paginate'] = paginate_helper($this->pagination->create_links());
-		
-		$this->pagination->initialize($config);
-		$data['total_rows'] = $config['total_rows'];
-		$data['links'] = $this->pagination->create_links();
-		$data['joborders'] = $this->joborder_list($id ,$config['per_page']);
-		*/
 		$dataset = $this->_mModel->paginate();
 		$data['joborders'] = $dataset['records'];
 		$data['total_rows'] = $dataset['overallcount'];
 		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'tranx/joborder/viewjoborder';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function joborder_list( $start, $end ){

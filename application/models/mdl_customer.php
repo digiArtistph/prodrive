@@ -32,7 +32,7 @@ class Mdl_customer extends CI_Model {
 	
 	public function paginate() {
 		
-		$result = paginate();
+		$result = paginate(array('callback' => 'readFilterPerPage'));
 		
 		return $result;
 	}

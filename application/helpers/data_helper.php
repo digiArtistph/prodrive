@@ -2,17 +2,33 @@
 
 function dmax() {
 	$CI =& get_instance();
-	
 	$strQry = "CALL sp_dmax(@cntr)";
 	$CI->db->query($strQry);
-	
+
 	$resultset = $CI->db->query("SELECT @cntr AS dmax")->result();
 	
 	foreach($resultset as $result) {
 		return $result->dmax;
-	}
+	} 
 }
-
+/**
+	 * 
+	 * Reads filterperpage session and rewrites the $config array that is being passed by reference
+	 * @param array $config
+	 */
+	function readFilterPerPage(&$config) {
+		$CI =& get_instance();
+		
+		// sessionbrowser
+		$params = array('pgbookmark', 'pgperpage');
+ 		$CI->sessionbrowser->getInfo($params);
+ 		$arr = $CI->sessionbrowser->mData;
+ 		
+ 		$config['per_page'] = $arr['pgperpage'];
+	}
+	
+	
+	
 if( ! function_exists('paginate')) {
 	
 	function paginate($params = array()) {
@@ -34,7 +50,11 @@ if( ! function_exists('paginate')) {
 						'num_links' => 3,
 						'uri_segment' => 5					
 					);
-		
+					//call_debug($params);
+		// the parameter should be passed by reference
+		if(array_key_exists('callback', $params))
+			call_user_func_array($params['callback'], array(&$config)); 
+			
 		// overides the default settings
 		$config = array_merge($config, $params);
 		$CI->pagination->initialize($config);
@@ -51,6 +71,7 @@ if( ! function_exists('paginate')) {
 		
 		return $result;
 	}
+	
 	
 }
 

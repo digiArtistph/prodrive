@@ -15,6 +15,7 @@
 	define('JOTBL_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.populatetable.js'). '"></script>');
 	define('DATAVALIDATION_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.datavalidation.js'). '"></script>');
 	define('VEHICLE_OWNER_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.owned.vehicle.js'). '"></script>');
+	define('FILTERPERPAGE_PLUGIN_JS', '<script type="text/javascript" src="' . base_url('js/jquery.filterperpage.js'). '"></script>');
 	
 	switch ($section) {
 		case 'home':
@@ -31,6 +32,7 @@
 			echo DCR_PLUGIN_JS;
 			echo DATAVALIDATION_PLUGIN_JS;
 			echo VEHICLE_OWNER_PLUGIN_JS;
+			echo FILTERPERPAGE_PLUGIN_JS;
 			echo UTILITY_JS;					
 			break;
 		case 'login':

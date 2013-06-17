@@ -26,7 +26,8 @@ class Mdl_labortype extends CI_Model{
 		
 		$config = array(
 						'base_url' => base_url('master/labortype/section/viewlabortype'),
-						'query' => sprintf("SELECT * FROM labortype lt LEFT JOIN categories c ON lt.category=c.categ_id %s", '')
+						'query' => sprintf("SELECT * FROM labortype lt LEFT JOIN categories c ON lt.category=c.categ_id %s", ''),
+						'callback' => 'readFilterPerPage'
 					);
 		
 		$result = paginate($config);
