@@ -59,7 +59,7 @@ if( ! function_exists('paginate')) {
 						'num_links' => 3,
 						'uri_segment' => 5					
 					);
-					//call_debug($params);
+
 		// the parameter should be passed by reference
 		if(array_key_exists('callback', $params))
 			call_user_func_array($params['callback'], array(&$config)); 
