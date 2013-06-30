@@ -85,7 +85,7 @@ class mdl_autocomplete extends CI_Model{
 	public function customer() {
 		
 		$term = $this->input->get('term');
-		$strQry = "SELECT custid AS `index`, CONCAT(lname, ', ', fname)  AS `value`  FROM customer WHERE lname LIKE '%" . $term . "%' ORDER BY lname";
+		$strQry = "SELECT custid AS `index`, CONCAT(lname, ', ', fname)  AS `value`  FROM customer WHERE lname LIKE '%" . $term . "%' AND `status`='1' ORDER BY lname";
 		$resultset= $this->db->query($strQry)->result();
 		
 		return $resultset;

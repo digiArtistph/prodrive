@@ -1,0 +1,6 @@
+﻿#SELECT * FROM joborder j WHERE customer IN (SELECT  custid FROM customer c GROUP BY CONCAT(lname, ', ', fname) HAVING (COUNT(CONCAT(lname, ', ', fname)) >1));
+SELECT * FROM joborder j WHERE customer IN (SELECT custid FROM customer WHERE lname LIKE 'bautis%' AND fname LIKE 'mikh%');
+
+
+/* updates */
+UPDATE joborder SET customer=42 WHERE jo_id IN (51);

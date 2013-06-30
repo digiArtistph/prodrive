@@ -1,0 +1,9 @@
+﻿#SELECT * FROM customer c WHERE custid IN (SELECT custid FROM customer )
+#SELECT  custid,CONCAT(lname, ', ', fname) AS fullname FROM customer c GROUP BY fullname HAVING (COUNT(fullname) >1);
+SELECT  custid, COUNT(custid) AS cntr, CONCAT(lname, ', ', fname) AS fullname FROM customer c WHERE `status`='1' GROUP BY CONCAT(lname, ', ', fname) HAVING (COUNT(CONCAT(lname, ', ', fname)) >1) ORDER BY custid;
+SELECT custid, CONCAT(lname, ', ', fname) AS fullname FROM customer WHERE lname LIKE 'cruz%' AND fname LIKE '%ro%';
+SELECT custid, CONCAT(lname, ', ', fname) AS fullname FROM customer WHERE lname LIKE 'cruz%' /*AND fname LIKE '%ger%'*/ AND `status`='1';
+
+/* DELETES */
+#DELETE FROM customer WHERE custid IN (73);
+UPDATE customer SET `status`='0' WHERE custid IN (316,408,446);
