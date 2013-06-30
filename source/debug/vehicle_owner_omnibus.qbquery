@@ -1,0 +1,16 @@
+﻿SELECT v.vo_id, v.make, v.owner, CONCAT(RTRIM(LTRIM(c.lname)), ', ', RTRIM(LTRIM(c.fname))) AS `customer`, c.custid, COUNT(v.owner) AS `count`, v.plateno FROM vehicle_owner v LEFT JOIN customer c ON v.owner=c.custid WHERE v.`status`='1' GROUP BY v.owner, `customer`  HAVING `count` > 1 ORDER BY v. owner;
+
+
+/* 1. owner has several vehicles */
+SELECT v.vo_id, v.plateno, c.custid, CONCAT(RTRIM(LTRIM(c.lname)), ', ', RTRIM(LTRIM(c.fname))) AS `customers`, v.`status` FROM  vehicle_owner v LEFT JOIN customer c ON v.owner=c.custid WHERE `lname` LIKE '%MOFA%' AND fname LIKE '%%';
+
+/* 2. deactivates vehicle-owner master file */
+UPDATE vehicle_owner SET `status`='0' WHERE vo_id IN (52,53,507,515);
+#UPDATE vehicle_owner SET `owner`=48 WHERE vo_id IN (52);
+
+
+/* 3. jo - vehicle - owner*/
+SELECT * FROM joborder j WHERE v_id IN (25,52,53,507,515);
+
+/* 4.  redirects to the new jo-owner*/
+UPDATE joborder SET v_id=25 WHERE jo_id IN (55,56,509,517);
