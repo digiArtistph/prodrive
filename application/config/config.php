@@ -363,3 +363,14 @@ $config['proxy_ips'] = '';
 
 /* added settings by kenn */
 date_default_timezone_set('Asia/Manila');
+
+/*
+|--------------------------------------------------------------------------
+| HMVC Patter
+|--------------------------------------------------------------------------
+|
+|
+*/
+$config['modules_locations'] = array(
+	APPPATH.'modules/' => '../modules/'	
+);
