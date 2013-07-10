@@ -116,7 +116,6 @@ class Customer extends CI_Controller {
 		$data['paginate'] = $dataset['paginate'];		
 		$data['search_keyword'] = $search;
 		
-		// clears bookmark session
 		$data['main_content'] = 'master/customer/view_customer';
 		$this->load->view('includes/template', $data);
 		
