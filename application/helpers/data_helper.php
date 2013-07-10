@@ -79,9 +79,15 @@ if( ! function_exists('paginate')) {
 		$result['records'] = $dataset->result();
 		
 		return $result;
-	}
-	
-	
+	}	
 }
 
+if (! function_exists('search_highlight')) {
+	function search_highlight($keyword, $phase) {
+		
+		$pattern = "/$keyword/i";		
+		return (preg_replace($pattern, "<span class='search-highlight'>$0</span>", $phase));
+		
+	}
+}
 

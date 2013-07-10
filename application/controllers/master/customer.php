@@ -38,13 +38,16 @@ class Customer extends CI_Controller {
 			case 'feedbackcustomer':
 				$this->_feedbackcustomer($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_customer();
 		}
 	}
 	
 	private function _customer(){
-				
+
 		$dataset = $this->_mModel->paginate();
 		$data['customers'] = $dataset['records'];
 		$data['count'] = $dataset['overallcount'];
@@ -104,24 +107,19 @@ class Customer extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
-	/*
-	private function _custom_list($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
+	private function _find(){
 		
-		if(empty($id))
-			$strqry = 'SELECT * FROM ' . $almd_db->customer . ' WHERE `status`="1"';
-		else
-			$strqry = sprintf('SELECT * FROM `%s` WHERE custid="%s"',$almd_db->customer, $id);
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['customers'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
 		
-		$query = $this->db->query($strqry);
+		// clears bookmark session
+		$data['main_content'] = 'master/customer/view_customer';
+		$this->load->view('includes/template', $data);
 		
-		if( $query->num_rows() <1 )
-			return false;
-		
-		return $query->result();
 	}
-	*/
 	
 	public function ajaxdelcust(){
 		$strQry = sprintf("DELETE FROM `customer` WHERE `custid`=%d", $this->input->post('id'));

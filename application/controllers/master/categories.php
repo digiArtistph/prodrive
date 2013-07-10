@@ -36,6 +36,9 @@ class Categories extends CI_Controller {
 			case 'feedbackcategories':
 				$this->_feedbackcategories($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_categories();
 		}
@@ -70,6 +73,20 @@ class Categories extends CI_Controller {
 		$data['parents'] = $dataset['records'];
 		$data['categories'] = $categories;
 		$data['main_content'] = 'master/categories/edit_categories';
+		$this->load->view('includes/template', $data);
+		
+	}
+	
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['categories'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
+		
+		// clears bookmark session
+		$data['main_content'] = 'master/categories/view_categories';
 		$this->load->view('includes/template', $data);
 		
 	}

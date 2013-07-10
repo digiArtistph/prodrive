@@ -20,7 +20,7 @@
         <tbody>
 		<?php foreach ($labortypes as $labortype):?>
 			<tr>
-				<td><?php echo $labortype->name;?></td>
+				<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '', $labortype->name);?></td>
 				<td><?php echo $labortype->category;?></td>
             	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/labortype/section/editlabor/' . $labortype->laborid ;?>">Edit</a>|<a  class="reggriddelbtn delete-record-view" post-url="master/labortype/ajaxdeltype" code="<?php echo $labortype->laborid;?>" href="#">Delete</a></td>
         	</tr>   
@@ -28,7 +28,7 @@
 		</tbody>
     </table>
 	<?php else:?>
-		<p>No labor types Added!!!</p>
+		<p>No labor types Found.</p>
 	<?php endif;?>
 	</div>
     <?php getPagination(); ?>

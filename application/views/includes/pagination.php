@@ -28,6 +28,11 @@
             <option <?php echo filterSelected(50, $perpage); ?> value="50">50</option>
             <option <?php echo filterSelected(75, $perpage); ?> value="75">75</option>
             <option <?php echo filterSelected(100, $perpage); ?> value="100">100</option>
-            </select> per page
-       </div>
+            </select> 
+            per page &nbsp;&nbsp;&nbsp;            
+            <span><?php echo form_open(base_url("$controller/$method/section/find")); ?>|| Find: 
+            <input type="text" name="search" /> 
+      <input type="submit" value="Go" /> <?php echo form_close(); ?> <?php if(isset($search_keyword)): echo ($search_keyword != '') ?  "searched keyword/s: <strong>'$search_keyword'<strong> ": ''; endif; ?></span>
+           
+  </div>
     </div>

@@ -3,7 +3,7 @@
 class Labortype extends CI_Controller {
 
 	private $_mModel;
-	
+
 	public function __construct() {
 	
 		parent::__construct();
@@ -13,7 +13,6 @@ class Labortype extends CI_Controller {
 		
 		$this->load->model('mdl_labortype');
 		$this->_mModel = $this->mdl_labortype;
-		
 	}
 	
 	public function index(){
@@ -35,18 +34,23 @@ class Labortype extends CI_Controller {
 			case 'editlabor':
 				$this->_editlabor($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_laborview();
 		}
 	}
 	
 	private function _laborview(){
-		$dataset = $this->_mModel->paginate(); // $this->_mModel->retrieveAllLaborType();
-		$data['labortypes'] = $dataset['records']; //$this->_laborlist();
+		
+		$dataset = $this->_mModel->paginate();
+		$data['labortypes'] = $dataset['records'];
 		$data['count'] = $dataset['overallcount'];
 		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/labortype/view_types';
 		$this->load->view('includes/template', $data);
+		
 	}
 	
 	private function _addlabortype(){
@@ -84,24 +88,19 @@ class Labortype extends CI_Controller {
 		return $query->result();
 	}
 	
-	/*
-	private function _laborlist($id = ''){
-		global $almd_db;
-		$almd_db = new Almdtables();
-	
-		if(empty($id))
-			$strqry = mysql_real_escape_string('SELECT * FROM ' . $almd_db->labortype . ' lt LEFT JOIN ' . $almd_db->categories . ' ct ON lt.category = ct.categ_id');
-		else
-			$strqry = sprintf('SELECT * FROM `%s` WHERE laborid="%s"',$almd_db->labortype, $id);
-	
-		$query = $this->db->query($strqry);
-	
-		if( $query->num_rows() <1 )
-			return false;
-	
-		return $query->result();
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['labortypes'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
+		$data['search_keyword'] = $search;
+				
+		$data['main_content'] = 'master/labortype/view_types';
+		$this->load->view('includes/template', $data);
+		
 	}
-	*/
 	
 	public function ajaxdeltype(){
 		$strQry = sprintf("DELETE FROM `labortype` WHERE `laborid`=%d", $this->input->post('id'));

@@ -23,7 +23,10 @@ class Home extends CI_Controller {
 	public function test () {
 		$string = 'master/labortype/sectionviewlabortype/30';
 		$pattern = '/'.addcslashes('^master/labortype', '/').'/';
+		$string = "SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM customer WHERE `status`='1' ORDER BY lname LIMIT 0, 10";
+		$patt = '/[\w\s\W]+(?=order)/i';
 		
+		/*
 		if(preg_match($pattern, $string))
 			echo 'matched';
 		else
@@ -36,6 +39,11 @@ class Home extends CI_Controller {
 		
 		echo $cntr;
 		
+		*/
+		
+		preg_match($patt, $string, $matches);
+		
+		call_debug($matches);
 	}
 		
 }

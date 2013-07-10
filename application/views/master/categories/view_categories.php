@@ -26,7 +26,7 @@
 		</tbody>
     </table>
 	<?php else:?>
-		<p>No Categories Added!</p>
+		<p>No Categories Found.</p>
 	<?php endif;?>
 	</div>
     

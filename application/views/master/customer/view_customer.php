@@ -31,7 +31,7 @@
 		</tbody>
     </table>
 	<?php else:?>
-		<p>No Customer Added!!!</p>
+		<p>No Customers Found.</p>
 	<?php endif;?>
 	</div>
     <?php getPagination(); ?>

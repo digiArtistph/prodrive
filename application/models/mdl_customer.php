@@ -1,6 +1,13 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Mdl_customer extends CI_Model {
+	private $tableName;
+	
+	public function __construct() {
+		
+		$this->tableName = "customer";
+		
+	}
 	
 	public function retrieveAllCompany() {
 		
@@ -36,5 +43,17 @@ class Mdl_customer extends CI_Model {
 		
 		return $result;
 	}
+	
+	public  function find($search) {
+		
+		$strQry = sprintf("SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM $this->tableName WHERE `status`='1' AND (lname LIKE '%c%s%c' OR fname LIKE '%c%s%c')", 37, $search, 37, 37, $search, 37);				
+		$dataset = $this->db->query($strQry);
+		$result['overallcount'] = $dataset->num_rows;
+		$result['paginate'] = "";
+		$result['records'] = $dataset->result();
+		
+		return $result;
+	}
+
 	
 }
