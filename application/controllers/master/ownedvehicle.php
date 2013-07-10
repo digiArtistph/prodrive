@@ -36,6 +36,9 @@ class Ownedvehicle extends CI_Controller {
 			case 'deleteownedvehicle':
 				$this->_deleteOwnedVehicle($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_ownedVehicle();
 		}
@@ -85,6 +88,20 @@ class Ownedvehicle extends CI_Controller {
 		}
 		
 	}
+	
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['records'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];
+		$data['search_keyword'] = $search;
+		
+		$data['main_content'] = 'master/vehicle_owner/vehicle_owner_view';
+		$this->load->view('includes/template', $data);
+		
+	}	
 	
 	private function _editOwnedVehicle($id = ''){
 		if(empty($id))

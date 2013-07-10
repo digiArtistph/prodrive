@@ -14,9 +14,7 @@
 ?>
 <div class="clearthis">&nbsp;</div>
 <div class="pagination-record">
-	<div class="pagination-controls">
-    	<?php echo $paginate; ?>
-    </div>
+	
     
     <div class="record-filter">
 	   
@@ -29,10 +27,25 @@
             <option <?php echo filterSelected(75, $perpage); ?> value="75">75</option>
             <option <?php echo filterSelected(100, $perpage); ?> value="100">100</option>
             </select> 
-            per page &nbsp;&nbsp;&nbsp;            
-            <span><?php echo form_open(base_url("$controller/$method/section/find")); ?>|| Find: 
-            <input type="text" name="search" /> 
-      <input type="submit" value="Go" /> <?php echo form_close(); ?> <?php if(isset($search_keyword)): echo ($search_keyword != '') ?  "searched keyword/s: <strong>'$search_keyword'<strong> ": ''; endif; ?></span>
+            per page
            
   </div>
+  
+  	<div class="search-keyword">
+    	<?php echo form_open(base_url("$controller/$method/section/find")); ?> &nbsp;|| Find: 
+            <input type="text" name="search" /> 
+      	<input type="submit" value="Go" /> <?php echo form_close(); ?> 
+        <?php if(isset($search_keyword)): ?>
+			<?php if($search_keyword != ""): ?>
+        	|| Searched keyword/s: <?php echo "'<strong>" . $search_keyword . '</strong>"'; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+		
     </div>
+    
+  	<?php if($paginate !=""): ?>
+        <div class="pagination-controls">
+            <?php echo $paginate; ?>
+        </div>
+    <?php endif; ?>
+</div>

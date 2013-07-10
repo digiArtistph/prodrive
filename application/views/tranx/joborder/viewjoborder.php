@@ -22,15 +22,15 @@
 		<tbody>
 			<?php if(empty($joborders)):?>
 			<tr>
-				<td>No Data</td>
+				<td>No Job Orders Found.</td>
 			</tr>
 			<?php else :?>
 			<?php foreach ($joborders as $order):?>
 			<tr title="Balance: Php <?php echo sCurrency($order->balance); ?> &nbsp;&nbsp; Payment: Php <?php echo sCurrency($order->payment); ?>">
 				<td><?php echo $order->jo_num?></td>
 				<!--<td><?php echo $order->vehicle;?></td>-->
-				<td><?php echo ucfirst($order->lname). ', ' . ucfirst($order->fname);?></td>
-				<td><?php echo $order->plate;?></td>
+				<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '',$order->owner);?></td>
+				<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '', $order->plate);?></td>
 				<!--<td><?php echo $order->color;?></td>
 				<td><?php echo $order->num;?></td>
 				<td><?php echo $order->addr;?></td>-->

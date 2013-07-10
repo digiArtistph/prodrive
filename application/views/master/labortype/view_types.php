@@ -30,7 +30,7 @@
 	<?php else:?>
 		<p>No labor types Found.</p>
 	<?php endif;?>
-	</div>
-    <?php getPagination(); ?>
+	</div>    
 <div id="dialog-confirm" title="Delete Record"><p></p></div>
+<?php getPagination(); ?>
 </div>

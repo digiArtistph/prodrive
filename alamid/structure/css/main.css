@@ -35,6 +35,8 @@ a {text-decoration:none;}
 /*search box */
 #searchbox {border:1px solid #ccc; position:absolute; right:0px; top:100%; z-index:9999;}
 .search-highlight {color:#000; font-weight:bold;}
+.search-keyword {float:left; width:45%;}
+.search-keyword form {display:inline-table;}
 
 /* tongbens edit quick search */
 .quicksearch {bottom: -30px; font-size:.8em; right:35px; position:absolute;}
@@ -163,10 +165,9 @@ h4 {font-size:.9em; margin:.5em 0;}
 /* pagination */
 .pagination-record {clear:both; position:relative; min-height:30px;}
 .pagination-record .pagination-controls {font-size:.85em; float:right;}
-.pagination-record .record-filter {font-size:.85em; float:left; max-width:70%;}
+.pagination-record .record-filter {font-size:.85em; float:left;}
 .pagination-record .record-filter select {font-size:.85em; padding:3px 5px;}
 .pagination-record .record-filter span {float:right;}
-.pagination-record .record-filter span form {display:inline;}
 .pagination-record .pagination-controls a,
 .pagination-record .pagination-controls a:visited {color:#292929;}
 .pagination-record .pagination-controls a, .pagination-record .pagination-controls strong {background: #e3e3e3; border:1px solid #cac9c9; border-radius: 2px 2px; padding:3px 5px; -moz-border-radius:2px 2px; -webkit-border-radius:2px 2px;}

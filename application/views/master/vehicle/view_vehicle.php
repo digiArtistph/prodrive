@@ -18,7 +18,7 @@
         <tbody>
         <?php foreach ($vehicles as $vehicle):?>
         	<tr>
-        		<td><?php echo $vehicle->make;?></td>        		
+        		<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '', $vehicle->make); ?></td>        		
         		<td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/vehicle/section/editvehicle/' . $vehicle->v_id; ?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/vehicle/ajaxdelveh" code="<?php echo $vehicle->v_id;?>" href="#">Delete</a></td>
         	</tr>
         <?php endforeach;?>
@@ -28,6 +28,7 @@
 		<p>No Vehicles</p>
 		<?php endif;?>
 	</div>
-    <?php getPagination(); ?>
+   
 <div id="dialog-confirm" title="Delete Record"><p></p></div>
+ <?php getPagination(); ?>
 </div>

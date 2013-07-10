@@ -32,15 +32,32 @@ class Color extends CI_Controller {
 			case 'editcolor':
 				$this->_editcolor($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_colors();
 		}
 	}
+
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['colors'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];		
+		$data['search_keyword'] = $search;
+		
+		$data['main_content'] = 'master/color/view_color';
+		$this->load->view('includes/template', $data);
+		
+	}
 	
 	private function _colors(){
 		
-		$dataset = $this->_mModel->paginate(); //$this->_mModel->retrieveAllColors();
-		$data['colors'] = $dataset['records'];// $this->_colorlist();
+		$dataset = $this->_mModel->paginate();
+		$data['colors'] = $dataset['records'];
 		$data['count'] = $dataset['overallcount'];
 		$data['paginate'] = $dataset['paginate'];
 		$data['main_content'] = 'master/color/view_color';

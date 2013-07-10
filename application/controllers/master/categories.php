@@ -84,6 +84,7 @@ class Categories extends CI_Controller {
 		$data['categories'] = $dataset['records'];
 		$data['count'] = $dataset['overallcount'];
 		$data['paginate'] = $dataset['paginate'];
+		$data['search_keyword'] = $search;
 		
 		// clears bookmark session
 		$data['main_content'] = 'master/categories/view_categories';

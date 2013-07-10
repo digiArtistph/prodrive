@@ -17,9 +17,9 @@
         <tbody>
         	<?php foreach($records as $record): ?>
             	<tr>
-                	<td><?php echo $record->make; ?></td>
+                	<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '' , $record->make); ?></td>
                     <td><?php echo $record->plateno; ?></td>
-                    <td><?php echo $record->owner; ?></td>
+                    <td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '', $record->owner); ?></td>
                     <td><a class="reggrideditbtn" href="<?php echo base_url(). 'master/ownedvehicle/section/editownedvehicle/' . $record->vo_id;?>">Edit</a> <a class="reggriddelbtn delete-record-view" post-url="master/ownedvehicle/ajaxdelvehicle" code="<?php echo $record->vo_id;?>" href="#">Delete</a></td>
                 </tr>          
             <?php endforeach; ?>
@@ -29,7 +29,9 @@
     <?php else: ?>
     	<p>No Record Found.</p>
     <?php endif; ?>
-    <?php getPagination(); ?>
+    
+    
 <div id="dialog-confirm" title="Delete Record"><p></p></div>
 </div>
+<?php getPagination(); ?>
 </div>

@@ -19,14 +19,14 @@
         <tbody>
 		<?php foreach ($colors as $color):?>
 			<tr>
-				<td><?php echo $color->name;?></td>
+				<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '',$color->name);?></td>
             	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/color/section/editcolor/' . $color->clr_id;?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/color/ajaxdelclr" code="<?php echo $color->clr_id;?>" href="#">Delete</a></td>
         	</tr>   
 		<?php endforeach;?>
 		</tbody>
     </table>
 	<?php else:?>
-		<p>No Color Added!!!</p>
+		<p>No Colors Found.</p>
 	<?php endif;?>
 	
 	</div>

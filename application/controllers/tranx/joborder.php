@@ -34,18 +34,28 @@ class Joborder extends CI_Controller{
 			case 'editjoborder':
 				$this->_editjoborder($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_joborder($id);
 		}
 	}
 	
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['joborders'] = $dataset['records'];
+		$data['total_rows'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];		
+		$data['search_keyword'] = $search;
+		$data['main_content'] = 'tranx/joborder/viewjoborder';
+		$this->load->view('includes/template', $data);
+		
+	}
+	
 	private function _editjoborder($id){
-		/*	
-		$params = array('pgperpage', 'pgbookmark');
- 		$this->sessionbrowser->getInfo($params);
- 		$arr = $this->sessionbrowser->mData;
- 		call_debug($arr); 		
- 		*/
 		
 		$data['jbo_order'] = $this->_joborders($id);
 		

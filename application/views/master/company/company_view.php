@@ -21,7 +21,7 @@
         <tbody>
 		<?php foreach ($companies as $company): ?>
 			<tr>
-            	<td><?php echo $company->name ; ?></td>
+            	<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '', $company->name); ?></td>
                 <td><?php  echo ($company->addr) ? $company->addr : '' ; ?></td>
                 <td><?php if( empty($company->phone) ){echo 'No Phone number';}else{ echo $company->phone;}?></td>
                 <td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/company/section/editcompany/' . $company->co_id;?>">Edit</a>|<a post-url="ajax/ajxcompany/deleteCompany" class="reggriddelbtn delete-record-view" href="#" code="<?php echo $company->co_id;?>">Delete</a></td>

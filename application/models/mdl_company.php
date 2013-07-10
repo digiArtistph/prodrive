@@ -2,9 +2,17 @@
 
 class Mdl_company extends CI_Model {
 	
+	private $tableName;
+	
+	public function __construct() {
+		
+		$this->tableName = "company";
+		
+	}
+	
 	public function retrieveAllCompany() {
 		
-		$strQry = sprintf("SELECT * FROM company WHERE `status`='1'");
+		$strQry = sprintf("SELECT * FROM $this->tableName WHERE `status`='1'");
 		$resultset = $this->db->query($strQry);
 		
 		$record['count'] = $resultset->num_rows;
@@ -16,7 +24,7 @@ class Mdl_company extends CI_Model {
 	
 	public function isUserExists($name) {
 		
-		$strQry = sprintf("SELECT name FROM company WHERE name='%s'", $name);
+		$strQry = sprintf("SELECT name FROM $this->tableName WHERE name='%s'", $name);
 		
 		if($this->db->query($strQry)->num_rows < 1)
 			return FALSE;
@@ -91,4 +99,14 @@ class Mdl_company extends CI_Model {
 		
 	}
 	
+	public  function find($search) {
+		
+		$strQry = sprintf("SELECT * FROM $this->tableName WHERE `status`='1' AND name LIKE '%c%s%c'", 37, $search, 37);				
+		$dataset = $this->db->query($strQry);
+		$result['overallcount'] = $dataset->num_rows;
+		$result['paginate'] = "";
+		$result['records'] = $dataset->result();
+		
+		return $result;
+	}
 }

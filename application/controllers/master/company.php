@@ -36,6 +36,9 @@ class Company extends CI_Controller {
 			case 'editcompany':
 				$this->_editcompany($id);
 				break;
+			case 'find':
+				$this->_find();
+				break;
 			default:
 				$this->_company();
 		}
@@ -101,6 +104,20 @@ class Company extends CI_Controller {
 			else
 				echo 'Inserting new record failed.';	
 		}
+		
+	}
+	
+	private function _find(){
+		
+		$search = mysql_real_escape_string($this->input->post('search'));
+		$dataset = $this->_mModel->find($search);
+		$data['companies'] = $dataset['records'];
+		$data['count'] = $dataset['overallcount'];
+		$data['paginate'] = $dataset['paginate'];		
+		$data['search_keyword'] = $search;
+		
+		$data['main_content'] = 'master/company/company_view';
+		$this->load->view('includes/template', $data);
 		
 	}
 	

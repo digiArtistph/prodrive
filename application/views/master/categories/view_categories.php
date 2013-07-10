@@ -19,7 +19,7 @@
         <tbody>
 		<?php foreach ($categories as $category):?>
 			<tr>
-				<td><?php echo $category->category;?></td>
+				<td><?php echo search_highlight((isset($search_keyword)) ? $search_keyword : '',$category->category);?></td>
             	<td><a class="reggrideditbtn" href="<?php echo base_url() . 'master/categories/section/editcategories/' . $category->categ_id;?>">Edit</a>|<a class="reggriddelbtn delete-record-view" post-url="master/categories/ajaxdelcat" code="<?php echo $category->categ_id;?>" href="#">Delete</a></td>
         	</tr>   
 		<?php endforeach;?>
@@ -30,6 +30,7 @@
 	<?php endif;?>
 	</div>
     
-<?php getPagination(); ?>
+
 <div id="dialog-confirm" title="Delete Record"><p></p></div>
+<?php getPagination(); ?>
 </div>
