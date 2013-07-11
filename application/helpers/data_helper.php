@@ -23,8 +23,8 @@ function dmax() {
 		$params = array('pgbookmark', 'pgperpage');
  		$CI->sessionbrowser->getInfo($params);
  		$arr = $CI->sessionbrowser->mData;
- 		
- 		$config['per_page'] = $arr['pgperpage'];
+ 		 		
+ 		$config['per_page'] = ($arr['pgperpage'] != "") ? $arr['pgperpage'] : 5;
 	}
 	
 	

@@ -40,7 +40,7 @@ class Customer extends CI_Controller {
 				break;
 			case 'find':
 				$this->_find();
-				break;
+				break;			
 			default:
 				$this->_customer();
 		}
@@ -107,6 +107,13 @@ class Customer extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 	
+	private function _duplicate_record($fname, $lname) {
+		
+		$data['customer'] = htmlentities("$fname $lname", ENT_QUOTES);
+		$data['main_content'] = 'master/customer/customer_exists_view';
+		$this->load->view('includes/template', $data);
+	}
+	
 	private function _find(){
 		
 		$search = mysql_real_escape_string($this->input->post('search'));
@@ -143,23 +150,29 @@ class Customer extends CI_Controller {
 		if($validation->run() === FALSE) {
 			$this->_addcustomer();
 		} else {
-			global $almd_db;
-			$almd_db = new Almdtables();
-			$strqry = sprintf("INSERT INTO $almd_db->customer (fname, mname, lname, addr, phone, company) VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
-				trim(mysql_real_escape_string($this->input->post('fname'))), 
-				mysql_real_escape_string($this->input->post('mname')), 
-				trim(mysql_real_escape_string($this->input->post('lname'))),
-				mysql_real_escape_string($this->input->post('addr')),
-				mysql_real_escape_string($this->input->post('phone')),
-				mysql_real_escape_string($this->input->post('company'))
-				);
-			$query = $this->db->query($strqry);
-			if(!$query){
-				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
-			}
 			
-			// 
-			redirect( base_url() . 'master/customer/section/' );
+			// checks customer exists. 
+			if(! $this->_mModel->isCustomerExists($this->input->post('fname'), $this->input->post('lname'))) {
+				global $almd_db;
+				$almd_db = new Almdtables();
+				$strqry = sprintf("INSERT INTO $almd_db->customer (fname, mname, lname, addr, phone, company) VALUES ('%s', '%s', '%s', '%s', '%s', %d)",
+					trim(mysql_real_escape_string($this->input->post('fname'))), 
+					mysql_real_escape_string($this->input->post('mname')), 
+					trim(mysql_real_escape_string($this->input->post('lname'))),
+					mysql_real_escape_string($this->input->post('addr')),
+					mysql_real_escape_string($this->input->post('phone')),
+					mysql_real_escape_string($this->input->post('company'))
+					);
+				$query = $this->db->query($strqry);
+				if(!$query){
+					redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
+				}
+				
+				// 
+				redirect( base_url() . 'master/customer/section/' );
+			} else {
+				$this->_duplicate_record($this->input->post('fname'),$this->input->post('lname'));				
+			}		
 		}
 	}
 	
@@ -189,4 +202,5 @@ class Customer extends CI_Controller {
 			redirect( base_url() . 'master/customer/section/viewcustomer/' . $this->input->post('bookmark'));
 		}
 	}
+	
 }

@@ -44,8 +44,7 @@ class Mdl_customer extends CI_Model {
 		return $result;
 	}
 	
-	public  function find($search) {
-		
+	public  function find($search) {		
 		$strQry = sprintf("SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM $this->tableName WHERE `status`='1' AND (lname LIKE '%c%s%c' OR fname LIKE '%c%s%c')", 37, $search, 37, 37, $search, 37);				
 		$dataset = $this->db->query($strQry);
 		$result['overallcount'] = $dataset->num_rows;
@@ -55,5 +54,18 @@ class Mdl_customer extends CI_Model {
 		return $result;
 	}
 
+	public function isCustomerExists($fname, $lname) {
+		$fname = trim(mysql_real_escape_string($fname));
+		$lname = trim(mysql_real_escape_string($lname));
+		
+		$strQry = sprintf("SELECT * FROM $this->tableName WHERE fname='%s' AND lname='%s'", $fname, $lname);
+		$count = $this->db->query($strQry)->num_rows;
+		
+		if($count < 1)
+			return FALSE;
+			
+		return TRUE;
+			
+	}
 	
 }
