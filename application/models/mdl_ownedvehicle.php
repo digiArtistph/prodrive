@@ -13,7 +13,7 @@ class Mdl_ownedvehicle extends CI_Model {
 	public function add() {
 		
 		// preps data
-		$plateNo = mysql_real_escape_string($this->input->post('plateno'));
+		$plateNo = trim(mysql_real_escape_string($this->input->post('plateno')));
 		$make = mysql_real_escape_string($this->input->post('makecode'));
 		$color = mysql_real_escape_string($this->input->post('colorcode'));
 		$description = mysql_real_escape_string($this->input->post('description'));
@@ -53,7 +53,7 @@ class Mdl_ownedvehicle extends CI_Model {
 	
 		// preps data
 		$vehicleNo = mysql_real_escape_string($this->input->post('vehiclecode'));
-		$plateNo = mysql_real_escape_string($this->input->post('plateno'));
+		$plateNo = trim(mysql_real_escape_string($this->input->post('plateno')));
 		$make = mysql_real_escape_string($this->input->post('makecode'));
 		$color = mysql_real_escape_string($this->input->post('colorcode'));
 		$description = mysql_real_escape_string($this->input->post('description'));
