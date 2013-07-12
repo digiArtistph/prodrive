@@ -91,3 +91,12 @@ if (! function_exists('search_highlight')) {
 	}
 }
 
+if (! function_exists('parsePlateNo')) {
+	function parsePlateNo($plate) {
+		$pattern = '/[\W]/i';
+		$replacement = "";
+		$parsed = trim(strtoupper(preg_replace($pattern, $replacement, $plate)));
+
+		return $parsed;
+	}
+}

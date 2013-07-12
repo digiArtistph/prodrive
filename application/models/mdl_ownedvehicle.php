@@ -13,7 +13,7 @@ class Mdl_ownedvehicle extends CI_Model {
 	public function add() {
 		
 		// preps data
-		$plateNo = trim(mysql_real_escape_string($this->input->post('plateno')));
+		$plateNo = trim(mysql_real_escape_string(parsePlateNo($this->input->post('plateno'))));
 		$make = mysql_real_escape_string($this->input->post('makecode'));
 		$color = mysql_real_escape_string($this->input->post('colorcode'));
 		$description = mysql_real_escape_string($this->input->post('description'));
@@ -86,5 +86,27 @@ class Mdl_ownedvehicle extends CI_Model {
 		$result['records'] = $dataset->result();
 		
 		return $result;
+	}
+	
+	public function isOwnerPlateNoExists($plateNo, $owner) {
+		$plateNo = trim(mysql_real_escape_string(parsePlateNo($plateNo)));
+		$owner = trim(mysql_real_escape_string($owner));
+		
+		// checks for duplicate plate-owner
+		$strQry = sprintf("SELECT * FROM $this->tableName WHERE plateno='%s' AND owner=%d", $plateNo, $owner);		
+		$count = $this->db->query($strQry)->num_rows;
+		
+		if($count > 0 )			
+			return 1;
+			
+		// checks for duplicate plate only
+		$strQryPlateOnly = sprintf("SELECT * FROM $this->tableName WHERE plateno='%s'", $plateNo);
+		$countDuplicatePlateOnly = $this->db->query($strQryPlateOnly)->num_rows;
+
+		if($countDuplicatePlateOnly > 0)
+			return 2;
+			
+		return FALSE;
+
 	}
 }

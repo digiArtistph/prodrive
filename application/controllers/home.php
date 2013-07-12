@@ -25,7 +25,8 @@ class Home extends CI_Controller {
 		$pattern = '/'.addcslashes('^master/labortype', '/').'/';
 		$string = "SELECT custid, CONCAT(lname, ', ', fname) AS fullname, addr, phone, company FROM customer WHERE `status`='1' ORDER BY lname LIMIT 0, 10";
 		$patt = '/[\w\s\W]+(?=order)/i';
-		
+		$pattern = '/[\W]/i';
+		$string = 'KCT-1-*  ***0-7';
 		/*
 		if(preg_match($pattern, $string))
 			echo 'matched';
@@ -40,10 +41,9 @@ class Home extends CI_Controller {
 		echo $cntr;
 		
 		*/
+		echo $string . "<br />";
+		echo preg_replace($pattern, "", $string);
 		
-		preg_match($patt, $string, $matches);
-		
-		call_debug($matches);
 	}
 		
 }
