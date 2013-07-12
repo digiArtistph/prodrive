@@ -189,17 +189,21 @@ class Customer extends CI_Controller {
 		if($validation->run() === FALSE) {
 			$this->_editcustomer($this->input->post('ct_id'));
 		} else {
-			global $almd_db;
-			$almd_db = new Almdtables();
-			$db = $this->input;
-			
-			$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s" , `company`="%s" WHERE custid="%s" ', $almd_db->customer, trim($this->input->post('fname')), mysql_real_escape_string($this->input->post('mname')), trim(mysql_real_escape_string($this->input->post('lname'))), mysql_real_escape_string($this->input->post('addr')), mysql_real_escape_string($this->input->post('phone')), $this->input->post('company'), $this->input->post('ct_id') );
-			$query = $this->db->query($strqry);
-			if(!$query){
-				redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
+			if(! $this->_mModel->isCustomerExists($this->input->post('fname'), $this->input->post('lname'))) {
+				global $almd_db;
+				$almd_db = new Almdtables();
+				$db = $this->input;
+				
+				$strqry = sprintf('UPDATE `%s` SET `fname`="%s", `mname`="%s", `lname`="%s", `addr`="%s", `phone`="%s" , `company`="%s" WHERE custid="%s" ', $almd_db->customer, trim($this->input->post('fname')), mysql_real_escape_string($this->input->post('mname')), trim(mysql_real_escape_string($this->input->post('lname'))), mysql_real_escape_string($this->input->post('addr')), mysql_real_escape_string($this->input->post('phone')), $this->input->post('company'), $this->input->post('ct_id') );
+				$query = $this->db->query($strqry);
+				if(!$query){
+					redirect( base_url() . 'master/customer/section/feedbackcustomer/2' );
+				}
+				// clears bookmark session.
+				redirect( base_url() . 'master/customer/section/viewcustomer/' . $this->input->post('bookmark'));
+			} else {
+				$this->_duplicate_record($this->input->post('fname'),$this->input->post('lname'));
 			}
-			// clears bookmark session.
-			redirect( base_url() . 'master/customer/section/viewcustomer/' . $this->input->post('bookmark'));
 		}
 	}
 	
