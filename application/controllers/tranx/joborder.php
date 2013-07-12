@@ -122,12 +122,12 @@ class Joborder extends CI_Controller{
 	
 	public function ajaxdeljo(){
 		
-		$strQry = sprintf("DELETE FROM `jodetails` WHERE `jo_id`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `jodetails` SET `status`='0' WHERE `jo_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			return false;
 		
-		$strQry = sprintf("DELETE FROM `joborder` WHERE `jo_id`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `joborder` SET `status`='0' WHERE `jo_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			echo "0";

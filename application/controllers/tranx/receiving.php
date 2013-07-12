@@ -122,7 +122,7 @@ class Receiving extends CI_Controller{
 	}
 	
 	public function ajaxdelvr(){
-		$strQry = sprintf("DELETE FROM `vehicle_receive` WHERE `vr_id`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `vehicle_receive` SET `status`='0' WHERE `vr_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		
 		if(!$query)

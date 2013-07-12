@@ -129,7 +129,7 @@ class Customer extends CI_Controller {
 	}
 	
 	public function ajaxdelcust(){
-		$strQry = sprintf("DELETE FROM `customer` WHERE `custid`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `customer` SET `status`='0' WHERE `custid`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			echo "0";

@@ -177,7 +177,7 @@ class Ownedvehicle extends CI_Controller {
 	}
 	
 	public function ajaxdelvehicle(){
-		$strQry = sprintf("DELETE FROM `vehicle_owner` WHERE `vo_id`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `vehicle_owner` SET `status`='0' WHERE `vo_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			echo "0";

@@ -20,7 +20,7 @@
             	<tr>
                 	<td><?php echo $record->plateno; ?></td>
                     <td><?php echo $record->customer; ?></td>
-                    <td><a class="reggrideditbtn" href="<?php echo base_url() . 'tranx/receiving/section/editreceiving/' . $record->vr_id;?>">Edit</a>|<a class="reggriddelbtn delrcv" href="#" delrcv="<?php echo $record->vr_id;?>">Delete</a></td>
+                    <td><a class="reggrideditbtn" href="<?php echo base_url() . 'tranx/receiving/section/editreceiving/' . $record->vr_id;?>">Edit</a>|<a class="reggriddelbtn" href="#" post-url="tranx/receiving/ajaxdelvr" code="<?php echo $record->vr_id;?>">Delete</a></td>
             	</tr>
             <?php endforeach; ?>
         </tbody>
