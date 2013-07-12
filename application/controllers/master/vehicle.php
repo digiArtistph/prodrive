@@ -82,7 +82,7 @@ class Vehicle extends CI_Controller {
 	}
 	
 	public function ajaxdelveh(){
-		$strQry = sprintf("DELETE FROM `vehicle` WHERE `v_id`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `vehicle` SET `status`='0' WHERE `v_id`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			echo "0";

@@ -103,7 +103,7 @@ class Labortype extends CI_Controller {
 	}
 	
 	public function ajaxdeltype(){
-		$strQry = sprintf("DELETE FROM `labortype` WHERE `laborid`=%d", $this->input->post('id'));
+		$strQry = sprintf("UPDATE `labortype` SET `status`='0' WHERE `laborid`=%d", $this->input->post('id'));
 		$query = $this->db->query($strQry);
 		if(!$query)
 			echo "0";

@@ -52,7 +52,7 @@ class Mdl_company extends CI_Model {
 	
 	public function deleteCompany($id) {
 		
-		$strQry =sprintf("DELETE FROM company WHERE co_id=%d", $id);
+		$strQry =sprintf("UPDATE $this->tableName SET `status`='0' WHERE co_id=%d", $id);
 				
 		if(! $this->db->query($strQry))
 			return FALSE;
