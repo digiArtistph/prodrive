@@ -1,3 +1,6 @@
+<?php
+	
+?>
 <div class="wrapper">
 <h3 class="heading">Job Order</h3>
 <div class="minidashboard">
@@ -11,7 +14,7 @@
         	</p>
     </div>        
     </div>
-<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a> &nbsp; <a class="jotagaspaidbtn" href="#">Tag as Paid</a></div>
+<div class="toolbar"><a class="cancenewlbtn" href="<?php echo base_url('tranx/joborder'); ?>">Cancel Edit Job Order</a> &nbsp; <a href="#">Bill to customer</a> &nbsp; <!--<a class="jotagaspaidbtn" href="#">Fully paid</a>-->  </div>
 	<div id="add_form">
 	<div class="suggestion"  style="height: 20px"><p><span class="error"></span></p></div>
     <div class="jovehicledialog">
