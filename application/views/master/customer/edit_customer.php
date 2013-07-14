@@ -22,7 +22,7 @@
             <?php endforeach; ?>
 		  </select></p>
 		<p>
-		  <label>Phone No.  </label> <input type="text" name="phone" value="<?php echo $customer->phone;?>" /></p>
+		  <label>Phone No.  </label> <input type="text" name="phone" value="<?php echo $customer->phone;?>" /><?php echo form_error('phone', '<span class="error">', '</span>');?></p>
 		<p class="submit"><input type="submit" value="Save"/></p>
 		<?php echo form_close();?>
 		<?php endforeach;?>
