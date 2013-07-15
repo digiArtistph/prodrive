@@ -34,7 +34,7 @@
         </div>
         <!-- navigation menu -->
         <?php $this->load->view('includes/navigation'); ?>
-        <?php $this->load->view('includes/searchbox'); ?>
+        <!--<?php $this->load->view('includes/searchbox'); ?>-->
     </div>
     
     <div id="container">

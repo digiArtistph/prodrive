@@ -1,0 +1,1 @@
+﻿SELECT CONCAT(c.lname, ', ', c.fname) AS `client`, j.trnxdate, j.jo_id, j.tax, j.discount, SUM(jd.amnt) AS `total` FROM joborder j LEFT JOIN customer c ON j.customer=c.custid LEFT JOIN jodetails jd ON j.jo_id=jd.jo_id WHERE j.`status`='1' GROUP BY `client`;

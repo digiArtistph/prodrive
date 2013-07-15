@@ -1,0 +1,1 @@
+﻿SELECT /*d.trnxdate AS tdate,*/ dtl.dcr_id, dtl.refno AS joid, SUM(dtl.amnt) AS `total` FROM dcrdetails dtl LEFT JOIN dcr d  ON dtl.dcr_id=d.dcr_id LEFT JOIN joborder j ON dtl.refno=j.jo_id WHERE j.`status`='1' AND d.trnxdate BETWEEN '2013-07-01' AND '2013-07-30' GROUP BY joid;
